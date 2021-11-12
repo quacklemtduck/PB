@@ -12,11 +12,15 @@ public class Project
     public int SupervisorID { get; set; } //TODO: not 0
 
     [EmailAddress]
-    public string Email { get; set; } //TODO: not 0
+    public string? Email { get; set; } //TODO: not 0
 
     public DateTime? Deadline { get; set; } 
 
     public bool getNotification { get; set; }
+
+    public int numberOfStudents {get; set;}
+
+    public ICollection<Student> CollabStudents {get; set;}  = new HashSet<Student>();
 
     public ICollection<Tag> Tags {get; set;} = new HashSet<Tag>();
 

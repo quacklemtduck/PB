@@ -8,15 +8,9 @@ public interface IProjectRepository {
     //delete
     Task<Status> DeleteAsync(int projectID);
 
-    ////Update: Update state
-    Task<Status> UpdateAsync(int ID, ProjectUpdateStateDTO project);
+    ////Update: Update state, Add application, Edit
+    Task<Status> UpdateAsync(int ID, ProjectUpdateDTO project);
 
-    //Update: Edit
-    Task<Status> UpdateAsync(int ID, ProjectDetailsDTO project);
-
-    //Update: Add application
-    Task<Status> UpdateAsync(int ID, ProjectUpdateApplicationDTO project);
-     
     //Read by id
     Task<Option<ProjectDetailsDTO>> ReadByIDAsync(int projectId); //What is option???
 
