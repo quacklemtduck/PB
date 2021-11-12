@@ -9,6 +9,14 @@
     }
 
     public record ProjectUpdateDTO : ProjectDTO {
+        //TODO: do we have to have this??
+    }
+
+    public record ProjectUpdateStateDTO : ProjectDTO {
+
+    }
+
+    public record ProjectUpdateApplicationDTO : ProjectDTO {
 
     }
 
