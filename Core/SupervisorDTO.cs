@@ -2,7 +2,7 @@ namespace Core;
 
 public record SupervisorUpdateDTO(int Id, ICollection<int>? Projects);
 
-public record SupervisorDetailsDTO(int Id, string Name, string Email, ICollection<int>? Projects);
+public record SupervisorDetailsDTO(int Id, string Name, string Email, string ContactInfo, ICollection<int>? Projects);
 
 public record SuperVisorCreateDTO{
 
