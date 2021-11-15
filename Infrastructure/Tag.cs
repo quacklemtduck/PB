@@ -1,6 +1,7 @@
 namespace PBInfrastructure
 {
-    public class Tag
+    public enum Tag
     {
+        
     }
 }
