@@ -4,12 +4,20 @@ namespace PBInfrastructure;
 
 public class ProjectRepository : IProjectRepository
 {
+
+    PBContext _context;
+
+    public ProjectRepository(PBContext context)
+    {
+        _context = context;
+    }
+
     public Task<ProjectDetailsDTO> CreateAsync(ProjectCreateDTO project)
     {
         throw new NotImplementedException();
     }
 
-    public Task<Status> DeleteAsync(int projectID)
+    public Task<Response> DeleteAsync(int projectID)
     {
         throw new NotImplementedException();
     }
@@ -24,7 +32,7 @@ public class ProjectRepository : IProjectRepository
         throw new NotImplementedException();
     }
 
-    public Task<Status> UpdateAsync(int ID, ProjectUpdateDTO project)
+    public Task<Response> UpdateAsync(int ID, ProjectUpdateDTO project)
     {
         throw new NotImplementedException();
     }

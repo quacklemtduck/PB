@@ -1,8 +1,8 @@
-﻿namespace Core;
+﻿namespace PB.Core;
 
     public record ProjectListDTO(int ID, string Title, string? Deadline);
     public record ProjectDetailsDTO(
-        int ID, string Title, string? Description, int SupervisorID, string? Email, string? Deadline, bool getNotification, int numberOfStudents, ICollection<string> CollabStudents, ISet<string> Tags, ISet<string> Applications, ISet<string> University) : ProjectListDTO(ID, Title, Deadline);
+        int ID, string Title, string? Description, int SupervisorID, string? Email, string? Deadline, bool getNotification, int numberOfStudents, ICollection<string> CollabStudents, ISet<string> Tags, ISet<string> Applications, ISet<string> Universities) : ProjectListDTO(ID, Title, Deadline);
     public record ProjectCreateDTO {
         public string? Title { get; set; } //TODO: not nullable
 
@@ -25,7 +25,7 @@
 
         public ISet<string> Applications { get; set; } = new HashSet<string>();
 
-        public ISet<string> University {get; set;} = new HashSet<string>();
+        public ISet<string> Universities {get; set;} = new HashSet<string>();
 
     }
 
