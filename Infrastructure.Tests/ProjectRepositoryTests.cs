@@ -73,9 +73,17 @@ public class ProjectRepositoryTests : IDisposable
 
 
     [Fact]
-    public void ListAll_()
+    public async Task ListAllAsync_returns_all_projects()
     {
-        //TODO: implement
+        var projects = await _repository.ListAllAsync();
+
+        Assert.Collection(projects,
+            projects => Assert.Equal(new ProjectListDTO(1, "Project1", "Okt 1, 2021"), projects),
+            projects => Assert.Equal(new ProjectListDTO(2, "Project2", "Okt 1, 2021"), projects),
+            projects => Assert.Equal(new ProjectListDTO(3, "Project3", "Okt 1, 2021"), projects),
+            projects => Assert.Equal(new ProjectListDTO(4, "Project4", "Okt 1, 2021"), projects),
+            projects => Assert.Equal(new ProjectListDTO(5, "Project5", "Okt 1, 2021"), projects)
+        );
     }
 
         [Fact]
@@ -126,6 +134,74 @@ public class ProjectRepositoryTests : IDisposable
             Assert.Empty(projectUpdated.CollabStudents);
             Assert.Empty(projectUpdated.Tags);
             Assert.Empty(projectUpdated.Applications);
+            Assert.Empty(projectUpdated.Universities);
+        }
+
+        [Fact]
+        public async Task UpdateAsync_adds_students_existing_Project()
+        {
+            var student = new Student("name");
+            
+            var project = new ProjectUpdateDTO { 
+                ID = 5,
+                Title = "newProject5",
+                Description = "This is project 5, version 2",
+                SupervisorID = 5,
+                Email = "supervisor5@mail.com",
+                Deadline = "",
+                getNotification = false,
+                numberOfStudents = 2,
+                CollabStudents = new HashSet<string>{student.Id.ToString()},
+                Tags = new HashSet<string>(),
+                Applications = new HashSet<string>(),
+                Universities = new HashSet<string>() };
+
+            var response = await _repository.UpdateAsync(5, project);
+
+            Assert.Equal(Updated, response);
+            var option = await _repository.ReadByIDAsync(1);
+            var projectUpdated = option.Value;
+
+            Assert.True(projectUpdated.CollabStudents.Contains(student.Id.ToString()));
+            Assert.Equal(1,projectUpdated.CollabStudents.Count());
+
+            Assert.Empty(projectUpdated.Tags);
+            Assert.Empty(projectUpdated.Applications);
+            Assert.Empty(projectUpdated.Universities);
+        }
+
+[Fact]
+        public async Task UpdateAsync_adds_application_existing_Project()
+        {
+            var application = new Application{
+
+            }
+            
+            var project = new ProjectUpdateDTO { 
+                ID = 5,
+                Title = "newProject5",
+                Description = "This is project 5, version 2",
+                SupervisorID = 5,
+                Email = "supervisor5@mail.com",
+                Deadline = "",
+                getNotification = false,
+                numberOfStudents = 2,
+                CollabStudents = new HashSet<string>(),
+                Tags = new HashSet<string>(),
+                Applications = new HashSet<string>{application.Id.ToString()},
+                Universities = new HashSet<string>() };
+
+            var response = await _repository.UpdateAsync(5, project);
+
+            Assert.Equal(Updated, response);
+            var option = await _repository.ReadByIDAsync(1);
+            var projectUpdated = option.Value;
+
+            Assert.True(projectUpdated.Applications.Contains(application.Id.ToString()));
+            Assert.Equal(1,projectUpdated.Applications.Count());
+            
+            Assert.Empty(projectUpdated.Tags);
+            Assert.Empty(projectUpdated.CollabStudents);
             Assert.Empty(projectUpdated.Universities);
         }
 
