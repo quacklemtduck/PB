@@ -2,12 +2,12 @@ namespace PBInfrastructure;
 public class Application
 {
     public int Id {get; set;}
-    public int studentID {get; set;}
-    public int projectID {get; set;}
+    public int StudentID {get; set;}
+    public int ProjectID {get; set;}
     public string? Description {get; set;}
 
-    public Application(int _studentID, int _projectID) {
-        studentID = _studentID;
-        projectID = _projectID;
-    }
+    public Project Project {get; set;}
+
+    public Student Student {get; set;}
+
 }
