@@ -24,4 +24,5 @@ public class Supervisor
         Password = _password;
         ContactInfo = _contactInfo;
     }
+
 }

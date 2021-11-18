@@ -18,6 +18,8 @@ public record SuperVisorCreateDTO{
 
     [StringLength(100)]
     public string ContactInfo {get; set;}
+    public ICollection<int>? Projects {get; set;}  = new HashSet<int>();
+
 
     public SuperVisorCreateDTO(string _name, string _email, string _password, string _contactInfo){
         Name = _name;
