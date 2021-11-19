@@ -1,7 +1,12 @@
-namespace Core;
-
-public enum Status
+namespace PB.Core
 {
-    Updated,
-    NotFound
+    public enum Status
+    {
+        Visible,
+        Hidden,
+        Closed,
+        Deleted,
+        Updated,
+        NotFound
+    }
 }

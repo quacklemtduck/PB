@@ -18,11 +18,4 @@ public class Supervisor
     public string ContactInfo {get; set;}
     public ICollection<Project>? Projects {get; set;}
 
-    public Supervisor(string _name, string _email, string _password, string _contactInfo){
-        Name = _name;
-        Email = _email;
-        Password = _password;
-        ContactInfo = _contactInfo;
-    }
-
 }
