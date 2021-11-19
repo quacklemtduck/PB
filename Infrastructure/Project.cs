@@ -11,6 +11,8 @@ public class Project
 
     public int SupervisorID { get; set; } //TODO: not 0
 
+    public Supervisor Supervisor {get; set;}
+
     public DateTime? Deadline { get; set; } 
 
     public bool getNotification { get; set; }
