@@ -9,7 +9,4 @@ public class Student {
 
     public ICollection<Project>? Projects {get; set;}
 
-    public Student(string _Name) {
-        Name = _Name;
-    }
 }

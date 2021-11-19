@@ -11,8 +11,12 @@ public class Project
 
     public int SupervisorID { get; set; } //TODO: not 0
 
+
     [EmailAddress]
     public string? Email { get; set; } //TODO: not nullable
+
+    public Supervisor Supervisor {get; set;}
+
 
     public DateTime? Deadline { get; set; } 
 
