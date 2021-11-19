@@ -1,6 +1,5 @@
-using Core;
-
-namespace PBInfrastructure;
+namespace PB.Infrastructure
+{
 
 public class ProjectRepository : IProjectRepository
 {
@@ -12,28 +11,29 @@ public class ProjectRepository : IProjectRepository
         _context = context;
     }
 
-    public Task<ProjectDetailsDTO> CreateAsync(ProjectCreateDTO project)
-    {
-        throw new NotImplementedException();
-    }
+        public Task<ProjectDetailsDTO> CreateAsync(ProjectCreateDTO project)
+        {
+            throw new NotImplementedException();
+        }
 
-    public Task<Response> DeleteAsync(int projectID)
-    {
-        throw new NotImplementedException();
-    }
+        public Task<Response> DeleteAsync(int projectID)
+        {
+            throw new NotImplementedException();
+        }
 
-    public Task<IReadOnlyCollection<ProjectListDTO>> ListAllAsync()
-    {
-        throw new NotImplementedException();
-    }
+        public Task<IReadOnlyCollection<ProjectListDTO>> ListAllAsync()
+        {
+            throw new NotImplementedException();
+        }
 
-    public Task<Option<ProjectDetailsDTO>> ReadByIDAsync(int projectId)
-    {
-        throw new NotImplementedException();
-    }
+        public Task<ProjectDetailsDTO> ReadByIDAsync(int projectId)
+        {
+            throw new NotImplementedException();
+        }
 
-    public Task<Response> UpdateAsync(int ID, ProjectUpdateDTO project)
-    {
-        throw new NotImplementedException();
+        public Task<Response> UpdateAsync(int ID, ProjectUpdateDTO project)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

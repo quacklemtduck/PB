@@ -1,31 +1,34 @@
-namespace PBInfrastructure;
-
-public class SupervisorRepository : ISupervisorRepository
+namespace PB.Infrastructure
 {
 
-    PBContext _context;
+    public class SupervisorRepository : ISupervisorRepository
+    {
 
-    public SupervisorRepository(PBContext context)
-    {
-        _context = context;
-    }
+        PBContext _context;
 
-    public Task<SupervisorDetailsDTO> CreateAsync(SuperVisorCreateDTO supervisor)
-    {
-        throw new NotImplementedException();
-    }
-    public Task<Option<SupervisorDetailsDTO>> ReadAsync(int supervisorId)
-    {
-        throw new NotImplementedException();
-    }
-    public Task<IReadOnlyCollection<SupervisorDetailsDTO>> ReadAsync()
-    {
-        throw new NotImplementedException();
-    }
+        public SupervisorRepository(PBContext context)
+        {
+            _context = context;
+        }
 
-    public Task<Status> UpdateAsync(int id, SupervisorUpdateDTO supervisor)
-    {
-        throw new NotImplementedException();
-    }
+        public Task<SupervisorDetailsDTO> CreateAsync(SuperVisorCreateDTO supervisor)
+        {
+            throw new NotImplementedException();
+        }
+        public Task<IReadOnlyCollection<SupervisorDetailsDTO>> ReadAllAsync()
+        {
+            throw new NotImplementedException();
+        }
 
+        public Task<SupervisorDetailsDTO> ReadAsync(int supervisorId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Response> UpdateAsync(int id, SupervisorUpdateDTO supervisor)
+        {
+            throw new NotImplementedException();
+        }
+
+    }
 }

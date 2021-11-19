@@ -5,8 +5,6 @@ namespace PB.Core
         Visible,
         Hidden,
         Closed,
-        Deleted,
-        Updated,
-        NotFound
+        Deleted
     }
 }

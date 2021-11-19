@@ -1,4 +1,4 @@
-namespace Core;
+namespace PB.Core;
 
 public record SupervisorUpdateDTO(int Id, ICollection<int>? Projects);
 

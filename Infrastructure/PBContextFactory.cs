@@ -1,4 +1,4 @@
-namespace PBInfrastructure
+namespace PB.Infrastructure
 {
     class PBContextFactory : IDesignTimeDbContextFactory<PBContext>
     {

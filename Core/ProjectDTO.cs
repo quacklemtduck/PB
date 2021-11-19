@@ -19,11 +19,11 @@
 
         public int numberOfStudents {get; set;}
 
-        public ICollection<string> CollabStudents {get; set;}  = new HashSet<string>();
+        public ICollection<int> CollabStudents {get; set;}  = new HashSet<int>();
 
         public ISet<string> Tags {get; set;} = new HashSet<string>();
 
-        public ISet<string> Applications { get; set; } = new HashSet<string>();
+        public ISet<int> Applications { get; set; } = new HashSet<int>();
 
         public ISet<string> Universities {get; set;} = new HashSet<string>();
 

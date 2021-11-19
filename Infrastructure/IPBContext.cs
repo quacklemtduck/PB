@@ -1,4 +1,4 @@
-namespace PBInfrastructure;
+namespace PB.Infrastructure;
 
 public interface IPBContext : IDisposable{
     DbSet<Project> Projects {get;}

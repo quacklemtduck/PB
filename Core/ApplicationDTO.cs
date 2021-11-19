@@ -1,4 +1,4 @@
-namespace Core;
+namespace PB.Core;
 
 public record ApplicationUpdateDTO(int Id, int studentId, int projectId);
 public record ApplicationDetailsDTO(int Id, int studentId, int projectId, string Description);

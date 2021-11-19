@@ -6,7 +6,6 @@ public class SupervisorRepositoryTests : IDisposable
     private readonly SupervisorRepository _repository;
     private bool disposedValue;
 
-
     public SupervisorRepositoryTests()
     {
             var connection = new SqliteConnection("Filename=:memory:");
@@ -17,11 +16,11 @@ public class SupervisorRepositoryTests : IDisposable
             context.Database.EnsureCreated();
 
             context.Supervisors.AddRange(
-                new Supervisor("Supervisor1","supervisor1@email.com","***","info1") {Id = 1, Projects = new List<Project>()},
-                new Supervisor("Supervisor2","supervisor2@email.com","***","info2") {Id = 2, Projects = new List<Project>()},
-                new Supervisor("Supervisor3","supervisor3@email.com","***","info3") {Id = 3, Projects = new List<Project>()},
-                new Supervisor("Supervisor4","supervisor4@email.com","***","info4") {Id = 4, Projects = new List<Project>()},
-                new Supervisor("Supervisor5","supervisor5@email.com","***","info5") {Id = 5, Projects = new List<Project>()}
+                new Supervisor{Id = 1, Name = "Supervisor1", Email = "supervisor1@email.com",Password = "***",ContactInfo = "info1", Projects = new List<Project>()},
+                new Supervisor{Id = 2, Name = "Supervisor2", Email = "supervisor2@email.com",Password = "***",ContactInfo = "info2", Projects = new List<Project>()},
+                new Supervisor{Id = 3, Name = "Supervisor3", Email = "supervisor3@email.com",Password = "***",ContactInfo = "info3", Projects = new List<Project>()},
+                new Supervisor{Id = 4, Name = "Supervisor4", Email = "supervisor4@email.com",Password = "***",ContactInfo = "info4", Projects = new List<Project>()},
+                new Supervisor{Id = 5, Name = "Supervisor5", Email = "supervisor5@email.com",Password = "***",ContactInfo = "info5", Projects = new List<Project>()}               
             );
             
 
@@ -47,8 +46,7 @@ public class SupervisorRepositoryTests : IDisposable
     [Fact]
     public async Task ReadAsync_given_id_exists_returns_Supervisor()
     {
-        var option = await _repository.ReadAsync(2);
-        var supervisor = option.Value;
+        var supervisor = await _repository.ReadAsync(2);
 
         Assert.Equal(2, supervisor.Id);
         Assert.Equal("Supervisor2", supervisor.Name);
@@ -62,13 +60,13 @@ public class SupervisorRepositoryTests : IDisposable
     {
         var option = await _repository.ReadAsync(-1);
 
-        Assert.True(option.IsNone);
+        Assert.Null(option);
     }
 
     [Fact]
     public async Task ReadAllAsync_returns_all_supervisors()
     {
-        var supervisors = await _repository.ReadAsync();
+        var supervisors = await _repository.ReadAllAsync();
 
         Assert.Collection(supervisors,
             supervisors => Assert.Equal(new SupervisorDetailsDTO(1,"supervisor1","supervisor1@email.com","info1",new List<int>()),supervisors),
@@ -95,8 +93,7 @@ public class SupervisorRepositoryTests : IDisposable
         var status = await _repository.UpdateAsync(supervisor.Id,supervisor);
         Assert.Equal(Updated,status);
 
-        var option = await _repository.ReadAsync(1);
-        var updatedSupervisor = option.Value;
+        var updatedSupervisor = await _repository.ReadAsync(1);
         Assert.Collection(updatedSupervisor.Projects,
             projects => Assert.Equal(1,projects),
             projects => Assert.Equal(2,projects),

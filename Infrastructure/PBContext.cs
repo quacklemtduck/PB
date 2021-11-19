@@ -1,4 +1,6 @@
-namespace PBInfrastructure
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+
+namespace PB.Infrastructure
 {
 
     public class PBContext : DbContext, IPBContext

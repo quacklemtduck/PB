@@ -1,7 +1,10 @@
-namespace PBInfrastructure
+namespace PB.Infrastructure
 {
-    public enum Tag
+    public class Tag
     {
+        public int Id {get; set;}
         
+        [StringLength(20)]
+        public string TagName {get; set;}
     }
 }
