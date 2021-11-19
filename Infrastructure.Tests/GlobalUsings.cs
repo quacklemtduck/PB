@@ -1,0 +1,11 @@
+global using System;
+global using Microsoft.Data.Sqlite;
+global using PBInfrastructure;
+global using Xunit;
+global using System.Collections.Generic;
+global using Microsoft.EntityFrameworkCore;
+global using System.Linq;
+global using PB.Core;
+global using Core;
+global using static PB.Core.University;
+global using static PB.Core.Response;
