@@ -18,4 +18,6 @@ public class Supervisor
     public string ContactInfo {get; set;}
     public ICollection<Project>? Projects {get; set;}
 
+
+
 }

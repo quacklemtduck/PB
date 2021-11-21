@@ -11,10 +11,10 @@ namespace PB.Core
         Task<Response> DeleteAsync(int projectID);
 
         ////Update: Update state, Add application, Edit
-        Task<Response> UpdateAsync(int ID, ProjectUpdateDTO project);
+        Task<Response> UpdateAsync(int ID, ProjectUpdateDTO project); //Edit
         /*Task<Response> UpdateStateAsync(int ID, ProjectUpdateDTO project);
         Task<Response> UpdateAddApplicationAsync(int ID, ProjectUpdateDTO project);
-        Task<Response> UpdateEditAsync(int ID, ProjectUpdateDTO project);*/ //skal de her med, og skal have have mere specifikke dtos?
+        Task<Response> UpdateChooseStudentsAsync(int ID, ProjectUpdateDTO project);*/
 
         //Read by id
         Task<ProjectDetailsDTO> ReadByIDAsync(int projectId);
