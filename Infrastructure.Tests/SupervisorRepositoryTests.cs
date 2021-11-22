@@ -87,7 +87,7 @@ public class SupervisorRepositoryTests : IDisposable
     }
 
     [Fact]
-    public async Task UpdateAsync_given_existing_id_updates_supervisor_adding_projects()
+    public async Task UpdateAsync_given_existing_id_updates_supervisor()
     {
         var supervisor = new SupervisorUpdateDTO(1,"supervisor1.1","more info"); 
         var status = await _repository.UpdateAsync(supervisor.Id,supervisor);
