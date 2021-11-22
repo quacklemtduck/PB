@@ -6,7 +6,7 @@ public class SupervisorRepositoryTests : IDisposable
     private readonly SupervisorRepository _repository;
     private bool disposedValue;
 
-    public SupervisorRepositoryTests()
+    /*public SupervisorRepositoryTests()
     {
             var connection = new SqliteConnection("Filename=:memory:");
             connection.Open();
@@ -100,7 +100,7 @@ public class SupervisorRepositoryTests : IDisposable
             projects => Assert.Equal(3,projects)
         );
     }
-
+*/
     protected virtual void Dispose(bool disposing)
     {
         if (!disposedValue)

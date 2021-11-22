@@ -108,6 +108,7 @@ namespace PB.Infrastructure
                 entity.status = project.status;
                 entity.CollabStudents = await GetStudentsAsync(project.CollabStudents).ToListAsync();
                 entity.Tags = await GetTagsAsync(project.Tags).ToListAsync();
+                //Console.WriteLine("-------> Applications: " + project.Applications);
                 entity.Applications = await GetApplicationsAsync(project.Applications).ToListAsync();
                 entity.Universities = await GetUniversitiesAsync(project.Universities).ToListAsync();
 
@@ -148,6 +149,7 @@ namespace PB.Infrastructure
 
             foreach (var application in applications)
             {
+                //Console.WriteLine("===========>>Application Title: " + application);
                 yield return existing.TryGetValue(application, out var a) ? a : new Application { Title = application };
             }
         }

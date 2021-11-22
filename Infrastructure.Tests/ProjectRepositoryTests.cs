@@ -18,8 +18,7 @@ namespace PB.Infrastructure.Tests
             var supervisor = new Supervisor { Id = 1, Name = "Supervisor1", Email = "supervisor1@email.com", Password = "***", ContactInfo = "info1", Projects = new List<Project>() };
             //context.Supervisors.Add(supervisor);
 
-            var application = new Application { Title = "Softwareudvikler søger nye udfordringer" };
-            //context.Applications.Add(application);
+
 
             var student = new Student { Name = "Test" };
             context.Students.Add(student);
@@ -27,13 +26,19 @@ namespace PB.Infrastructure.Tests
 
             DateTime deadline = DateTime.Parse("Dec 22, 2021");
 
+            var project = new Project { Id = 5, Title = "Project5", Description = "This is project 5", Supervisor = supervisor, Deadline = deadline};
+
+
             context.Projects.AddRange(
                 new Project { Id = 1, Title = "Project1", Description = "This is project 1", Supervisor = supervisor, Deadline = deadline },
                 new Project { Id = 2, Title = "Project2", Description = "This is project 2", Supervisor = supervisor, Deadline = deadline },
                 new Project { Id = 3, Title = "Project3", Description = "This is project 3", Supervisor = supervisor, Deadline = deadline },
                 new Project { Id = 4, Title = "Project4", Description = "This is project 4", Supervisor = supervisor, Deadline = deadline },
-                new Project { Id = 5, Title = "Project5", Description = "This is project 5", Supervisor = supervisor, Deadline = deadline }
+                project
             );
+            
+            var application = new Application { Title = "Softwareudvikler søger nye udfordringer", Student = student, Project = project };
+            context.Applications.Add(application);
 
             context.SaveChanges();
 
@@ -226,9 +231,11 @@ namespace PB.Infrastructure.Tests
             Assert.Equal(Updated, response);
             var projectUpdated = await _repository.ReadByIDAsync(5);
 
+            Assert.Equal("newProject5", projectUpdated.Title);
+
             Assert.Equal(1, projectUpdated.Applications.Count());
             Assert.True(projectUpdated.Applications.Contains(application.Title));
-            Assert.Equal("newProject5", projectUpdated.Title);
+            
 
             Assert.Empty(projectUpdated.Tags);
             Assert.Empty(projectUpdated.CollabStudents);
