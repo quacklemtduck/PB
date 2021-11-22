@@ -56,7 +56,7 @@ public class SupervisorRepositoryTests : IDisposable
     }
 
     [Fact]
-    public async Task ReadAsync_given_non_existing_id_returns_None()
+    public async Task ReadAsync_given_non_existing_id_returns_Null()
     {
         var option = await _repository.ReadAsync(-1);
 
@@ -69,18 +69,18 @@ public class SupervisorRepositoryTests : IDisposable
         var supervisors = await _repository.ReadAllAsync();
 
         Assert.Collection(supervisors,
-            supervisors => Assert.Equal(new SupervisorDetailsDTO(1,"supervisor1","supervisor1@email.com","info1",new List<int>()),supervisors),
-            supervisors => Assert.Equal(new SupervisorDetailsDTO(1,"supervisor2","supervisor2@email.com","info2",new List<int>()),supervisors),
-            supervisors => Assert.Equal(new SupervisorDetailsDTO(1,"supervisor3","supervisor3@email.com","info3",new List<int>()),supervisors),
-            supervisors => Assert.Equal(new SupervisorDetailsDTO(1,"supervisor4","supervisor4@email.com","info4",new List<int>()),supervisors),
-            supervisors => Assert.Equal(new SupervisorDetailsDTO(1,"supervisor5","supervisor5@email.com","info5",new List<int>()),supervisors)
+            supervisors => Assert.Equal(new SupervisorDetailsDTO(1,"Supervisor1","supervisor1@email.com","info1",new List<int>()).ToString(),supervisors.ToString()),
+            supervisors => Assert.Equal(new SupervisorDetailsDTO(2,"Supervisor2","supervisor2@email.com","info2",new List<int>()).ToString(),supervisors.ToString()),
+            supervisors => Assert.Equal(new SupervisorDetailsDTO(3,"Supervisor3","supervisor3@email.com","info3",new List<int>()).ToString(),supervisors.ToString()),
+            supervisors => Assert.Equal(new SupervisorDetailsDTO(4,"Supervisor4","supervisor4@email.com","info4",new List<int>()).ToString(),supervisors.ToString()),
+            supervisors => Assert.Equal(new SupervisorDetailsDTO(5,"Supervisor5","supervisor5@email.com","info5",new List<int>()).ToString(),supervisors.ToString())
         );
     }
 
     [Fact]
     public async Task UpdateAsync_given_non_existing_id_returns_NotFound()
     {
-        var supervisor = new SupervisorUpdateDTO(-1,new List<int>());
+        var supervisor = new SupervisorUpdateDTO(-1,"supervisor-1","info");
         var status = await _repository.UpdateAsync(supervisor.Id,supervisor);
 
         Assert.Equal(NotFound,status);
@@ -89,16 +89,13 @@ public class SupervisorRepositoryTests : IDisposable
     [Fact]
     public async Task UpdateAsync_given_existing_id_updates_supervisor_adding_projects()
     {
-        var supervisor = new SupervisorUpdateDTO(1,new List<int>(){1,2,3}); 
+        var supervisor = new SupervisorUpdateDTO(1,"supervisor1.1","more info"); 
         var status = await _repository.UpdateAsync(supervisor.Id,supervisor);
         Assert.Equal(Updated,status);
 
         var updatedSupervisor = await _repository.ReadAsync(1);
-        Assert.Collection(updatedSupervisor.Projects,
-            projects => Assert.Equal(1,projects),
-            projects => Assert.Equal(2,projects),
-            projects => Assert.Equal(3,projects)
-        );
+        Assert.Equal("supervisor1.1",updatedSupervisor.Name);
+        Assert.Equal("more info",updatedSupervisor.ContactInfo);
     }
 
     protected virtual void Dispose(bool disposing)

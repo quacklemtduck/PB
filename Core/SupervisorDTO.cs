@@ -1,6 +1,6 @@
 namespace PB.Core;
 
-public record SupervisorUpdateDTO(int Id, ICollection<int>? Projects);
+public record SupervisorUpdateDTO(int Id, String Name, string ContactInfo);
 
 public record SupervisorDetailsDTO(int Id, string Name, string Email, string ContactInfo, ICollection<int>? Projects);
 
