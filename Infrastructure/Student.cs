@@ -7,6 +7,6 @@ public class Student {
     [StringLength(50)]
     public string Name {get; set;}
 
-    public ICollection<Project>? Projects {get; set;}
+    public ICollection<int>? Projects {get; set;}
 
 }
