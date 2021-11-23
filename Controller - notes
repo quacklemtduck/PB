@@ -1,0 +1,59 @@
+---> Projects
+
+Allow supervisor
+Edit - update/put
+Choose students - update/put
+Close project - update/put
+Upload project - post
+Delete project - delete - almost check (how to differentiate between supervisor and student??)
+
+Read own project - Get
+Get own projects - list own/get project
+
+
+Allow students
+Add application - update/put
+
+
+Allow anynoumus
+View projects - listallprojects/get project - check
+
+
+---> Supervisor
+
+Allow anynoumus
+Sign up - post
+Sign in/log in
+
+Allow Supervisor
+View own profile - get
+Edit own profile - put
+//Delete own profile - delete
+
+
+
+---> Student
+Allow anynoumus
+Sign up - post
+//Sign in/log in
+
+//Allow Student
+//View own profile - get
+//Edit own profile - put
+//Delete own profile - delete
+
+//Allow supervisor
+//View profile through application - get
+
+
+---> Application
+
+Supervisor
+Get applications to own projects - get
+
+//Student
+//View own application - get
+//Delete own application - delete
+//Edit application - put
+//Upload application - post
+
