@@ -24,13 +24,15 @@ namespace PB.Infrastructure
             return new StudentDetailsDTO(
                         entity.Id,
                         entity.Name,
-                        entity.Projects
+                        entity.GetProjectIDs()
             );
         }
 
-        public Task<IReadOnlyCollection<StudentDetailsDTO>> ReadAllAsync()
+        public async Task<IReadOnlyCollection<StudentDetailsDTO>> ReadAllAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Students
+                .Select(s => new StudentDetailsDTO(s.Id,s.Name,s.Projects.Select(s => s.Id).ToList<int>()))
+                .ToListAsync();
         }
 
         public async Task<StudentDetailsDTO> ReadAsync(int studentId)
@@ -40,7 +42,7 @@ namespace PB.Infrastructure
                            select new StudentDetailsDTO(
                                s.Id,
                                s.Name,
-                               s.Projects
+                               s.GetProjectIDs()
                            );
 
             return await students.FirstOrDefaultAsync();
