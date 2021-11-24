@@ -1,4 +1,4 @@
----> Projects
+---> Projects (ProjectController)
 
 Allow supervisor
 Edit - update/put
@@ -19,7 +19,7 @@ Allow anynoumus
 View projects - listallprojects/get project - check
 
 
----> Supervisor
+---> Supervisor (SupervisorController)
 
 Allow anynoumus
 Sign up - post
@@ -32,7 +32,7 @@ Edit own profile - put
 
 
 
----> Student
+---> Student (StudentController)
 Allow anynoumus
 Sign up - post
 //Sign in/log in
@@ -46,7 +46,7 @@ Sign up - post
 //View profile through application - get
 
 
----> Application
+---> Application (ApplicationController)
 
 Supervisor
 Get applications to own projects - get

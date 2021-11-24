@@ -1,4 +1,4 @@
-namespace PB.Server.Controllers;
+/*namespace PB.Server.Controllers;
 
 [Authorize]
 [ApiController]
@@ -50,4 +50,4 @@ public class ProjectsController : ControllerBase
     [ProducesResponseType(404)]
     public async Task<IActionResult> Delete(int id)
           => (await _repository.DeleteAsync(id)).ToActionResult();
-}
+}*/

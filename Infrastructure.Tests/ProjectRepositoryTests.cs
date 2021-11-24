@@ -106,6 +106,21 @@ namespace PB.Infrastructure.Tests
         }
 
         [Fact]
+        public async Task ListAllAsync_returns_all_supervisors_projects()
+        {
+            var projects = await _repository.ListAllAsync(1);
+
+
+            Assert.Collection(projects,
+                projects => Assert.Equal(new ProjectListDTO(1, "Project1", getDeadlineString()), projects),
+                projects => Assert.Equal(new ProjectListDTO(2, "Project2", getDeadlineString()), projects),
+                projects => Assert.Equal(new ProjectListDTO(3, "Project3", getDeadlineString()), projects),
+                projects => Assert.Equal(new ProjectListDTO(4, "Project4", getDeadlineString()), projects),
+                projects => Assert.Equal(new ProjectListDTO(5, "Project5", getDeadlineString()), projects)
+            );
+        }
+
+        [Fact]
         public async Task UpdateAsync_given_non_existing_Project_returns_NotFound()
         {
             var supervisor = new Supervisor { Id = 1, Name = "Supervisor1", Email = "supervisor1@email.com", Password = "***", ContactInfo = "info1", Projects = new List<Project>() };

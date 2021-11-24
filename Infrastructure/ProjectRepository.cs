@@ -66,6 +66,13 @@ namespace PB.Infrastructure
                        .Select(p => new ProjectListDTO(p.Id, p.Title, convertDateTimeToString(p.Deadline)))
                        .ToListAsync())
                        .AsReadOnly();
+        
+        public async Task<IReadOnlyCollection<ProjectListDTO>> ListAllAsync(int SupervisorID) =>
+                (await _context.Projects
+                        .Where(p => SupervisorID == p.SupervisorID)
+                       .Select(p => new ProjectListDTO(p.Id, p.Title, convertDateTimeToString(p.Deadline)))
+                       .ToListAsync())
+                       .AsReadOnly();
 
         public async Task<ProjectDetailsDTO> ReadByIDAsync(int projectId)
         {
@@ -179,6 +186,7 @@ namespace PB.Infrastructure
             const string FMT = "O";
             return DateTime.ParseExact(deadline, FMT, CultureInfo.InvariantCulture);
         }
+
 
     }
 }
