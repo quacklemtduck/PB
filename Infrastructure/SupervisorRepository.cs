@@ -3,7 +3,7 @@ namespace PB.Infrastructure
 
     public class SupervisorRepository : ISupervisorRepository
     {
-
+        
         PBContext _context;
 
         public SupervisorRepository(PBContext context)
