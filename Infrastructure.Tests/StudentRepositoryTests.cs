@@ -16,12 +16,12 @@ namespace Infrastructure.Tests
             context.Database.EnsureCreated();
 
             context.Students.AddRange(
-                new Student{Id = 1,Name = "Markus"},
-                new Student{Id = 2,Name = "Daniel"},
-                new Student{Id = 3,Name = "Line"},
-                new Student{Id = 4,Name = "Andreas"},
-                new Student{Id = 5,Name = "Gustav"},
-                new Student{Id = 6,Name = "Jacob"}
+                new Student{Id = 1,Name = "student1"},
+                new Student{Id = 2,Name = "student2"},
+                new Student{Id = 3,Name = "student3"},
+                new Student{Id = 4,Name = "student4"},
+                new Student{Id = 5,Name = "student5"},
+                new Student{Id = 6,Name = "student6"}
             );
 
             context.SaveChanges();
@@ -63,11 +63,12 @@ namespace Infrastructure.Tests
             var students = await _repository.ReadAllAsync();
 
             Assert.Collection(students,
-                students => Assert.Equal(new StudentDetailsDTO(1, "student1", new List<int>()), students),
-                students => Assert.Equal(new StudentDetailsDTO(2, "student2", new List<int>()), students),
-                students => Assert.Equal(new StudentDetailsDTO(3, "student3", new List<int>()), students),
-                students => Assert.Equal(new StudentDetailsDTO(4, "student4", new List<int>()), students),
-                students => Assert.Equal(new StudentDetailsDTO(5, "student5", new List<int>()), students)
+                students => Assert.Equal(new StudentDetailsDTO(1, "student1", new List<int>()).ToString(), students.ToString()),
+                students => Assert.Equal(new StudentDetailsDTO(2, "student2", new List<int>()).ToString(), students.ToString()),
+                students => Assert.Equal(new StudentDetailsDTO(3, "student3", new List<int>()).ToString(), students.ToString()),
+                students => Assert.Equal(new StudentDetailsDTO(4, "student4", new List<int>()).ToString(), students.ToString()),
+                students => Assert.Equal(new StudentDetailsDTO(5, "student5", new List<int>()).ToString(), students.ToString()),
+                students => Assert.Equal(new StudentDetailsDTO(6, "student6", new List<int>()).ToString(), students.ToString())
             );
         }
     }

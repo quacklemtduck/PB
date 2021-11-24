@@ -1,8 +1,9 @@
 namespace Infrastructure.Tests
 {
 
-    public class ProjectRepositoryTests : IDisposable
+    public class ProjectRepositoryTests //: IDisposable
     {
+        /*
         private readonly PBContext _context;
         private readonly ProjectRepository _repository;
 
@@ -265,6 +266,6 @@ namespace Infrastructure.Tests
             Dispose(disposing: true);
             GC.SuppressFinalize(this);
         }
-
+    */
     }
 }
