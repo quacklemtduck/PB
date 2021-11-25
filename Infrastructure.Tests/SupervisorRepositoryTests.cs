@@ -90,12 +90,35 @@ public class SupervisorRepositoryTests : IDisposable
     public async Task UpdateAsync_given_existing_id_updates_supervisor()
     {
         var supervisor = new SupervisorUpdateDTO(1,"supervisor1.1","more info"); 
-        var status = await _repository.UpdateAsync(supervisor.Id,supervisor);
-        Assert.Equal(Updated,status);
+        var response = await _repository.UpdateAsync(supervisor.Id,supervisor);
+        Assert.Equal(Updated,response);
 
         var updatedSupervisor = await _repository.ReadAsync(1);
         Assert.Equal("supervisor1.1",updatedSupervisor.Name);
         Assert.Equal("more info",updatedSupervisor.ContactInfo);
+    }
+    [Fact]
+    public async Task DeleteAsync_given_non_existing_id_reeturns_NotFound()
+    {
+        var respone = await _repository.DeleteAsync(-1);
+        Assert.Equal(NotFound,respone);
+    }
+
+    [Fact]
+    public async Task DeleteAsync_given_existing_id_removes_supervisor()
+    {
+        var supervisor = await _repository.ReadAsync(2);
+
+        Assert.Equal(2, supervisor.Id);
+        Assert.Equal("Supervisor2", supervisor.Name);
+        Assert.Equal("supervisor2@email.com", supervisor.Email);
+        Assert.Equal("info2", supervisor.ContactInfo);
+        Assert.Empty(supervisor.Projects);
+
+        var respone = await _repository.DeleteAsync(2);
+        Assert.Equal(Deleted,respone);
+        var checkIfDeleted = await _repository.DeleteAsync(2);
+        Assert.Equal(NotFound,checkIfDeleted);
     }
 
     protected virtual void Dispose(bool disposing)

@@ -51,5 +51,15 @@ namespace PB.Infrastructure
             return Updated;
         }
 
+        public async Task<Response> DeleteAsync(int id)
+        {
+            var entity = _context.Supervisors.FirstOrDefault(s => s.Id == id);
+            if (entity == null) return NotFound;
+
+            _context.Supervisors.Remove(entity);
+            await _context.SaveChangesAsync();
+            return Deleted;
+        }
+
     }
 }
