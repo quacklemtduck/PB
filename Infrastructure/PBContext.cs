@@ -9,6 +9,8 @@ namespace PB.Infrastructure
         public DbSet<Student> Students => Set<Student>();
         public DbSet<Supervisor> Supervisors => Set<Supervisor>();
         public DbSet<Application> Applications => Set<Application>();
+        public DbSet<Tag> Tags => Set<Tag>();
+        public DbSet<University> Universities => Set<University>();
         public PBContext(DbContextOptions<PBContext> options) : base(options) { }
 
         // protected override void OnConfiguring(DbContextOptionsBuilder options){
