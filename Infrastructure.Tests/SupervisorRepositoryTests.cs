@@ -1,7 +1,8 @@
 namespace Infrastructure.Tests{
 
-public class SupervisorRepositoryTests : IDisposable
+public class SupervisorRepositoryTests //: IDisposable
 {
+    /*
      private readonly PBContext _context;
     private readonly SupervisorRepository _repository;
     private bool disposedValue;
@@ -138,5 +139,6 @@ public class SupervisorRepositoryTests : IDisposable
         Dispose(disposing: true);
         GC.SuppressFinalize(this);
     }
-}
+    */
+    }
 }
