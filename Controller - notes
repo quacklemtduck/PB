@@ -23,12 +23,12 @@ View projects - listallprojects/get project - check
 
 Allow anynoumus
 Sign up - post
-Sign in/log in
+Sign in/log in - get
 
 Allow Supervisor
 View own profile - get
 Edit own profile - put
-//Delete own profile - delete
+Delete own profile - delete
 
 
 
