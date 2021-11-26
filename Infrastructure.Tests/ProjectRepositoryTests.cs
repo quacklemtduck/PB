@@ -19,9 +19,10 @@ namespace PB.Infrastructure.Tests
             var supervisor = new Supervisor { Id = 1, Name = "Supervisor1", Email = "supervisor1@email.com", Password = "***", ContactInfo = "info1", Projects = new List<Project>() };
             //context.Supervisors.Add(supervisor);
 
+            var university = new University {Name = "Københavns Universitet", Abbreviation = "KU"};
 
 
-            var student = new Student { Name = "Test" };
+            var student = new Student { Name = "Test", Email = "Test@gmail.com", University = university };
             context.Students.Add(student);
 
 
@@ -133,9 +134,8 @@ namespace PB.Infrastructure.Tests
                 Description = "This is project 5",
                 Supervisor = supervisor.ToString(),
                 Deadline = getDeadlineString(),
-                getNotification = false,
-                numberOfStudents = 2,
-                CollabStudents = new HashSet<string>(),
+                Notification = false,
+                ChosenStudents = new HashSet<string>(),
                 Tags = new HashSet<string>(),
                 Applications = new HashSet<string>(),
                 Universities = new HashSet<string>()
@@ -159,9 +159,8 @@ namespace PB.Infrastructure.Tests
                 Description = "This is project 5, version 2",
                 Supervisor = "Supervisor1",
                 Deadline = getDeadlineString(),
-                getNotification = false,
-                numberOfStudents = 2,
-                CollabStudents = new HashSet<string>(),
+                Notification = false,
+                ChosenStudents = new HashSet<string>(),
                 Tags = new HashSet<string>(),
                 Applications = new HashSet<string>(),
                 Universities = new HashSet<string>()
@@ -172,7 +171,7 @@ namespace PB.Infrastructure.Tests
             Assert.Equal(Updated, response);
             var projectUpdated = await _repository.ReadByIDAsync(5);
 
-            Assert.Empty(projectUpdated.CollabStudents);
+            Assert.Empty(projectUpdated.ChosenStudents);
             Assert.Empty(projectUpdated.Tags);
             Assert.Empty(projectUpdated.Applications);
             Assert.Empty(projectUpdated.Universities);
@@ -183,8 +182,8 @@ namespace PB.Infrastructure.Tests
         {
             var student = new Student { Name = "Test" };
             var supervisor = new Supervisor { Id = 1, Name = "Supervisor1", Email = "supervisor1@email.com", Password = "***", ContactInfo = "info1", Projects = new List<Project>() };
-            var collabStudents = new HashSet<string>();
-            collabStudents.Add(student.Name);
+            var ChosenStudents = new HashSet<string>();
+            ChosenStudents.Add(student.Name);
 
             var project = new ProjectUpdateDTO
             {
@@ -193,10 +192,9 @@ namespace PB.Infrastructure.Tests
                 Description = "This is project 5, version 2",
                 Supervisor = "Supervisor1",
                 Deadline = getDeadlineString(),
-                getNotification = false,
-                numberOfStudents = 2,
-                //CollabStudents = new HashSet<string>() { student.Name },
-                CollabStudents = collabStudents,
+                Notification = false,
+                //ChosenStudents = new HashSet<string>() { student.Name },
+                ChosenStudents = ChosenStudents,
                 Tags = new HashSet<string>(),
                 Applications = new HashSet<string>(),
                 Universities = new HashSet<string>()
@@ -208,9 +206,9 @@ namespace PB.Infrastructure.Tests
             var projectUpdated = await _repository.ReadByIDAsync(5);
             
             Assert.Equal("newProject5" , projectUpdated.Title);
-            Assert.Equal(1 , projectUpdated.CollabStudents.Count);
-            Assert.True(projectUpdated.CollabStudents.Contains(student.Name));
-            Assert.Equal(1, projectUpdated.CollabStudents.Count());
+            Assert.Equal(1 , projectUpdated.ChosenStudents.Count);
+            Assert.True(projectUpdated.ChosenStudents.Contains(student.Name));
+            Assert.Equal(1, projectUpdated.ChosenStudents.Count());
 
             Assert.Empty(projectUpdated.Tags);
             Assert.Empty(projectUpdated.Applications);
@@ -234,9 +232,8 @@ namespace PB.Infrastructure.Tests
                 Description = "This is project 5, version 2",
                 Supervisor = "Supervisor1",
                 Deadline = getDeadlineString(),
-                getNotification = false,
-                numberOfStudents = 2,
-                CollabStudents = new HashSet<string>(),
+                Notification = false,
+                ChosenStudents = new HashSet<string>(),
                 Tags = new HashSet<string>(),
                 Applications = applications,
                 Universities = new HashSet<string>()
@@ -254,7 +251,7 @@ namespace PB.Infrastructure.Tests
             
 
             Assert.Empty(projectUpdated.Tags);
-            Assert.Empty(projectUpdated.CollabStudents);
+            Assert.Empty(projectUpdated.ChosenStudents);
             Assert.Empty(projectUpdated.Universities);
         }
 
@@ -275,15 +272,14 @@ namespace PB.Infrastructure.Tests
 
             Assert.True(project.Supervisor.Contains(supervisor.Name));
             Assert.Equal(1, project.ID);
-            Assert.Equal(0, project.numberOfStudents);
             Assert.Equal("Supervisor1", project.Supervisor);
-            Assert.Empty(project.CollabStudents);
+            Assert.Empty(project.ChosenStudents);
             Assert.Equal(getDeadlineString(), project.Deadline);
             Assert.Equal("This is project 1", project.Description);
-            Assert.False(project.getNotification);
+            Assert.False(project.Notification);
             Assert.Empty(project.Tags);
             Assert.Empty(project.Universities);
-            Assert.Empty(project.CollabStudents);
+            Assert.Empty(project.ChosenStudents);
 
         }
 

@@ -15,13 +15,15 @@ namespace Infrastructure.Tests
             var context = new PBContext(builder.Options);
             context.Database.EnsureCreated();
 
+            var university = new University {Name = "Københavns Universitet", Abbreviation = "KU"};
+
             context.Students.AddRange(
-                new Student{Id = 1,Name = "student1"},
-                new Student{Id = 2,Name = "student2"},
-                new Student{Id = 3,Name = "student3"},
-                new Student{Id = 4,Name = "student4"},
-                new Student{Id = 5,Name = "student5"},
-                new Student{Id = 6,Name = "student6"}
+                new Student{Id = 1,Name = "student1", Email = "student1@gmail.com", University = university},
+                new Student{Id = 2,Name = "student2", Email = "student2@gmail.com", University = university},
+                new Student{Id = 3,Name = "student3", Email = "student3@gmail.com", University = university},
+                new Student{Id = 4,Name = "student4", Email = "student4@gmail.com", University = university},
+                new Student{Id = 5,Name = "student5", Email = "student5@gmail.com", University = university},
+                new Student{Id = 6,Name = "student6", Email = "student6@gmail.com", University = university}
             );
 
             context.SaveChanges();
@@ -41,7 +43,12 @@ namespace Infrastructure.Tests
         [Fact]
         public async Task UpdateAsync_given_non_existing_id_returns_NotFound()
         {
-            var student = new StudentUpdateDTO(10, "Lars", new List<int>());
+            var student = new StudentUpdateDTO{
+                Id = 10,
+                Name = "Lars",
+                Projects = new List<string>(),
+                Applications = new HashSet<string>()
+                };
             var response = await _repository.UpdateAsync(student.Id, student);
 
             Assert.Equal(NotFound, response);
@@ -50,25 +57,30 @@ namespace Infrastructure.Tests
         [Fact]
         public async Task CreateAsync_creates_new_student_with_generated_id()
         {
-            var student = new StudentCreateDTO{Name = "Markus"};
+            var university = new University {Name = "Københavns Universitet", Abbreviation = "KU"};
+            var student = new StudentCreateDTO{Name = "Markus", Email="Markus@gmail.com", University = university.Name};
             var created = await _repository.CreateAsync(student);
 
             Assert.Equal(7, created.Id);
             Assert.Equal("Markus", created.Name);
         }
 
+
+        //this tests fails - build database??
         [Fact]
         public async Task ReadAllAsync_returns_all_students()
         {
             var students = await _repository.ReadAllAsync();
+            var university = new University {Name = "Københavns Universitet", Abbreviation = "KU"};
+
 
             Assert.Collection(students,
-                students => Assert.Equal(new StudentDetailsDTO(1, "student1", new List<int>()).ToString(), students.ToString()),
-                students => Assert.Equal(new StudentDetailsDTO(2, "student2", new List<int>()).ToString(), students.ToString()),
-                students => Assert.Equal(new StudentDetailsDTO(3, "student3", new List<int>()).ToString(), students.ToString()),
-                students => Assert.Equal(new StudentDetailsDTO(4, "student4", new List<int>()).ToString(), students.ToString()),
-                students => Assert.Equal(new StudentDetailsDTO(5, "student5", new List<int>()).ToString(), students.ToString()),
-                students => Assert.Equal(new StudentDetailsDTO(6, "student6", new List<int>()).ToString(), students.ToString())
+                students => Assert.Equal(new StudentDetailsDTO(1, "student1", university.Name, "student1@gmail.com", new HashSet<string>(), new HashSet<string>()).ToString(), students.ToString()),
+                students => Assert.Equal(new StudentDetailsDTO(2, "student2", university.Name, "student2@gmail.com", new HashSet<string>(), new HashSet<string>()).ToString(), students.ToString()),
+                students => Assert.Equal(new StudentDetailsDTO(3, "student3", university.Name, "student3@gmail.com", new HashSet<string>(), new HashSet<string>()).ToString(), students.ToString()),
+                students => Assert.Equal(new StudentDetailsDTO(4, "student4", university.Name, "student4@gmail.com", new HashSet<string>(), new HashSet<string>()).ToString(), students.ToString()),
+                students => Assert.Equal(new StudentDetailsDTO(5, "student5", university.Name, "student5@gmail.com", new HashSet<string>(), new HashSet<string>()).ToString(), students.ToString()),
+                students => Assert.Equal(new StudentDetailsDTO(6, "student6", university.Name, "student6@gmail.com", new HashSet<string>(), new HashSet<string>()).ToString(), students.ToString())
             );
         }
 

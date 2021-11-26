@@ -7,7 +7,15 @@ public class Student {
     [StringLength(50)]
     public string Name {get; set;}
 
+    [EmailAddress]
+    public string Email {get; set;}
+
     public ICollection<Project> Projects {get; set;}
+
+    public ICollection<Application> Applications {get; set;}
+    public int UniversityID {get; set;}
+    public University University {get; set;}
+
 
     public ICollection<int> GetProjectIDs() {
         ICollection<int> ProjectIDList = new List<int>();
