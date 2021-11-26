@@ -5,10 +5,11 @@ Edit - update/put
 Choose students - update/put
 Close project - update/put
 Upload project - post
+
 Delete project - delete - almost check (how to differentiate between supervisor and student??)
 
 Read own project - Get
-Get own projects - list own/get project
+Get own projects - list own/get projects
 
 
 Allow students

@@ -121,7 +121,21 @@ public class SupervisorRepositoryTests //: IDisposable
         var checkIfDeleted = await _repository.DeleteAsync(2);
         Assert.Equal(NotFound,checkIfDeleted);
     }
-*/
+    
+    private bool disposed;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    _context.Dispose();
+                }
+
+                disposed = true;
+            }
+        }
     protected virtual void Dispose(bool disposing)
     {
         if (!disposedValue)
