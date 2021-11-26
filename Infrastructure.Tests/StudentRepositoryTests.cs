@@ -5,7 +5,7 @@ namespace Infrastructure.Tests
         private readonly PBContext _context;
         private readonly StudentRepository _repository;
 
-
+/*
         public StudentRepositoryTests()
         {
             var connection = new SqliteConnection("Filename=:memory:");
@@ -69,6 +69,7 @@ namespace Infrastructure.Tests
                 students => Assert.Equal(new StudentDetailsDTO(4, "student4", new List<int>()), students),
                 students => Assert.Equal(new StudentDetailsDTO(5, "student5", new List<int>()), students)
             );
-        }
+        }*/
     }
+    
 }

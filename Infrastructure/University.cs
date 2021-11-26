@@ -8,5 +8,6 @@ namespace PB.Infrastructure{
 
         [StringLength(10)]
         public string Abbreviation {get; set;}
+
     }
 }
