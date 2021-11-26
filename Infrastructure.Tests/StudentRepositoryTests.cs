@@ -1,11 +1,10 @@
 namespace Infrastructure.Tests
 {
-    public class StudentRepositoryTests
+    public class StudentRepositoryTests : IDisposable
     {
         private readonly PBContext _context;
         private readonly StudentRepository _repository;
 
-/*
         public StudentRepositoryTests()
         {
             var connection = new SqliteConnection("Filename=:memory:");
@@ -70,7 +69,29 @@ namespace Infrastructure.Tests
                 students => Assert.Equal(new StudentDetailsDTO(5, "student5", new List<int>()).ToString(), students.ToString()),
                 students => Assert.Equal(new StudentDetailsDTO(6, "student6", new List<int>()).ToString(), students.ToString())
             );
-        }*/
+        }
+
+        private bool disposed;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    _context.Dispose();
+                }
+
+                disposed = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
     }
     
 }
