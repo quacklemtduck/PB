@@ -8,5 +8,7 @@ namespace PB.Core
         Task<SupervisorDetailsDTO> ReadAsync(int supervisorId);
         Task<IReadOnlyCollection<SupervisorDetailsDTO>> ReadAllAsync();
         Task<Response> UpdateAsync(int id, SupervisorUpdateDTO supervisor);
+        Task<Response> DeleteAsync(int id);
+
     }
 }

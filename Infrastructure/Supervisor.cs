@@ -16,7 +16,7 @@ public class Supervisor
 
     [StringLength(100)]
     public string ContactInfo {get; set;}
-    public ICollection<Project>? Projects {get; set;}
+    public ICollection<Project> Projects {get; set;} = new HashSet<Project>();
 
 
 

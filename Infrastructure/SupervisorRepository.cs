@@ -11,23 +11,54 @@ namespace PB.Infrastructure
             _context = context;
         }
 
-        public Task<SupervisorDetailsDTO> CreateAsync(SuperVisorCreateDTO supervisor)
+        public async Task<SupervisorDetailsDTO> CreateAsync(SuperVisorCreateDTO supervisor)
         {
-            throw new NotImplementedException();
+            var sup = new Supervisor{
+                Name = supervisor.Name,
+                Email = supervisor.Email,
+                Password = supervisor.Password,
+                ContactInfo = supervisor.ContactInfo,
+                Projects = new List<Project>()
+            };
+
+            _context.Supervisors.Add(sup);
+            
+            await _context.SaveChangesAsync();
+
+            return new SupervisorDetailsDTO(sup.Id,sup.Name,sup.Email,sup.ContactInfo,new List<int>());
         }
-        public Task<IReadOnlyCollection<SupervisorDetailsDTO>> ReadAllAsync()
+        public async Task<IReadOnlyCollection<SupervisorDetailsDTO>> ReadAllAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Supervisors
+                .Select(s => new SupervisorDetailsDTO(s.Id,s.Name,s.Email,s.ContactInfo,s.Projects.Select(p => p.Id).ToList<int>()))
+                .ToListAsync();
         }
 
-        public Task<SupervisorDetailsDTO> ReadAsync(int supervisorId)
+        public async Task<SupervisorDetailsDTO> ReadAsync(int supervisorId)
         {
-            throw new NotImplementedException();
+            var supervisor = await _context.Supervisors.FirstOrDefaultAsync(s => s.Id == supervisorId);
+            return supervisor == null ? null : new SupervisorDetailsDTO(supervisor.Id,supervisor.Name,supervisor.Email,supervisor.ContactInfo,supervisor.Projects.Select(p => p.Id).ToList<int>());
         }
 
-        public Task<Response> UpdateAsync(int id, SupervisorUpdateDTO supervisor)
+        public async Task<Response> UpdateAsync(int id, SupervisorUpdateDTO supervisor)
         {
-            throw new NotImplementedException();
+            var entity = _context.Supervisors.FirstOrDefault(s => s.Id == id);
+            if (entity == null) return NotFound;
+            
+            entity.Name = supervisor.Name;
+            entity.ContactInfo = supervisor.ContactInfo;
+            await _context.SaveChangesAsync();
+            return Updated;
+        }
+
+        public async Task<Response> DeleteAsync(int id)
+        {
+            var entity = _context.Supervisors.FirstOrDefault(s => s.Id == id);
+            if (entity == null) return NotFound;
+
+            _context.Supervisors.Remove(entity);
+            await _context.SaveChangesAsync();
+            return Deleted;
         }
 
     }
