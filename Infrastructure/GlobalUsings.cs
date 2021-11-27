@@ -12,3 +12,4 @@ global using PB.Core;
 global using System;
 global using System.Globalization;
 global using static PB.Core.Response;
+global using Microsoft.CodeAnalysis;

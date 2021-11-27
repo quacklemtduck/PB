@@ -70,7 +70,7 @@ namespace PB.Infrastructure
                        .ToListAsync())
                        .AsReadOnly();
 
-        public async Task<ProjectDetailsDTO> ReadByIDAsync(int projectId)
+        public async Task<Option<ProjectDetailsDTO>> ReadByIDAsync(int projectId)
         {
             var projects = from p in _context.Projects
                            where p.Id == projectId

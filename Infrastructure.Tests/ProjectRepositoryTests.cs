@@ -169,7 +169,7 @@ namespace PB.Infrastructure.Tests
             var response = await _repository.UpdateAsync(5, project);
 
             Assert.Equal(Updated, response);
-            var projectUpdated = await _repository.ReadByIDAsync(5);
+            var projectUpdated = (await _repository.ReadByIDAsync(5)).Value;
 
             Assert.Empty(projectUpdated.ChosenStudents);
             Assert.Empty(projectUpdated.Tags);
@@ -203,7 +203,7 @@ namespace PB.Infrastructure.Tests
             var response = await _repository.UpdateAsync(5, project);
 
             Assert.Equal(Updated, response);
-            var projectUpdated = await _repository.ReadByIDAsync(5);
+            var projectUpdated = (await _repository.ReadByIDAsync(5)).Value;
             
             Assert.Equal("newProject5" , projectUpdated.Title);
             Assert.Equal(1 , projectUpdated.ChosenStudents.Count);
@@ -242,7 +242,7 @@ namespace PB.Infrastructure.Tests
             var response = await _repository.UpdateAsync(5, project);
 
             Assert.Equal(Updated, response);
-            var projectUpdated = await _repository.ReadByIDAsync(5);
+            var projectUpdated = (await _repository.ReadByIDAsync(5)).Value;
 
             Assert.Equal("newProject5", projectUpdated.Title);
 
@@ -260,7 +260,7 @@ namespace PB.Infrastructure.Tests
         {
             var option = await _repository.ReadByIDAsync(42);
 
-            Assert.Null(option);
+            Assert.True(option.IsNone);
         }
 
         [Fact]
@@ -268,7 +268,7 @@ namespace PB.Infrastructure.Tests
         {
             var supervisor = new Supervisor { Id = 1, Name = "Supervisor1", Email = "supervisor1@email.com", Password = "***", ContactInfo = "info1", Projects = new List<Project>() };
 
-            var project = await _repository.ReadByIDAsync(1);
+            var project = (await _repository.ReadByIDAsync(1)).Value;
 
             Assert.True(project.Supervisor.Contains(supervisor.Name));
             Assert.Equal(1, project.ID);

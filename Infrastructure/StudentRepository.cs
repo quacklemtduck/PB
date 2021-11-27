@@ -42,7 +42,7 @@ namespace PB.Infrastructure
                 .ToListAsync();
         }
 
-        public async Task<StudentDetailsDTO> ReadAsync(int studentId)
+        public async Task<Option<StudentDetailsDTO>> ReadAsync(int studentId)
         {
             var students = from s in _context.Students
                            where s.Id == studentId

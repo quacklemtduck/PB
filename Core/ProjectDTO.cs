@@ -8,7 +8,7 @@
 
         public string? Description { get; set; }
 
-        public string Supervisor { get; set; } //TODO: not 0
+        public string? Supervisor { get; set; } //TODO: not 0
 
         public string? Deadline { get; set; } //can this be a string
 

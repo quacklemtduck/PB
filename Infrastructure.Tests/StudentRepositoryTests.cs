@@ -35,9 +35,15 @@ namespace Infrastructure.Tests
         [Fact]
         public async Task ReadAsync_given_id_exists_returns_Student()
         {
-            var student = await _repository.ReadAsync(2);
+            
+            
+            var option = await _repository.ReadAsync(2);
+            var student = option.Value;
 
             Assert.Equal(2, student.Id);
+            Assert.Equal("student2", student.Name);
+            Assert.Equal("student2@gmail.com", student.Email);
+            Assert.Equal("Københavns Universitet", student.University);
         }
 
         [Fact]
@@ -49,6 +55,8 @@ namespace Infrastructure.Tests
                 Projects = new List<string>(),
                 Applications = new HashSet<string>()
                 };
+
+                
             var response = await _repository.UpdateAsync(student.Id, student);
 
             Assert.Equal(NotFound, response);
@@ -58,7 +66,7 @@ namespace Infrastructure.Tests
         public async Task CreateAsync_creates_new_student_with_generated_id()
         {
             var university = new University {Name = "Københavns Universitet", Abbreviation = "KU"};
-            var student = new StudentCreateDTO{Name = "Markus", Email="Markus@gmail.com", University = university.Name};
+            var student = new StudentCreateDTO{ Name = "Markus", Email="Markus@gmail.com", University = university.Name};
             var created = await _repository.CreateAsync(student);
 
             Assert.Equal(7, created.Id);
@@ -66,7 +74,6 @@ namespace Infrastructure.Tests
         }
 
 
-        //this tests fails - build database??
         [Fact]
         public async Task ReadAllAsync_returns_all_students()
         {
