@@ -19,8 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
-  <ProjectReference Include="..\Client\MyApp.Client.csproj" /> <!--??-->
-    <ProjectReference Include="..\PB.Core\MyApp.Core.csproj" />
+  <ProjectReference Include="..\Client\Client.csproj" /> <!--??-->
+    <ProjectReference Include="..\PB.Core\Core.csproj" />
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
   </ItemGroup>
 

@@ -1,4 +1,4 @@
-/*namespace MyApp.Server.Tests.Controllers{
+/*namespace PB.Server.Tests.Controllers{
 
 public class CharactersControllerTests
 {
