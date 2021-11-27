@@ -1,10 +1,10 @@
 namespace PB.Server.Controllers
 {
-/*
-[Authorize]
+
+//[Authorize]
 [ApiController]
 [Route("api/[controller]")]
-[RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes")]
+//[RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes")]
 public class ProjectsController : ControllerBase
 {
     private readonly ILogger<ProjectsController> _logger;
@@ -16,7 +16,7 @@ public class ProjectsController : ControllerBase
         _repository = repository;
     }
 
-    [AllowAnonymous]
+    //[AllowAnonymous]
     [HttpGet]
     public async Task<IReadOnlyCollection<ProjectListDTO>> Get()
         => await _repository.ListAllAsync();
@@ -28,7 +28,7 @@ public class ProjectsController : ControllerBase
     public async Task<ActionResult<ProjectDetailsDTO>> Get(int id)
         => (await _repository.ReadByIDAsync(id)).ToActionResult();
 
-    [Authorize]
+    //[Authorize]
     [HttpPost]
     [ProducesResponseType(typeof(ProjectDetailsDTO), 201)]
     public async Task<IActionResult> Post(ProjectCreateDTO project)
@@ -38,18 +38,18 @@ public class ProjectsController : ControllerBase
         return CreatedAtRoute(nameof(Get), new { created.ID }, created);
     }
 
-    [Authorize]
+    //[Authorize]
     [HttpPut("{id}")]
     [ProducesResponseType(204)]
     [ProducesResponseType(404)]
     public async Task<IActionResult> Put(int id, [FromBody] ProjectUpdateDTO project)
            => (await _repository.UpdateAsync(id, project)).ToActionResult();
 
-    [Authorize]
+    //[Authorize]
     [HttpDelete("{id}")]
     [ProducesResponseType(204)]
     [ProducesResponseType(404)]
     public async Task<IActionResult> Delete(int id)
           => (await _repository.DeleteAsync(id)).ToActionResult();
-}*/
+}
 }
