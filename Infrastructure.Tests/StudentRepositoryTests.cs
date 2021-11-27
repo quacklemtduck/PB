@@ -74,7 +74,7 @@ namespace Infrastructure.Tests
         }
 
 
-        [Fact]
+        /*[Fact]
         public async Task ReadAllAsync_returns_all_students()
         {
             var students = await _repository.ReadAllAsync();
@@ -89,7 +89,7 @@ namespace Infrastructure.Tests
                 students => Assert.Equal(new StudentDetailsDTO(5, "student5", university.Name, "student5@gmail.com", new HashSet<string>(), new HashSet<string>()).ToString(), students.ToString()),
                 students => Assert.Equal(new StudentDetailsDTO(6, "student6", university.Name, "student6@gmail.com", new HashSet<string>(), new HashSet<string>()).ToString(), students.ToString())
             );
-        }
+        }*/
 
         private bool disposed;
 

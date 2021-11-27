@@ -4,7 +4,7 @@ namespace PB.Core
     {
          Task<StudentDetailsDTO> CreateAsync(StudentCreateDTO student);
          Task<Option<StudentDetailsDTO>> ReadAsync(int studentId);
-         Task<IReadOnlyCollection<StudentDetailsDTO>> ReadAllAsync();
+         //Task<IReadOnlyCollection<StudentDetailsDTO>> ReadAllAsync();
          Task<Response> UpdateAsync(int id, StudentUpdateDTO student);
     }
 }

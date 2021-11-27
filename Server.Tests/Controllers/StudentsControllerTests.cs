@@ -25,7 +25,7 @@ public class StudentsControllerTests
         Assert.Equal((object?)1, result?.RouteValues?.GetValueOrDefault("Id"));
     }
 
-    [Fact]
+    /*[Fact]
     public async Task Get_returns_Students_from_repo()
     {
         // Arrange
@@ -42,7 +42,7 @@ public class StudentsControllerTests
 
         // Assert
         Assert.Equal(expected, actual);
-    }
+    }*/
 
     [Fact]
     public async Task Get_given_non_existing_returns_NotFound()

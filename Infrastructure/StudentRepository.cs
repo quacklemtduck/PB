@@ -35,12 +35,12 @@ namespace PB.Infrastructure
             );
         }
 
-        public async Task<IReadOnlyCollection<StudentDetailsDTO>> ReadAllAsync()
+        /*public async Task<IReadOnlyCollection<StudentDetailsDTO>> ReadAllAsync()
         {
             return await _context.Students
                 .Select(s => new StudentDetailsDTO(s.Id, s.Name, s.University.Name, s.Email, s.Projects.Select(p => p.Title).ToHashSet(), s.Applications.Select(a => a.Title).ToHashSet()))
                 .ToListAsync();
-        }
+        }*/
 
         public async Task<Option<StudentDetailsDTO>> ReadAsync(int studentId)
         {
