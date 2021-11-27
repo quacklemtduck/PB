@@ -39,7 +39,7 @@ public class ProjectsControllerTests
         var controller = new ProjectsController(logger.Object, repository.Object);
 
         // Act
-        var actual = await controller.Get();
+        var actual = await controller.GetAll();
 
         // Assert
         Assert.Equal(expected, actual);
