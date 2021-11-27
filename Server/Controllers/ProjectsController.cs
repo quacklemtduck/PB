@@ -21,7 +21,7 @@ namespace PB.Server.Controllers
         public async Task<IReadOnlyCollection<ProjectListDTO>> GetAll()
             => await _repository.ListAllAsync();
 
-        //[AllowAnonymous]
+        //[Authorize] //Supervisor
         [HttpGet]
         public async Task<IReadOnlyCollection<ProjectListDTO>> GetAll(int SupervisorID)
             => await _repository.ListAllAsync(SupervisorID);
@@ -43,14 +43,14 @@ namespace PB.Server.Controllers
             return CreatedAtRoute(nameof(Get), new { created.ID }, created);
         }
 
-        //[Authorize]
+        //[Authorize] //Supervisor and Student
         [HttpPut("{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
         public async Task<IActionResult> Put(int id, [FromBody] ProjectUpdateDTO project)
                => (await _repository.UpdateAsync(id, project)).ToActionResult();
 
-        //[Authorize]
+        //[Authorize] //Supervisor
         [HttpDelete("{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
