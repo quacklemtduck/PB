@@ -1,5 +1,6 @@
-/*namespace PB.Server.Controllers;
-
+namespace PB.Server.Controllers
+{
+/*
 [Authorize]
 [ApiController]
 [Route("api/[controller]")]
@@ -51,3 +52,4 @@ public class ProjectsController : ControllerBase
     public async Task<IActionResult> Delete(int id)
           => (await _repository.DeleteAsync(id)).ToActionResult();
 }*/
+}
