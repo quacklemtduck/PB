@@ -60,8 +60,6 @@ public class SupervisorControllerTests
     public async Task Get_given_existing_returns_supervisor()
     {
         // Arrange
-        var university = new University {Name = "Københavns Universitet", Abbreviation = "KU"};
-
         var logger = new Mock<ILogger<SupervisorController>>();
         var repository = new Mock<ISupervisorRepository>();
         var supervisor = new SupervisorDetailsDTO(1, "supervisor", "supervisor@gmail.com", new HashSet<int>());

@@ -48,8 +48,10 @@ namespace Infrastructure.Tests
         [Fact]
         public async Task ReadAsync_given_id_exists_returns_Aplication()
         {
-            var app = await _repository.ReadAsync(2);
-
+            var option = await _repository.ReadAsync(2);
+            Assert.True(option.IsSome);
+            
+            var app = option.Value;
             Assert.Equal(2, app.Id);
             Assert.Equal("title2", app.Title);
             Assert.Equal("app 2", app.Description);
@@ -58,11 +60,11 @@ namespace Infrastructure.Tests
         }
 
         [Fact]
-        public async Task ReadAsync_given_non_existing_id_returns_Null()
+        public async Task ReadAsync_given_non_existing_id_returns_None()
         {
             var option = await _repository.ReadAsync(-1);
 
-            Assert.Null(option);
+            Assert.True(option.IsNone);
         }
 
         [Fact]
@@ -93,7 +95,7 @@ namespace Infrastructure.Tests
             var response = await _repository.UpdateAsync(application.Id, application);
             Assert.Equal(Updated, response);
 
-            var updatedApplication = await _repository.ReadAsync(1);
+            var updatedApplication = (await _repository.ReadAsync(1)).Value;
             Assert.Equal("title", updatedApplication.Title);
             Assert.Equal("app", updatedApplication.Description);
         }

@@ -24,7 +24,7 @@ namespace PB.Infrastructure
             return new ApplicationDetailsDTO(entity.Id,entity.StudentID,entity.ProjectID,entity.Description,entity.Title);
         }
 
-        public async Task<ApplicationDetailsDTO> ReadAsync(int applicationId)
+        public async Task<Option<ApplicationDetailsDTO>> ReadAsync(int applicationId)
         {
             var app = await _context.Applications.FirstOrDefaultAsync(a => a.Id == applicationId);
             return app == null ? null : new ApplicationDetailsDTO(app.Id,app.StudentID,app.ProjectID,app.Description,app.Title);
