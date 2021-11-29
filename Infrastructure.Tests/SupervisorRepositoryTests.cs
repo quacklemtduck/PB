@@ -46,8 +46,10 @@ public class SupervisorRepositoryTests : IDisposable
     [Fact]
     public async Task ReadAsync_given_id_exists_returns_Supervisor()
     {
-        var supervisor = await _repository.ReadAsync(2);
+        var option = await _repository.ReadAsync(2);
 
+        Assert.True(option.IsSome);
+        var supervisor = option.Value;
         Assert.Equal(2, supervisor.Id);
         Assert.Equal("Supervisor2", supervisor.Name);
         Assert.Equal("supervisor2@email.com", supervisor.Email);
@@ -55,11 +57,10 @@ public class SupervisorRepositoryTests : IDisposable
     }
 
     [Fact]
-    public async Task ReadAsync_given_non_existing_id_returns_Null()
+    public async Task ReadAsync_given_non_existing_id_returns_None()
     {
         var option = await _repository.ReadAsync(-1);
-
-        Assert.Null(option);
+        Assert.True(option.IsNone);
     }
 
     [Fact]
@@ -92,7 +93,7 @@ public class SupervisorRepositoryTests : IDisposable
         var response = await _repository.UpdateAsync(supervisor.Id,supervisor);
         Assert.Equal(Updated,response);
 
-        var updatedSupervisor = await _repository.ReadAsync(1);
+        var updatedSupervisor = (await _repository.ReadAsync(1)).Value;
         Assert.Equal("supervisor1.1",updatedSupervisor.Name);
     }
     [Fact]
@@ -105,7 +106,7 @@ public class SupervisorRepositoryTests : IDisposable
     [Fact]
     public async Task DeleteAsync_given_existing_id_removes_supervisor()
     {
-        var supervisor = await _repository.ReadAsync(2);
+        var supervisor = (await _repository.ReadAsync(2)).Value;
 
         Assert.Equal(2, supervisor.Id);
         Assert.Equal("Supervisor2", supervisor.Name);

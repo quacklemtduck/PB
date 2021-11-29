@@ -10,6 +10,7 @@ global using System.Text.Json.Serialization;
 
 global using PB.Core;
 global using PB.Infrastructure;
+global using PB.Server.Model;
 //global using PB.Server.Model;
 global using static PB.Core.Status;
 global using static PB.Core.Response;

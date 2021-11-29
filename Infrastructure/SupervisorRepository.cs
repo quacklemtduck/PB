@@ -33,12 +33,12 @@ namespace PB.Infrastructure
                 .ToListAsync();
         }
 
-        public async Task<SupervisorDetailsDTO> ReadAsync(int supervisorId)
+        public async Task<Option<SupervisorDetailsDTO>> ReadAsync(int supervisorId)
         {
             var supervisor = await _context.Supervisors.FirstOrDefaultAsync(s => s.Id == supervisorId);
             return supervisor == null ? null : new SupervisorDetailsDTO(supervisor.Id,supervisor.Name,supervisor.Email,supervisor.Projects.Select(p => p.Id).ToList<int>());
         }
-        
+
         public async Task<Response> UpdateAsync(int id, SupervisorUpdateDTO supervisor)
         {
             var entity = _context.Supervisors.FirstOrDefault(s => s.Id == id);
