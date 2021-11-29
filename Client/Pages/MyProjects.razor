@@ -1,3 +1,21 @@
 @page "/MyProjects"
 
 <h2>My projects</h2>
+
+ <RadzenPager Count="count" PageSize="@pageSize" PageNumbersCount="10" PageChanged="@PageChanged" />
+
+ @code {
+    int pageSize;
+    int count;
+
+    protected override void OnInitialized()
+    {
+        count = 10;
+        pageSize = 6;
+    }
+
+    void PageChanged(PagerEventArgs args)
+    {
+        
+    }
+}
