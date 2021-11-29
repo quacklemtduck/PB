@@ -1,2 +1,24 @@
 @page "/Projects"
 
+@using Microsoft.EntityFrameworkCore
+
+<h2>Projects</h2>
+    
+    <RadzenPager ShowPagingSummary="true" PagingSummaryFormat="@pagingSummaryFormat" Count="count" PageSize="@pageSize" PageNumbersCount="10" PageChanged="@PageChanged" />
+@code {
+    string pagingSummaryFormat = "Displaying page {0} of {1} (total {2} records)";
+    int pageSize = 6;
+    int count;
+   
+
+    protected override void OnInitialized()
+    {
+        
+    }
+
+    void PageChanged(PagerEventArgs args)
+    {
+        
+    }
+
+}

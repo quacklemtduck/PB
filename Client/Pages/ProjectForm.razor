@@ -6,6 +6,8 @@
     }
 </style>
 
+<h2>Create new project</h2>
+
 @if (project == null)
 {
     <p><em>Loading...</em></p>
@@ -14,7 +16,7 @@ else
 {
     <RadzenTemplateForm Data="@project" Submit="@((Project args) => { Submit(args); })">
 
-        <RadzenFieldset Text="Project creation form" style="width: 100%;">
+        <RadzenFieldset Text="" style="width: 100%;">
             <div class="row">
                 <div class="col-md-4 align-items-center d-flex">
                     <RadzenLabel Text="Project Title" />
@@ -102,11 +104,11 @@ new University() { UniId = 4, UniAbbrv = "DTU" }
 
     void Submit(Project arg)
     {
-        //
+        //Called when you press save on project form
     }
 
     void Cancel()
     {
-        //
+        //Called when you press cancel on project form
     }
 }
