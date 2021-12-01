@@ -4,15 +4,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using PB.Server.Data;
+using PB.Infrastructure;
 
 #nullable disable
 
-namespace PB.Server.Data.Migrations
+namespace PB.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211201125631_Names")]
-    partial class Names
+    [Migration("20211201163002_PersonalData")]
+    partial class PersonalData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -341,7 +341,7 @@ namespace PB.Server.Data.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasMaxLength(20)
+                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LastName")

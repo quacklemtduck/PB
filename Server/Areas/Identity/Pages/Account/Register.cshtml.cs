@@ -2,22 +2,14 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Logging;
 using PB.Infrastructure.Authentication;
 
 namespace PB.Server.Areas.Identity.Pages.Account
@@ -30,13 +22,15 @@ namespace PB.Server.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<ApplicationUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly ISupervisorRepository _supervisorRepository;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             IUserStore<ApplicationUser> userStore,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ISupervisorRepository supervisorRepository)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -44,6 +38,7 @@ namespace PB.Server.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _supervisorRepository = supervisorRepository;
         }
 
         /// <summary>
@@ -73,10 +68,12 @@ namespace PB.Server.Areas.Identity.Pages.Account
         {
 
             [Required]
+            [DataType(DataType.Text)]
             [Display(Name = "First Name")]
-            public string FistName { get; set; }
+            public string FirstName { get; set; }
 
             [Required]
+            [DataType(DataType.Text)]
             [Display(Name = "Last Name")]
             public string LastName { get; set; }
             /// <summary>
@@ -122,11 +119,12 @@ namespace PB.Server.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
-                user.FirstName = Input.FistName;
+                user.FirstName = Input.FirstName;
                 user.LastName = Input.LastName;
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
+                await _supervisorRepository.CreateAsync(new SuperVisorCreateDTO(user.FirstName, user.Email, "", "25369883"));
 
                 if (result.Succeeded)
                 {
