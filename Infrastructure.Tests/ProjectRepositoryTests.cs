@@ -1,19 +1,22 @@
+using Core;
+using Duende.IdentityServer.EntityFramework.Options;
 namespace PB.Infrastructure.Tests
 {
 
     public class ProjectRepositoryTests : IDisposable
     {
         
-        private readonly PBContext _context;
+        private readonly ApplicationDbContext _context;
         private readonly ProjectRepository _repository;
 
         public ProjectRepositoryTests()
         {
             var connection = new SqliteConnection("Filename=:memory:");
             connection.Open();
-            var builder = new DbContextOptionsBuilder<PBContext>();
+            var builder = new DbContextOptionsBuilder<ApplicationDbContext>();
             builder.UseSqlite(connection);
-            var context = new PBContext(builder.Options);
+            var options = new Option<OperationalStoreOptions>(new OperationalStoreOptions());
+            var context = new ApplicationDbContext(builder.Options, options);
             context.Database.EnsureCreated();
 
             var supervisor = new Supervisor { Id = 1, Name = "Supervisor1", Email = "supervisor1@email.com", Password = "***", ContactInfo = "info1", Projects = new List<Project>() };
