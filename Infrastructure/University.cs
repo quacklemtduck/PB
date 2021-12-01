@@ -11,5 +11,18 @@ namespace PB.Infrastructure{
 
         public ICollection<Education> Educations { get; set; } = new HashSet<Education>();
 
+        public ICollection<int> GetEducationIDs()
+        {
+            ICollection<int> EducationtIDList = new List<int>();
+            if (Educations != null)
+            {
+                foreach (Education e in Educations)
+                {
+                    EducationtIDList.Add(e.Id);
+                }
+            }
+            return EducationtIDList;
+        }
+
     }
 }
