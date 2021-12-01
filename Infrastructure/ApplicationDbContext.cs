@@ -20,5 +20,12 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>, 
     public DbSet<Application> Applications => Set<Application>();
     public DbSet<Tag> Tags => Set<Tag>();
     public DbSet<University> Universities => Set<University>();
+    public DbSet<Education> Educations => Set<Education>();
+
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
+        builder.Seed();
+    }
 
 }

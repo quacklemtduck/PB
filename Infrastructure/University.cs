@@ -1,13 +1,15 @@
 namespace PB.Infrastructure{
     public class University
     {
-        public int Id {get; set;}
         
         [StringLength(50)]
-        public string Name {get; set;}
+        public string? Name {get; set;}
 
         [StringLength(10)]
-        public string Abbreviation {get; set;}
+        [Key]
+        public string? Id {get; set;}
+
+        public ICollection<Education> Educations { get; set; } = new HashSet<Education>();
 
     }
 }
