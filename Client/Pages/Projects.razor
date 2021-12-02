@@ -1,4 +1,35 @@
 @page "/Projects"
+@using PB.Infrastructure
 
 <h2>Projects</h2>
+<RadzenDataList WrapItems="true" AllowPaging="true" Data="@projects" TItem="Project">
+   <Template Context="project">
+    @project.Title (@project.Id)
+   </Template>
+  </RadzenDataList>
+ <RadzenPager Count="count" PageSize="@pageSize" PageNumbersCount="10" PageChanged="@PageChanged" />
 
+ @code {
+    int pageSize;
+    int count;
+    List<Project> projects;
+    ProjRepoMock mock = new ProjRepoMock();
+
+    protected override void OnInitialized()
+    {
+        count = mock.ListAll().Count();
+        pageSize = 6;
+        projects = GetProjects(0, pageSize);        
+    }
+
+    void PageChanged(PagerEventArgs args)
+    {
+        projects = GetProjects(args.Skip, args.Top);
+    }
+
+    List<Project> GetProjects(int skip, int take) {
+        // assign projects from backend ...
+        
+        return mock.ListAll().Skip(skip).Take(take).ToList();
+        }
+}

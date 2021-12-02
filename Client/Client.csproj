@@ -13,4 +13,8 @@
     <PackageReference Include="Radzen.Blazor" Version="3.13.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
