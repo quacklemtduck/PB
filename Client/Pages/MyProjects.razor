@@ -4,7 +4,25 @@
 <h2>My projects</h2>
 <RadzenDataList WrapItems="true" AllowPaging="true" Data="@projects" TItem="Project">
    <Template Context="project">
-    @project.Title (@project.Id)
+      <RadzenCard class="m-3">
+                <h3 class="h5">@project.Title</h3>
+                <div class="d-flex flex-row">
+                    <div>
+                        <div>Supervisor</div>
+                        <b>@project.Supervisor</b>
+                        <div class="mt-3">University</div>
+                        <b>@project.Universities</b>
+                    </div>
+                </div>
+            </RadzenCard>
+            <RadzenCard class="m-3">
+                <h3 class="h5">Description</h3>
+                <div class="row">
+                    <div class="col-md-4">
+                        <b>@(project.Description)</b>
+                    </div> 
+                </div>
+            </RadzenCard>
    </Template>
   </RadzenDataList>
  <RadzenPager Count="count" PageSize="@pageSize" PageNumbersCount="10" PageChanged="@PageChanged" />
