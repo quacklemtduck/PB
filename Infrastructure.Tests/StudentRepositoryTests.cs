@@ -1,8 +1,11 @@
+using Core;
+using Duende.IdentityServer.EntityFramework.Options;
+
 namespace Infrastructure.Tests
 {
     public class StudentRepositoryTests : IDisposable
     {
-        private readonly PBContext _context;
+        private readonly ApplicationDbContext _context;
         private readonly StudentRepository _repository;
 
 
@@ -10,9 +13,10 @@ namespace Infrastructure.Tests
         {
             var connection = new SqliteConnection("Filename=:memory:");
             connection.Open();
-            var builder = new DbContextOptionsBuilder<PBContext>();
+            var builder = new DbContextOptionsBuilder<ApplicationDbContext>();
             builder.UseSqlite(connection);
-            var context = new PBContext(builder.Options);
+            var options = new Option<OperationalStoreOptions>(new OperationalStoreOptions());
+            var context = new ApplicationDbContext(builder.Options, options);
             context.Database.EnsureCreated();
 
             var university = new University {Name = "Københavns Universitet", Abbreviation = "KU"};

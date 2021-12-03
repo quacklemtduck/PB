@@ -1,17 +1,17 @@
 namespace PB.Core;
 
-public record ApplicationUpdateDTO(int Id, int studentId, int projectId);
-public record ApplicationDetailsDTO(int Id, int studentId, int projectId, string Description);
+public record ApplicationUpdateDTO(int Id, string? Description, string Title);
+public record ApplicationDetailsDTO(int Id, int studentId, int projectId, string? Description, string Title);
 public record ApplicationCreateDTO
 {
-    public int Id {get; set;}
     public int studentId {get; set;}
     public int projectId {get; set;}
-    public string Description {get; set;}
+    public string? Description {get; set;}
+    public string Title {get; set;}
 
-    public ApplicationCreateDTO(int _studentId, int _projectId, string _Description) {
+    public ApplicationCreateDTO(int _studentId, int _projectId, string _title) {
         studentId = _studentId;
         projectId = _projectId;
-        Description = _Description;
+        Title = _title;
     }
 }

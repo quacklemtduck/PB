@@ -4,9 +4,9 @@ namespace PB.Infrastructure
     public class ProjectRepository : IProjectRepository
     {
 
-        PBContext _context;
+        ApplicationDbContext _context;
 
-        public ProjectRepository(PBContext context)
+        public ProjectRepository(ApplicationDbContext context)
         {
             _context = context;
         }

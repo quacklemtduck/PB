@@ -3,9 +3,9 @@ namespace PB.Infrastructure
     public class StudentRepository : IStudentRepository
     {
 
-        private readonly PBContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public StudentRepository(PBContext context)
+        public StudentRepository(ApplicationDbContext context)
         {
             _context = context;
         }
