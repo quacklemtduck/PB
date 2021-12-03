@@ -17,7 +17,7 @@ namespace PB.Core
         Task<Response> UpdateChooseStudentsAsync(int ID, ProjectUpdateDTO project);*/
 
         //Read by id
-        Task<ProjectDetailsDTO> ReadByIDAsync(int projectId);
+        Task<Option<ProjectDetailsDTO>> ReadByIDAsync(int projectId);
 
         //List all ProjectListDTO
         Task<IReadOnlyCollection<ProjectListDTO>> ListAllAsync();

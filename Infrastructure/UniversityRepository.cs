@@ -26,5 +26,11 @@ namespace PB.Infrastructure
             var u = await _context.Universities.FindAsync(universityId);
             return u == null ? null : new UniversityDetailsDTO(Id: u.Id, Name: u.Name, u.GetEducationIDs() );
         }
+
+public UniversityDetailsDTO? ReadByID(string universityId)
+        {
+            var u = _context.Universities.Find(universityId);
+            return u == null ? null : new UniversityDetailsDTO(Id: u.Id, Name: u.Name, u.GetEducationIDs() );
+        }
     }
 }

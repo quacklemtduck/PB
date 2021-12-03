@@ -124,7 +124,7 @@ namespace PB.Server.Areas.Identity.Pages.Account
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
-                await _supervisorRepository.CreateAsync(new SuperVisorCreateDTO(user.FirstName, user.Email, "", "25369883"));
+                await _supervisorRepository.CreateAsync(new SuperVisorCreateDTO(user.FirstName, user.Email));
 
                 if (result.Succeeded)
                 {

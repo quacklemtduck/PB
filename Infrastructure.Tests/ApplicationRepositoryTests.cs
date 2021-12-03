@@ -2,16 +2,17 @@ namespace Infrastructure.Tests
 {
     public class ApplicationRepositoryTests : IDisposable
     {
-        private readonly PBContext _context;
+        private readonly ApplicationDbContext _context;
         private readonly ApplicationRepository _repository;
         
         public ApplicationRepositoryTests()
         {
             var connection = new SqliteConnection("Filename=:memory:");
             connection.Open();
-            var builder = new DbContextOptionsBuilder<PBContext>();
+            var builder = new DbContextOptionsBuilder<ApplicationDbContext>();
             builder.UseSqlite(connection);
-            var context = new PBContext(builder.Options);
+            var options = new Option<OperationalStoreOptions>(new OperationalStoreOptions());
+            var context = new ApplicationDbContext(builder.Options, options);
             context.Database.EnsureCreated();
             var student1 = new Student { Id = 1, Name = "Student1" };
             var student2 = new Student { Id = 2, Name = "Student2" };

@@ -4,6 +4,6 @@ namespace PB.Core
     {
         Visible,
         Hidden,
-        Closed
+        Closed    
     }
 }

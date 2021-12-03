@@ -14,35 +14,45 @@ namespace PB.Infrastructure
         {
             var entity = new Student 
             {
-                Name = student.Name
+                Name = student.Name,
+                University = await getUniversityAsync(student.University),
+                Email = student.Email
             };
 
             _context.Students.Add(entity);
 
             await _context.SaveChangesAsync();
 
+
+
             return new StudentDetailsDTO(
                         entity.Id,
                         entity.Name,
-                        entity.GetProjectIDs()
+                        entity.University?.Name,
+                        entity.Email,
+                        entity.Projects.Select(p => p.Title).ToHashSet(),
+                        entity.Applications.Select(a => a.Title).ToHashSet()
             );
         }
 
-        public async Task<IReadOnlyCollection<StudentDetailsDTO>> ReadAllAsync()
+        /*public async Task<IReadOnlyCollection<StudentDetailsDTO>> ReadAllAsync()
         {
             return await _context.Students
-                .Select(s => new StudentDetailsDTO(s.Id,s.Name,s.Projects.Select(s => s.Id).ToList<int>()))
+                .Select(s => new StudentDetailsDTO(s.Id, s.Name, s.University.Name, s.Email, s.Projects.Select(p => p.Title).ToHashSet(), s.Applications.Select(a => a.Title).ToHashSet()))
                 .ToListAsync();
-        }
+        }*/
 
-        public async Task<StudentDetailsDTO> ReadAsync(int studentId)
+        public async Task<Option<StudentDetailsDTO>> ReadAsync(int studentId)
         {
             var students = from s in _context.Students
                            where s.Id == studentId
                            select new StudentDetailsDTO(
-                               s.Id,
-                               s.Name,
-                               s.GetProjectIDs()
+                               s.Id, 
+                               s.Name, 
+                               s.University.Name, 
+                               s.Email, 
+                               s.Projects.Select(p => p.Title).ToHashSet(), 
+                               s.Applications.Select(a => a.Title).ToHashSet()
                            );
 
             return await students.FirstOrDefaultAsync();
@@ -50,7 +60,7 @@ namespace PB.Infrastructure
 
         public async Task<Response> UpdateAsync(int id, StudentUpdateDTO student)
         {
-            var entity = await _context.Students.Include(s => s.Projects).FirstOrDefaultAsync(s => s.Id == student.Id);
+            var entity = await _context.Students.Include(s => s.Projects).Include(s => s.Applications).FirstOrDefaultAsync(s => s.Id == student.Id);
 
             if (entity == null)
             {
@@ -58,6 +68,11 @@ namespace PB.Infrastructure
             }
 
             entity.Name = student.Name;
+            entity.University = await getUniversityAsync(student.University);
+            entity.Email = student.Email;
+            entity.Projects = await GetProjectsAsync(student.Projects).ToListAsync();
+            entity.Applications = await getApplicationsAsync(student.Applications).ToListAsync();
+
 
             await _context.SaveChangesAsync();
 
@@ -78,5 +93,32 @@ namespace PB.Infrastructure
 
         return Deleted;
         }
+
+
+        private async Task<University?> getUniversityAsync(string? name) =>
+        string.IsNullOrWhiteSpace(name) ? null : await _context.Universities.FirstOrDefaultAsync(s => s.Name == name) ?? new University { Name = name };
+
+
+        private async IAsyncEnumerable<Application> getApplicationsAsync(IEnumerable<string> applications)
+        {
+            var existing = await _context.Applications.Where(a => applications.Contains(a.Title)).ToDictionaryAsync(a => a.Title);
+
+            foreach (var application in applications)
+            {
+                yield return existing.TryGetValue(application, out var a) ? a : new Application { Title = application };
+            }
+        }
+
+        private async IAsyncEnumerable<Project> GetProjectsAsync(IEnumerable<string> projects)
+        {
+            var existing = await _context.Projects.Where(p => projects.Contains(p.Title)).ToDictionaryAsync(p => p.Title);
+
+            foreach (var project in projects)
+            {
+                yield return existing.TryGetValue(project, out var p) ? p : new Project { Title = project };
+            }
+        }
+
+
     }
 }

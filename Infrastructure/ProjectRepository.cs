@@ -19,11 +19,8 @@ namespace PB.Infrastructure
                 Description = project.Description,
                 Supervisor = await getSupervisorAsync(project.Supervisor),
                 Deadline = convertStringToDateTime(project.Deadline),
-                getNotification = project.getNotification,
-                numberOfStudents = project.numberOfStudents,
-                CollabStudents = await GetStudentsAsync(project.CollabStudents).ToListAsync(),
+                Notification = project.Notification,
                 Tags = await GetTagsAsync(project.Tags).ToListAsync(),
-                Applications = await GetApplicationsAsync(project.Applications).ToListAsync(),
                 Universities = await GetUniversitiesAsync(project.Universities).ToListAsync()
             };
 
@@ -37,9 +34,8 @@ namespace PB.Infrastructure
                                  entity.Description,
                                  entity.Supervisor?.Name,
                                  convertDateTimeToString(entity.Deadline),
-                                 entity.getNotification,
-                                 entity.numberOfStudents,
-                                 entity.CollabStudents.Select(s => s.Name).ToHashSet(),
+                                 entity.Notification,
+                                 entity.ChosenStudents.Select(s => s.Name).ToHashSet(),
                                  entity.Tags.Select(t => t.TagName).ToHashSet(),
                                  entity.Applications.Select(a => a.Title).ToHashSet(),
                                  entity.Universities.Select(u => u.Name).ToHashSet()
@@ -74,7 +70,7 @@ namespace PB.Infrastructure
                        .ToListAsync())
                        .AsReadOnly();
 
-        public async Task<ProjectDetailsDTO> ReadByIDAsync(int projectId)
+        public async Task<Option<ProjectDetailsDTO>> ReadByIDAsync(int projectId)
         {
             var projects = from p in _context.Projects
                            where p.Id == projectId
@@ -84,9 +80,8 @@ namespace PB.Infrastructure
                                p.Description,
                                p.Supervisor == null ? null : p.Supervisor.Name,
                                convertDateTimeToString(p.Deadline),
-                               p.getNotification,
-                               p.numberOfStudents,
-                               p.CollabStudents.Select(s => s.Name).ToHashSet(),
+                               p.Notification,
+                               p.ChosenStudents.Select(s => s.Name).ToHashSet(),
                                p.Tags.Select(t => t.TagName).ToHashSet(),
                                p.Applications.Select(a => a.Title).ToHashSet(),
                                p.Universities.Select(u => u.Name).ToHashSet()
@@ -97,7 +92,7 @@ namespace PB.Infrastructure
 
         public async Task<Response> UpdateAsync(int ID, ProjectUpdateDTO project)
         {
-            var entity = await _context.Projects.Include(p => p.CollabStudents).Include(p => p.Tags).Include(p => p.Applications).Include(p => p.Universities).FirstOrDefaultAsync(p => p.Id == project.ID);
+            var entity = await _context.Projects.Include(p => p.ChosenStudents).Include(p => p.Tags).Include(p => p.Applications).Include(p => p.Universities).FirstOrDefaultAsync(p => p.Id == project.ID);
 
             //var entity = await _context.Projects.FirstOrDefaultAsync(p => p.Id == project.ID);
 
@@ -110,12 +105,10 @@ namespace PB.Infrastructure
                 entity.Description = project.Description;
                 entity.Supervisor = await getSupervisorAsync(project.Supervisor);
                 entity.Deadline = convertStringToDateTime(project.Deadline);
-                entity.getNotification = project.getNotification;
-                entity.numberOfStudents = project.numberOfStudents;
-                entity.status = project.status;
-                entity.CollabStudents = await GetStudentsAsync(project.CollabStudents).ToListAsync();
+                entity.Notification = project.Notification;
+                entity.Status = project.Status;
+                entity.ChosenStudents = await GetStudentsAsync(project.ChosenStudents).ToListAsync();
                 entity.Tags = await GetTagsAsync(project.Tags).ToListAsync();
-                //Console.WriteLine("-------> Applications: " + project.Applications);
                 entity.Applications = await GetApplicationsAsync(project.Applications).ToListAsync();
                 entity.Universities = await GetUniversitiesAsync(project.Universities).ToListAsync();
 
