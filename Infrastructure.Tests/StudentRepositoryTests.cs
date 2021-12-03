@@ -1,5 +1,3 @@
-using Core;
-using Duende.IdentityServer.EntityFramework.Options;
 
 namespace Infrastructure.Tests
 {
@@ -19,15 +17,15 @@ namespace Infrastructure.Tests
             var context = new ApplicationDbContext(builder.Options, options);
             context.Database.EnsureCreated();
 
-            var university = new University {Name = "Københavns Universitet", Abbreviation = "KU"};
 
+            var universityRepository = new UniversityRepository(context);
             context.Students.AddRange(
-                new Student{Id = 1,Name = "student1", Email = "student1@gmail.com", University = university},
-                new Student{Id = 2,Name = "student2", Email = "student2@gmail.com", University = university},
-                new Student{Id = 3,Name = "student3", Email = "student3@gmail.com", University = university},
-                new Student{Id = 4,Name = "student4", Email = "student4@gmail.com", University = university},
-                new Student{Id = 5,Name = "student5", Email = "student5@gmail.com", University = university},
-                new Student{Id = 6,Name = "student6", Email = "student6@gmail.com", University = university}
+                new Student{Id = 1,Name = "student1", Email = "student1@gmail.com", University = context.Universities.Find("KU")},
+                new Student{Id = 2,Name = "student2", Email = "student2@gmail.com", University = context.Universities.Find("KU")},
+                new Student{Id = 3,Name = "student3", Email = "student3@gmail.com", University = context.Universities.Find("KU")},
+                new Student{Id = 4,Name = "student4", Email = "student4@gmail.com", University = context.Universities.Find("KU")},
+                new Student{Id = 5,Name = "student5", Email = "student5@gmail.com", University = context.Universities.Find("KU")},
+                new Student{Id = 6,Name = "student6", Email = "student6@gmail.com", University = context.Universities.Find("KU")}
             );
 
             context.SaveChanges();
@@ -69,7 +67,7 @@ namespace Infrastructure.Tests
         [Fact]
         public async Task CreateAsync_creates_new_student_with_generated_id()
         {
-            var university = new University {Name = "Københavns Universitet", Abbreviation = "KU"};
+            var university = new University {Name = "Københavns Universitet", Id = "KU"};
             var student = new StudentCreateDTO{ Name = "Markus", Email="Markus@gmail.com", University = university.Name};
             var created = await _repository.CreateAsync(student);
 

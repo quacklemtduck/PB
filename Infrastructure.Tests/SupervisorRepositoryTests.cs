@@ -1,6 +1,3 @@
-using Core;
-using Duende.IdentityServer.EntityFramework.Options;
-
 namespace Infrastructure.Tests{
 
 public class SupervisorRepositoryTests : IDisposable
@@ -8,7 +5,6 @@ public class SupervisorRepositoryTests : IDisposable
     
     private readonly ApplicationDbContext _context;
     private readonly SupervisorRepository _repository;
-    private bool disposedValue;
 
     public SupervisorRepositoryTests()
     {
@@ -125,6 +121,7 @@ public class SupervisorRepositoryTests : IDisposable
     
     private bool disposed;
 
+        
         protected virtual void Dispose(bool disposing)
         {
             if (!disposed)
@@ -137,17 +134,7 @@ public class SupervisorRepositoryTests : IDisposable
                 disposed = true;
             }
         }
-    protected virtual void Dispose(bool disposing)
-    {
-        if (!disposedValue)
-        {
-            if (disposing)
-            {
-                _context.Dispose();
-            }
-            disposedValue = true;
-        }
-    }
+
     public void Dispose()
     {
         // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method

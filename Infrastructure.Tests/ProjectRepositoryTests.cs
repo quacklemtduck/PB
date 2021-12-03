@@ -1,5 +1,3 @@
-using Core;
-using Duende.IdentityServer.EntityFramework.Options;
 namespace PB.Infrastructure.Tests
 {
 
@@ -19,15 +17,14 @@ namespace PB.Infrastructure.Tests
             var context = new ApplicationDbContext(builder.Options, options);
             context.Database.EnsureCreated();
 
-            var supervisor = new Supervisor { Id = 1, Name = "Supervisor1", Email = "supervisor1@email.com", Password = "***", ContactInfo = "info1", Projects = new List<Project>() };
+            var supervisor = new Supervisor { Id = 1, Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
             //context.Supervisors.Add(supervisor);
-
-            var university = new University {Name = "Københavns Universitet", Abbreviation = "KU"};
+            var universityRepository = new UniversityRepository(context);
+            var university = context.Universities.Find("KU");
 
 
             var student = new Student { Name = "Test", Email = "Test@gmail.com", University = university };
             context.Students.Add(student);
-
 
             DateTime deadline = DateTime.Parse("Dec 22, 2021");
 
@@ -91,10 +88,6 @@ namespace PB.Infrastructure.Tests
             Assert.Null(entity);
         }
 
-
-
-
-
         [Fact]
         public async Task ListAllAsync_returns_all_projects()
         {
@@ -128,7 +121,7 @@ namespace PB.Infrastructure.Tests
         [Fact]
         public async Task UpdateAsync_given_non_existing_Project_returns_NotFound()
         {
-            var supervisor = new Supervisor { Id = 1, Name = "Supervisor1", Email = "supervisor1@email.com", Password = "***", ContactInfo = "info1", Projects = new List<Project>() };
+            var supervisor = new Supervisor { Id = 1, Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
 
             var project = new ProjectUpdateDTO
             {
@@ -152,7 +145,7 @@ namespace PB.Infrastructure.Tests
         [Fact]
         public async Task UpdateAsync_updates_existing_Project()
         {
-            var supervisor = new Supervisor { Id = 1, Name = "Supervisor1", Email = "supervisor1@email.com", Password = "***", ContactInfo = "info1", Projects = new List<Project>() };
+            var supervisor = new Supervisor { Id = 1, Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
 
 
             var project = new ProjectUpdateDTO
@@ -184,7 +177,7 @@ namespace PB.Infrastructure.Tests
         public async Task UpdateAsync_adds_students_existing_Project()
         {
             var student = new Student { Name = "Test" };
-            var supervisor = new Supervisor { Id = 1, Name = "Supervisor1", Email = "supervisor1@email.com", Password = "***", ContactInfo = "info1", Projects = new List<Project>() };
+            var supervisor = new Supervisor { Id = 1, Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
             var ChosenStudents = new HashSet<string>();
             ChosenStudents.Add(student.Name);
 
@@ -223,7 +216,7 @@ namespace PB.Infrastructure.Tests
         {
             var application = new Application { Title = "Softwareudvikler søger nye udfordringer" };
 
-            var supervisor = new Supervisor { Id = 1, Name = "Supervisor1", Email = "supervisor1@email.com", Password = "***", ContactInfo = "info1", Projects = new List<Project>() };
+            var supervisor = new Supervisor { Id = 1, Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
         
             var applications = new HashSet<string>();
             applications.Add(application.Title);
@@ -269,7 +262,7 @@ namespace PB.Infrastructure.Tests
         [Fact]
         public async Task ReadByIDAsync_given_id_exists_returns_Project()
         {
-            var supervisor = new Supervisor { Id = 1, Name = "Supervisor1", Email = "supervisor1@email.com", Password = "***", ContactInfo = "info1", Projects = new List<Project>() };
+            var supervisor = new Supervisor { Id = 1, Name = "Supervisor1", Email = "supervisor1@email.com",Projects = new List<Project>() };
 
             var project = (await _repository.ReadByIDAsync(1)).Value;
 

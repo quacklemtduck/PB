@@ -7,8 +7,8 @@ namespace PB.Server.Tests.Controllers
         public async Task Create_creates_Project()
         {
             // Arrange
-            var university = new University { Name = "Københavns Universitet", Abbreviation = "KU" };
-            var supervisor = new Supervisor { Id = 1, Name = "Supervisor1", Email = "supervisor1@email.com", Password = "***", ContactInfo = "info1", Projects = new List<Project>() };
+            var university = new University { Name = "Københavns Universitet", Id = "KU" };
+            var supervisor = new Supervisor { Id = 1, Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
 
             var logger = new Mock<ILogger<ProjectsController>>();
             var toCreate = new ProjectCreateDTO();
@@ -34,7 +34,7 @@ namespace PB.Server.Tests.Controllers
             var logger = new Mock<ILogger<ProjectsController>>();
             var expected = Array.Empty<ProjectDetailsDTO>();
             var repository = new Mock<IProjectRepository>();
-
+            
             repository.Setup(m => m.ListAllAsync()).ReturnsAsync(expected);
 
             var controller = new ProjectsController(logger.Object, repository.Object);
@@ -48,7 +48,7 @@ namespace PB.Server.Tests.Controllers
 
         public async Task Get_returns_Supervisors_projects_from_repo()
         {
-            var supervisor = new Supervisor { Id = 1, Name = "Supervisor1", Email = "supervisor1@email.com", Password = "***", ContactInfo = "info1", Projects = new List<Project>() };
+            var supervisor = new Supervisor { Id = 1, Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
 
             // Arrange
             var logger = new Mock<ILogger<ProjectsController>>();
@@ -86,8 +86,8 @@ namespace PB.Server.Tests.Controllers
         public async Task Get_given_existing_returns_project()
         {
             // Arrange
-            var university = new University { Name = "Københavns Universitet", Abbreviation = "KU" };
-            var supervisor = new Supervisor { Id = 1, Name = "Supervisor1", Email = "supervisor1@email.com", Password = "***", ContactInfo = "info1", Projects = new List<Project>() };
+            var university = new University { Name = "Københavns Universitet", Id = "KU" };
+            var supervisor = new Supervisor { Id = 1, Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
 
             var logger = new Mock<ILogger<ProjectsController>>();
             var repository = new Mock<IProjectRepository>();

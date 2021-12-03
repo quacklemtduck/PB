@@ -8,3 +8,4 @@ global using System.Linq;
 global using PB.Infrastructure;
 global using PB.Core;
 global using static PB.Core.Response;
+global using Duende.IdentityServer.EntityFramework.Options;

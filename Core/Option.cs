@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 
-namespace Core
+namespace PB.Core
 {
     public class Option<T>  : IOptions<T> where T : class
     {

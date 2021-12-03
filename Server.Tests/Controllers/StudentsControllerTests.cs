@@ -5,8 +5,8 @@ public class StudentsControllerTests
     [Fact]
     public async Task Create_creates_Student()
     {
-        // Arrange
-        var university = new University {Name = "Københavns Universitet", Abbreviation = "KU"};
+        // Arrange    
+        var university = new University {Name = "Københavns Universitet", Id = "KU"};
 
         var logger = new Mock<ILogger<StudentsController>>();
         var toCreate = new StudentCreateDTO();
@@ -64,7 +64,7 @@ public class StudentsControllerTests
     public async Task Get_given_existing_returns_student()
     {
         // Arrange
-        var university = new University {Name = "Københavns Universitet", Abbreviation = "KU"};
+        var university = new University {Name = "Københavns Universitet", Id = "KU"};
 
         var logger = new Mock<ILogger<StudentsController>>();
         var repository = new Mock<IStudentRepository>();
