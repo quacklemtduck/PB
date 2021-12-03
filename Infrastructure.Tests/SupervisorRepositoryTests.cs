@@ -57,7 +57,7 @@ public class SupervisorRepositoryTests : IDisposable
     }
 
     [Fact]
-    public async Task ReadAsync_given_non_existing_id_returns_None()
+    public async Task ReadAsync_given_non_existing_id_returns_Null()
     {
         var option = await _repository.ReadAsync(-1);
         Assert.True(option.IsNone);
@@ -89,6 +89,7 @@ public class SupervisorRepositoryTests : IDisposable
     [Fact]
     public async Task UpdateAsync_given_existing_id_updates_supervisor()
     {
+
         var supervisor = new SupervisorUpdateDTO(1,"supervisor1.1"); 
         var response = await _repository.UpdateAsync(supervisor.Id,supervisor);
         Assert.Equal(Updated,response);

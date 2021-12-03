@@ -12,7 +12,4 @@ public class Supervisor
     public string Email {get; set;}
 
     public ICollection<Project> Projects {get; set;} = new HashSet<Project>();
-
-
-
 }
