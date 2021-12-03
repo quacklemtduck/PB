@@ -1,13 +1,13 @@
-namespace PB.Infrastructure
+/*namespace PB.Infrastructure
 {
-    class PBContextFactory : IDesignTimeDbContextFactory<PBContext>
+    class PBContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
     {
-        public PBContext CreateDbContext(string[] args)
+        public ApplicationDbContext CreateDbContext(string[] args)
         {
-            var optionsBuilder = new DbContextOptionsBuilder<PBContext>();
+            var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
             optionsBuilder.UseSqlite("Data Source=PB.db");
 
-            return new PBContext(optionsBuilder.Options);
+            return new ApplicationDbContext(optionsBuilder.Options);
         }
     }
-}
+}*/
