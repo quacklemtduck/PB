@@ -352,3 +352,6 @@ MigrationBackup/
 app.db
 app.db-shm
 app.db-wal
+Server/app.db
+Server/app.db-shm
+Server/app.db-wal
