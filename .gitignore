@@ -355,3 +355,7 @@ app.db-wal
 Server/app.db
 Server/app.db-shm
 Server/app.db-wal
+*.db
+Server/app.db
+*.db-shm
+*.db-wal
