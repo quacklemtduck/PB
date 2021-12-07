@@ -1,9 +1,13 @@
+using System.Security.Claims;
+using PB.Infrastructure.Authentication;
+using Microsoft.AspNetCore.Identity;
+
 namespace PB.Server.Controllers
 {
 
     //[Authorize]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     //[RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes")]
     public class ProjectsController : ControllerBase
     {
@@ -22,9 +26,14 @@ namespace PB.Server.Controllers
             => await _repository.ListAllAsync();
 
         //[Authorize] //Supervisor
+
+        [Authorize]
         [HttpGet]
-        public async Task<IReadOnlyCollection<ProjectListDTO>> GetAll(int SupervisorID)
-            => await _repository.ListAllAsync(SupervisorID);
+        public async Task<IReadOnlyCollection<ProjectListDTO>> GetAllFromSupervisor(){
+            
+            //Console.WriteLine(ClaimTypes.Name);
+            return await _repository.ListAllAsync();
+        }
 
         //[AllowAnonymous]
         [ProducesResponseType(404)]
@@ -33,7 +42,7 @@ namespace PB.Server.Controllers
         public async Task<ActionResult<ProjectDetailsDTO>> Get(int id)
             => (await _repository.ReadByIDAsync(id)).ToActionResult();
 
-        //[Authorize]
+        [Authorize]
         [HttpPost]
         [ProducesResponseType(typeof(ProjectDetailsDTO), 201)]
         public async Task<IActionResult> Post(ProjectCreateDTO project)

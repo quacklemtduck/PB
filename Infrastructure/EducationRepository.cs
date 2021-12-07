@@ -27,5 +27,6 @@ namespace PB.Infrastructure
             var e = await _context.Educations.FindAsync(educationId);
             return e == null ? null : new EducationDetailsDTO( e.Id, e.Name, e.Grade, e.UniversityID);
         }
+
     }
 }

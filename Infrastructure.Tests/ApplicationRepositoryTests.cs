@@ -17,8 +17,8 @@ namespace Infrastructure.Tests
             var student1 = new Student { Id = 1, Name = "Student1" };
             var student2 = new Student { Id = 2, Name = "Student2" };
             var supervisor = new Supervisor { Id = 1, Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
-            var project1 = new Project { Id = 1, Title = "Project1", Description = "project 1", Supervisor = supervisor, Deadline = DateTime.Parse("Dec 22, 2021") };
-            var project2 = new Project { Id = 2, Title = "Project2", Description = "project 2", Supervisor = supervisor, Deadline = DateTime.Parse("Dec 22, 2021") };
+            var project1 = new Project { Id = 1, Title = "Project1", Description = "project 1", Supervisor = supervisor };
+            var project2 = new Project { Id = 2, Title = "Project2", Description = "project 2", Supervisor = supervisor };
 
             context.Applications.AddRange(
                 new Application { Id = 1, Title = "title1", Description = "app 1", Student = student1, Project = project1 },

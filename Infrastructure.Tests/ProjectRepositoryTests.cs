@@ -28,14 +28,14 @@ namespace PB.Infrastructure.Tests
 
             DateTime deadline = DateTime.Parse("Dec 22, 2021");
 
-            var project = new Project { Id = 5, Title = "Project5", Description = "This is project 5", Supervisor = supervisor, Deadline = deadline};
+            var project = new Project { Id = 5, Title = "Project5", Description = "This is project 5", Supervisor = supervisor};
 
 
             context.Projects.AddRange(
-                new Project { Id = 1, Title = "Project1", Description = "This is project 1", Supervisor = supervisor, Deadline = deadline },
-                new Project { Id = 2, Title = "Project2", Description = "This is project 2", Supervisor = supervisor, Deadline = deadline },
-                new Project { Id = 3, Title = "Project3", Description = "This is project 3", Supervisor = supervisor, Deadline = deadline },
-                new Project { Id = 4, Title = "Project4", Description = "This is project 4", Supervisor = supervisor, Deadline = deadline },
+                new Project { Id = 1, Title = "Project1", Description = "This is project 1", Supervisor = supervisor },
+                new Project { Id = 2, Title = "Project2", Description = "This is project 2", Supervisor = supervisor },
+                new Project { Id = 3, Title = "Project3", Description = "This is project 3", Supervisor = supervisor },
+                new Project { Id = 4, Title = "Project4", Description = "This is project 4", Supervisor = supervisor },
                 project
             );
             
@@ -95,11 +95,11 @@ namespace PB.Infrastructure.Tests
 
 
             Assert.Collection(projects,
-                projects => Assert.Equal(new ProjectListDTO(1, "Project1", getDeadlineString()), projects),
-                projects => Assert.Equal(new ProjectListDTO(2, "Project2", getDeadlineString()), projects),
-                projects => Assert.Equal(new ProjectListDTO(3, "Project3", getDeadlineString()), projects),
-                projects => Assert.Equal(new ProjectListDTO(4, "Project4", getDeadlineString()), projects),
-                projects => Assert.Equal(new ProjectListDTO(5, "Project5", getDeadlineString()), projects)
+                projects => Assert.Equal(new ProjectListDTO(1, "Project1"), projects),
+                projects => Assert.Equal(new ProjectListDTO(2, "Project2"), projects),
+                projects => Assert.Equal(new ProjectListDTO(3, "Project3"), projects),
+                projects => Assert.Equal(new ProjectListDTO(4, "Project4"), projects),
+                projects => Assert.Equal(new ProjectListDTO(5, "Project5"), projects)
             );
         }
 
@@ -110,11 +110,11 @@ namespace PB.Infrastructure.Tests
 
 
             Assert.Collection(projects,
-                projects => Assert.Equal(new ProjectListDTO(1, "Project1", getDeadlineString()), projects),
-                projects => Assert.Equal(new ProjectListDTO(2, "Project2", getDeadlineString()), projects),
-                projects => Assert.Equal(new ProjectListDTO(3, "Project3", getDeadlineString()), projects),
-                projects => Assert.Equal(new ProjectListDTO(4, "Project4", getDeadlineString()), projects),
-                projects => Assert.Equal(new ProjectListDTO(5, "Project5", getDeadlineString()), projects)
+                projects => Assert.Equal(new ProjectListDTO(1, "Project1"), projects),
+                projects => Assert.Equal(new ProjectListDTO(2, "Project2"), projects),
+                projects => Assert.Equal(new ProjectListDTO(3, "Project3"), projects),
+                projects => Assert.Equal(new ProjectListDTO(4, "Project4"), projects),
+                projects => Assert.Equal(new ProjectListDTO(5, "Project5"), projects)
             );
         }
 
@@ -129,12 +129,10 @@ namespace PB.Infrastructure.Tests
                 Title = "Project5",
                 Description = "This is project 5",
                 Supervisor = supervisor.ToString(),
-                Deadline = getDeadlineString(),
                 Notification = false,
                 ChosenStudents = new HashSet<string>(),
-                Tags = new HashSet<string>(),
                 Applications = new HashSet<string>(),
-                Universities = new HashSet<string>()
+                Educations = new HashSet<int>()
             };
 
             var response = await _repository.UpdateAsync(42, project);
@@ -154,12 +152,10 @@ namespace PB.Infrastructure.Tests
                 Title = "newProject5",
                 Description = "This is project 5, version 2",
                 Supervisor = "Supervisor1",
-                Deadline = getDeadlineString(),
                 Notification = false,
                 ChosenStudents = new HashSet<string>(),
-                Tags = new HashSet<string>(),
                 Applications = new HashSet<string>(),
-                Universities = new HashSet<string>()
+                Educations = new HashSet<int>()
             };
 
             var response = await _repository.UpdateAsync(5, project);
@@ -168,9 +164,8 @@ namespace PB.Infrastructure.Tests
             var projectUpdated = (await _repository.ReadByIDAsync(5)).Value;
 
             Assert.Empty(projectUpdated.ChosenStudents);
-            Assert.Empty(projectUpdated.Tags);
             Assert.Empty(projectUpdated.Applications);
-            Assert.Empty(projectUpdated.Universities);
+            Assert.Empty(projectUpdated.Educations);
         }
 
         [Fact]
@@ -187,13 +182,11 @@ namespace PB.Infrastructure.Tests
                 Title = "newProject5",
                 Description = "This is project 5, version 2",
                 Supervisor = "Supervisor1",
-                Deadline = getDeadlineString(),
                 Notification = false,
                 //ChosenStudents = new HashSet<string>() { student.Name },
                 ChosenStudents = ChosenStudents,
-                Tags = new HashSet<string>(),
                 Applications = new HashSet<string>(),
-                Universities = new HashSet<string>()
+                Educations = new HashSet<int>()
             };
 
             var response = await _repository.UpdateAsync(5, project);
@@ -205,10 +198,8 @@ namespace PB.Infrastructure.Tests
             Assert.Equal(1 , projectUpdated.ChosenStudents.Count);
             Assert.True(projectUpdated.ChosenStudents.Contains(student.Name));
             Assert.Equal(1, projectUpdated.ChosenStudents.Count());
-
-            Assert.Empty(projectUpdated.Tags);
             Assert.Empty(projectUpdated.Applications);
-            Assert.Empty(projectUpdated.Universities);
+            Assert.Empty(projectUpdated.Educations);
         }
 
         [Fact]
@@ -227,12 +218,10 @@ namespace PB.Infrastructure.Tests
                 Title = "newProject5",
                 Description = "This is project 5, version 2",
                 Supervisor = "Supervisor1",
-                Deadline = getDeadlineString(),
                 Notification = false,
                 ChosenStudents = new HashSet<string>(),
-                Tags = new HashSet<string>(),
                 Applications = applications,
-                Universities = new HashSet<string>()
+                Educations = new HashSet<int>()
             };
 
             var response = await _repository.UpdateAsync(5, project);
@@ -246,9 +235,8 @@ namespace PB.Infrastructure.Tests
             Assert.True(projectUpdated.Applications.Contains(application.Title));
             
 
-            Assert.Empty(projectUpdated.Tags);
             Assert.Empty(projectUpdated.ChosenStudents);
-            Assert.Empty(projectUpdated.Universities);
+            Assert.Empty(projectUpdated.Educations);
         }
 
         [Fact]
@@ -270,11 +258,9 @@ namespace PB.Infrastructure.Tests
             Assert.Equal(1, project.ID);
             Assert.Equal("Supervisor1", project.Supervisor);
             Assert.Empty(project.ChosenStudents);
-            Assert.Equal(getDeadlineString(), project.Deadline);
             Assert.Equal("This is project 1", project.Description);
             Assert.False(project.Notification);
-            Assert.Empty(project.Tags);
-            Assert.Empty(project.Universities);
+            Assert.Empty(project.Educations);
             Assert.Empty(project.ChosenStudents);
 
         }
