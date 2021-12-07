@@ -17,7 +17,7 @@ namespace PB.Infrastructure
             {
                 Title = project.Title,
                 Description = project.Description,
-                Supervisor = await getSupervisorAsync(project.Supervisor),
+                Supervisor = _context.Supervisors.Find(project.Supervisor),
                 //Deadline = convertStringToDateTime(project.Deadline),
                 Notification = project.Notification,
                 //Tags = await GetTagsAsync(project.Tags).ToListAsync(),
@@ -59,14 +59,14 @@ namespace PB.Infrastructure
 
         public async Task<IReadOnlyCollection<ProjectListDTO>> ListAllAsync() =>
                 (await _context.Projects
-                       .Select(p => new ProjectListDTO(p.Id, p.Title))
+                       .Select(p => new ProjectListDTO(p.Id, p.Title, p.Description))
                        .ToListAsync())
                        .AsReadOnly();
         
-        public async Task<IReadOnlyCollection<ProjectListDTO>> ListAllAsync(int SupervisorID) =>
+        public async Task<IReadOnlyCollection<ProjectListDTO>> ListAllAsync(string SupervisorID) =>
                 (await _context.Projects
                         .Where(p => SupervisorID == p.SupervisorID)
-                       .Select(p => new ProjectListDTO(p.Id, p.Title/*, convertDateTimeToString(p.Deadline)*/))
+                       .Select(p => new ProjectListDTO(p.Id, p.Title, p.Description))
                        .ToListAsync())
                        .AsReadOnly();
 

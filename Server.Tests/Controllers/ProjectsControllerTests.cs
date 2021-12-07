@@ -10,7 +10,7 @@ namespace PB.Server.Tests.Controllers
         {
             // Arrange
             var university = new University { Name = "Københavns Universitet", Id = "KU" };
-            var supervisor = new Supervisor { Id = 1, Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
+            var supervisor = new Supervisor { Id = "1", Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
 
             var logger = new Mock<ILogger<ProjectsController>>();
             var toCreate = new ProjectCreateDTO();
@@ -29,24 +29,24 @@ namespace PB.Server.Tests.Controllers
             Assert.Equal((object?)1, result?.RouteValues?.GetValueOrDefault("Id"));
         }
 
-        [Fact]
-        public async Task Get_returns_Projects_from_repo()
-        {
-            // Arrange
-            var logger = new Mock<ILogger<ProjectsController>>();
-            var expected = Array.Empty<ProjectDetailsDTO>();
-            var repository = new Mock<IProjectRepository>();
+        // [Fact]
+        // public async Task Get_returns_Projects_from_repo()
+        // {
+        //     // Arrange
+        //     var logger = new Mock<ILogger<ProjectsController>>();
+        //     var expected = Array.Empty<ProjectDetailsDTO>();
+        //     var repository = new Mock<IProjectRepository>();
             
-            repository.Setup(m => m.ListAllAsync()).ReturnsAsync(expected);
+        //     repository.Setup(m => m.ListAllAsync()).ReturnsAsync(expected);
 
-            var controller = new ProjectsController(logger.Object, repository.Object);
+        //     var controller = new ProjectsController(logger.Object, repository.Object);
 
-            // Act
-            var actual = await controller.GetAll();
+        //     // Act
+        //     var actual = await controller.GetAll();
 
-            // Assert
-            Assert.Equal(expected, actual);
-        }
+        //     // Assert
+        //     Assert.Equal(expected, actual);
+        // }
 
         // public async Task Get_returns_Supervisors_projects_from_repo()
         // {
@@ -89,7 +89,7 @@ namespace PB.Server.Tests.Controllers
         {
             // Arrange
             var university = new University { Name = "Københavns Universitet", Id = "KU" };
-            var supervisor = new Supervisor { Id = 1, Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
+            var supervisor = new Supervisor { Id = "1", Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
 
             var logger = new Mock<ILogger<ProjectsController>>();
             var repository = new Mock<IProjectRepository>();

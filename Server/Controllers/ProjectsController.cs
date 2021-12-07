@@ -30,9 +30,9 @@ namespace PB.Server.Controllers
         [Authorize]
         [HttpGet]
         public async Task<IReadOnlyCollection<ProjectListDTO>> GetAllFromSupervisor(){
-            
+           var user = User.FindFirstValue(ClaimTypes.NameIdentifier); 
             //Console.WriteLine(ClaimTypes.Name);
-            return await _repository.ListAllAsync();
+            return await _repository.ListAllAsync(user);
         }
 
         //[AllowAnonymous]
@@ -47,6 +47,9 @@ namespace PB.Server.Controllers
         [ProducesResponseType(typeof(ProjectDetailsDTO), 201)]
         public async Task<IActionResult> Post(ProjectCreateDTO project)
         {
+            project.Supervisor = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            Console.WriteLine("----------------------------- KIG HER ---------------------------");
+            Console.WriteLine(project.Supervisor);
             var created = await _repository.CreateAsync(project);
 
             return CreatedAtRoute(nameof(Get), new { created.ID }, created);

@@ -1,15 +1,29 @@
 @page "/MyProjects"
 @using PB.Client.Services
+@using PB.Core
 @using System.Net.Http
 @inject HttpClient http
 
 <h1>MyProjects</h1>
 
-
-
+<RadzenDataList WrapItems="true" AllowPaging="true" Data="@projects" TItem="ProjectListDTO">
+   <Template Context="project">
+      <RadzenCard class="m-3">
+                <h3 class="h5">@project.Title</h3>
+                <b class="h5">Description</b>
+                <div class="row">
+                    <div class="col-md-4">
+                        <b>@project.Description.Substring(0,Math.Min(project.Description.Length, 20))</b>
+                    </div> 
+                </div>
+            </RadzenCard>
+   </Template>
+  </RadzenDataList>
 
 @code {
+
+    private IEnumerable<ProjectListDTO>? projects {get; set;}
         protected override async Task OnInitializedAsync(){
-            await ProjectService.GetMyProjects(http);   
+            projects = await ProjectService.GetMyProjects(http);   
         }
 }

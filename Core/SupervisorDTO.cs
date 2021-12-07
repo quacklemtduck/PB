@@ -1,8 +1,8 @@
 namespace PB.Core;
 
-public record SupervisorUpdateDTO(int Id, String Name);
+public record SupervisorUpdateDTO(string Id, String Name);
 
-public record SupervisorDetailsDTO(int Id, string Name, string Email, ICollection<int> Projects);
+public record SupervisorDetailsDTO(string Id, string Name, string Email, ICollection<int> Projects);
 
 public record SuperVisorCreateDTO{
 
@@ -13,8 +13,11 @@ public record SuperVisorCreateDTO{
     public string Email {get; set;}
     public ICollection<int> Projects {get; set;}  = new HashSet<int>();
 
-    public SuperVisorCreateDTO(string _name, string _email){
+    public string Id {get; set;}
+
+    public SuperVisorCreateDTO(string _id, string _name, string _email){
         Name = _name;
         Email = _email;
+        Id = _id;
     }
 }

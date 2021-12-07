@@ -8,8 +8,8 @@ public class SupervisorControllerTests
         // Arrange
 
         var logger = new Mock<ILogger<SupervisorController>>();
-        var toCreate = new SuperVisorCreateDTO("supervisor","email");
-        var created = new SupervisorDetailsDTO(1, "supervisor","supervisor@email.com", new HashSet<int>());
+        var toCreate = new SuperVisorCreateDTO("1","supervisor","email");
+        var created = new SupervisorDetailsDTO("1", "supervisor","supervisor@email.com", new HashSet<int>());
         var repository = new Mock<ISupervisorRepository>();
         repository.Setup(m => m.CreateAsync(toCreate)).ReturnsAsync(created);
         var controller = new SupervisorController(logger.Object, repository.Object);
@@ -46,11 +46,11 @@ public class SupervisorControllerTests
         // Arrange
         var logger = new Mock<ILogger<SupervisorController>>();
         var repository = new Mock<ISupervisorRepository>();
-        repository.Setup(m => m.ReadAsync(42)).ReturnsAsync(default(SupervisorDetailsDTO));
+        repository.Setup(m => m.ReadAsync("42")).ReturnsAsync(default(SupervisorDetailsDTO));
         var controller = new SupervisorController(logger.Object, repository.Object);
 
         // Act
-        var response = await controller.Get(42);
+        var response = await controller.Get("42");
 
         // Assert
         Assert.IsType<NotFoundResult>(response.Result);
@@ -62,12 +62,12 @@ public class SupervisorControllerTests
         // Arrange
         var logger = new Mock<ILogger<SupervisorController>>();
         var repository = new Mock<ISupervisorRepository>();
-        var supervisor = new SupervisorDetailsDTO(1, "supervisor", "supervisor@gmail.com", new HashSet<int>());
-        repository.Setup(m => m.ReadAsync(1)).ReturnsAsync(supervisor);
+        var supervisor = new SupervisorDetailsDTO("1", "supervisor", "supervisor@gmail.com", new HashSet<int>());
+        repository.Setup(m => m.ReadAsync("1")).ReturnsAsync(supervisor);
         var controller = new SupervisorController(logger.Object, repository.Object);
 
         // Act
-        var response = await controller.Get(1);
+        var response = await controller.Get("1");
 
         // Assert
         Assert.Equal(supervisor, response.Value);
@@ -78,13 +78,13 @@ public class SupervisorControllerTests
     {
         // Arrange
         var logger = new Mock<ILogger<SupervisorController>>();
-        var supervisor = new SupervisorUpdateDTO(1,"name");
+        var supervisor = new SupervisorUpdateDTO("1","name");
         var repository = new Mock<ISupervisorRepository>();
-        repository.Setup(m => m.UpdateAsync(1, supervisor)).ReturnsAsync(Updated);
+        repository.Setup(m => m.UpdateAsync("1", supervisor)).ReturnsAsync(Updated);
         var controller = new SupervisorController(logger.Object, repository.Object);
 
         // Act
-        var response = await controller.Put(1, supervisor);
+        var response = await controller.Put("1", supervisor);
 
         // Assert
         Assert.IsType<NoContentResult>(response);
@@ -95,13 +95,13 @@ public class SupervisorControllerTests
     {
         // Arrange
         var logger = new Mock<ILogger<SupervisorController>>();
-        var supervisor = new SupervisorUpdateDTO(1,"name");
+        var supervisor = new SupervisorUpdateDTO("1","name");
         var repository = new Mock<ISupervisorRepository>();
-        repository.Setup(m => m.UpdateAsync(1, supervisor)).ReturnsAsync(NotFound);
+        repository.Setup(m => m.UpdateAsync("1", supervisor)).ReturnsAsync(NotFound);
         var controller = new SupervisorController(logger.Object, repository.Object);
 
         // Act
-        var response = await controller.Put(1, supervisor);
+        var response = await controller.Put("1", supervisor);
 
         // Assert
         Assert.IsType<NotFoundResult>(response);
@@ -113,10 +113,10 @@ public class SupervisorControllerTests
         // Arrange
         var logger = new Mock<ILogger<SupervisorController>>();
         var repository = new Mock<ISupervisorRepository>();
-        repository.Setup(m => m.DeleteAsync(42)).ReturnsAsync(NotFound);
+        repository.Setup(m => m.DeleteAsync("42")).ReturnsAsync(NotFound);
         var controller = new SupervisorController(logger.Object, repository.Object);
         // Act
-        var response = await controller.Delete(42);
+        var response = await controller.Delete("42");
         // Assert
         Assert.IsType<NotFoundResult>(response);
     }
@@ -127,10 +127,10 @@ public class SupervisorControllerTests
         // Arrange
         var logger = new Mock<ILogger<SupervisorController>>();
         var repository = new Mock<ISupervisorRepository>();
-        repository.Setup(m => m.DeleteAsync(1)).ReturnsAsync(Deleted);
+        repository.Setup(m => m.DeleteAsync("1")).ReturnsAsync(Deleted);
         var controller = new SupervisorController(logger.Object, repository.Object);
         // Act
-        var response = await controller.Delete(1);
+        var response = await controller.Delete("1");
         // Assert
         Assert.IsType<NoContentResult>(response);
     }

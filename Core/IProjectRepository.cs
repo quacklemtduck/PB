@@ -23,6 +23,6 @@ namespace PB.Core
         Task<IReadOnlyCollection<ProjectListDTO>> ListAllAsync();
 
         //List all supervisor's ProjectListDTO
-        Task<IReadOnlyCollection<ProjectListDTO>> ListAllAsync(int SupervisorID);
+        Task<IReadOnlyCollection<ProjectListDTO>> ListAllAsync(string SupervisorID);
     }
 }

@@ -1,8 +1,8 @@
 ﻿namespace PB.Core;
 
-    public record ProjectListDTO(int ID, string Title);
+    public record ProjectListDTO(int ID, string Title, string Description);
     public record ProjectDetailsDTO(
-        int ID, string Title, string? Description, string? Supervisor, bool Notification, ICollection<string> ChosenStudents, ISet<string> Applications, ISet<int> Educations) : ProjectListDTO(ID, Title);
+        int ID, string Title, string? Description, string? Supervisor, bool Notification, ICollection<string> ChosenStudents, ISet<string> Applications, ISet<int> Educations);
     public record ProjectCreateDTO {
         public string? Title { get; set; } //TODO: not nullable
 

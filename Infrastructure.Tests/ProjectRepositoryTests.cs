@@ -17,7 +17,7 @@ namespace PB.Infrastructure.Tests
             var context = new ApplicationDbContext(builder.Options, options);
             context.Database.EnsureCreated();
 
-            var supervisor = new Supervisor { Id = 1, Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
+            var supervisor = new Supervisor { Id = "1", Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
             //context.Supervisors.Add(supervisor);
             var universityRepository = new UniversityRepository(context);
             var university = context.Universities.Find("KU");
@@ -95,33 +95,33 @@ namespace PB.Infrastructure.Tests
 
 
             Assert.Collection(projects,
-                projects => Assert.Equal(new ProjectListDTO(1, "Project1"), projects),
-                projects => Assert.Equal(new ProjectListDTO(2, "Project2"), projects),
-                projects => Assert.Equal(new ProjectListDTO(3, "Project3"), projects),
-                projects => Assert.Equal(new ProjectListDTO(4, "Project4"), projects),
-                projects => Assert.Equal(new ProjectListDTO(5, "Project5"), projects)
+                projects => Assert.Equal(new ProjectListDTO(1, "Project1", "This is project 1"), projects),
+                projects => Assert.Equal(new ProjectListDTO(2, "Project2", "This is project 2"), projects),
+                projects => Assert.Equal(new ProjectListDTO(3, "Project3", "This is project 3"), projects),
+                projects => Assert.Equal(new ProjectListDTO(4, "Project4", "This is project 4"), projects),
+                projects => Assert.Equal(new ProjectListDTO(5, "Project5", "This is project 5"), projects)
             );
         }
 
         [Fact]
         public async Task ListAllAsync_returns_all_supervisors_projects()
         {
-            var projects = await _repository.ListAllAsync(1);
+            var projects = await _repository.ListAllAsync("1");
 
 
             Assert.Collection(projects,
-                projects => Assert.Equal(new ProjectListDTO(1, "Project1"), projects),
-                projects => Assert.Equal(new ProjectListDTO(2, "Project2"), projects),
-                projects => Assert.Equal(new ProjectListDTO(3, "Project3"), projects),
-                projects => Assert.Equal(new ProjectListDTO(4, "Project4"), projects),
-                projects => Assert.Equal(new ProjectListDTO(5, "Project5"), projects)
+                projects => Assert.Equal(new ProjectListDTO(1, "Project1", "This is project 1"), projects),
+                projects => Assert.Equal(new ProjectListDTO(2, "Project2", "This is project 2"), projects),
+                projects => Assert.Equal(new ProjectListDTO(3, "Project3", "This is project 3"), projects),
+                projects => Assert.Equal(new ProjectListDTO(4, "Project4", "This is project 4"), projects),
+                projects => Assert.Equal(new ProjectListDTO(5, "Project5", "This is project 5"), projects)
             );
         }
 
         [Fact]
         public async Task UpdateAsync_given_non_existing_Project_returns_NotFound()
         {
-            var supervisor = new Supervisor { Id = 1, Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
+            var supervisor = new Supervisor { Id = "1", Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
 
             var project = new ProjectUpdateDTO
             {
@@ -143,7 +143,7 @@ namespace PB.Infrastructure.Tests
         [Fact]
         public async Task UpdateAsync_updates_existing_Project()
         {
-            var supervisor = new Supervisor { Id = 1, Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
+            var supervisor = new Supervisor { Id = "1", Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
 
 
             var project = new ProjectUpdateDTO
@@ -172,7 +172,7 @@ namespace PB.Infrastructure.Tests
         public async Task UpdateAsync_adds_students_existing_Project()
         {
             var student = new Student { Name = "Test" };
-            var supervisor = new Supervisor { Id = 1, Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
+            var supervisor = new Supervisor { Id = "1", Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
             var ChosenStudents = new HashSet<string>();
             ChosenStudents.Add(student.Name);
 
@@ -207,7 +207,7 @@ namespace PB.Infrastructure.Tests
         {
             var application = new Application { Title = "Softwareudvikler søger nye udfordringer" };
 
-            var supervisor = new Supervisor { Id = 1, Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
+            var supervisor = new Supervisor { Id = "1", Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
         
             var applications = new HashSet<string>();
             applications.Add(application.Title);
@@ -250,7 +250,7 @@ namespace PB.Infrastructure.Tests
         [Fact]
         public async Task ReadByIDAsync_given_id_exists_returns_Project()
         {
-            var supervisor = new Supervisor { Id = 1, Name = "Supervisor1", Email = "supervisor1@email.com",Projects = new List<Project>() };
+            var supervisor = new Supervisor { Id = "1", Name = "Supervisor1", Email = "supervisor1@email.com",Projects = new List<Project>() };
 
             var project = (await _repository.ReadByIDAsync(1)).Value;
 

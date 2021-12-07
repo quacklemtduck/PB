@@ -8,7 +8,7 @@
         [StringLength(50)]
         public string Title { get; set; }
         public string? Description { get; set; }
-        public int SupervisorID { get; set; } //FK
+        public string SupervisorID { get; set; } //FK
         public Supervisor Supervisor { get; set; }
         //public DateTime? Deadline { get; set; }
         public bool Notification { get; set; }

@@ -24,7 +24,7 @@ public class SupervisorController : ControllerBase
     [ProducesResponseType(404)]
     [ProducesResponseType(typeof(SupervisorDetailsDTO), 200)]
     [HttpGet("{id}")]
-    public async Task<ActionResult<SupervisorDetailsDTO>> Get(int id)
+    public async Task<ActionResult<SupervisorDetailsDTO>> Get(string id)
         => (await _repository.ReadAsync(id)).ToActionResult();
 
     [Authorize]
@@ -41,13 +41,13 @@ public class SupervisorController : ControllerBase
     [HttpPut("{id}")]
     [ProducesResponseType(204)]
     [ProducesResponseType(404)]
-    public async Task<IActionResult> Put(int id, [FromBody] SupervisorUpdateDTO supervisor)
+    public async Task<IActionResult> Put(string id, [FromBody] SupervisorUpdateDTO supervisor)
            => (await _repository.UpdateAsync(id, supervisor)).ToActionResult();
 
     [Authorize]
     [HttpDelete("{id}")]
     [ProducesResponseType(204)]
     [ProducesResponseType(404)]
-    public async Task<IActionResult> Delete(int id)
+    public async Task<IActionResult> Delete(string id)
           => (await _repository.DeleteAsync(id)).ToActionResult();
 }

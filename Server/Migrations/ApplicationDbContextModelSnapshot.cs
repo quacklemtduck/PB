@@ -406,10 +406,15 @@ namespace PB.Server.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("ProjectId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("UniversityID")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProjectId");
 
                     b.HasIndex("UniversityID");
 
@@ -3266,9 +3271,6 @@ namespace PB.Server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime?>("Deadline")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
@@ -3278,11 +3280,13 @@ namespace PB.Server.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("SupervisorID")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("SupervisorID")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
                         .IsRequired()
+                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -3317,9 +3321,8 @@ namespace PB.Server.Migrations
 
             modelBuilder.Entity("PB.Infrastructure.Supervisor", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -3342,17 +3345,12 @@ namespace PB.Server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("ProjectId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("TagName")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ProjectId");
 
                     b.ToTable("Tags");
                 });
@@ -3367,12 +3365,7 @@ namespace PB.Server.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("ProjectId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ProjectId");
 
                     b.ToTable("Universities");
 
@@ -3491,6 +3484,10 @@ namespace PB.Server.Migrations
 
             modelBuilder.Entity("PB.Infrastructure.Education", b =>
                 {
+                    b.HasOne("PB.Infrastructure.Project", null)
+                        .WithMany("Educations")
+                        .HasForeignKey("ProjectId");
+
                     b.HasOne("PB.Infrastructure.University", "University")
                         .WithMany("Educations")
                         .HasForeignKey("UniversityID");
@@ -3518,20 +3515,6 @@ namespace PB.Server.Migrations
                     b.Navigation("University");
                 });
 
-            modelBuilder.Entity("PB.Infrastructure.Tag", b =>
-                {
-                    b.HasOne("PB.Infrastructure.Project", null)
-                        .WithMany("Tags")
-                        .HasForeignKey("ProjectId");
-                });
-
-            modelBuilder.Entity("PB.Infrastructure.University", b =>
-                {
-                    b.HasOne("PB.Infrastructure.Project", null)
-                        .WithMany("Universities")
-                        .HasForeignKey("ProjectId");
-                });
-
             modelBuilder.Entity("ProjectStudent", b =>
                 {
                     b.HasOne("PB.Infrastructure.Student", null)
@@ -3551,9 +3534,7 @@ namespace PB.Server.Migrations
                 {
                     b.Navigation("Applications");
 
-                    b.Navigation("Tags");
-
-                    b.Navigation("Universities");
+                    b.Navigation("Educations");
                 });
 
             modelBuilder.Entity("PB.Infrastructure.Student", b =>

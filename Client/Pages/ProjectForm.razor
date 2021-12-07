@@ -1,4 +1,8 @@
 @page "/ProjectForm"
+@using PB.Core
+@using PB.Client.Services
+@using System.Net.Http
+@inject HttpClient http
 
 <style>
     form .row {
@@ -14,7 +18,7 @@
 }
 else
 {
-    <RadzenTemplateForm Data="@project" Submit="@((Project args) => { Submit(args); })">
+    <RadzenTemplateForm Data="@project" Submit="@((TempProject args) => { Submit(args); })">
 
         <RadzenFieldset Text="" style="width: 100%;">
             <div class="row">
@@ -22,42 +26,23 @@ else
                     <RadzenLabel Text="Project Title" />
                 </div>
                 <div class="col-md-8">
-                    <RadzenTextBox style="width: 100%;" Name="UniAbbrv" />
+                    <RadzenTextBox @bind-Value=@project.Title style="width: 100%;" Name="Title" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-6">
+                    <h6>Notifications</h6>
+                    <RadzenSwitch @bind-Value=@project.Notification Style="margin-bottom: 20px" Change=@(args => OnChange(args,
+                    "Notification")) />
+                    <br />
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4 align-items-center d-flex">
-                    <RadzenLabel Text="Deadline" />
+                    <RadzenLabel Text="Description" />
                 </div>
                 <div class="col-md-8">
-                    <RadzenDatePicker style="width: 100%;" Name="Deadline" @bind-Value="project.Deadline" />
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 align-items-center d-flex">
-                    <RadzenLabel Text="University" />
-                </div>
-                <div class="col-md-8">
-                    <RadzenDropDown @bind-Value="project.UniId" AllowClear="true" Placeholder="Select university"
-                    Data="@universities" style="width: 100%;" TextProperty="UniAbbrv" ValueProperty="UniId"
-                    Name="UniId">
-                    </RadzenDropDown>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 align-items-center d-flex">
-                    <RadzenLabel Text="Supervisor" />
-                </div>
-                <div class="col-md-8">
-                    <RadzenTextBox style="width: 100%;" Name="Supervisor" />
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 align-items-center d-flex">
-                    <RadzenLabel Text="Project Description" />
-                </div>
-                <div class="col-md-8">
-                    <RadzenTextArea style="width: 100%" Name="project Description" />
+                    <RadzenTextArea @bind-Value=@project.Description style="width: 100%" Name="Description" />
                 </div>
             </div>
         </RadzenFieldset>
@@ -73,38 +58,28 @@ else
 }
 
 @code {
-    public class Project
+    private TempProject project {get; set;} = new TempProject();
+    public class TempProject
     {
-        public int UniId { get; set; }
-        public string UniAbbrv { get; set; }
-        public DateTime Deadline { get; set; }
-        public string Supervisor { get; set; }
+        public string Title { get; set; }
+        public bool Notification { get; set; }
         public string Description { get; set; }
-
+        public ISet<int> Educations { get; set; } = new HashSet<int>();
     }
 
-    public class University
+    async void Submit(TempProject arg)
     {
-        public int UniId { get; set; }
-        public string UniAbbrv { get; set; }
+        var req = new ProjectCreateDTO{Title= arg.Title, Description=arg.Description, Notification= arg.Notification, Educations= arg.Educations};
+        Console.WriteLine(arg.Notification);
+        Console.WriteLine(arg.Title);
+        Console.WriteLine(arg.Description);
+        await ProjectService.CreateProject(http, req);
+    //Called when you press save on project form
     }
 
-    Project project = new Project()
+    void OnChange(bool? value, string name)
     {
-        Deadline = DateTime.Now,
-    };
-
-    List<University> universities = new List<University>()
-    {
-    new University() { UniId = 1, UniAbbrv = "AAU" },
-    new University() { UniId = 2, UniAbbrv = "ITU" },
-    new University() { UniId = 3, UniAbbrv = "KU" },
-    new University() { UniId = 4, UniAbbrv = "DTU" }
-    };
-
-    void Submit(Project arg)
-    {
-        //Called when you press save on project form
+        
     }
 
     void Cancel()
