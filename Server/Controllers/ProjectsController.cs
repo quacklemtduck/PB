@@ -38,7 +38,7 @@ namespace PB.Server.Controllers
         //[AllowAnonymous]
         [ProducesResponseType(404)]
         [ProducesResponseType(typeof(ProjectDetailsDTO), 200)]
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "Get")]
         public async Task<ActionResult<ProjectDetailsDTO>> Get(int id)
             => (await _repository.ReadByIDAsync(id)).ToActionResult();
 
@@ -52,7 +52,7 @@ namespace PB.Server.Controllers
             Console.WriteLine(project.Supervisor);
             var created = await _repository.CreateAsync(project);
 
-            return CreatedAtRoute(nameof(Get), new { created.ID }, created);
+            return CreatedAtRoute("Get", new { created.ID }, created);
         }
 
         //[Authorize] //Supervisor and Student

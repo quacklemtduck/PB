@@ -3,6 +3,7 @@
 @using PB.Client.Services
 @using System.Net.Http
 @inject HttpClient http
+@inject NavigationManager NavigationManager
 
 <style>
     form .row {
@@ -73,7 +74,14 @@ else
         Console.WriteLine(arg.Notification);
         Console.WriteLine(arg.Title);
         Console.WriteLine(arg.Description);
-        await ProjectService.CreateProject(http, req);
+        var res = await ProjectService.CreateProject(http, req);
+        Console.WriteLine(res!.ToString());
+        if (res.IsSuccessStatusCode)
+        {
+            var created = await res.Content.ReadFromJsonAsync<ProjectDetailsDTO>();
+            var uri = $"{NavigationManager.BaseUri}project/{created.ID}";
+            NavigationManager.NavigateTo(uri);
+        }
     //Called when you press save on project form
     }
 
