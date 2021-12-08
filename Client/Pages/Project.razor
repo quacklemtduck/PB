@@ -1,0 +1,26 @@
+@page "/Project/{projectId:int}"
+@using PB.Client.Services
+@using PB.Core
+@using System.Net.Http
+@inject HttpClient http
+@inject NavigationManager NavigationManager
+
+@if (project != null){
+    <h1>@project.Title</h1>
+    <p>@project.Description</p>
+}
+
+@code {
+    [Parameter]
+    public int? ProjectId {get; set;}
+    private ProjectDetailsDTO? project;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if(ProjectId != 0){
+            project = await ProjectService.GetProject(http, ProjectId);
+        }
+
+        await base.OnParametersSetAsync();
+    }
+}

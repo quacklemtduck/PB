@@ -42,10 +42,14 @@ namespace PB.Server.Controllers
         [HttpGet("{id}", Name = "Get")]
         public async Task<ActionResult<ProjectDetailsDTO>> Get(int id){
             var result = await _repository.ReadByIDAsync(id);
+            Console.WriteLine("---------------START GET-------------");
             if(result.IsSome){
+                Console.WriteLine($"---------------HAS VALUE------------- {result.Value.Status}");
                 if (result.Value.Status != Status.Visible){
+                    Console.WriteLine("---------------Is not visible-------------");
                     var user = User.FindFirstValue(ClaimTypes.NameIdentifier);
                     if(user != null){
+                        Console.WriteLine("HAS USER");
                         if(user == result.Value.Supervisor){
                             return result.ToActionResult();
                         }
@@ -54,7 +58,7 @@ namespace PB.Server.Controllers
                     return Unauthorized();
                     
                 } else{
-                    return Unauthorized();
+                    return result.ToActionResult();
                 }
             }else{
                 return result.ToActionResult();

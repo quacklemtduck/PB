@@ -21,6 +21,11 @@ namespace PB.Client.Services
             var result = await http.PostAsJsonAsync("api/Projects/Post", req);
             return result;
         }
+
+        public async static Task<ProjectDetailsDTO?> GetProject(HttpClient http, int? id){
+            var result = await http.GetFromJsonAsync<ProjectDetailsDTO>($"api/Projects/get/{id}");
+            return result;
+        }
     }
 
 }
