@@ -37,6 +37,7 @@ namespace PB.Server.Controllers
 
         //[AllowAnonymous]
         [ProducesResponseType(404)]
+        [ProducesResponseType(401)]
         [ProducesResponseType(typeof(ProjectDetailsDTO), 200)]
         [HttpGet("{id}", Name = "Get")]
         public async Task<ActionResult<ProjectDetailsDTO>> Get(int id){
