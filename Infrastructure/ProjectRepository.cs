@@ -38,7 +38,8 @@ namespace PB.Infrastructure
                                  entity.ChosenStudents.Select(s => s.Name).ToHashSet(),
                                  //entity.Tags.Select(t => t.TagName).ToHashSet(),
                                  entity.Applications.Select(a => a.Title).ToHashSet(),
-                                 entity.Educations.Select(u => u.Id).ToHashSet()
+                                 entity.Educations.Select(u => u.Id).ToHashSet(),
+                                 entity.Status
                              );
         }
 
@@ -84,7 +85,8 @@ namespace PB.Infrastructure
                                p.ChosenStudents.Select(s => s.Name).ToHashSet(),
                                //p.Tags.Select(t => t.TagName).ToHashSet(),
                                p.Applications.Select(a => a.Title).ToHashSet(),
-                               p.Educations.Select(u => u.Id).ToHashSet()
+                               p.Educations.Select(u => u.Id).ToHashSet(),
+                               p.Status
                            );
 
             return await projects.FirstOrDefaultAsync();

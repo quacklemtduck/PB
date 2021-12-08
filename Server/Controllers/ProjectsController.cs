@@ -39,8 +39,26 @@ namespace PB.Server.Controllers
         [ProducesResponseType(404)]
         [ProducesResponseType(typeof(ProjectDetailsDTO), 200)]
         [HttpGet("{id}", Name = "Get")]
-        public async Task<ActionResult<ProjectDetailsDTO>> Get(int id)
-            => (await _repository.ReadByIDAsync(id)).ToActionResult();
+        public async Task<ActionResult<ProjectDetailsDTO>> Get(int id){
+            var result = await _repository.ReadByIDAsync(id);
+            if(result.IsSome){
+                if (result.Value.Status != Status.Visible){
+                    var user = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                    if(user != null){
+                        if(user == result.Value.Supervisor){
+                            return result.ToActionResult();
+                        }
+                    }
+
+                    return Unauthorized();
+                    
+                } else{
+                    return Unauthorized();
+                }
+            }else{
+                return result.ToActionResult();
+            }
+        }
 
         [Authorize]
         [HttpPost]
