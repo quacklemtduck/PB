@@ -9,7 +9,7 @@
 <RadzenDataList WrapItems="true" AllowPaging="true" Data="@projects" TItem="ProjectListDTO">
    <Template Context="project">
       <RadzenCard class="m-3">
-                <h3 class="h5">@project.Title</h3>
+                <h3 class="h5"><a href="/project/@project.ID">@project.Title</a></h3>
                 <b class="h5">Description</b>
                 <div class="row">
                     <div class="col-md-4">
