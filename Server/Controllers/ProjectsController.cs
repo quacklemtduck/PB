@@ -46,6 +46,7 @@ namespace PB.Server.Controllers
                 if (result.Value.Status != Status.Visible){
                     var user = User.FindFirstValue(ClaimTypes.NameIdentifier);
                     if(user != null){
+                        Console.WriteLine($"-------KIG HER {user} -- {result.Value.Supervisor}");
                         if(user == result.Value.Supervisor){
                             return result.ToActionResult();
                         }
@@ -87,5 +88,13 @@ namespace PB.Server.Controllers
         [ProducesResponseType(404)]
         public async Task<IActionResult> Delete(int id)
               => (await _repository.DeleteAsync(id)).ToActionResult();
+
+        [HttpPut]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(201)]
+        public async Task<IActionResult> UpdateStatus(ProjectVisibilityUpdateDTO dto){
+            var res = await _repository.UpdateStatusAsync(dto);
+            return res.ToActionResult();
+        }
     }
 }

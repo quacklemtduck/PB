@@ -60,14 +60,14 @@ namespace PB.Infrastructure
 
         public async Task<IReadOnlyCollection<ProjectListDTO>> ListAllAsync() =>
                 (await _context.Projects
-                       .Select(p => new ProjectListDTO(p.Id, p.Title, p.Description))
+                       .Select(p => new ProjectListDTO(p.Id, p.Title, p.Description, p.Status))
                        .ToListAsync())
                        .AsReadOnly();
         
         public async Task<IReadOnlyCollection<ProjectListDTO>> ListAllAsync(string SupervisorID) =>
                 (await _context.Projects
                         .Where(p => SupervisorID == p.SupervisorID)
-                       .Select(p => new ProjectListDTO(p.Id, p.Title, p.Description))
+                       .Select(p => new ProjectListDTO(p.Id, p.Title, p.Description, p.Status))
                        .ToListAsync())
                        .AsReadOnly();
 
@@ -79,7 +79,7 @@ namespace PB.Infrastructure
                                p.Id,
                                p.Title,
                                p.Description,
-                               p.Supervisor == null ? null : p.Supervisor.Name,
+                               p.Supervisor == null ? null : p.Supervisor.Id,
                                //convertDateTimeToString(p.Deadline),
                                p.Notification,
                                p.ChosenStudents.Select(s => s.Name).ToHashSet(),
@@ -117,6 +117,14 @@ namespace PB.Infrastructure
 
             await _context.SaveChangesAsync();
 
+            return Response.Updated;
+        }
+
+        public async Task<Response> UpdateStatusAsync(ProjectVisibilityUpdateDTO dto){
+            var entity = await _context.Projects.FindAsync(dto.ID);
+            if (entity == null) return Response.NotFound;
+            entity.Status = dto.Status;
+            await _context.SaveChangesAsync();
             return Response.Updated;
         }
 

@@ -7,23 +7,43 @@
 <h1>MyProjects</h1>
 
 <RadzenDataList WrapItems="true" AllowPaging="true" Data="@projects" TItem="ProjectListDTO">
-   <Template Context="project">
-      <RadzenCard class="m-3">
-                <h3 class="h5"><a href="/project/@project.ID">@project.Title</a></h3>
-                <b class="h5">Description</b>
-                <div class="row">
-                    <div class="col-md-4">
-                        <b>@project.Description.Substring(0,Math.Min(project.Description.Length, 20))</b>
-                    </div> 
+    <Template Context="project">
+        <RadzenCard class="m-3">
+            <h3 class="h5"><a href="/project/@project.ID">@project.Title</a></h3>
+            <b class="h5">Description</b>
+            <div class="row">
+                <div class="col-md-4">
+                    <b>@project.Description.Substring(0,Math.Min(project.Description.Length, 20))</b>
                 </div>
-            </RadzenCard>
-   </Template>
-  </RadzenDataList>
+            </div>
+            <div>
+                <p>Visibility: @project.Status</p>
+                @if(project.Status == Status.Visible){
+                <RadzenButton Click=@(args => ChangeVisibility(project.ID, Status.Hidden)) Text="Make Hidden"/>
+                }else{
+                    <RadzenButton Click=@(args => ChangeVisibility(project.ID, Status.Visible)) Text="Make Visible"/>
+                }
+            </div>
+        </RadzenCard>
+    </Template>
+</RadzenDataList>
 
 @code {
 
-    private IEnumerable<ProjectListDTO>? projects {get; set;}
-        protected override async Task OnInitializedAsync(){
-            projects = await ProjectService.GetMyProjects(http);   
+    private IEnumerable<ProjectListDTO>? projects { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        projects = await ProjectService.GetMyProjects(http);
+    }
+
+    async void ChangeVisibility(int id, Status status)
+    {
+        var result = await ProjectService.UpdateProjectVisibility(http, new ProjectVisibilityUpdateDTO(id, status));
+        if (result.IsSuccessStatusCode)
+        {
+            await OnInitializedAsync();
+            StateHasChanged();
         }
+    }
+
 }
