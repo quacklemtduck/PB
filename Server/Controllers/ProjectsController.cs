@@ -81,7 +81,7 @@ namespace PB.Server.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
         public async Task<IActionResult> Put(int id, [FromBody] ProjectUpdateDTO project)
-               => (await _repository.UpdateAsync(id, project)).ToActionResult();
+               => (await _repository.UpdateAsync(project)).ToActionResult();
 
         //[Authorize] //Supervisor
         [HttpDelete("{id}")]

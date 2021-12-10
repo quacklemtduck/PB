@@ -2,27 +2,27 @@ namespace PB.Server.Tests.Controllers{
 
 public class SupervisorControllerTests
 {
-    [Fact]
-    public async Task Create_creates_supervisor()
-    {
-        // Arrange
+    // [Fact]
+    // public async Task Create_creates_supervisor()
+    // {
+    //     // Arrange
 
-        var logger = new Mock<ILogger<SupervisorController>>();
-        var toCreate = new SuperVisorCreateDTO("1","supervisor","email");
-        var created = new SupervisorDetailsDTO("1", "supervisor","supervisor@email.com", new HashSet<int>());
-        var repository = new Mock<ISupervisorRepository>();
-        repository.Setup(m => m.CreateAsync(toCreate)).ReturnsAsync(created);
-        var controller = new SupervisorController(logger.Object, repository.Object);
+    //     var logger = new Mock<ILogger<SupervisorController>>();
+    //     var toCreate = new SuperVisorCreateDTO("1","supervisor","email");
+    //     var created = new SupervisorDetailsDTO("1", "supervisor","supervisor@email.com", new HashSet<int>());
+    //     var repository = new Mock<ISupervisorRepository>();
+    //     repository.Setup(m => m.CreateAsync(toCreate)).ReturnsAsync(created);
+    //     var controller = new SupervisorController(logger.Object, repository.Object);
 
-        // Act
-        var result = await controller.Post(toCreate) as CreatedAtRouteResult;
+    //     // Act
+    //     var result = await controller.Post(toCreate) as CreatedAtRouteResult;
 
-        // Assert
-        Assert.Equal(created, result?.Value);
-        Assert.Equal("Get", result?.RouteName);
-        Assert.Equal(KeyValuePair.Create("Id", (object?)1), result?.RouteValues?.Single());
-        Assert.Equal((object?)1, result?.RouteValues?.GetValueOrDefault("Id"));
-    }
+    //     // Assert
+    //     Assert.Equal(created, result?.Value);
+    //     Assert.Equal("Get", result?.RouteName);
+    //     Assert.Equal(KeyValuePair.Create("Id", (object?)1), result?.RouteValues?.Single());
+    //     Assert.Equal((object?)1, result?.RouteValues?.GetValueOrDefault("Id"));
+    // }
 
     [Fact]
     public async Task Get_returns_Supervisors_from_repo()

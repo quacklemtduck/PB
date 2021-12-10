@@ -92,7 +92,7 @@ namespace PB.Infrastructure
             return await projects.FirstOrDefaultAsync();
         }
 
-        public async Task<Response> UpdateAsync(int ID, ProjectUpdateDTO project)
+        public async Task<Response> UpdateAsync(ProjectUpdateDTO project)
         {
             var entity = await _context.Projects.Include(p => p.ChosenStudents).Include(p => p.Applications).Include(p => p.Educations).FirstOrDefaultAsync(p => p.Id == project.ID);
 
@@ -108,11 +108,11 @@ namespace PB.Infrastructure
                 //entity.Supervisor = await getSupervisorAsync(project.Supervisor);
                 //entity.Deadline = convertStringToDateTime(project.Deadline);
                 entity.Notification = project.Notification;
-                entity.Status = project.Status;
+                entity.Status = project.Status!;
                 entity.ChosenStudents = await GetStudentsAsync(project.ChosenStudents).ToListAsync();
                 //entity.Tags = await GetTagsAsync(project.Tags).ToListAsync();
                 entity.Applications = await GetApplicationsAsync(project.Applications).ToListAsync();
-                entity.Educations = _context.Educations.Where(e => !project.Educations.Any(e2 => e2 == e.Id)).ToList();
+                entity.Educations = _context.Educations.Where(e => project.Educations.Any(e2 => e2 == e.Id)).ToList();
 
 
             await _context.SaveChangesAsync();

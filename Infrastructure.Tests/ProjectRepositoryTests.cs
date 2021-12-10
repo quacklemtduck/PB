@@ -135,7 +135,7 @@ namespace PB.Infrastructure.Tests
                 Educations = new HashSet<int>()
             };
 
-            var response = await _repository.UpdateAsync(42, project);
+            var response = await _repository.UpdateAsync(project);
 
             Assert.Equal(NotFound, response);
         }
@@ -151,18 +151,17 @@ namespace PB.Infrastructure.Tests
                 ID = 5,
                 Title = "newProject5",
                 Description = "This is project 5, version 2",
-                Supervisor = "Supervisor1",
                 Notification = false,
                 ChosenStudents = new HashSet<string>(),
                 Applications = new HashSet<string>(),
                 Educations = new HashSet<int>()
             };
 
-            var response = await _repository.UpdateAsync(5, project);
+            var response = await _repository.UpdateAsync(project);
 
             Assert.Equal(Updated, response);
             var projectUpdated = (await _repository.ReadByIDAsync(5)).Value;
-
+            Assert.Equal("newProject5", projectUpdated.Title);
             Assert.Empty(projectUpdated.ChosenStudents);
             Assert.Empty(projectUpdated.Applications);
             Assert.Empty(projectUpdated.Educations);
@@ -189,7 +188,7 @@ namespace PB.Infrastructure.Tests
                 Educations = new HashSet<int>()
             };
 
-            var response = await _repository.UpdateAsync(5, project);
+            var response = await _repository.UpdateAsync(project);
 
             Assert.Equal(Updated, response);
             var projectUpdated = (await _repository.ReadByIDAsync(5)).Value;
@@ -224,7 +223,7 @@ namespace PB.Infrastructure.Tests
                 Educations = new HashSet<int>()
             };
 
-            var response = await _repository.UpdateAsync(5, project);
+            var response = await _repository.UpdateAsync(project);
 
             Assert.Equal(Updated, response);
             var projectUpdated = (await _repository.ReadByIDAsync(5)).Value;
@@ -254,9 +253,8 @@ namespace PB.Infrastructure.Tests
 
             var project = (await _repository.ReadByIDAsync(1)).Value;
 
-            Assert.True(project.Supervisor.Contains(supervisor.Name));
+            Assert.Equal(supervisor.Id, project.Supervisor);
             Assert.Equal(1, project.ID);
-            Assert.Equal("Supervisor1", project.Supervisor);
             Assert.Empty(project.ChosenStudents);
             Assert.Equal("This is project 1", project.Description);
             Assert.False(project.Notification);
