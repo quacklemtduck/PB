@@ -4,7 +4,6 @@ using PB.Shared;
 
 namespace PB.Server.Controllers;
 
-[Authorize]
 [ApiController]
 [Route("[controller]")]
 public class WeatherForecastController : ControllerBase

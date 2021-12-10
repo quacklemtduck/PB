@@ -20,6 +20,11 @@ builder.Services.AddIdentityServer()
 
 builder.Services.AddScoped<IPBContext, ApplicationDbContext>();
 builder.Services.AddScoped<ISupervisorRepository, SupervisorRepository>();
+builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
+builder.Services.AddScoped<IApplicationRepository, ApplicationRepository>();
+builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+builder.Services.AddScoped<IUniversityRepository, UniversityRepository>();
+builder.Services.AddScoped<IEducationRepository, EducationRepository>();
 
 builder.Services.AddAuthentication()
     .AddIdentityServerJwt();

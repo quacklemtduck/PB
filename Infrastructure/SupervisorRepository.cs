@@ -17,7 +17,8 @@ namespace PB.Infrastructure
             var sup = new Supervisor{
                 Name = supervisor.Name,
                 Email = supervisor.Email,
-                Projects = new List<Project>()
+                Projects = new List<Project>(),
+                Id = supervisor.Id
             };
 
             _context.Supervisors.Add(sup);
@@ -33,13 +34,13 @@ namespace PB.Infrastructure
                 .ToListAsync();
         }
 
-        public async Task<Option<SupervisorDetailsDTO>> ReadAsync(int supervisorId)
+        public async Task<Option<SupervisorDetailsDTO>> ReadAsync(string supervisorId)
         {
             var supervisor = await _context.Supervisors.FirstOrDefaultAsync(s => s.Id == supervisorId);
             return supervisor == null ? null : new SupervisorDetailsDTO(supervisor.Id,supervisor.Name,supervisor.Email,supervisor.Projects.Select(p => p.Id).ToList<int>());
         }
 
-        public async Task<Response> UpdateAsync(int id, SupervisorUpdateDTO supervisor)
+        public async Task<Response> UpdateAsync(string id, SupervisorUpdateDTO supervisor)
         {
             var entity = _context.Supervisors.FirstOrDefault(s => s.Id == id);
             if (entity == null) return NotFound;
@@ -49,7 +50,7 @@ namespace PB.Infrastructure
             return Updated;
         }
 
-        public async Task<Response> DeleteAsync(int id)
+        public async Task<Response> DeleteAsync(string id)
         {
             var entity = _context.Supervisors.FirstOrDefault(s => s.Id == id);
             if (entity == null) return NotFound;

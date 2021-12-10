@@ -17,11 +17,11 @@ namespace PB.Infrastructure
             {
                 Title = project.Title,
                 Description = project.Description,
-                Supervisor = await getSupervisorAsync(project.Supervisor),
-                Deadline = convertStringToDateTime(project.Deadline),
+                Supervisor = _context.Supervisors.Find(project.Supervisor),
+                //Deadline = convertStringToDateTime(project.Deadline),
                 Notification = project.Notification,
-                Tags = await GetTagsAsync(project.Tags).ToListAsync(),
-                Universities = await GetUniversitiesAsync(project.Universities).ToListAsync()
+                //Tags = await GetTagsAsync(project.Tags).ToListAsync(),
+                Educations = _context.Educations.Where(e => !project.Educations.Any(e2 => e2 == e.Id)).ToList()
             };
 
             _context.Projects.Add(entity);
@@ -33,12 +33,13 @@ namespace PB.Infrastructure
                                  entity.Title,
                                  entity.Description,
                                  entity.Supervisor?.Name,
-                                 convertDateTimeToString(entity.Deadline),
+                                 //convertDateTimeToString(entity.Deadline),
                                  entity.Notification,
                                  entity.ChosenStudents.Select(s => s.Name).ToHashSet(),
-                                 entity.Tags.Select(t => t.TagName).ToHashSet(),
+                                 //entity.Tags.Select(t => t.TagName).ToHashSet(),
                                  entity.Applications.Select(a => a.Title).ToHashSet(),
-                                 entity.Universities.Select(u => u.Name).ToHashSet()
+                                 entity.Educations.Select(u => u.Id).ToHashSet(),
+                                 entity.Status
                              );
         }
 
@@ -59,14 +60,14 @@ namespace PB.Infrastructure
 
         public async Task<IReadOnlyCollection<ProjectListDTO>> ListAllAsync() =>
                 (await _context.Projects
-                       .Select(p => new ProjectListDTO(p.Id, p.Title, convertDateTimeToString(p.Deadline)))
+                       .Select(p => new ProjectListDTO(p.Id, p.Title, p.Description, p.Status))
                        .ToListAsync())
                        .AsReadOnly();
         
-        public async Task<IReadOnlyCollection<ProjectListDTO>> ListAllAsync(int SupervisorID) =>
+        public async Task<IReadOnlyCollection<ProjectListDTO>> ListAllAsync(string SupervisorID) =>
                 (await _context.Projects
                         .Where(p => SupervisorID == p.SupervisorID)
-                       .Select(p => new ProjectListDTO(p.Id, p.Title, convertDateTimeToString(p.Deadline)))
+                       .Select(p => new ProjectListDTO(p.Id, p.Title, p.Description, p.Status))
                        .ToListAsync())
                        .AsReadOnly();
 
@@ -78,21 +79,22 @@ namespace PB.Infrastructure
                                p.Id,
                                p.Title,
                                p.Description,
-                               p.Supervisor == null ? null : p.Supervisor.Name,
-                               convertDateTimeToString(p.Deadline),
+                               p.Supervisor == null ? null : p.Supervisor.Id,
+                               //convertDateTimeToString(p.Deadline),
                                p.Notification,
                                p.ChosenStudents.Select(s => s.Name).ToHashSet(),
-                               p.Tags.Select(t => t.TagName).ToHashSet(),
+                               //p.Tags.Select(t => t.TagName).ToHashSet(),
                                p.Applications.Select(a => a.Title).ToHashSet(),
-                               p.Universities.Select(u => u.Name).ToHashSet()
+                               p.Educations.Select(u => u.Id).ToHashSet(),
+                               p.Status
                            );
 
             return await projects.FirstOrDefaultAsync();
         }
 
-        public async Task<Response> UpdateAsync(int ID, ProjectUpdateDTO project)
+        public async Task<Response> UpdateAsync(ProjectUpdateDTO project)
         {
-            var entity = await _context.Projects.Include(p => p.ChosenStudents).Include(p => p.Tags).Include(p => p.Applications).Include(p => p.Universities).FirstOrDefaultAsync(p => p.Id == project.ID);
+            var entity = await _context.Projects.Include(p => p.ChosenStudents).Include(p => p.Applications).Include(p => p.Educations).FirstOrDefaultAsync(p => p.Id == project.ID);
 
             //var entity = await _context.Projects.FirstOrDefaultAsync(p => p.Id == project.ID);
 
@@ -103,18 +105,26 @@ namespace PB.Infrastructure
 
                 entity.Title = project.Title;
                 entity.Description = project.Description;
-                entity.Supervisor = await getSupervisorAsync(project.Supervisor);
-                entity.Deadline = convertStringToDateTime(project.Deadline);
+                //entity.Supervisor = await getSupervisorAsync(project.Supervisor);
+                //entity.Deadline = convertStringToDateTime(project.Deadline);
                 entity.Notification = project.Notification;
-                entity.Status = project.Status;
+                entity.Status = project.Status!;
                 entity.ChosenStudents = await GetStudentsAsync(project.ChosenStudents).ToListAsync();
-                entity.Tags = await GetTagsAsync(project.Tags).ToListAsync();
+                //entity.Tags = await GetTagsAsync(project.Tags).ToListAsync();
                 entity.Applications = await GetApplicationsAsync(project.Applications).ToListAsync();
-                entity.Universities = await GetUniversitiesAsync(project.Universities).ToListAsync();
+                entity.Educations = _context.Educations.Where(e => project.Educations.Any(e2 => e2 == e.Id)).ToList();
 
 
             await _context.SaveChangesAsync();
 
+            return Response.Updated;
+        }
+
+        public async Task<Response> UpdateStatusAsync(ProjectVisibilityUpdateDTO dto){
+            var entity = await _context.Projects.FindAsync(dto.ID);
+            if (entity == null) return Response.NotFound;
+            entity.Status = dto.Status;
+            await _context.SaveChangesAsync();
             return Response.Updated;
         }
 

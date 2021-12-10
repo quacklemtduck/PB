@@ -1,0 +1,37 @@
+@page "/Project/{projectId:int}"
+@using PB.Client.Services
+@using PB.Core
+@using System.Net.Http
+@inject HttpClient http
+@inject NavigationManager NavigationManager
+@inject IHttpClientFactory ClientFactory
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Components.Authorization
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+@if (project != null){
+    <h1>@project.Title</h1>
+    <p>@project.Description</p>
+}
+
+@code {
+    [Parameter]
+    public int? ProjectId {get; set;}
+    private ProjectDetailsDTO? project;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        if(ProjectId != 0){
+            if(user.Identity.IsAuthenticated){
+                project = await ProjectService.GetProject(http, ProjectId);
+            }else{
+                var anonClient = ClientFactory.CreateClient("PB.NoAuthenticationClient");
+                project = await ProjectService.GetProject(anonClient, ProjectId);
+            }
+        }
+
+        await base.OnParametersSetAsync();
+    }
+}

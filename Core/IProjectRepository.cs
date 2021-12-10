@@ -11,7 +11,7 @@ namespace PB.Core
         Task<Response> DeleteAsync(int projectID);
 
         ////Update: Update state, Add application, Edit
-        Task<Response> UpdateAsync(int ID, ProjectUpdateDTO project); //Edit
+        Task<Response> UpdateAsync(ProjectUpdateDTO project); //Edit
         /*Task<Response> UpdateStateAsync(int ID, ProjectUpdateDTO project);
         Task<Response> UpdateAddApplicationAsync(int ID, ProjectUpdateDTO project);
         Task<Response> UpdateChooseStudentsAsync(int ID, ProjectUpdateDTO project);*/
@@ -23,6 +23,8 @@ namespace PB.Core
         Task<IReadOnlyCollection<ProjectListDTO>> ListAllAsync();
 
         //List all supervisor's ProjectListDTO
-        Task<IReadOnlyCollection<ProjectListDTO>> ListAllAsync(int SupervisorID);
+        Task<IReadOnlyCollection<ProjectListDTO>> ListAllAsync(string SupervisorID);
+
+        Task<Response> UpdateStatusAsync(ProjectVisibilityUpdateDTO dto);
     }
 }
