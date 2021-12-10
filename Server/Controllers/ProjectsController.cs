@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 namespace PB.Server.Controllers
 {
 
-    //[Authorize]
+    [Authorize]
     [ApiController]
     [Route("api/[controller]/[action]")]
     //[RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes")]
@@ -35,12 +35,13 @@ namespace PB.Server.Controllers
             return await _repository.ListAllAsync(user);
         }
 
-        //[AllowAnonymous]
+        [AllowAnonymous]
         [ProducesResponseType(404)]
         [ProducesResponseType(401)]
         [ProducesResponseType(typeof(ProjectDetailsDTO), 200)]
         [HttpGet("{id}", Name = "Get")]
         public async Task<ActionResult<ProjectDetailsDTO>> Get(int id){
+            Console.WriteLine("---------------- GOT REQUEST ---------------");
             var result = await _repository.ReadByIDAsync(id);
             if(result.IsSome){
                 if (result.Value.Status != Status.Visible){
