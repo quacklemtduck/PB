@@ -1,0 +1,2488 @@
+{
+  "Core.dll": {
+    "/Volumes/TOSHIBA EXT/ITU - Andet år/BDSA/PB/Core/ApplicationDTO.cs": {
+      "PB.Core.ApplicationUpdateDTO": {
+        "System.Int32 PB.Core.ApplicationUpdateDTO::get_Id()": {
+          "Lines": {
+            "3": 12
+          },
+          "Branches": []
+        }
+      },
+      "PB.Core.ApplicationDetailsDTO": {
+        "System.Int32 PB.Core.ApplicationDetailsDTO::get_Id()": {
+          "Lines": {
+            "4": 66
+          },
+          "Branches": []
+        }
+      },
+      "PB.Core.ApplicationCreateDTO": {
+        "System.Int32 PB.Core.ApplicationCreateDTO::get_studentId()": {
+          "Lines": {
+            "7": 2
+          },
+          "Branches": []
+        },
+        "System.Int32 PB.Core.ApplicationCreateDTO::get_projectId()": {
+          "Lines": {
+            "8": 2
+          },
+          "Branches": []
+        },
+        "System.String PB.Core.ApplicationCreateDTO::get_Description()": {
+          "Lines": {
+            "9": 2
+          },
+          "Branches": []
+        },
+        "System.String PB.Core.ApplicationCreateDTO::get_Title()": {
+          "Lines": {
+            "10": 2
+          },
+          "Branches": []
+        },
+        "System.Void PB.Core.ApplicationCreateDTO::.ctor(System.Int32,System.Int32,System.String)": {
+          "Lines": {
+            "12": 2,
+            "13": 1,
+            "14": 1,
+            "15": 1,
+            "16": 1
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Volumes/TOSHIBA EXT/ITU - Andet år/BDSA/PB/Core/Extensions.cs": {
+      "PB.Core.Extensions/<ToListAsync>d__0`1": {
+        "System.Void PB.Core.Extensions/<ToListAsync>d__0`1::MoveNext()": {
+          "Lines": {
+            "7": 6,
+            "8": 6,
+            "9": 22,
+            "10": 6,
+            "11": 2,
+            "12": 6,
+            "13": 6
+          },
+          "Branches": [
+            {
+              "Line": 9,
+              "Offset": 266,
+              "EndOffset": 102,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            },
+            {
+              "Line": 9,
+              "Offset": 266,
+              "EndOffset": 271,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 6
+            },
+            {
+              "Line": 9,
+              "Offset": 404,
+              "EndOffset": 406,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 9,
+              "Offset": 404,
+              "EndOffset": 435,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 6
+            }
+          ]
+        }
+      }
+    },
+    "/Volumes/TOSHIBA EXT/ITU - Andet år/BDSA/PB/Core/Option.cs": {
+      "PB.Core.Option`1": {
+        "T PB.Core.Option`1::get_Value()": {
+          "Lines": {
+            "14": 12
+          },
+          "Branches": [
+            {
+              "Line": 14,
+              "Offset": 12,
+              "EndOffset": 14,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 14,
+              "Offset": 12,
+              "EndOffset": 21,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 12
+            }
+          ]
+        },
+        "System.Boolean PB.Core.Option`1::get_IsNone()": {
+          "Lines": {
+            "16": 3
+          },
+          "Branches": []
+        },
+        "System.Boolean PB.Core.Option`1::get_IsSome()": {
+          "Lines": {
+            "18": 2
+          },
+          "Branches": []
+        },
+        "T PB.Core.Option`1::op_Implicit(PB.Core.Option`1<T>)": {
+          "Lines": {
+            "25": 0
+          },
+          "Branches": []
+        },
+        "PB.Core.Option`1<T> PB.Core.Option`1::op_Implicit(T)": {
+          "Lines": {
+            "27": 13
+          },
+          "Branches": []
+        },
+        "System.Void PB.Core.Option`1::.ctor(T)": {
+          "Lines": {
+            "20": 54,
+            "21": 54,
+            "22": 54,
+            "23": 54
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Volumes/TOSHIBA EXT/ITU - Andet år/BDSA/PB/Core/ProjectDTO.cs": {
+      "PB.Core.ProjectListDTO": {
+        "System.Int32 PB.Core.ProjectListDTO::get_ID()": {
+          "Lines": {
+            "3": 100
+          },
+          "Branches": []
+        }
+      },
+      "PB.Core.ProjectVisibilityUpdateDTO": {
+        "System.Int32 PB.Core.ProjectVisibilityUpdateDTO::get_ID()": {
+          "Lines": {
+            "4": 0
+          },
+          "Branches": []
+        }
+      },
+      "PB.Core.ProjectDetailsDTO": {
+        "System.Int32 PB.Core.ProjectDetailsDTO::get_ID()": {
+          "Lines": {
+            "6": 62
+          },
+          "Branches": []
+        },
+        "System.Void PB.Core.ProjectDetailsDTO::.ctor(System.Int32,System.String,System.String,System.String,System.Boolean,System.Collections.Generic.ICollection`1<System.String>,System.Collections.Generic.ISet`1<System.String>,System.Collections.Generic.ISet`1<System.Int32>,PB.Core.Status)": {
+          "Lines": {
+            "5": 4
+          },
+          "Branches": []
+        }
+      },
+      "PB.Core.ProjectCreateDTO": {
+        "System.String PB.Core.ProjectCreateDTO::get_Title()": {
+          "Lines": {
+            "8": 7
+          },
+          "Branches": []
+        },
+        "System.String PB.Core.ProjectCreateDTO::get_Description()": {
+          "Lines": {
+            "10": 7
+          },
+          "Branches": []
+        },
+        "System.String PB.Core.ProjectCreateDTO::get_Supervisor()": {
+          "Lines": {
+            "12": 3
+          },
+          "Branches": []
+        },
+        "System.Boolean PB.Core.ProjectCreateDTO::get_Notification()": {
+          "Lines": {
+            "16": 7
+          },
+          "Branches": []
+        },
+        "PB.Core.Status PB.Core.ProjectCreateDTO::get_Status()": {
+          "Lines": {
+            "18": 7
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.ISet`1<System.Int32> PB.Core.ProjectCreateDTO::get_Educations()": {
+          "Lines": {
+            "23": 11
+          },
+          "Branches": []
+        }
+      },
+      "PB.Core.ProjectUpdateDTO": {
+        "System.Int32 PB.Core.ProjectUpdateDTO::get_ID()": {
+          "Lines": {
+            "28": 8
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.ISet`1<System.String> PB.Core.ProjectUpdateDTO::get_Applications()": {
+          "Lines": {
+            "29": 11
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.ICollection`1<System.String> PB.Core.ProjectUpdateDTO::get_ChosenStudents()": {
+          "Lines": {
+            "31": 11
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Volumes/TOSHIBA EXT/ITU - Andet år/BDSA/PB/Core/StudentDTO.cs": {
+      "PB.Core.StudentDTO": {
+        "System.Void PB.Core.StudentDTO::.ctor()": {
+          "Lines": {
+            "3": 0
+          },
+          "Branches": []
+        }
+      },
+      "PB.Core.StudentDetailsDTO": {
+        "System.Int32 PB.Core.StudentDetailsDTO::get_Id()": {
+          "Lines": {
+            "5": 20
+          },
+          "Branches": []
+        }
+      },
+      "PB.Core.StudentCreateDTO": {
+        "System.String PB.Core.StudentCreateDTO::get_Name()": {
+          "Lines": {
+            "9": 3
+          },
+          "Branches": []
+        },
+        "System.String PB.Core.StudentCreateDTO::get_University()": {
+          "Lines": {
+            "11": 2
+          },
+          "Branches": []
+        },
+        "System.String PB.Core.StudentCreateDTO::get_Email()": {
+          "Lines": {
+            "14": 2
+          },
+          "Branches": []
+        }
+      },
+      "PB.Core.StudentUpdateDTO": {
+        "System.Int32 PB.Core.StudentUpdateDTO::get_Id()": {
+          "Lines": {
+            "22": 3
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.ICollection`1<System.String> PB.Core.StudentUpdateDTO::get_Projects()": {
+          "Lines": {
+            "23": 1
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.ISet`1<System.String> PB.Core.StudentUpdateDTO::get_Applications()": {
+          "Lines": {
+            "24": 1
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Volumes/TOSHIBA EXT/ITU - Andet år/BDSA/PB/Core/SupervisorDTO.cs": {
+      "PB.Core.SupervisorUpdateDTO": {
+        "System.String PB.Core.SupervisorUpdateDTO::get_Id()": {
+          "Lines": {
+            "3": 9
+          },
+          "Branches": []
+        }
+      },
+      "PB.Core.SupervisorDetailsDTO": {
+        "System.String PB.Core.SupervisorDetailsDTO::get_Id()": {
+          "Lines": {
+            "5": 123
+          },
+          "Branches": []
+        }
+      },
+      "PB.Core.SuperVisorCreateDTO": {
+        "System.String PB.Core.SuperVisorCreateDTO::get_Name()": {
+          "Lines": {
+            "10": 2
+          },
+          "Branches": []
+        },
+        "System.String PB.Core.SuperVisorCreateDTO::get_Email()": {
+          "Lines": {
+            "13": 2
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.ICollection`1<System.Int32> PB.Core.SuperVisorCreateDTO::get_Projects()": {
+          "Lines": {
+            "14": 1
+          },
+          "Branches": []
+        },
+        "System.String PB.Core.SuperVisorCreateDTO::get_Id()": {
+          "Lines": {
+            "16": 2
+          },
+          "Branches": []
+        },
+        "System.Void PB.Core.SuperVisorCreateDTO::.ctor(System.String,System.String,System.String)": {
+          "Lines": {
+            "18": 2,
+            "19": 1,
+            "20": 1,
+            "21": 1,
+            "22": 1
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Volumes/TOSHIBA EXT/ITU - Andet år/BDSA/PB/Core/UniversityDTO.cs": {
+      "PB.Core.UniversityDetailsDTO": {
+        "System.String PB.Core.UniversityDetailsDTO::get_Id()": {
+          "Lines": {
+            "11": 0
+          },
+          "Branches": []
+        }
+      },
+      "PB.Core.EducationDetailsDTO": {
+        "System.Int32 PB.Core.EducationDetailsDTO::get_Id()": {
+          "Lines": {
+            "13": 240
+          },
+          "Branches": []
+        }
+      }
+    }
+  },
+  "Infrastructure.dll": {
+    "/Volumes/TOSHIBA EXT/ITU - Andet år/BDSA/PB/Infrastructure/Application.cs": {
+      "PB.Infrastructure.Application": {
+        "System.Int32 PB.Infrastructure.Application::get_Id()": {
+          "Lines": {
+            "5": 21
+          },
+          "Branches": []
+        },
+        "System.String PB.Infrastructure.Application::get_Title()": {
+          "Lines": {
+            "7": 42
+          },
+          "Branches": []
+        },
+        "System.String PB.Infrastructure.Application::get_Description()": {
+          "Lines": {
+            "8": 23
+          },
+          "Branches": []
+        },
+        "System.Int32 PB.Infrastructure.Application::get_StudentID()": {
+          "Lines": {
+            "9": 3
+          },
+          "Branches": []
+        },
+        "PB.Infrastructure.Student PB.Infrastructure.Application::get_Student()": {
+          "Lines": {
+            "10": 34
+          },
+          "Branches": []
+        },
+        "System.Int32 PB.Infrastructure.Application::get_ProjectID()": {
+          "Lines": {
+            "11": 3
+          },
+          "Branches": []
+        },
+        "PB.Infrastructure.Project PB.Infrastructure.Application::get_Project()": {
+          "Lines": {
+            "12": 34
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Volumes/TOSHIBA EXT/ITU - Andet år/BDSA/PB/Infrastructure/ApplicationDbContext.cs": {
+      "PB.Infrastructure.ApplicationDbContext": {
+        "Microsoft.EntityFrameworkCore.DbSet`1<PB.Infrastructure.Project> PB.Infrastructure.ApplicationDbContext::get_Projects()": {
+          "Lines": {
+            "17": 46
+          },
+          "Branches": []
+        },
+        "Microsoft.EntityFrameworkCore.DbSet`1<PB.Infrastructure.Student> PB.Infrastructure.ApplicationDbContext::get_Students()": {
+          "Lines": {
+            "18": 25
+          },
+          "Branches": []
+        },
+        "Microsoft.EntityFrameworkCore.DbSet`1<PB.Infrastructure.Supervisor> PB.Infrastructure.ApplicationDbContext::get_Supervisors()": {
+          "Lines": {
+            "19": 20
+          },
+          "Branches": []
+        },
+        "Microsoft.EntityFrameworkCore.DbSet`1<PB.Infrastructure.Application> PB.Infrastructure.ApplicationDbContext::get_Applications()": {
+          "Lines": {
+            "20": 31
+          },
+          "Branches": []
+        },
+        "Microsoft.EntityFrameworkCore.DbSet`1<PB.Infrastructure.Tag> PB.Infrastructure.ApplicationDbContext::get_Tags()": {
+          "Lines": {
+            "21": 0
+          },
+          "Branches": []
+        },
+        "Microsoft.EntityFrameworkCore.DbSet`1<PB.Infrastructure.University> PB.Infrastructure.ApplicationDbContext::get_Universities()": {
+          "Lines": {
+            "22": 51
+          },
+          "Branches": []
+        },
+        "Microsoft.EntityFrameworkCore.DbSet`1<PB.Infrastructure.Education> PB.Infrastructure.ApplicationDbContext::get_Educations()": {
+          "Lines": {
+            "23": 12
+          },
+          "Branches": []
+        },
+        "System.Void PB.Infrastructure.ApplicationDbContext::OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)": {
+          "Lines": {
+            "26": 2,
+            "27": 2,
+            "28": 2,
+            "29": 2
+          },
+          "Branches": []
+        },
+        "System.Void PB.Infrastructure.ApplicationDbContext::.ctor(Microsoft.EntityFrameworkCore.DbContextOptions,Microsoft.Extensions.Options.IOptions`1<Duende.IdentityServer.EntityFramework.Options.OperationalStoreOptions>)": {
+          "Lines": {
+            "13": 41,
+            "14": 41,
+            "15": 41
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Volumes/TOSHIBA EXT/ITU - Andet år/BDSA/PB/Infrastructure/ApplicationRepository.cs": {
+      "PB.Infrastructure.ApplicationRepository": {
+        "System.Void PB.Infrastructure.ApplicationRepository::.ctor(PB.Infrastructure.ApplicationDbContext)": {
+          "Lines": {
+            "8": 6,
+            "9": 6,
+            "10": 6,
+            "11": 6
+          },
+          "Branches": []
+        }
+      },
+      "PB.Infrastructure.ApplicationRepository/<CreateAsync>d__2": {
+        "System.Void PB.Infrastructure.ApplicationRepository/<CreateAsync>d__2::MoveNext()": {
+          "Lines": {
+            "14": 1,
+            "15": 1,
+            "16": 1,
+            "17": 1,
+            "18": 1,
+            "19": 1,
+            "20": 1,
+            "21": 1,
+            "23": 1,
+            "24": 1,
+            "25": 1
+          },
+          "Branches": []
+        }
+      },
+      "PB.Infrastructure.ApplicationRepository/<GetProjectAsync>d__6": {
+        "System.Void PB.Infrastructure.ApplicationRepository/<GetProjectAsync>d__6::MoveNext()": {
+          "Lines": {
+            "53": 1
+          },
+          "Branches": []
+        }
+      },
+      "PB.Infrastructure.ApplicationRepository/<GetStudentAsync>d__7": {
+        "System.Void PB.Infrastructure.ApplicationRepository/<GetStudentAsync>d__7::MoveNext()": {
+          "Lines": {
+            "55": 1
+          },
+          "Branches": []
+        }
+      },
+      "PB.Infrastructure.ApplicationRepository/<ReadAllAsync>d__4": {
+        "System.Void PB.Infrastructure.ApplicationRepository/<ReadAllAsync>d__4::MoveNext()": {
+          "Lines": {
+            "34": 1,
+            "35": 1,
+            "36": 1,
+            "37": 1,
+            "38": 1
+          },
+          "Branches": []
+        }
+      },
+      "PB.Infrastructure.ApplicationRepository/<ReadAsync>d__3": {
+        "System.Void PB.Infrastructure.ApplicationRepository/<ReadAsync>d__3::MoveNext()": {
+          "Lines": {
+            "28": 3,
+            "29": 3,
+            "30": 3,
+            "31": 3
+          },
+          "Branches": [
+            {
+              "Line": 30,
+              "Offset": 296,
+              "EndOffset": 298,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 2
+            },
+            {
+              "Line": 30,
+              "Offset": 296,
+              "EndOffset": 360,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1
+            }
+          ]
+        }
+      },
+      "PB.Infrastructure.ApplicationRepository/<UpdateAsync>d__5": {
+        "System.Void PB.Infrastructure.ApplicationRepository/<UpdateAsync>d__5::MoveNext()": {
+          "Lines": {
+            "41": 2,
+            "42": 2,
+            "43": 3,
+            "45": 1,
+            "46": 1,
+            "48": 1,
+            "49": 1,
+            "50": 2
+          },
+          "Branches": [
+            {
+              "Line": 43,
+              "Offset": 182,
+              "EndOffset": 184,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 43,
+              "Offset": 182,
+              "EndOffset": 191,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1
+            }
+          ]
+        }
+      }
+    },
+    "/Volumes/TOSHIBA EXT/ITU - Andet år/BDSA/PB/Infrastructure/Education.cs": {
+      "PB.Infrastructure.Education": {
+        "System.Int32 PB.Infrastructure.Education::get_Id()": {
+          "Lines": {
+            "11": 819
+          },
+          "Branches": []
+        },
+        "System.String PB.Infrastructure.Education::get_Name()": {
+          "Lines": {
+            "13": 819
+          },
+          "Branches": []
+        },
+        "System.String PB.Infrastructure.Education::get_Grade()": {
+          "Lines": {
+            "16": 819
+          },
+          "Branches": []
+        },
+        "System.String PB.Infrastructure.Education::get_UniversityID()": {
+          "Lines": {
+            "17": 819
+          },
+          "Branches": []
+        },
+        "PB.Infrastructure.University PB.Infrastructure.Education::get_University()": {
+          "Lines": {
+            "19": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Volumes/TOSHIBA EXT/ITU - Andet år/BDSA/PB/Infrastructure/EducationRepository.cs": {
+      "PB.Infrastructure.EducationRepository": {
+        "System.Void PB.Infrastructure.EducationRepository::.ctor(PB.Infrastructure.ApplicationDbContext)": {
+          "Lines": {
+            "13": 9,
+            "14": 9,
+            "15": 9,
+            "16": 9
+          },
+          "Branches": []
+        }
+      },
+      "PB.Infrastructure.EducationRepository/<ReadAllByUniversityAsync>d__2": {
+        "System.Void PB.Infrastructure.EducationRepository/<ReadAllByUniversityAsync>d__2::MoveNext()": {
+          "Lines": {
+            "18": 1,
+            "19": 1,
+            "20": 1,
+            "21": 1,
+            "22": 1,
+            "23": 1
+          },
+          "Branches": []
+        }
+      },
+      "PB.Infrastructure.EducationRepository/<ReadByIDAsync>d__3": {
+        "System.Void PB.Infrastructure.EducationRepository/<ReadByIDAsync>d__3::MoveNext()": {
+          "Lines": {
+            "26": 8,
+            "27": 8,
+            "28": 8,
+            "29": 8
+          },
+          "Branches": [
+            {
+              "Line": 28,
+              "Offset": 180,
+              "EndOffset": 182,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 7
+            },
+            {
+              "Line": 28,
+              "Offset": 180,
+              "EndOffset": 233,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1
+            }
+          ]
+        }
+      }
+    },
+    "/Volumes/TOSHIBA EXT/ITU - Andet år/BDSA/PB/Infrastructure/ModelBuilderExtensions.cs": {
+      "PB.Infrastructure.ModelBuilderExtensions": {
+        "System.Void PB.Infrastructure.ModelBuilderExtensions::Seed(Microsoft.EntityFrameworkCore.ModelBuilder)": {
+          "Lines": {
+            "12": 2,
+            "13": 2,
+            "14": 2,
+            "15": 2,
+            "16": 2,
+            "17": 2,
+            "18": 2,
+            "19": 2,
+            "21": 2,
+            "22": 2,
+            "23": 2,
+            "24": 2,
+            "25": 2,
+            "26": 2,
+            "27": 2,
+            "28": 2,
+            "29": 2,
+            "30": 2,
+            "31": 2,
+            "32": 2,
+            "33": 2,
+            "34": 2,
+            "35": 2,
+            "36": 2,
+            "37": 2,
+            "38": 2,
+            "39": 2,
+            "40": 2,
+            "41": 2,
+            "42": 2,
+            "43": 2,
+            "44": 2,
+            "45": 2,
+            "46": 2,
+            "47": 2,
+            "48": 2,
+            "49": 2,
+            "50": 2,
+            "51": 2,
+            "52": 2,
+            "53": 2,
+            "54": 2,
+            "55": 2,
+            "56": 2,
+            "57": 2,
+            "58": 2,
+            "59": 2,
+            "60": 2,
+            "61": 2,
+            "62": 2,
+            "63": 2,
+            "64": 2,
+            "65": 2,
+            "66": 2,
+            "67": 2,
+            "68": 2,
+            "69": 2,
+            "70": 2,
+            "71": 2,
+            "72": 2,
+            "73": 2,
+            "74": 2,
+            "75": 2,
+            "76": 2,
+            "77": 2,
+            "78": 2,
+            "79": 2,
+            "80": 2,
+            "81": 2,
+            "82": 2,
+            "83": 2,
+            "84": 2,
+            "85": 2,
+            "86": 2,
+            "87": 2,
+            "88": 2,
+            "89": 2,
+            "90": 2,
+            "91": 2,
+            "92": 2,
+            "93": 2,
+            "94": 2,
+            "95": 2,
+            "96": 2,
+            "97": 2,
+            "98": 2,
+            "99": 2,
+            "100": 2,
+            "101": 2,
+            "102": 2,
+            "103": 2,
+            "104": 2,
+            "105": 2,
+            "106": 2,
+            "107": 2,
+            "108": 2,
+            "109": 2,
+            "110": 2,
+            "111": 2,
+            "112": 2,
+            "113": 2,
+            "114": 2,
+            "115": 2,
+            "116": 2,
+            "117": 2,
+            "118": 2,
+            "119": 2,
+            "120": 2,
+            "121": 2,
+            "122": 2,
+            "123": 2,
+            "124": 2,
+            "125": 2,
+            "126": 2,
+            "127": 2,
+            "128": 2,
+            "129": 2,
+            "130": 2,
+            "131": 2,
+            "132": 2,
+            "133": 2,
+            "134": 2,
+            "135": 2,
+            "136": 2,
+            "137": 2,
+            "138": 2,
+            "139": 2,
+            "140": 2,
+            "141": 2,
+            "142": 2,
+            "143": 2,
+            "144": 2,
+            "145": 2,
+            "146": 2,
+            "147": 2,
+            "148": 2,
+            "149": 2,
+            "150": 2,
+            "151": 2,
+            "152": 2,
+            "153": 2,
+            "154": 2,
+            "155": 2,
+            "156": 2,
+            "157": 2,
+            "158": 2,
+            "159": 2,
+            "160": 2,
+            "161": 2,
+            "162": 2,
+            "163": 2,
+            "164": 2,
+            "165": 2,
+            "166": 2,
+            "167": 2,
+            "168": 2,
+            "169": 2,
+            "170": 2,
+            "171": 2,
+            "172": 2,
+            "173": 2,
+            "174": 2,
+            "175": 2,
+            "176": 2,
+            "177": 2,
+            "178": 2,
+            "179": 2,
+            "180": 2,
+            "181": 2,
+            "182": 2,
+            "183": 2,
+            "184": 2,
+            "185": 2,
+            "186": 2,
+            "187": 2,
+            "188": 2,
+            "189": 2,
+            "190": 2,
+            "191": 2,
+            "192": 2,
+            "193": 2,
+            "194": 2,
+            "195": 2,
+            "196": 2,
+            "197": 2,
+            "198": 2,
+            "199": 2,
+            "200": 2,
+            "201": 2,
+            "202": 2,
+            "203": 2,
+            "204": 2,
+            "205": 2,
+            "206": 2,
+            "207": 2,
+            "208": 2,
+            "209": 2,
+            "210": 2,
+            "211": 2,
+            "212": 2,
+            "213": 2,
+            "214": 2,
+            "215": 2,
+            "216": 2,
+            "217": 2,
+            "218": 2,
+            "219": 2,
+            "220": 2,
+            "221": 2,
+            "222": 2,
+            "223": 2,
+            "224": 2,
+            "225": 2,
+            "226": 2,
+            "227": 2,
+            "228": 2,
+            "229": 2,
+            "230": 2,
+            "231": 2,
+            "232": 2,
+            "233": 2,
+            "234": 2,
+            "235": 2,
+            "236": 2,
+            "237": 2,
+            "238": 2,
+            "239": 2,
+            "240": 2,
+            "241": 2,
+            "242": 2,
+            "243": 2,
+            "244": 2,
+            "245": 2,
+            "246": 2,
+            "247": 2,
+            "248": 2,
+            "249": 2,
+            "250": 2,
+            "251": 2,
+            "252": 2,
+            "253": 2,
+            "254": 2,
+            "255": 2,
+            "256": 2,
+            "257": 2,
+            "258": 2,
+            "259": 2,
+            "260": 2,
+            "261": 2,
+            "262": 2,
+            "263": 2,
+            "264": 2,
+            "265": 2,
+            "266": 2,
+            "267": 2,
+            "268": 2,
+            "269": 2,
+            "270": 2,
+            "271": 2,
+            "272": 2,
+            "273": 2,
+            "274": 2,
+            "275": 2,
+            "276": 2,
+            "277": 2,
+            "278": 2,
+            "279": 2,
+            "280": 2,
+            "281": 2,
+            "282": 2,
+            "283": 2,
+            "284": 2,
+            "285": 2,
+            "286": 2,
+            "287": 2,
+            "288": 2,
+            "289": 2,
+            "290": 2,
+            "291": 2,
+            "292": 2,
+            "293": 2,
+            "294": 2,
+            "295": 2,
+            "296": 2,
+            "297": 2,
+            "298": 2,
+            "299": 2,
+            "300": 2,
+            "301": 2,
+            "302": 2,
+            "303": 2,
+            "304": 2,
+            "305": 2,
+            "306": 2,
+            "307": 2,
+            "308": 2,
+            "309": 2,
+            "310": 2,
+            "311": 2,
+            "312": 2,
+            "313": 2,
+            "314": 2,
+            "315": 2,
+            "316": 2,
+            "317": 2,
+            "318": 2,
+            "319": 2,
+            "320": 2,
+            "321": 2,
+            "322": 2,
+            "323": 2,
+            "324": 2,
+            "325": 2,
+            "326": 2,
+            "327": 2,
+            "328": 2,
+            "329": 2,
+            "330": 2,
+            "331": 2,
+            "332": 2,
+            "333": 2,
+            "334": 2,
+            "335": 2,
+            "336": 2,
+            "337": 2,
+            "338": 2,
+            "339": 2,
+            "340": 2,
+            "341": 2,
+            "342": 2,
+            "343": 2,
+            "344": 2,
+            "345": 2,
+            "346": 2,
+            "347": 2,
+            "348": 2,
+            "349": 2,
+            "350": 2,
+            "351": 2,
+            "352": 2,
+            "353": 2,
+            "354": 2,
+            "355": 2,
+            "356": 2,
+            "357": 2,
+            "358": 2,
+            "359": 2,
+            "360": 2,
+            "361": 2,
+            "362": 2,
+            "363": 2,
+            "364": 2,
+            "365": 2,
+            "366": 2,
+            "367": 2,
+            "368": 2,
+            "369": 2,
+            "370": 2,
+            "371": 2,
+            "372": 2,
+            "373": 2,
+            "374": 2,
+            "375": 2,
+            "376": 2,
+            "377": 2,
+            "378": 2,
+            "379": 2,
+            "380": 2,
+            "381": 2,
+            "382": 2,
+            "383": 2,
+            "384": 2,
+            "385": 2,
+            "386": 2,
+            "387": 2,
+            "388": 2,
+            "389": 2,
+            "390": 2,
+            "391": 2,
+            "392": 2,
+            "393": 2,
+            "394": 2,
+            "395": 2,
+            "396": 2,
+            "397": 2,
+            "398": 2,
+            "399": 2,
+            "400": 2,
+            "401": 2,
+            "402": 2,
+            "403": 2,
+            "404": 2,
+            "405": 2,
+            "406": 2,
+            "407": 2,
+            "408": 2,
+            "409": 2,
+            "410": 2,
+            "411": 2,
+            "412": 2,
+            "413": 2,
+            "414": 2,
+            "415": 2,
+            "416": 2,
+            "417": 2,
+            "418": 2,
+            "419": 2,
+            "420": 2,
+            "421": 2,
+            "422": 2,
+            "423": 2,
+            "424": 2,
+            "425": 2,
+            "426": 2
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Volumes/TOSHIBA EXT/ITU - Andet år/BDSA/PB/Infrastructure/Project.cs": {
+      "PB.Infrastructure.Project": {
+        "System.Int32 PB.Infrastructure.Project::get_Id()": {
+          "Lines": {
+            "7": 87
+          },
+          "Branches": []
+        },
+        "System.String PB.Infrastructure.Project::get_Title()": {
+          "Lines": {
+            "9": 90
+          },
+          "Branches": []
+        },
+        "System.String PB.Infrastructure.Project::get_Description()": {
+          "Lines": {
+            "10": 90
+          },
+          "Branches": []
+        },
+        "System.String PB.Infrastructure.Project::get_SupervisorID()": {
+          "Lines": {
+            "11": 0
+          },
+          "Branches": []
+        },
+        "PB.Infrastructure.Supervisor PB.Infrastructure.Project::get_Supervisor()": {
+          "Lines": {
+            "12": 87
+          },
+          "Branches": []
+        },
+        "System.Boolean PB.Infrastructure.Project::get_Notification()": {
+          "Lines": {
+            "14": 3
+          },
+          "Branches": []
+        },
+        "PB.Core.Status PB.Infrastructure.Project::get_Status()": {
+          "Lines": {
+            "15": 3
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.ICollection`1<PB.Infrastructure.Application> PB.Infrastructure.Project::get_Applications()": {
+          "Lines": {
+            "17": 90
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.ICollection`1<PB.Infrastructure.Education> PB.Infrastructure.Project::get_Educations()": {
+          "Lines": {
+            "18": 90
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.ICollection`1<PB.Infrastructure.Student> PB.Infrastructure.Project::get_ChosenStudents()": {
+          "Lines": {
+            "20": 90
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Volumes/TOSHIBA EXT/ITU - Andet år/BDSA/PB/Infrastructure/ProjectRepository.cs": {
+      "PB.Infrastructure.ProjectRepository": {
+        "System.String PB.Infrastructure.ProjectRepository::convertDateTimeToString(System.Nullable`1<System.DateTime>)": {
+          "Lines": {
+            "180": 0,
+            "182": 0,
+            "183": 0,
+            "186": 0
+          },
+          "Branches": [
+            {
+              "Line": 182,
+              "Offset": 10,
+              "EndOffset": 12,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 182,
+              "Offset": 10,
+              "EndOffset": 28,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.DateTime PB.Infrastructure.ProjectRepository::convertStringToDateTime(System.String)": {
+          "Lines": {
+            "188": 0,
+            "190": 0,
+            "191": 0
+          },
+          "Branches": []
+        },
+        "System.Void PB.Infrastructure.ProjectRepository::.ctor(PB.Infrastructure.ApplicationDbContext)": {
+          "Lines": {
+            "9": 15,
+            "10": 15,
+            "11": 15,
+            "12": 15
+          },
+          "Branches": []
+        }
+      },
+      "PB.Infrastructure.ProjectRepository/<>c": {
+        "System.String PB.Infrastructure.ProjectRepository/<>c::<CreateAsync>b__2_0(PB.Infrastructure.Student)": {
+          "Lines": {
+            "38": 0
+          },
+          "Branches": []
+        },
+        "System.String PB.Infrastructure.ProjectRepository/<>c::<CreateAsync>b__2_1(PB.Infrastructure.Application)": {
+          "Lines": {
+            "40": 0
+          },
+          "Branches": []
+        },
+        "System.Int32 PB.Infrastructure.ProjectRepository/<>c::<CreateAsync>b__2_2(PB.Infrastructure.Education)": {
+          "Lines": {
+            "41": 0
+          },
+          "Branches": []
+        },
+        "System.String PB.Infrastructure.ProjectRepository/<>c::<GetTagsAsync>b__9_1(PB.Infrastructure.Tag)": {
+          "Lines": {
+            "138": 0
+          },
+          "Branches": []
+        },
+        "System.String PB.Infrastructure.ProjectRepository/<>c::<GetStudentsAsync>b__10_1(PB.Infrastructure.Student)": {
+          "Lines": {
+            "148": 4
+          },
+          "Branches": []
+        },
+        "System.String PB.Infrastructure.ProjectRepository/<>c::<GetApplicationsAsync>b__11_1(PB.Infrastructure.Application)": {
+          "Lines": {
+            "158": 4
+          },
+          "Branches": []
+        },
+        "System.String PB.Infrastructure.ProjectRepository/<>c::<GetUniversitiesAsync>b__12_1(PB.Infrastructure.University)": {
+          "Lines": {
+            "169": 0
+          },
+          "Branches": []
+        }
+      },
+      "PB.Infrastructure.ProjectRepository/<CreateAsync>d__2": {
+        "System.Void PB.Infrastructure.ProjectRepository/<CreateAsync>d__2::MoveNext()": {
+          "Lines": {
+            "15": 0,
+            "16": 0,
+            "17": 0,
+            "18": 0,
+            "19": 0,
+            "20": 0,
+            "21": 0,
+            "22": 0,
+            "23": 0,
+            "24": 0,
+            "25": 0,
+            "27": 0,
+            "29": 0,
+            "31": 0,
+            "32": 0,
+            "33": 0,
+            "34": 0,
+            "35": 0,
+            "36": 0,
+            "37": 0,
+            "39": 0,
+            "42": 0,
+            "43": 0,
+            "44": 0
+          },
+          "Branches": [
+            {
+              "Line": 31,
+              "Offset": 603,
+              "EndOffset": 605,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 31,
+              "Offset": 603,
+              "EndOffset": 609,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        }
+      },
+      "PB.Infrastructure.ProjectRepository/<DeleteAsync>d__3": {
+        "System.Void PB.Infrastructure.ProjectRepository/<DeleteAsync>d__3::MoveNext()": {
+          "Lines": {
+            "47": 7,
+            "48": 7,
+            "50": 7,
+            "51": 1,
+            "52": 1,
+            "55": 6,
+            "56": 6,
+            "58": 6,
+            "59": 7
+          },
+          "Branches": [
+            {
+              "Line": 50,
+              "Offset": 198,
+              "EndOffset": 200,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 50,
+              "Offset": 198,
+              "EndOffset": 208,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 6
+            }
+          ]
+        }
+      },
+      "PB.Infrastructure.ProjectRepository/<GetApplicationsAsync>d__11": {
+        "System.Void PB.Infrastructure.ProjectRepository/<GetApplicationsAsync>d__11::MoveNext()": {
+          "Lines": {
+            "157": 3,
+            "160": 11,
+            "161": 1,
+            "163": 1,
+            "164": 1,
+            "165": 3
+          },
+          "Branches": [
+            {
+              "Line": 160,
+              "Offset": 578,
+              "EndOffset": 443,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 1
+            },
+            {
+              "Line": 163,
+              "Offset": 485,
+              "EndOffset": 487,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 163,
+              "Offset": 485,
+              "EndOffset": 507,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1
+            },
+            {
+              "Line": 160,
+              "Offset": 578,
+              "EndOffset": 583,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 3
+            }
+          ]
+        }
+      },
+      "PB.Infrastructure.ProjectRepository/<GetStudentsAsync>d__10": {
+        "System.Void PB.Infrastructure.ProjectRepository/<GetStudentsAsync>d__10::MoveNext()": {
+          "Lines": {
+            "147": 3,
+            "150": 11,
+            "151": 1,
+            "152": 1,
+            "153": 1,
+            "154": 3
+          },
+          "Branches": [
+            {
+              "Line": 150,
+              "Offset": 578,
+              "EndOffset": 443,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 1
+            },
+            {
+              "Line": 152,
+              "Offset": 485,
+              "EndOffset": 487,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 152,
+              "Offset": 485,
+              "EndOffset": 507,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1
+            },
+            {
+              "Line": 150,
+              "Offset": 578,
+              "EndOffset": 583,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 3
+            }
+          ]
+        }
+      },
+      "PB.Infrastructure.ProjectRepository/<GetTagsAsync>d__9": {
+        "System.Void PB.Infrastructure.ProjectRepository/<GetTagsAsync>d__9::MoveNext()": {
+          "Lines": {
+            "137": 0,
+            "140": 0,
+            "141": 0,
+            "142": 0,
+            "143": 0,
+            "144": 0
+          },
+          "Branches": [
+            {
+              "Line": 140,
+              "Offset": 578,
+              "EndOffset": 443,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 142,
+              "Offset": 485,
+              "EndOffset": 487,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 142,
+              "Offset": 485,
+              "EndOffset": 507,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 140,
+              "Offset": 578,
+              "EndOffset": 583,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            }
+          ]
+        }
+      },
+      "PB.Infrastructure.ProjectRepository/<GetUniversitiesAsync>d__12": {
+        "System.Void PB.Infrastructure.ProjectRepository/<GetUniversitiesAsync>d__12::MoveNext()": {
+          "Lines": {
+            "168": 0,
+            "171": 0,
+            "172": 0,
+            "173": 0,
+            "174": 0,
+            "175": 0
+          },
+          "Branches": [
+            {
+              "Line": 171,
+              "Offset": 578,
+              "EndOffset": 443,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 173,
+              "Offset": 485,
+              "EndOffset": 487,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 173,
+              "Offset": 485,
+              "EndOffset": 507,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 171,
+              "Offset": 578,
+              "EndOffset": 583,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            }
+          ]
+        }
+      },
+      "PB.Infrastructure.ProjectRepository/<ListAllAsync>d__4": {
+        "System.Void PB.Infrastructure.ProjectRepository/<ListAllAsync>d__4::MoveNext()": {
+          "Lines": {
+            "62": 1,
+            "63": 1,
+            "64": 1,
+            "65": 1
+          },
+          "Branches": []
+        }
+      },
+      "PB.Infrastructure.ProjectRepository/<ListAllAsync>d__5": {
+        "System.Void PB.Infrastructure.ProjectRepository/<ListAllAsync>d__5::MoveNext()": {
+          "Lines": {
+            "68": 1,
+            "69": 1,
+            "70": 1,
+            "71": 1,
+            "72": 1
+          },
+          "Branches": []
+        }
+      },
+      "PB.Infrastructure.ProjectRepository/<ReadByIDAsync>d__6": {
+        "System.Void PB.Infrastructure.ProjectRepository/<ReadByIDAsync>d__6::MoveNext()": {
+          "Lines": {
+            "75": 5,
+            "76": 5,
+            "77": 5,
+            "78": 5,
+            "79": 5,
+            "80": 5,
+            "81": 5,
+            "82": 5,
+            "83": 5,
+            "84": 5,
+            "85": 5,
+            "86": 5,
+            "87": 5,
+            "88": 5,
+            "89": 5,
+            "90": 5,
+            "92": 5,
+            "93": 5
+          },
+          "Branches": []
+        }
+      },
+      "PB.Infrastructure.ProjectRepository/<UpdateAsync>d__7": {
+        "System.Void PB.Infrastructure.ProjectRepository/<UpdateAsync>d__7::MoveNext()": {
+          "Lines": {
+            "96": 4,
+            "97": 4,
+            "101": 4,
+            "102": 1,
+            "103": 1,
+            "106": 3,
+            "107": 3,
+            "110": 3,
+            "111": 3,
+            "112": 3,
+            "114": 3,
+            "115": 3,
+            "118": 3,
+            "120": 3,
+            "121": 4
+          },
+          "Branches": [
+            {
+              "Line": 101,
+              "Offset": 543,
+              "EndOffset": 545,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 101,
+              "Offset": 543,
+              "EndOffset": 553,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 3
+            }
+          ]
+        }
+      },
+      "PB.Infrastructure.ProjectRepository/<UpdateStatusAsync>d__8": {
+        "System.Void PB.Infrastructure.ProjectRepository/<UpdateStatusAsync>d__8::MoveNext()": {
+          "Lines": {
+            "123": 0,
+            "124": 0,
+            "125": 0,
+            "126": 0,
+            "127": 0,
+            "128": 0,
+            "129": 0
+          },
+          "Branches": [
+            {
+              "Line": 125,
+              "Offset": 203,
+              "EndOffset": 205,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 125,
+              "Offset": 203,
+              "EndOffset": 212,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        }
+      },
+      "PB.Infrastructure.ProjectRepository/<getSupervisorAsync>d__13": {
+        "System.Void PB.Infrastructure.ProjectRepository/<getSupervisorAsync>d__13::MoveNext()": {
+          "Lines": {
+            "178": 0
+          },
+          "Branches": [
+            {
+              "Line": 178,
+              "Offset": 61,
+              "EndOffset": 63,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 178,
+              "Offset": 61,
+              "EndOffset": 75,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 178,
+              "Offset": 308,
+              "EndOffset": 310,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 178,
+              "Offset": 308,
+              "EndOffset": 334,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            }
+          ]
+        }
+      }
+    },
+    "/Volumes/TOSHIBA EXT/ITU - Andet år/BDSA/PB/Infrastructure/ProjRepoMock.cs": {
+      "PB.Infrastructure.ProjRepoMock": {
+        "System.Collections.Generic.List`1<PB.Infrastructure.Project> PB.Infrastructure.ProjRepoMock::ListAll()": {
+          "Lines": {
+            "8": 0,
+            "9": 0,
+            "11": 0,
+            "12": 0,
+            "13": 0,
+            "14": 0,
+            "15": 0,
+            "16": 0,
+            "17": 0,
+            "18": 0,
+            "19": 0,
+            "20": 0,
+            "21": 0,
+            "22": 0,
+            "23": 0,
+            "24": 0,
+            "28": 0,
+            "29": 0,
+            "30": 0,
+            "31": 0,
+            "32": 0,
+            "33": 0,
+            "34": 0,
+            "35": 0,
+            "36": 0,
+            "37": 0,
+            "38": 0,
+            "39": 0,
+            "40": 0,
+            "41": 0,
+            "42": 0,
+            "43": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Volumes/TOSHIBA EXT/ITU - Andet år/BDSA/PB/Infrastructure/Student.cs": {
+      "PB.Infrastructure.Student": {
+        "System.Int32 PB.Infrastructure.Student::get_Id()": {
+          "Lines": {
+            "5": 31
+          },
+          "Branches": []
+        },
+        "System.String PB.Infrastructure.Student::get_Name()": {
+          "Lines": {
+            "8": 51
+          },
+          "Branches": []
+        },
+        "System.String PB.Infrastructure.Student::get_Email()": {
+          "Lines": {
+            "11": 35
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.ICollection`1<PB.Infrastructure.Project> PB.Infrastructure.Student::get_Projects()": {
+          "Lines": {
+            "13": 48
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.ICollection`1<PB.Infrastructure.Application> PB.Infrastructure.Student::get_Applications()": {
+          "Lines": {
+            "15": 48
+          },
+          "Branches": []
+        },
+        "PB.Infrastructure.University PB.Infrastructure.Student::get_University()": {
+          "Lines": {
+            "16": 35
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.ICollection`1<System.Int32> PB.Infrastructure.Student::GetProjectIDs()": {
+          "Lines": {
+            "19": 0,
+            "20": 0,
+            "21": 0,
+            "22": 0,
+            "23": 0,
+            "24": 0,
+            "25": 0,
+            "26": 0,
+            "27": 0,
+            "28": 0
+          },
+          "Branches": [
+            {
+              "Line": 21,
+              "Offset": 18,
+              "EndOffset": 20,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 22,
+              "Offset": 64,
+              "EndOffset": 36,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 22,
+              "Offset": 64,
+              "EndOffset": 66,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 21,
+              "Offset": 18,
+              "EndOffset": 80,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        }
+      }
+    },
+    "/Volumes/TOSHIBA EXT/ITU - Andet år/BDSA/PB/Infrastructure/StudentRepository.cs": {
+      "PB.Infrastructure.StudentRepository": {
+        "System.Void PB.Infrastructure.StudentRepository::.ctor(PB.Infrastructure.ApplicationDbContext)": {
+          "Lines": {
+            "8": 3,
+            "9": 3,
+            "10": 3,
+            "11": 3
+          },
+          "Branches": []
+        }
+      },
+      "PB.Infrastructure.StudentRepository/<>c": {
+        "System.String PB.Infrastructure.StudentRepository/<>c::<CreateAsync>b__2_0(PB.Infrastructure.Project)": {
+          "Lines": {
+            "33": 0
+          },
+          "Branches": []
+        },
+        "System.String PB.Infrastructure.StudentRepository/<>c::<CreateAsync>b__2_1(PB.Infrastructure.Application)": {
+          "Lines": {
+            "34": 0
+          },
+          "Branches": []
+        },
+        "System.String PB.Infrastructure.StudentRepository/<>c::<getApplicationsAsync>b__7_1(PB.Infrastructure.Application)": {
+          "Lines": {
+            "104": 0
+          },
+          "Branches": []
+        },
+        "System.String PB.Infrastructure.StudentRepository/<>c::<GetProjectsAsync>b__8_1(PB.Infrastructure.Project)": {
+          "Lines": {
+            "114": 0
+          },
+          "Branches": []
+        }
+      },
+      "PB.Infrastructure.StudentRepository/<CreateAsync>d__2": {
+        "System.Void PB.Infrastructure.StudentRepository/<CreateAsync>d__2::MoveNext()": {
+          "Lines": {
+            "14": 1,
+            "15": 1,
+            "16": 1,
+            "17": 1,
+            "18": 1,
+            "19": 1,
+            "20": 1,
+            "22": 1,
+            "24": 1,
+            "28": 1,
+            "29": 1,
+            "30": 1,
+            "31": 1,
+            "32": 1,
+            "35": 1,
+            "36": 1
+          },
+          "Branches": [
+            {
+              "Line": 28,
+              "Offset": 447,
+              "EndOffset": 449,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 28,
+              "Offset": 447,
+              "EndOffset": 453,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1
+            }
+          ]
+        }
+      },
+      "PB.Infrastructure.StudentRepository/<DeleteAsync>d__5": {
+        "System.Void PB.Infrastructure.StudentRepository/<DeleteAsync>d__5::MoveNext()": {
+          "Lines": {
+            "83": 0,
+            "84": 0,
+            "86": 0,
+            "87": 0,
+            "88": 0,
+            "91": 0,
+            "92": 0,
+            "94": 0,
+            "95": 0
+          },
+          "Branches": [
+            {
+              "Line": 86,
+              "Offset": 198,
+              "EndOffset": 200,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 86,
+              "Offset": 198,
+              "EndOffset": 208,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        }
+      },
+      "PB.Infrastructure.StudentRepository/<GetProjectsAsync>d__8": {
+        "System.Void PB.Infrastructure.StudentRepository/<GetProjectsAsync>d__8::MoveNext()": {
+          "Lines": {
+            "113": 0,
+            "116": 0,
+            "117": 0,
+            "118": 0,
+            "119": 0,
+            "120": 0
+          },
+          "Branches": [
+            {
+              "Line": 116,
+              "Offset": 578,
+              "EndOffset": 443,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 118,
+              "Offset": 485,
+              "EndOffset": 487,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 118,
+              "Offset": 485,
+              "EndOffset": 507,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 116,
+              "Offset": 578,
+              "EndOffset": 583,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            }
+          ]
+        }
+      },
+      "PB.Infrastructure.StudentRepository/<ReadAsync>d__3": {
+        "System.Void PB.Infrastructure.StudentRepository/<ReadAsync>d__3::MoveNext()": {
+          "Lines": {
+            "46": 1,
+            "47": 1,
+            "48": 1,
+            "49": 1,
+            "50": 1,
+            "51": 1,
+            "52": 1,
+            "53": 1,
+            "54": 1,
+            "55": 1,
+            "56": 1,
+            "58": 1,
+            "59": 1
+          },
+          "Branches": []
+        }
+      },
+      "PB.Infrastructure.StudentRepository/<UpdateAsync>d__4": {
+        "System.Void PB.Infrastructure.StudentRepository/<UpdateAsync>d__4::MoveNext()": {
+          "Lines": {
+            "62": 1,
+            "63": 1,
+            "65": 1,
+            "66": 1,
+            "67": 1,
+            "70": 0,
+            "71": 0,
+            "72": 0,
+            "73": 0,
+            "74": 0,
+            "77": 0,
+            "79": 0,
+            "80": 1
+          },
+          "Branches": [
+            {
+              "Line": 65,
+              "Offset": 490,
+              "EndOffset": 492,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 65,
+              "Offset": 490,
+              "EndOffset": 500,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        }
+      },
+      "PB.Infrastructure.StudentRepository/<getApplicationsAsync>d__7": {
+        "System.Void PB.Infrastructure.StudentRepository/<getApplicationsAsync>d__7::MoveNext()": {
+          "Lines": {
+            "103": 0,
+            "106": 0,
+            "107": 0,
+            "108": 0,
+            "109": 0,
+            "110": 0
+          },
+          "Branches": [
+            {
+              "Line": 106,
+              "Offset": 578,
+              "EndOffset": 443,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 108,
+              "Offset": 485,
+              "EndOffset": 487,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 108,
+              "Offset": 485,
+              "EndOffset": 507,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 106,
+              "Offset": 578,
+              "EndOffset": 583,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            }
+          ]
+        }
+      },
+      "PB.Infrastructure.StudentRepository/<getUniversityAsync>d__6": {
+        "System.Void PB.Infrastructure.StudentRepository/<getUniversityAsync>d__6::MoveNext()": {
+          "Lines": {
+            "99": 1
+          },
+          "Branches": [
+            {
+              "Line": 99,
+              "Offset": 61,
+              "EndOffset": 63,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 99,
+              "Offset": 61,
+              "EndOffset": 75,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1
+            },
+            {
+              "Line": 99,
+              "Offset": 308,
+              "EndOffset": 310,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 99,
+              "Offset": 308,
+              "EndOffset": 334,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 1
+            }
+          ]
+        }
+      }
+    },
+    "/Volumes/TOSHIBA EXT/ITU - Andet år/BDSA/PB/Infrastructure/Supervisor.cs": {
+      "PB.Infrastructure.Supervisor": {
+        "System.String PB.Infrastructure.Supervisor::get_Id()": {
+          "Lines": {
+            "5": 72
+          },
+          "Branches": []
+        },
+        "System.String PB.Infrastructure.Supervisor::get_Name()": {
+          "Lines": {
+            "8": 72
+          },
+          "Branches": []
+        },
+        "System.String PB.Infrastructure.Supervisor::get_Email()": {
+          "Lines": {
+            "12": 71
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.ICollection`1<PB.Infrastructure.Project> PB.Infrastructure.Supervisor::get_Projects()": {
+          "Lines": {
+            "14": 137
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Volumes/TOSHIBA EXT/ITU - Andet år/BDSA/PB/Infrastructure/SupervisorRepository.cs": {
+      "PB.Infrastructure.SupervisorRepository": {
+        "System.Void PB.Infrastructure.SupervisorRepository::.ctor(PB.Infrastructure.ApplicationDbContext)": {
+          "Lines": {
+            "10": 8,
+            "11": 8,
+            "12": 8,
+            "13": 8
+          },
+          "Branches": []
+        }
+      },
+      "PB.Infrastructure.SupervisorRepository/<>c": {
+        "System.Int32 PB.Infrastructure.SupervisorRepository/<>c::<ReadAsync>b__4_0(PB.Infrastructure.Project)": {
+          "Lines": {
+            "40": 4
+          },
+          "Branches": []
+        }
+      },
+      "PB.Infrastructure.SupervisorRepository/<CreateAsync>d__2": {
+        "System.Void PB.Infrastructure.SupervisorRepository/<CreateAsync>d__2::MoveNext()": {
+          "Lines": {
+            "16": 1,
+            "17": 1,
+            "18": 1,
+            "19": 1,
+            "20": 1,
+            "21": 1,
+            "22": 1,
+            "24": 1,
+            "26": 1,
+            "28": 1,
+            "29": 1
+          },
+          "Branches": []
+        }
+      },
+      "PB.Infrastructure.SupervisorRepository/<DeleteAsync>d__6": {
+        "System.Void PB.Infrastructure.SupervisorRepository/<DeleteAsync>d__6::MoveNext()": {
+          "Lines": {
+            "54": 3,
+            "55": 3,
+            "56": 5,
+            "58": 1,
+            "59": 1,
+            "60": 1,
+            "61": 3
+          },
+          "Branches": [
+            {
+              "Line": 56,
+              "Offset": 182,
+              "EndOffset": 184,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 2
+            },
+            {
+              "Line": 56,
+              "Offset": 182,
+              "EndOffset": 191,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1
+            }
+          ]
+        }
+      },
+      "PB.Infrastructure.SupervisorRepository/<ReadAllAsync>d__3": {
+        "System.Void PB.Infrastructure.SupervisorRepository/<ReadAllAsync>d__3::MoveNext()": {
+          "Lines": {
+            "31": 1,
+            "32": 1,
+            "33": 1,
+            "34": 1,
+            "35": 1
+          },
+          "Branches": []
+        }
+      },
+      "PB.Infrastructure.SupervisorRepository/<ReadAsync>d__4": {
+        "System.Void PB.Infrastructure.SupervisorRepository/<ReadAsync>d__4::MoveNext()": {
+          "Lines": {
+            "38": 4,
+            "39": 4,
+            "41": 4
+          },
+          "Branches": [
+            {
+              "Line": 40,
+              "Offset": 296,
+              "EndOffset": 298,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 3
+            },
+            {
+              "Line": 40,
+              "Offset": 296,
+              "EndOffset": 390,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1
+            }
+          ]
+        }
+      },
+      "PB.Infrastructure.SupervisorRepository/<UpdateAsync>d__5": {
+        "System.Void PB.Infrastructure.SupervisorRepository/<UpdateAsync>d__5::MoveNext()": {
+          "Lines": {
+            "44": 2,
+            "45": 2,
+            "46": 3,
+            "48": 1,
+            "49": 1,
+            "50": 1,
+            "51": 2
+          },
+          "Branches": [
+            {
+              "Line": 46,
+              "Offset": 182,
+              "EndOffset": 184,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 46,
+              "Offset": 182,
+              "EndOffset": 191,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1
+            }
+          ]
+        }
+      }
+    },
+    "/Volumes/TOSHIBA EXT/ITU - Andet år/BDSA/PB/Infrastructure/Tag.cs": {
+      "PB.Infrastructure.Tag": {
+        "System.Int32 PB.Infrastructure.Tag::get_Id()": {
+          "Lines": {
+            "5": 0
+          },
+          "Branches": []
+        },
+        "System.String PB.Infrastructure.Tag::get_TagName()": {
+          "Lines": {
+            "8": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Volumes/TOSHIBA EXT/ITU - Andet år/BDSA/PB/Infrastructure/University.cs": {
+      "PB.Infrastructure.University": {
+        "System.String PB.Infrastructure.University::get_Name()": {
+          "Lines": {
+            "6": 13
+          },
+          "Branches": []
+        },
+        "System.String PB.Infrastructure.University::get_Id()": {
+          "Lines": {
+            "10": 51
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.ICollection`1<PB.Infrastructure.Education> PB.Infrastructure.University::get_Educations()": {
+          "Lines": {
+            "12": 243
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.ICollection`1<System.Int32> PB.Infrastructure.University::GetEducationIDs()": {
+          "Lines": {
+            "15": 0,
+            "16": 0,
+            "17": 0,
+            "18": 0,
+            "19": 0,
+            "20": 0,
+            "21": 0,
+            "22": 0,
+            "23": 0,
+            "24": 0,
+            "25": 0
+          },
+          "Branches": [
+            {
+              "Line": 17,
+              "Offset": 18,
+              "EndOffset": 20,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 19,
+              "Offset": 64,
+              "EndOffset": 36,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 19,
+              "Offset": 64,
+              "EndOffset": 66,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 17,
+              "Offset": 18,
+              "EndOffset": 80,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        }
+      }
+    },
+    "/Volumes/TOSHIBA EXT/ITU - Andet år/BDSA/PB/Infrastructure/UniversityRepository.cs": {
+      "PB.Infrastructure.UniversityRepository": {
+        "PB.Core.UniversityDetailsDTO PB.Infrastructure.UniversityRepository::ReadByID(System.String)": {
+          "Lines": {
+            "31": 0,
+            "32": 0,
+            "33": 0,
+            "34": 0
+          },
+          "Branches": [
+            {
+              "Line": 33,
+              "Offset": 29,
+              "EndOffset": 31,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 33,
+              "Offset": 29,
+              "EndOffset": 56,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void PB.Infrastructure.UniversityRepository::.ctor(PB.Infrastructure.ApplicationDbContext)": {
+          "Lines": {
+            "13": 35,
+            "14": 35,
+            "15": 35,
+            "16": 35
+          },
+          "Branches": []
+        }
+      },
+      "PB.Infrastructure.UniversityRepository/<ReadAllAsync>d__2": {
+        "System.Void PB.Infrastructure.UniversityRepository/<ReadAllAsync>d__2::MoveNext()": {
+          "Lines": {
+            "18": 0,
+            "19": 0,
+            "20": 0,
+            "21": 0,
+            "22": 0
+          },
+          "Branches": []
+        }
+      },
+      "PB.Infrastructure.UniversityRepository/<ReadByIDAsync>d__3": {
+        "System.Void PB.Infrastructure.UniversityRepository/<ReadByIDAsync>d__3::MoveNext()": {
+          "Lines": {
+            "25": 0,
+            "26": 0,
+            "27": 0,
+            "28": 0
+          },
+          "Branches": [
+            {
+              "Line": 27,
+              "Offset": 175,
+              "EndOffset": 177,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 27,
+              "Offset": 175,
+              "EndOffset": 217,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        }
+      }
+    },
+    "/Volumes/TOSHIBA EXT/ITU - Andet år/BDSA/PB/Infrastructure/Authentication/ApplicationUser.cs": {
+      "PB.Infrastructure.Authentication.ApplicationUser": {
+        "System.String PB.Infrastructure.Authentication.ApplicationUser::get_FirstName()": {
+          "Lines": {
+            "9": 0
+          },
+          "Branches": []
+        },
+        "System.String PB.Infrastructure.Authentication.ApplicationUser::get_LastName()": {
+          "Lines": {
+            "13": 0
+          },
+          "Branches": []
+        }
+      }
+    }
+  }
+}

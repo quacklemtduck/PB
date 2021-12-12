@@ -161,11 +161,19 @@ namespace PB.Infrastructure.Tests
 
             Assert.Equal(Updated, response);
             var projectUpdated = (await _repository.ReadByIDAsync(5)).Value;
+            
             Assert.Equal("newProject5", projectUpdated.Title);
             Assert.Empty(projectUpdated.ChosenStudents);
             Assert.Empty(projectUpdated.Applications);
             Assert.Empty(projectUpdated.Educations);
         }
+
+
+
+
+
+
+
 
         [Fact]
         public async Task UpdateAsync_adds_students_existing_Project()
@@ -182,7 +190,6 @@ namespace PB.Infrastructure.Tests
                 Description = "This is project 5, version 2",
                 Supervisor = "Supervisor1",
                 Notification = false,
-                //ChosenStudents = new HashSet<string>() { student.Name },
                 ChosenStudents = ChosenStudents,
                 Applications = new HashSet<string>(),
                 Educations = new HashSet<int>()
@@ -197,10 +204,14 @@ namespace PB.Infrastructure.Tests
             Assert.Equal(1 , projectUpdated.ChosenStudents.Count);
             Assert.True(projectUpdated.ChosenStudents.Contains(student.Name));
             Assert.Equal(1, projectUpdated.ChosenStudents.Count());
+            
             Assert.Empty(projectUpdated.Applications);
             Assert.Empty(projectUpdated.Educations);
         }
 
+        
+        
+        
         [Fact]
         public async Task UpdateAsync_adds_application_existing_Project()
         {
@@ -278,6 +289,26 @@ namespace PB.Infrastructure.Tests
                 disposed = true;
             }
         }
+
+        // [Theory]
+        // [InlineData(7, "KU", "Markus", "Markus@gmail.com")]
+        // [InlineData(7, "KU", "Gustav", "Gustav@gmail.com")]
+        // [InlineData(7, "KU", "Daniel", "Daniel@gmail.com")]
+        // [InlineData(7, "KU", "Jacob", "Jacob@gmail.com")]
+        // [InlineData(7, "KU", "Andreas", "Andreas@gmail.com")]
+        // [InlineData(7, "KU", "Line", "Line@gmail.com")]
+        // public async Task CreateAsync_creates_new_project(int id, string universityAbbreviation, string studentName, string studentEmail)
+        // {
+        //     var universityRepository = new UniversityRepository(_context);
+        //     var university = _context.Universities.Find(universityAbbreviation);
+            
+        //     var student = new StudentCreateDTO{ Name = studentName, Email=studentEmail, University = university?.Name};
+        //     var created = await _repository.CreateAsync(student);
+
+        //     Assert.Equal(7, created.Id);
+        //     Assert.Equal(studentName, created.Name);
+            
+        // }
 
         public void Dispose()
         {
