@@ -106,68 +106,64 @@ namespace Infrastructure.Tests
             Assert.Empty(StudentUpdated.Applications);
         }
 
-        // [Fact]
-        // public async Task UpdateAsync_adds_project_and_applicaton_to_Student()
-        // {
-        //     var supervisor = new Supervisor { Id = "1", Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
-        //     _context.Supervisors.Add(supervisor);
-
-        //     Console.WriteLine("------------------> " + supervisor + " <----------------");
-
-        //     var project = new Project { Id = 6, Title = "Project6", Description = "This is project 6", Supervisor = supervisor, SupervisorID = supervisor.Id };
-
-        //     _context.Projects.Add(project);
-
-        //     Console.WriteLine("------------------> supervisor ID: " + _context.Projects.Find(1)?.SupervisorID + " Supervisor: " + _context.Projects.Find(1)?.Supervisor + "<----------------");
-            
-
-        //     var student = _context.Students.Find(1);
+        [Fact]
+        public async Task UpdateAsync_adds_project_and_applicaton_to_Student()
+        {
+            var supervisor = new Supervisor { Id = "1", Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
+            _context.Supervisors.Add(supervisor);
 
 
-        //     var application = new Application { Title = "Softwareudvikler søger nye udfordringer", Student = student, Project = project };
-        //     _context.Applications.Add(application);
+            var project = new Project { Id = 6, Title = "Project6", Description = "This is project 6", Supervisor = supervisor, SupervisorID = supervisor.Id };
+
+            _context.Projects.Add(project);       
 
 
-        //     var projectsList = new List<string>();
-
-        //     projectsList.Add(project.Title);
+            var student = _context.Students.Find(1);
 
 
-        //     var applicationList = new HashSet<string>();
+            var application = new Application { Title = "Softwareudvikler søger nye udfordringer", Student = student, Project = project };
+            _context.Applications.Add(application);
 
-        //     applicationList.Add(application.Title);
-
-        //     var studentUpdateDTO = new StudentUpdateDTO
-        //     {
-        //         Id = student.Id,
-        //         Name = "Lars",
-        //         Email = "Lars@gmail.com",
-        //         Projects = projectsList,
-        //         Applications = applicationList
-        //     };
-
-        //     Console.WriteLine("--------------------------------------------- 11 ---------------------------------------------");
+            _context.SaveChanges();
 
 
-        //     var response = await _repository.UpdateAsync(1, studentUpdateDTO);
-        //     Console.WriteLine("--------------------------------------------- 12 ---------------------------------------------");
+            var projectsList = new List<int>();
+
+            projectsList.Add(project.Id);
 
 
-        //     Assert.Equal(Updated, response);
-        //     Console.WriteLine("--------------------------------------------- 13 ---------------------------------------------");
+            var applicationList = new HashSet<int>();
 
-        //     var StudentUpdated = (await _repository.ReadAsync(1)).Value;
-        //     Console.WriteLine("--------------------------------------------- 14 ---------------------------------------------");
+            applicationList.Add(application.Id);
+
+            var studentUpdateDTO = new StudentUpdateDTO
+            {
+                Id = student.Id,
+                Name = "Lars",
+                Email = "Lars@gmail.com",
+                Projects = projectsList,
+                Applications = applicationList
+            };
+
+    
+            //jeg tror, det er fordi repo ikke blvier opdateret
+
+            var response = await _repository.UpdateAsync(1, studentUpdateDTO);
 
 
-        //     Assert.Equal("Lars", StudentUpdated.Name);
-        //     Assert.Equal("Lars@gmail.com", StudentUpdated.Email);
-        //     Assert.Equal(_context.Universities.Find("KU").Name, StudentUpdated.University);
-        //     Assert.Equal(1, StudentUpdated.Applications.Count);
-        //     Assert.Equal(1, StudentUpdated.Projects.Count);
-        //     Assert.True(StudentUpdated.Applications.Contains(application.Title));
-        //     Assert.True(StudentUpdated.Projects.Contains(project.Title));
-        // }
+            Assert.Equal(Updated, response);
+
+            var StudentUpdated = (await _repository.ReadAsync(1)).Value;
+
+
+            Assert.Equal("Lars", StudentUpdated.Name);
+            Assert.Equal("Lars@gmail.com", StudentUpdated.Email);
+            Assert.Equal(_context.Universities.Find("KU").Name, StudentUpdated.University);
+            Assert.Equal(1, StudentUpdated.Applications.Count);
+            Assert.Equal(1, StudentUpdated.Projects.Count);
+            Assert.True(StudentUpdated.Applications.Contains(application.Title));
+            Assert.True(StudentUpdated.Projects.Contains(project.Title));
+        }
 
 
         [Theory]
