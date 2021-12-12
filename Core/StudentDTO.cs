@@ -20,7 +20,7 @@ public record StudentCreateDTO
 
 public record StudentUpdateDTO : StudentCreateDTO{
     public int Id {get; set;}
-    public ICollection<string> Projects {get; set;}
-    public ISet<string> Applications {get; set;}
+    public ICollection<int> Projects {get; set;}
+    public ICollection<int> Applications {get; set;}
 
     }

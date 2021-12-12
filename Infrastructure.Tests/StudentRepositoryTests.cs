@@ -20,12 +20,12 @@ namespace Infrastructure.Tests
 
             var universityRepository = new UniversityRepository(context);
             context.Students.AddRange(
-                new Student{Id = 1,Name = "student1", Email = "student1@gmail.com", University = context.Universities.Find("KU")},
-                new Student{Id = 2,Name = "student2", Email = "student2@gmail.com", University = context.Universities.Find("KU")},
-                new Student{Id = 3,Name = "student3", Email = "student3@gmail.com", University = context.Universities.Find("KU")},
-                new Student{Id = 4,Name = "student4", Email = "student4@gmail.com", University = context.Universities.Find("KU")},
-                new Student{Id = 5,Name = "student5", Email = "student5@gmail.com", University = context.Universities.Find("KU")},
-                new Student{Id = 6,Name = "student6", Email = "student6@gmail.com", University = context.Universities.Find("KU")}
+                new Student { Id = 1, Name = "student1", Email = "student1@gmail.com", University = context.Universities.Find("KU") },
+                new Student { Id = 2, Name = "student2", Email = "student2@gmail.com", University = context.Universities.Find("KU") },
+                new Student { Id = 3, Name = "student3", Email = "student3@gmail.com", University = context.Universities.Find("KU") },
+                new Student { Id = 4, Name = "student4", Email = "student4@gmail.com", University = context.Universities.Find("KU") },
+                new Student { Id = 5, Name = "student5", Email = "student5@gmail.com", University = context.Universities.Find("KU") },
+                new Student { Id = 6, Name = "student6", Email = "student6@gmail.com", University = context.Universities.Find("KU") }
             );
 
             context.SaveChanges();
@@ -51,7 +51,7 @@ namespace Infrastructure.Tests
             Assert.Equal(name, student.Name);
             Assert.Equal(email, student.Email);
             Assert.Equal(university, student.University);
-            
+
             // var option = await _repository.ReadAsync(2);
             // var student = option.Value;
 
@@ -64,14 +64,15 @@ namespace Infrastructure.Tests
         [Fact]
         public async Task UpdateAsync_given_non_existing_id_returns_NotFound()
         {
-            var student = new StudentUpdateDTO{
+            var student = new StudentUpdateDTO
+            {
                 Id = 10,
                 Name = "Lars",
-                Projects = new List<string>(),
-                Applications = new HashSet<string>()
-                };
+                Projects = new List<int>(),
+                Applications = new HashSet<int>()
+            };
 
-                
+
             var response = await _repository.UpdateAsync(student.Id, student);
 
             Assert.Equal(NotFound, response);
@@ -89,14 +90,14 @@ namespace Infrastructure.Tests
                 Id = student.Id,
                 Name = "Lars",
                 Email = "Lars@gmail.com",
-                Projects = new List<string>(),
-                Applications = new HashSet<string>()
+                Projects = new List<int>(),
+                Applications = new HashSet<int>()
             };
 
 
-             var response = await _repository.UpdateAsync(1, studentUpdateDTO);
+            var response = await _repository.UpdateAsync(1, studentUpdateDTO);
 
-             Assert.Equal(Updated, response);
+            Assert.Equal(Updated, response);
             var StudentUpdated = (await _repository.ReadAsync(1)).Value;
 
             Assert.Equal("Lars", StudentUpdated.Name);
@@ -104,6 +105,69 @@ namespace Infrastructure.Tests
             Assert.Equal(_context.Universities.Find("KU").Name, StudentUpdated.University);
             Assert.Empty(StudentUpdated.Applications);
         }
+
+        // [Fact]
+        // public async Task UpdateAsync_adds_project_and_applicaton_to_Student()
+        // {
+        //     var supervisor = new Supervisor { Id = "1", Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
+        //     _context.Supervisors.Add(supervisor);
+
+        //     Console.WriteLine("------------------> " + supervisor + " <----------------");
+
+        //     var project = new Project { Id = 6, Title = "Project6", Description = "This is project 6", Supervisor = supervisor, SupervisorID = supervisor.Id };
+
+        //     _context.Projects.Add(project);
+
+        //     Console.WriteLine("------------------> supervisor ID: " + _context.Projects.Find(1)?.SupervisorID + " Supervisor: " + _context.Projects.Find(1)?.Supervisor + "<----------------");
+            
+
+        //     var student = _context.Students.Find(1);
+
+
+        //     var application = new Application { Title = "Softwareudvikler søger nye udfordringer", Student = student, Project = project };
+        //     _context.Applications.Add(application);
+
+
+        //     var projectsList = new List<string>();
+
+        //     projectsList.Add(project.Title);
+
+
+        //     var applicationList = new HashSet<string>();
+
+        //     applicationList.Add(application.Title);
+
+        //     var studentUpdateDTO = new StudentUpdateDTO
+        //     {
+        //         Id = student.Id,
+        //         Name = "Lars",
+        //         Email = "Lars@gmail.com",
+        //         Projects = projectsList,
+        //         Applications = applicationList
+        //     };
+
+        //     Console.WriteLine("--------------------------------------------- 11 ---------------------------------------------");
+
+
+        //     var response = await _repository.UpdateAsync(1, studentUpdateDTO);
+        //     Console.WriteLine("--------------------------------------------- 12 ---------------------------------------------");
+
+
+        //     Assert.Equal(Updated, response);
+        //     Console.WriteLine("--------------------------------------------- 13 ---------------------------------------------");
+
+        //     var StudentUpdated = (await _repository.ReadAsync(1)).Value;
+        //     Console.WriteLine("--------------------------------------------- 14 ---------------------------------------------");
+
+
+        //     Assert.Equal("Lars", StudentUpdated.Name);
+        //     Assert.Equal("Lars@gmail.com", StudentUpdated.Email);
+        //     Assert.Equal(_context.Universities.Find("KU").Name, StudentUpdated.University);
+        //     Assert.Equal(1, StudentUpdated.Applications.Count);
+        //     Assert.Equal(1, StudentUpdated.Projects.Count);
+        //     Assert.True(StudentUpdated.Applications.Contains(application.Title));
+        //     Assert.True(StudentUpdated.Projects.Contains(project.Title));
+        // }
 
 
         [Theory]
@@ -117,13 +181,13 @@ namespace Infrastructure.Tests
         {
             var universityRepository = new UniversityRepository(_context);
             var university = _context.Universities.Find(universityAbbreviation);
-            
-            var student = new StudentCreateDTO{ Name = studentName, Email=studentEmail, University = university?.Name};
+
+            var student = new StudentCreateDTO { Name = studentName, Email = studentEmail, University = university?.Name };
             var created = await _repository.CreateAsync(student);
 
             Assert.Equal(7, created.Id);
             Assert.Equal(studentName, created.Name);
-            
+
         }
 
 
@@ -212,5 +276,5 @@ namespace Infrastructure.Tests
         //     return ProjectRepository.convertDateTimeToString(deadline);
         // }
     }
-    
+
 }

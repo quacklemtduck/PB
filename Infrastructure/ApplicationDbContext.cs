@@ -18,7 +18,7 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>, 
     public DbSet<Student> Students => Set<Student>();
     public DbSet<Supervisor> Supervisors => Set<Supervisor>();
     public DbSet<Application> Applications => Set<Application>();
-    public DbSet<Tag> Tags => Set<Tag>();
+    //public DbSet<Tag> Tags => Set<Tag>();
     public DbSet<University> Universities => Set<University>();
     public DbSet<Education> Educations => Set<Education>();
 

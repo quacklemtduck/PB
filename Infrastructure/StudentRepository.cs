@@ -66,7 +66,7 @@ namespace PB.Infrastructure
                 return NotFound;
             }
 
-            
+
 
             entity.Name = student.Name;
             //entity.University = await getUniversityAsync(student.University);
@@ -113,15 +113,23 @@ namespace PB.Infrastructure
             }
         }
 
-        private async IAsyncEnumerable<Project> GetProjectsAsync(IEnumerable<string> projects)
+        private async IAsyncEnumerable<Project> GetProjectsAsync(IEnumerable<int> projects)
         {
             //if (projects == null) yield return null;
-            var existing = await _context.Projects.Where(p => projects.Contains(p.Title)).ToDictionaryAsync(p => p.Title);
+            var existing = await _context.Projects.Where(p => projects.Contains(p.Id)).ToDictionaryAsync(p => p.Id);
 
 
             foreach (var project in projects)
             {
-                yield return existing.TryGetValue(project, out var p) ? p : new Project { Title = project };
+                var pro = existing.TryGetValue(project, out var p) ? p : new Project { Id = project };
+                // Console.WriteLine("-------------------------------------> 125: " + pro.Title + "<-------------------------------------");
+                // Console.WriteLine("-------------------------------------> 126: " + pro.Id + "<-------------------------------------");
+                // Console.WriteLine("------------------------------------->" + pro.Supervisor + "<-------------------------------------");
+                // Console.WriteLine("------------------------------------->" + pro.Supervisor + "<-------------------------------------");
+
+
+                yield return pro;
+                //yield return existing.TryGetValue(project, out var p) ? p : new Project { Title = project };
             }
         }
 
