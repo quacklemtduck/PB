@@ -123,10 +123,10 @@ namespace Infrastructure.Tests
             GC.SuppressFinalize(this);
         }
 
-        private string getDeadlineString(){
-            DateTime deadline = DateTime.Parse("Dec 22, 2021");
-            return ProjectRepository.convertDateTimeToString(deadline);
-        }
+        // private string getDeadlineString(){
+        //     DateTime deadline = DateTime.Parse("Dec 22, 2021");
+        //     return ProjectRepository.convertDateTimeToString(deadline);
+        // }
     }
     
 }

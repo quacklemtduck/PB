@@ -26,5 +26,6 @@ namespace PB.Core
         Task<IReadOnlyCollection<ProjectListDTO>> ListAllAsync(string SupervisorID);
 
         Task<Response> UpdateStatusAsync(ProjectVisibilityUpdateDTO dto);
+        Task<Response> UpdateChosenStudentsAsync(ProjectChosenStudentsUpdateDTO dto);
     }
 }

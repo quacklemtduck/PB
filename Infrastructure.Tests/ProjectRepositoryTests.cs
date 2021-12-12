@@ -163,12 +163,71 @@ namespace PB.Infrastructure.Tests
             var projectUpdated = (await _repository.ReadByIDAsync(5)).Value;
             
             Assert.Equal("newProject5", projectUpdated.Title);
+            Assert.Equal("This is project 5, version 2", projectUpdated.Description);
+            Assert.Equal(false, projectUpdated.Notification);
             Assert.Empty(projectUpdated.ChosenStudents);
             Assert.Empty(projectUpdated.Applications);
             Assert.Empty(projectUpdated.Educations);
         }
 
 
+        [Fact]
+        public async Task UpdateStatusAsync_closes_project5()
+        {
+            var project = new ProjectVisibilityUpdateDTO (4, Status.Closed);
+
+            var response = await _repository.UpdateStatusAsync(project);
+
+            Assert.Equal(Updated, response);
+            var projectUpdated = (await _repository.ReadByIDAsync(4)).Value;
+            
+            Assert.Equal("Project4", projectUpdated.Title);
+            Assert.Equal("This is project 4", projectUpdated.Description);
+            Assert.Equal(false, projectUpdated.Notification);
+            Assert.Equal(Status.Closed, projectUpdated.Status);
+            Assert.Empty(projectUpdated.ChosenStudents);
+            Assert.Empty(projectUpdated.Applications);
+            Assert.Empty(projectUpdated.Educations);
+        }
+
+        [Fact]
+        public async Task UpdateStatusAsync_hides_project4()
+        {
+            var project = new ProjectVisibilityUpdateDTO (4, Status.Hidden);
+
+            var response = await _repository.UpdateStatusAsync(project);
+
+            Assert.Equal(Updated, response);
+            var projectUpdated = (await _repository.ReadByIDAsync(4)).Value;
+            
+            Assert.Equal("Project4", projectUpdated.Title);
+            Assert.Equal("This is project 4", projectUpdated.Description);
+            Assert.Equal(false, projectUpdated.Notification);
+            Assert.Equal(Status.Hidden, projectUpdated.Status);
+            Assert.Empty(projectUpdated.ChosenStudents);
+            Assert.Empty(projectUpdated.Applications);
+            Assert.Empty(projectUpdated.Educations);
+        }
+
+
+        [Fact]
+        public async Task UpdateStatusAsync_makes_project4_visible()
+        {
+            var project = new ProjectVisibilityUpdateDTO (4, Status.Visible);
+
+            var response = await _repository.UpdateStatusAsync(project);
+
+            Assert.Equal(Updated, response);
+            var projectUpdated = (await _repository.ReadByIDAsync(4)).Value;
+            
+            Assert.Equal("Project4", projectUpdated.Title);
+            Assert.Equal("This is project 4", projectUpdated.Description);
+            Assert.Equal(false, projectUpdated.Notification);
+            Assert.Equal(Status.Visible, projectUpdated.Status);
+            Assert.Empty(projectUpdated.ChosenStudents);
+            Assert.Empty(projectUpdated.Applications);
+            Assert.Empty(projectUpdated.Educations);
+        }
 
 
 
@@ -332,6 +391,8 @@ namespace PB.Infrastructure.Tests
             
         }
 
+        
+
         public void Dispose()
         {
             // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
@@ -339,9 +400,9 @@ namespace PB.Infrastructure.Tests
             GC.SuppressFinalize(this);
         }
 
-        private string getDeadlineString(){
-            DateTime deadline = DateTime.Parse("Dec 22, 2021");
-            return ProjectRepository.convertDateTimeToString(deadline);
-        }
+        // private string getDeadlineString(){
+        //     DateTime deadline = DateTime.Parse("Dec 22, 2021");
+        //     return ProjectRepository.convertDateTimeToString(deadline);
+        // }
     }
 }

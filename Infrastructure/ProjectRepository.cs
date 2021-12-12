@@ -125,7 +125,21 @@ namespace PB.Infrastructure
             var entity = await _context.Projects.FindAsync(dto.ID);
             if (entity == null) return Response.NotFound;
             entity.Status = dto.Status;
+            
             await _context.SaveChangesAsync();
+
+            return Response.Updated;
+        }
+
+        public async Task<Response> UpdateChosenStudentsAsync(ProjectChosenStudentsUpdateDTO dto){
+            var entity = await _context.Projects.Include(p => p.ChosenStudents).FirstOrDefaultAsync(p => p.Id == dto.ID);
+
+            if (entity == null) return Response.NotFound;
+
+            entity.ChosenStudents = await GetStudentsAsync(dto.ChosenStudents).ToListAsync();
+
+            await _context.SaveChangesAsync();
+
             return Response.Updated;
         }
 
@@ -134,15 +148,15 @@ namespace PB.Infrastructure
 
         //help methods:
 
-        private async IAsyncEnumerable<Tag> GetTagsAsync(IEnumerable<string> tags)
-        {
-            var existing = await _context.Tags.Where(t => tags.Contains(t.TagName)).ToDictionaryAsync(t => t.TagName);
+        // private async IAsyncEnumerable<Tag> GetTagsAsync(IEnumerable<string> tags)
+        // {
+        //     var existing = await _context.Tags.Where(t => tags.Contains(t.TagName)).ToDictionaryAsync(t => t.TagName);
 
-            foreach (var tag in tags)
-            {
-                yield return existing.TryGetValue(tag, out var t) ? t : new Tag { TagName = tag };
-            }
-        }
+        //     foreach (var tag in tags)
+        //     {
+        //         yield return existing.TryGetValue(tag, out var t) ? t : new Tag { TagName = tag };
+        //     }
+        // }
 
         private async IAsyncEnumerable<Student> GetStudentsAsync(IEnumerable<string> students)
         {
@@ -165,31 +179,31 @@ namespace PB.Infrastructure
             }
         }
 
-        private async IAsyncEnumerable<University> GetUniversitiesAsync(IEnumerable<string> universities)
-        {
-            var existing = await _context.Universities.Where(u => universities.Contains(u.Name)).ToDictionaryAsync(u => u.Name);
+        // private async IAsyncEnumerable<University> GetUniversitiesAsync(IEnumerable<string> universities)
+        // {
+        //     var existing = await _context.Universities.Where(u => universities.Contains(u.Name)).ToDictionaryAsync(u => u.Name);
 
-            foreach (var university in universities)
-            {
-                yield return existing.TryGetValue(university, out var u) ? u : new University { Name = university };
-            }
-        }
+        //     foreach (var university in universities)
+        //     {
+        //         yield return existing.TryGetValue(university, out var u) ? u : new University { Name = university };
+        //     }
+        // }
 
-        private async Task<Supervisor?> getSupervisorAsync(string? name) =>
-        string.IsNullOrWhiteSpace(name) ? null : await _context.Supervisors.FirstOrDefaultAsync(s => s.Name == name) ?? new Supervisor { Name = name };
+        // private async Task<Supervisor?> getSupervisorAsync(string? name) =>
+        // string.IsNullOrWhiteSpace(name) ? null : await _context.Supervisors.FirstOrDefaultAsync(s => s.Name == name) ?? new Supervisor { Name = name };
 
-        public static string convertDateTimeToString(DateTime? dateTime){
-            const string FMT = "O";
-            DateTime nonNullableDateTime = dateTime ?? DateTime.Now.AddMonths(1);
-            return nonNullableDateTime.ToString(FMT);
+        // public static string convertDateTimeToString(DateTime? dateTime){
+        //     const string FMT = "O";
+        //     DateTime nonNullableDateTime = dateTime ?? DateTime.Now.AddMonths(1);
+        //     return nonNullableDateTime.ToString(FMT);
 
 
-        }
+        // }
 
-        public static DateTime convertStringToDateTime(string deadline){
-            const string FMT = "O";
-            return DateTime.ParseExact(deadline, FMT, CultureInfo.InvariantCulture);
-        }
+        // public static DateTime convertStringToDateTime(string deadline){
+        //     const string FMT = "O";
+        //     return DateTime.ParseExact(deadline, FMT, CultureInfo.InvariantCulture);
+        // }
 
 
     }
