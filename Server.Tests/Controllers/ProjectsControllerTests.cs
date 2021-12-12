@@ -153,26 +153,27 @@ namespace PB.Server.Tests.Controllers
             Assert.IsType<NoContentResult>(response);
         }
 
-        // [Fact]
-        // public async Task ChoseStudents_Project()
-        // {
+        [Fact]
+        public async Task ChoseStudents_Project()
+        {
             
-        //     // Arrange
-        //     var student = new Student { Id = 1, Name = "student1", Email = "student1@gmail.com", University = new University{Name = "Københavns Universitet", Id = "KU"} }
-        //     var students = new HashSet<string>();
-        //     student.Id
-        //     var logger = new Mock<ILogger<ProjectsController>>();
-        //     var project = new ProjectChosenStudentsUpdateDTO(1, );
-        //     var repository = new Mock<IProjectRepository>();
-        //     repository.Setup(m => m.UpdateStatusAsync(project)).ReturnsAsync(Updated);
-        //     var controller = new ProjectsController(logger.Object, repository.Object);
+            // Arrange
+            var student = new Student { Name = "student1", Email = "student1@gmail.com", University = new University{Name = "Københavns Universitet", Id = "KU"} };
+            var students = new HashSet<int>();
+            students.Add(student.Id);
 
-        //     // Act
-        //     var response = await controller.UpdateStatus(project);
+            var logger = new Mock<ILogger<ProjectsController>>();
+            var project = new ProjectChosenStudentsUpdateDTO(1, students);
+            var repository = new Mock<IProjectRepository>();
+            repository.Setup(m => m.UpdateChosenStudentsAsync(project)).ReturnsAsync(Updated);
+            var controller = new ProjectsController(logger.Object, repository.Object);
 
-        //     // Assert
-        //     Assert.IsType<NoContentResult>(response);
-        // }
+            // Act
+            var response = await controller.UpdateChosenStudents(project);
+
+            // Assert
+            Assert.IsType<NoContentResult>(response);
+        }
 
         [Fact]
         public async Task Put_given_unknown_id_returns_NotFound()

@@ -177,7 +177,7 @@
       "PB.Core.ProjectChosenStudentsUpdateDTO": {
         "System.Int32 PB.Core.ProjectChosenStudentsUpdateDTO::get_ID()": {
           "Lines": {
-            "5": 0
+            "5": 3
           },
           "Branches": []
         }
@@ -317,7 +317,7 @@
       "PB.Core.SupervisorDetailsDTO": {
         "System.String PB.Core.SupervisorDetailsDTO::get_Id()": {
           "Lines": {
-            "5": 5
+            "5": 11
           },
           "Branches": []
         }
@@ -325,35 +325,35 @@
       "PB.Core.SuperVisorCreateDTO": {
         "System.String PB.Core.SuperVisorCreateDTO::get_Name()": {
           "Lines": {
-            "10": 0
+            "10": 1
           },
           "Branches": []
         },
         "System.String PB.Core.SuperVisorCreateDTO::get_Email()": {
           "Lines": {
-            "13": 0
+            "13": 1
           },
           "Branches": []
         },
         "System.Collections.Generic.ICollection`1<System.Int32> PB.Core.SuperVisorCreateDTO::get_Projects()": {
           "Lines": {
-            "14": 0
+            "14": 1
           },
           "Branches": []
         },
         "System.String PB.Core.SuperVisorCreateDTO::get_Id()": {
           "Lines": {
-            "16": 0
+            "16": 1
           },
           "Branches": []
         },
         "System.Void PB.Core.SuperVisorCreateDTO::.ctor(System.String,System.String,System.String)": {
           "Lines": {
-            "18": 0,
-            "19": 0,
-            "20": 0,
-            "21": 0,
-            "22": 0
+            "18": 2,
+            "19": 1,
+            "20": 1,
+            "21": 1,
+            "22": 1
           },
           "Branches": []
         }
@@ -1548,37 +1548,37 @@
       "PB.Infrastructure.Student": {
         "System.Int32 PB.Infrastructure.Student::get_Id()": {
           "Lines": {
-            "5": 0
+            "5": 1
           },
           "Branches": []
         },
         "System.String PB.Infrastructure.Student::get_Name()": {
           "Lines": {
-            "8": 0
+            "8": 1
           },
           "Branches": []
         },
         "System.String PB.Infrastructure.Student::get_Email()": {
           "Lines": {
-            "11": 0
+            "11": 1
           },
           "Branches": []
         },
         "System.Collections.Generic.ICollection`1<PB.Infrastructure.Project> PB.Infrastructure.Student::get_Projects()": {
           "Lines": {
-            "13": 0
+            "13": 1
           },
           "Branches": []
         },
         "System.Collections.Generic.ICollection`1<PB.Infrastructure.Application> PB.Infrastructure.Student::get_Applications()": {
           "Lines": {
-            "15": 0
+            "15": 1
           },
           "Branches": []
         },
         "PB.Infrastructure.University PB.Infrastructure.Student::get_University()": {
           "Lines": {
-            "16": 0
+            "16": 1
           },
           "Branches": []
         }
@@ -2020,19 +2020,19 @@
       "PB.Infrastructure.University": {
         "System.String PB.Infrastructure.University::get_Name()": {
           "Lines": {
-            "6": 6
+            "6": 8
           },
           "Branches": []
         },
         "System.String PB.Infrastructure.University::get_Id()": {
           "Lines": {
-            "10": 4
+            "10": 6
           },
           "Branches": []
         },
         "System.Collections.Generic.ICollection`1<PB.Infrastructure.Education> PB.Infrastructure.University::get_Educations()": {
           "Lines": {
-            "12": 4
+            "12": 6
           },
           "Branches": []
         },
@@ -4441,14 +4441,14 @@
       "PB.Server.Model.Extensions": {
         "Microsoft.AspNetCore.Mvc.IActionResult PB.Server.Model.Extensions::ToActionResult(PB.Core.Response)": {
           "Lines": {
-            "6": 13,
-            "7": 13,
-            "8": 5,
+            "6": 14,
+            "7": 14,
+            "8": 6,
             "9": 2,
             "10": 6,
             "11": 0,
             "12": 0,
-            "13": 13
+            "13": 14
           },
           "Branches": [
             {
@@ -4457,7 +4457,7 @@
               "EndOffset": 34,
               "Path": 1,
               "Ordinal": 1,
-              "Hits": 5
+              "Hits": 6
             },
             {
               "Line": 6,
@@ -13768,11 +13768,11 @@
       "PB.Server.Controllers.ProjectsController": {
         "System.Void PB.Server.Controllers.ProjectsController::.ctor(Microsoft.Extensions.Logging.ILogger`1<PB.Server.Controllers.ProjectsController>,PB.Core.IProjectRepository)": {
           "Lines": {
-            "17": 9,
-            "18": 9,
-            "19": 9,
-            "20": 9,
-            "21": 9
+            "17": 10,
+            "18": 10,
+            "19": 10,
+            "20": 10,
+            "21": 10
           },
           "Branches": []
         }
@@ -13918,10 +13918,10 @@
       "PB.Server.Controllers.ProjectsController/<UpdateChosenStudents>d__10": {
         "System.Void PB.Server.Controllers.ProjectsController/<UpdateChosenStudents>d__10::MoveNext()": {
           "Lines": {
-            "108": 0,
-            "109": 0,
-            "110": 0,
-            "111": 0
+            "108": 1,
+            "109": 1,
+            "110": 1,
+            "111": 1
           },
           "Branches": []
         }
@@ -13983,11 +13983,11 @@
       "PB.Server.Controllers.SupervisorController": {
         "System.Void PB.Server.Controllers.SupervisorController::.ctor(Microsoft.Extensions.Logging.ILogger`1<PB.Server.Controllers.SupervisorController>,PB.Core.ISupervisorRepository)": {
           "Lines": {
-            "12": 7,
-            "13": 7,
-            "14": 7,
-            "15": 7,
-            "16": 7
+            "12": 8,
+            "13": 8,
+            "14": 8,
+            "15": 8,
+            "16": 8
           },
           "Branches": []
         }
@@ -14019,10 +14019,10 @@
       "PB.Server.Controllers.SupervisorController/<Post>d__5": {
         "System.Void PB.Server.Controllers.SupervisorController/<Post>d__5::MoveNext()": {
           "Lines": {
-            "34": 0,
-            "35": 0,
-            "37": 0,
-            "38": 0
+            "34": 1,
+            "35": 1,
+            "37": 1,
+            "38": 1
           },
           "Branches": []
         }
