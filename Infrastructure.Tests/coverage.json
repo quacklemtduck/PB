@@ -58,13 +58,13 @@
       "PB.Core.Extensions/<ToListAsync>d__0`1": {
         "System.Void PB.Core.Extensions/<ToListAsync>d__0`1::MoveNext()": {
           "Lines": {
-            "7": 6,
-            "8": 6,
-            "9": 22,
-            "10": 6,
-            "11": 2,
-            "12": 6,
-            "13": 6
+            "7": 5,
+            "8": 5,
+            "9": 21,
+            "10": 5,
+            "11": 3,
+            "12": 5,
+            "13": 5
           },
           "Branches": [
             {
@@ -73,7 +73,7 @@
               "EndOffset": 102,
               "Path": 1,
               "Ordinal": 1,
-              "Hits": 2
+              "Hits": 3
             },
             {
               "Line": 9,
@@ -81,7 +81,7 @@
               "EndOffset": 271,
               "Path": 0,
               "Ordinal": 0,
-              "Hits": 6
+              "Hits": 5
             },
             {
               "Line": 9,
@@ -97,7 +97,7 @@
               "EndOffset": 435,
               "Path": 1,
               "Ordinal": 3,
-              "Hits": 6
+              "Hits": 5
             }
           ]
         }
@@ -183,7 +183,7 @@
       "PB.Core.ProjectChosenStudentsUpdateDTO": {
         "System.Int32 PB.Core.ProjectChosenStudentsUpdateDTO::get_ID()": {
           "Lines": {
-            "5": 0
+            "5": 5
           },
           "Branches": []
         }
@@ -191,7 +191,7 @@
       "PB.Core.ProjectDetailsDTO": {
         "System.Int32 PB.Core.ProjectDetailsDTO::get_ID()": {
           "Lines": {
-            "7": 166
+            "7": 172
           },
           "Branches": []
         },
@@ -205,37 +205,37 @@
       "PB.Core.ProjectCreateDTO": {
         "System.String PB.Core.ProjectCreateDTO::get_Title()": {
           "Lines": {
-            "9": 13
+            "9": 11
           },
           "Branches": []
         },
         "System.String PB.Core.ProjectCreateDTO::get_Description()": {
           "Lines": {
-            "11": 13
+            "11": 11
           },
           "Branches": []
         },
         "System.String PB.Core.ProjectCreateDTO::get_Supervisor()": {
           "Lines": {
-            "13": 9
+            "13": 8
           },
           "Branches": []
         },
         "System.Boolean PB.Core.ProjectCreateDTO::get_Notification()": {
           "Lines": {
-            "17": 13
+            "17": 11
           },
           "Branches": []
         },
         "PB.Core.Status PB.Core.ProjectCreateDTO::get_Status()": {
           "Lines": {
-            "19": 16
+            "19": 14
           },
           "Branches": []
         },
         "System.Collections.Generic.ISet`1<System.Int32> PB.Core.ProjectCreateDTO::get_Educations()": {
           "Lines": {
-            "24": 20
+            "24": 17
           },
           "Branches": []
         }
@@ -243,19 +243,19 @@
       "PB.Core.ProjectUpdateDTO": {
         "System.Int32 PB.Core.ProjectUpdateDTO::get_ID()": {
           "Lines": {
-            "29": 8
+            "29": 6
           },
           "Branches": []
         },
         "System.Collections.Generic.ISet`1<System.String> PB.Core.ProjectUpdateDTO::get_Applications()": {
           "Lines": {
-            "30": 11
+            "30": 8
           },
           "Branches": []
         },
         "System.Collections.Generic.ICollection`1<System.String> PB.Core.ProjectUpdateDTO::get_ChosenStudents()": {
           "Lines": {
-            "32": 11
+            "32": 8
           },
           "Branches": []
         }
@@ -461,7 +461,7 @@
         },
         "Microsoft.EntityFrameworkCore.DbSet`1<PB.Infrastructure.Application> PB.Infrastructure.ApplicationDbContext::get_Applications()": {
           "Lines": {
-            "20": 37
+            "20": 36
           },
           "Branches": []
         },
@@ -473,13 +473,13 @@
         },
         "Microsoft.EntityFrameworkCore.DbSet`1<PB.Infrastructure.University> PB.Infrastructure.ApplicationDbContext::get_Universities()": {
           "Lines": {
-            "22": 98
+            "22": 99
           },
           "Branches": []
         },
         "Microsoft.EntityFrameworkCore.DbSet`1<PB.Infrastructure.Education> PB.Infrastructure.ApplicationDbContext::get_Educations()": {
           "Lines": {
-            "23": 15
+            "23": 14
           },
           "Branches": []
         },
@@ -1142,13 +1142,13 @@
         },
         "System.String PB.Infrastructure.Project::get_Title()": {
           "Lines": {
-            "9": 126
+            "9": 125
           },
           "Branches": []
         },
         "System.String PB.Infrastructure.Project::get_Description()": {
           "Lines": {
-            "10": 126
+            "10": 125
           },
           "Branches": []
         },
@@ -1166,25 +1166,25 @@
         },
         "System.Boolean PB.Infrastructure.Project::get_Notification()": {
           "Lines": {
-            "14": 9
+            "14": 8
           },
           "Branches": []
         },
         "PB.Core.Status PB.Infrastructure.Project::get_Status()": {
           "Lines": {
-            "15": 12
+            "15": 11
           },
           "Branches": []
         },
         "System.Collections.Generic.ICollection`1<PB.Infrastructure.Application> PB.Infrastructure.Project::get_Applications()": {
           "Lines": {
-            "17": 126
+            "17": 125
           },
           "Branches": []
         },
         "System.Collections.Generic.ICollection`1<PB.Infrastructure.Education> PB.Infrastructure.Project::get_Educations()": {
           "Lines": {
-            "18": 129
+            "18": 128
           },
           "Branches": []
         },
@@ -1229,13 +1229,13 @@
         },
         "System.String PB.Infrastructure.ProjectRepository/<>c::<GetStudentsAsync>b__10_1(PB.Infrastructure.Student)": {
           "Lines": {
-            "163": 4
+            "163": 3
           },
           "Branches": []
         },
         "System.String PB.Infrastructure.ProjectRepository/<>c::<GetApplicationsAsync>b__11_1(PB.Infrastructure.Application)": {
           "Lines": {
-            "173": 4
+            "173": 3
           },
           "Branches": []
         }
@@ -1325,12 +1325,12 @@
       "PB.Infrastructure.ProjectRepository/<GetApplicationsAsync>d__11": {
         "System.Void PB.Infrastructure.ProjectRepository/<GetApplicationsAsync>d__11::MoveNext()": {
           "Lines": {
-            "172": 3,
-            "175": 11,
+            "172": 2,
+            "175": 8,
             "176": 1,
             "178": 1,
             "179": 1,
-            "180": 3
+            "180": 2
           },
           "Branches": [
             {
@@ -1363,7 +1363,7 @@
               "EndOffset": 583,
               "Path": 0,
               "Ordinal": 2,
-              "Hits": 3
+              "Hits": 2
             }
           ]
         }
@@ -1372,10 +1372,10 @@
         "System.Void PB.Infrastructure.ProjectRepository/<GetStudentsAsync>d__10::MoveNext()": {
           "Lines": {
             "162": 3,
-            "165": 11,
-            "166": 1,
-            "167": 1,
-            "168": 1,
+            "165": 13,
+            "166": 2,
+            "167": 2,
+            "168": 2,
             "169": 3
           },
           "Branches": [
@@ -1385,7 +1385,7 @@
               "EndOffset": 443,
               "Path": 1,
               "Ordinal": 3,
-              "Hits": 1
+              "Hits": 2
             },
             {
               "Line": 167,
@@ -1393,7 +1393,7 @@
               "EndOffset": 487,
               "Path": 0,
               "Ordinal": 0,
-              "Hits": 0
+              "Hits": 2
             },
             {
               "Line": 167,
@@ -1401,7 +1401,7 @@
               "EndOffset": 507,
               "Path": 1,
               "Ordinal": 1,
-              "Hits": 1
+              "Hits": 0
             },
             {
               "Line": 165,
@@ -1465,21 +1465,21 @@
       "PB.Infrastructure.ProjectRepository/<UpdateAsync>d__7": {
         "System.Void PB.Infrastructure.ProjectRepository/<UpdateAsync>d__7::MoveNext()": {
           "Lines": {
-            "97": 4,
-            "98": 4,
-            "102": 4,
+            "97": 3,
+            "98": 3,
+            "102": 3,
             "103": 1,
             "104": 1,
-            "107": 3,
-            "108": 3,
-            "111": 3,
-            "112": 3,
-            "113": 3,
-            "115": 3,
-            "116": 3,
-            "119": 3,
-            "121": 3,
-            "122": 4
+            "107": 2,
+            "108": 2,
+            "111": 2,
+            "112": 2,
+            "113": 2,
+            "115": 2,
+            "116": 2,
+            "119": 2,
+            "121": 2,
+            "122": 3
           },
           "Branches": [
             {
@@ -1496,7 +1496,7 @@
               "EndOffset": 553,
               "Path": 1,
               "Ordinal": 1,
-              "Hits": 3
+              "Hits": 2
             }
           ]
         }
@@ -1504,13 +1504,13 @@
       "PB.Infrastructure.ProjectRepository/<UpdateChosenStudentsAsync>d__9": {
         "System.Void PB.Infrastructure.ProjectRepository/<UpdateChosenStudentsAsync>d__9::MoveNext()": {
           "Lines": {
-            "134": 0,
-            "135": 0,
-            "137": 0,
-            "139": 0,
-            "141": 0,
-            "143": 0,
-            "144": 0
+            "134": 1,
+            "135": 1,
+            "137": 1,
+            "139": 1,
+            "141": 1,
+            "143": 1,
+            "144": 1
           },
           "Branches": [
             {
@@ -1527,7 +1527,7 @@
               "EndOffset": 419,
               "Path": 1,
               "Ordinal": 1,
-              "Hits": 0
+              "Hits": 1
             }
           ]
         }
@@ -1615,31 +1615,31 @@
         },
         "System.String PB.Infrastructure.Student::get_Name()": {
           "Lines": {
-            "8": 97
+            "8": 101
           },
           "Branches": []
         },
         "System.String PB.Infrastructure.Student::get_Email()": {
           "Lines": {
-            "11": 81
+            "11": 83
           },
           "Branches": []
         },
         "System.Collections.Generic.ICollection`1<PB.Infrastructure.Project> PB.Infrastructure.Student::get_Projects()": {
           "Lines": {
-            "13": 94
+            "13": 97
           },
           "Branches": []
         },
         "System.Collections.Generic.ICollection`1<PB.Infrastructure.Application> PB.Infrastructure.Student::get_Applications()": {
           "Lines": {
-            "15": 94
+            "15": 97
           },
           "Branches": []
         },
         "PB.Infrastructure.University PB.Infrastructure.Student::get_University()": {
           "Lines": {
-            "16": 81
+            "16": 83
           },
           "Branches": []
         },

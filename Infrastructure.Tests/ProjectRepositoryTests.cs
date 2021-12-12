@@ -3,7 +3,7 @@ namespace PB.Infrastructure.Tests
 
     public class ProjectRepositoryTests : IDisposable
     {
-        
+
         private readonly ApplicationDbContext _context;
         private readonly ProjectRepository _repository;
 
@@ -28,7 +28,7 @@ namespace PB.Infrastructure.Tests
 
             DateTime deadline = DateTime.Parse("Dec 22, 2021");
 
-            var project = new Project { Id = 5, Title = "Project5", Description = "This is project 5", Supervisor = supervisor};
+            var project = new Project { Id = 5, Title = "Project5", Description = "This is project 5", Supervisor = supervisor };
 
 
             context.Projects.AddRange(
@@ -38,7 +38,7 @@ namespace PB.Infrastructure.Tests
                 new Project { Id = 4, Title = "Project4", Description = "This is project 4", Supervisor = supervisor },
                 project
             );
-            
+
             var application = new Application { Title = "Softwareudvikler søger nye udfordringer", Student = student, Project = project };
             context.Applications.Add(application);
 
@@ -161,7 +161,7 @@ namespace PB.Infrastructure.Tests
 
             Assert.Equal(Updated, response);
             var projectUpdated = (await _repository.ReadByIDAsync(5)).Value;
-            
+
             Assert.Equal("newProject5", projectUpdated.Title);
             Assert.Equal("This is project 5, version 2", projectUpdated.Description);
             Assert.Equal(false, projectUpdated.Notification);
@@ -174,13 +174,13 @@ namespace PB.Infrastructure.Tests
         [Fact]
         public async Task UpdateStatusAsync_closes_project5()
         {
-            var project = new ProjectVisibilityUpdateDTO (4, Status.Closed);
+            var project = new ProjectVisibilityUpdateDTO(4, Status.Closed);
 
             var response = await _repository.UpdateStatusAsync(project);
 
             Assert.Equal(Updated, response);
             var projectUpdated = (await _repository.ReadByIDAsync(4)).Value;
-            
+
             Assert.Equal("Project4", projectUpdated.Title);
             Assert.Equal("This is project 4", projectUpdated.Description);
             Assert.Equal(false, projectUpdated.Notification);
@@ -193,13 +193,13 @@ namespace PB.Infrastructure.Tests
         [Fact]
         public async Task UpdateStatusAsync_hides_project4()
         {
-            var project = new ProjectVisibilityUpdateDTO (4, Status.Hidden);
+            var project = new ProjectVisibilityUpdateDTO(4, Status.Hidden);
 
             var response = await _repository.UpdateStatusAsync(project);
 
             Assert.Equal(Updated, response);
             var projectUpdated = (await _repository.ReadByIDAsync(4)).Value;
-            
+
             Assert.Equal("Project4", projectUpdated.Title);
             Assert.Equal("This is project 4", projectUpdated.Description);
             Assert.Equal(false, projectUpdated.Notification);
@@ -213,13 +213,13 @@ namespace PB.Infrastructure.Tests
         [Fact]
         public async Task UpdateStatusAsync_makes_project4_visible()
         {
-            var project = new ProjectVisibilityUpdateDTO (4, Status.Visible);
+            var project = new ProjectVisibilityUpdateDTO(4, Status.Visible);
 
             var response = await _repository.UpdateStatusAsync(project);
 
             Assert.Equal(Updated, response);
             var projectUpdated = (await _repository.ReadByIDAsync(4)).Value;
-            
+
             Assert.Equal("Project4", projectUpdated.Title);
             Assert.Equal("This is project 4", projectUpdated.Description);
             Assert.Equal(false, projectUpdated.Notification);
@@ -237,47 +237,56 @@ namespace PB.Infrastructure.Tests
         [Fact]
         public async Task UpdateAsync_adds_students_existing_Project()
         {
-            var student = new Student { Name = "Test" };
+            var university = _context.Universities.Find("KU");
+            var student1 = new Student { Name = "Test1", Email = "Test1@gmail.com", University = university };
+            var student2 = new Student { Name = "Test2", Email = "Test2@gmail.com", University = university };
+
             var supervisor = new Supervisor { Id = "1", Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
+
             var ChosenStudents = new HashSet<string>();
-            ChosenStudents.Add(student.Name);
+            ChosenStudents.Add(student1.Name);
+            ChosenStudents.Add(student2.Name);
 
-            var project = new ProjectUpdateDTO
-            {
-                ID = 5,
-                Title = "newProject5",
-                Description = "This is project 5, version 2",
-                Supervisor = "Supervisor1",
-                Notification = false,
-                ChosenStudents = ChosenStudents,
-                Applications = new HashSet<string>(),
-                Educations = new HashSet<int>()
-            };
+            var project = new ProjectChosenStudentsUpdateDTO(4, ChosenStudents);
 
-            var response = await _repository.UpdateAsync(project);
+            var response = await _repository.UpdateChosenStudentsAsync(project);
 
             Assert.Equal(Updated, response);
-            var projectUpdated = (await _repository.ReadByIDAsync(5)).Value;
-            
-            Assert.Equal("newProject5" , projectUpdated.Title);
-            Assert.Equal(1 , projectUpdated.ChosenStudents.Count);
-            Assert.True(projectUpdated.ChosenStudents.Contains(student.Name));
-            Assert.Equal(1, projectUpdated.ChosenStudents.Count());
-            
+            var projectUpdated = (await _repository.ReadByIDAsync(4)).Value;
+
+
+            Assert.Equal("Project4", projectUpdated.Title);
+            Assert.Equal("This is project 4", projectUpdated.Description);
+            Assert.Equal(false, projectUpdated.Notification);
+            Assert.Equal(Status.Visible, projectUpdated.Status);
+            Assert.Empty(projectUpdated.Applications);
+            Assert.Empty(projectUpdated.Educations);
+
+
+            // foreach (string student in projectUpdated.ChosenStudents)
+            // {
+            //     Console.WriteLine("---------------------------------" + student + "------------------------------------");
+            // }
+
+            Assert.Equal(2, projectUpdated.ChosenStudents.Count);
+            Assert.True(projectUpdated.ChosenStudents.Contains(student1.Name));
+            Assert.True(projectUpdated.ChosenStudents.Contains(student2.Name));
+            Assert.Equal(2, projectUpdated.ChosenStudents.Count());
+
             Assert.Empty(projectUpdated.Applications);
             Assert.Empty(projectUpdated.Educations);
         }
 
-        
-        
-        
+
+
+
         [Fact]
         public async Task UpdateAsync_adds_application_existing_Project()
         {
             var application = new Application { Title = "Softwareudvikler søger nye udfordringer" };
 
             var supervisor = new Supervisor { Id = "1", Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
-        
+
             var applications = new HashSet<string>();
             applications.Add(application.Title);
 
@@ -302,7 +311,7 @@ namespace PB.Infrastructure.Tests
 
             Assert.Equal(1, projectUpdated.Applications.Count());
             Assert.True(projectUpdated.Applications.Contains(application.Title));
-            
+
 
             Assert.Empty(projectUpdated.ChosenStudents);
             Assert.Empty(projectUpdated.Educations);
@@ -319,7 +328,7 @@ namespace PB.Infrastructure.Tests
         [Fact]
         public async Task ReadByIDAsync_given_id_exists_returns_Project()
         {
-            var supervisor = new Supervisor { Id = "1", Name = "Supervisor1", Email = "supervisor1@email.com",Projects = new List<Project>() };
+            var supervisor = new Supervisor { Id = "1", Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
 
             var project = (await _repository.ReadByIDAsync(1)).Value;
 
@@ -359,12 +368,13 @@ namespace PB.Infrastructure.Tests
             var supervisorID = "1";
 
             var educations = new HashSet<int>();
-            for (int i = 1; i < numberOfEducations+1; i++)
+            for (int i = 1; i < numberOfEducations + 1; i++)
             {
                 educations.Add(i);
             }
 
-            var project = new ProjectCreateDTO {
+            var project = new ProjectCreateDTO
+            {
                 Title = projectTitle,
                 Description = projectDescription,
                 Supervisor = supervisorID,
@@ -372,7 +382,7 @@ namespace PB.Infrastructure.Tests
                 Status = status,
                 Educations = educations
             };
-            
+
             var created = await _repository.CreateAsync(project);
 
             var projectID = 6;
@@ -384,14 +394,14 @@ namespace PB.Infrastructure.Tests
             Assert.Equal(status, created.Status);
             Assert.Equal(numberOfEducations, created.Educations.Count);
 
-            for (int i = 1; i < numberOfEducations +1; i++)
+            for (int i = 1; i < numberOfEducations + 1; i++)
             {
                 Assert.Contains(i, educations);
-            }    
-            
+            }
+
         }
 
-        
+
 
         public void Dispose()
         {
