@@ -141,6 +141,31 @@ namespace PB.Infrastructure.Tests
         }
 
         [Fact]
+        public async Task UpdateStatusAsync_given_non_existing_Project_returns_NotFound()
+        {
+            var supervisor = new Supervisor { Id = "1", Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
+
+            var project = new ProjectVisibilityUpdateDTO(42, Status.Closed);
+
+            var response = await _repository.UpdateStatusAsync(project);
+
+            Assert.Equal(NotFound, response);
+        }
+
+        [Fact]
+        public async Task UpdateChosenStudentsAsync_given_non_existing_Project_returns_NotFound()
+        {
+            var supervisor = new Supervisor { Id = "1", Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
+
+
+            var project = new ProjectChosenStudentsUpdateDTO(42, new HashSet<string>());
+
+            var response = await _repository.UpdateChosenStudentsAsync(project);
+
+            Assert.Equal(NotFound, response);
+        }
+
+        [Fact]
         public async Task UpdateAsync_updates_existing_Project()
         {
             var supervisor = new Supervisor { Id = "1", Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
@@ -289,7 +314,6 @@ namespace PB.Infrastructure.Tests
 
             var applications = new HashSet<string>();
             applications.Add(application.Title);
-
             var project = new ProjectUpdateDTO
             {
                 ID = 5,

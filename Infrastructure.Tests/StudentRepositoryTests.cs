@@ -34,17 +34,31 @@ namespace Infrastructure.Tests
             _repository = new StudentRepository(_context);
         }
 
-        [Fact]
-        public async Task ReadAsync_given_id_exists_returns_Student()
+        [Theory]
+        [InlineData(1, "student1", "student1@gmail.com", "Københavns Universitet")]
+        [InlineData(2, "student2", "student2@gmail.com", "Københavns Universitet")]
+        [InlineData(3, "student3", "student3@gmail.com", "Københavns Universitet")]
+        [InlineData(4, "student4", "student4@gmail.com", "Københavns Universitet")]
+        [InlineData(5, "student5", "student5@gmail.com", "Københavns Universitet")]
+        [InlineData(6, "student6", "student6@gmail.com", "Københavns Universitet")]
+        public async Task ReadAsync_given_id_exists_returns_Student(int id, string name, string email, string? university)
         {
-            
-            var option = await _repository.ReadAsync(2);
+
+            var option = await _repository.ReadAsync(id);
             var student = option.Value;
 
-            Assert.Equal(2, student.Id);
-            Assert.Equal("student2", student.Name);
-            Assert.Equal("student2@gmail.com", student.Email);
-            Assert.Equal("Københavns Universitet", student.University);
+            Assert.Equal(id, student.Id);
+            Assert.Equal(name, student.Name);
+            Assert.Equal(email, student.Email);
+            Assert.Equal(university, student.University);
+            
+            // var option = await _repository.ReadAsync(2);
+            // var student = option.Value;
+
+            // Assert.Equal(2, student.Id);
+            // Assert.Equal("student2", student.Name);
+            // Assert.Equal("student2@gmail.com", student.Email);
+            // Assert.Equal("Københavns Universitet", student.University);
         }
 
         [Fact]
