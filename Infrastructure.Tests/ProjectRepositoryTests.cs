@@ -290,25 +290,34 @@ namespace PB.Infrastructure.Tests
             }
         }
 
-        // [Theory]
-        // [InlineData(7, "KU", "Markus", "Markus@gmail.com")]
-        // [InlineData(7, "KU", "Gustav", "Gustav@gmail.com")]
-        // [InlineData(7, "KU", "Daniel", "Daniel@gmail.com")]
-        // [InlineData(7, "KU", "Jacob", "Jacob@gmail.com")]
-        // [InlineData(7, "KU", "Andreas", "Andreas@gmail.com")]
-        // [InlineData(7, "KU", "Line", "Line@gmail.com")]
-        // public async Task CreateAsync_creates_new_project(int id, string universityAbbreviation, string studentName, string studentEmail)
-        // {
-        //     var universityRepository = new UniversityRepository(_context);
-        //     var university = _context.Universities.Find(universityAbbreviation);
-            
-        //     var student = new StudentCreateDTO{ Name = studentName, Email=studentEmail, University = university?.Name};
-        //     var created = await _repository.CreateAsync(student);
+        /*[Theory]
+        [InlineData(7, "KU", "Markus", "Markus@gmail.com")]
+        [InlineData(7, "KU", "Gustav", "Gustav@gmail.com")]
+        [InlineData(7, "KU", "Daniel", "Daniel@gmail.com")]
+        [InlineData(7, "KU", "Jacob", "Jacob@gmail.com")]
+        [InlineData(7, "KU", "Andreas", "Andreas@gmail.com")]
+        [InlineData(7, "KU", "Line", "Line@gmail.com")]
+        public async Task CreateAsync_creates_new_project(int id, string projectTitle, string projectDescription, bool notification, Status status)
+        {
+            var universityRepository = new UniversityRepository(_context);
+            var university = _context.Universities.Find(universityAbbreviation);
 
-        //     Assert.Equal(7, created.Id);
-        //     Assert.Equal(studentName, created.Name);
+            var project = new ProjectCreateDTO {
+                Title = projectTitle,
+                Description = projectDescription,
+                Supervisor = supervisor,
+                Notification = notification,
+                Status = status,
+                Educations = new HashSet<int>()
+            };
             
-        // }
+            var created = await _repository.CreateAsync(project);
+
+            Assert.Equal(id, created.ID);
+            Assert.Equal(projectTitle, created.Title);
+            Assert.Equal()
+            
+        }*/
 
         public void Dispose()
         {

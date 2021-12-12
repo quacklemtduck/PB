@@ -64,15 +64,24 @@ namespace Infrastructure.Tests
             Assert.Equal(NotFound, response);
         }
 
-        [Fact]
-        public async Task CreateAsync_creates_new_student_with_generated_id()
+        [Theory]
+        [InlineData(7, "KU", "Markus", "Markus@gmail.com")]
+        [InlineData(7, "KU", "Gustav", "Gustav@gmail.com")]
+        [InlineData(7, "KU", "Daniel", "Daniel@gmail.com")]
+        [InlineData(7, "KU", "Jacob", "Jacob@gmail.com")]
+        [InlineData(7, "KU", "Andreas", "Andreas@gmail.com")]
+        [InlineData(7, "KU", "Line", "Line@gmail.com")]
+        public async Task CreateAsync_creates_new_student(int id, string universityAbbreviation, string studentName, string studentEmail)
         {
-            var university = new University {Name = "Københavns Universitet", Id = "KU"};
-            var student = new StudentCreateDTO{ Name = "Markus", Email="Markus@gmail.com", University = university.Name};
+            var universityRepository = new UniversityRepository(_context);
+            var university = _context.Universities.Find(universityAbbreviation);
+            
+            var student = new StudentCreateDTO{ Name = studentName, Email=studentEmail, University = university?.Name};
             var created = await _repository.CreateAsync(student);
 
             Assert.Equal(7, created.Id);
-            Assert.Equal("Markus", created.Name);
+            Assert.Equal(studentName, created.Name);
+            
         }
 
 
