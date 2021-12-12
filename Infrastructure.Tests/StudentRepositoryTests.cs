@@ -127,6 +127,47 @@ namespace Infrastructure.Tests
         }
 
 
+        [Theory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(3)]
+        [InlineData(4)]
+        [InlineData(5)]
+        public async Task Delete_returns_null(int projectID)
+        {
+            var response = await _repository.DeleteAsync(projectID);
+            _context.SaveChanges();
+
+            Project? foundProject =
+                (from p in _context.Projects
+                 where p.Id == projectID
+                 select p).SingleOrDefault();
+
+            Assert.Equal((Response.Deleted), response);
+            Assert.Null(foundProject);
+        }
+
+
+        [Fact]
+        public async Task DeleteAsync_given_non_existing_ID_returns_NotFound()
+        {
+            var response = await _repository.DeleteAsync(420);
+
+            Assert.Equal((Response.NotFound), response);
+        }
+
+        [Fact]
+        public async Task DeleteAsync_deletes_and_returns_Deleted()
+        {
+            var response = await _repository.DeleteAsync(2);
+
+            var entity = await _context.Projects.FindAsync(2);
+
+            Assert.Equal(Response.Deleted, response);
+            Assert.Null(entity);
+        }
+
+
         /*[Fact]
         public async Task ReadAllAsync_returns_all_students()
         {

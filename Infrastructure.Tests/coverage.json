@@ -154,10 +154,10 @@
         },
         "System.Void PB.Core.Option`1::.ctor(T)": {
           "Lines": {
-            "20": 82,
-            "21": 82,
-            "22": 82,
-            "23": 82
+            "20": 89,
+            "21": 89,
+            "22": 89,
+            "23": 89
           },
           "Branches": []
         }
@@ -443,13 +443,13 @@
       "PB.Infrastructure.ApplicationDbContext": {
         "Microsoft.EntityFrameworkCore.DbSet`1<PB.Infrastructure.Project> PB.Infrastructure.ApplicationDbContext::get_Projects()": {
           "Lines": {
-            "17": 66
+            "17": 72
           },
           "Branches": []
         },
         "Microsoft.EntityFrameworkCore.DbSet`1<PB.Infrastructure.Student> PB.Infrastructure.ApplicationDbContext::get_Students()": {
           "Lines": {
-            "18": 57
+            "18": 77
           },
           "Branches": []
         },
@@ -473,7 +473,7 @@
         },
         "Microsoft.EntityFrameworkCore.DbSet`1<PB.Infrastructure.University> PB.Infrastructure.ApplicationDbContext::get_Universities()": {
           "Lines": {
-            "22": 138
+            "22": 180
           },
           "Branches": []
         },
@@ -494,9 +494,9 @@
         },
         "System.Void PB.Infrastructure.ApplicationDbContext::.ctor(Microsoft.EntityFrameworkCore.DbContextOptions,Microsoft.Extensions.Options.IOptions`1<Duende.IdentityServer.EntityFramework.Options.OperationalStoreOptions>)": {
           "Lines": {
-            "13": 60,
-            "14": 60,
-            "15": 60
+            "13": 67,
+            "14": 67,
+            "15": 67
           },
           "Branches": []
         }
@@ -1568,37 +1568,37 @@
       "PB.Infrastructure.Student": {
         "System.Int32 PB.Infrastructure.Student::get_Id()": {
           "Lines": {
-            "5": 103
+            "5": 145
           },
           "Branches": []
         },
         "System.String PB.Infrastructure.Student::get_Name()": {
           "Lines": {
-            "8": 140
+            "8": 182
           },
           "Branches": []
         },
         "System.String PB.Infrastructure.Student::get_Email()": {
           "Lines": {
-            "11": 122
+            "11": 164
           },
           "Branches": []
         },
         "System.Collections.Generic.ICollection`1<PB.Infrastructure.Project> PB.Infrastructure.Student::get_Projects()": {
           "Lines": {
-            "13": 136
+            "13": 178
           },
           "Branches": []
         },
         "System.Collections.Generic.ICollection`1<PB.Infrastructure.Application> PB.Infrastructure.Student::get_Applications()": {
           "Lines": {
-            "15": 135
+            "15": 177
           },
           "Branches": []
         },
         "PB.Infrastructure.University PB.Infrastructure.Student::get_University()": {
           "Lines": {
-            "16": 121
+            "16": 163
           },
           "Branches": []
         }
@@ -1608,10 +1608,10 @@
       "PB.Infrastructure.StudentRepository": {
         "System.Void PB.Infrastructure.StudentRepository::.ctor(PB.Infrastructure.ApplicationDbContext)": {
           "Lines": {
-            "8": 14,
-            "9": 14,
-            "10": 14,
-            "11": 14
+            "8": 21,
+            "9": 21,
+            "10": 21,
+            "11": 21
           },
           "Branches": []
         }
@@ -1685,15 +1685,15 @@
       "PB.Infrastructure.StudentRepository/<DeleteAsync>d__5": {
         "System.Void PB.Infrastructure.StudentRepository/<DeleteAsync>d__5::MoveNext()": {
           "Lines": {
-            "87": 0,
-            "88": 0,
-            "90": 0,
-            "91": 0,
-            "92": 0,
-            "95": 0,
-            "96": 0,
-            "98": 0,
-            "99": 0
+            "87": 7,
+            "88": 7,
+            "90": 7,
+            "91": 1,
+            "92": 1,
+            "95": 6,
+            "96": 6,
+            "98": 6,
+            "99": 7
           },
           "Branches": [
             {
@@ -1702,7 +1702,7 @@
               "EndOffset": 200,
               "Path": 0,
               "Ordinal": 0,
-              "Hits": 0
+              "Hits": 1
             },
             {
               "Line": 90,
@@ -1710,7 +1710,7 @@
               "EndOffset": 208,
               "Path": 1,
               "Ordinal": 1,
-              "Hits": 0
+              "Hits": 6
             }
           ]
         }
@@ -2104,7 +2104,7 @@
         },
         "System.Collections.Generic.ICollection`1<PB.Infrastructure.Education> PB.Infrastructure.University::get_Educations()": {
           "Lines": {
-            "12": 356
+            "12": 398
           },
           "Branches": []
         },
@@ -2189,10 +2189,10 @@
         },
         "System.Void PB.Infrastructure.UniversityRepository::.ctor(PB.Infrastructure.ApplicationDbContext)": {
           "Lines": {
-            "13": 60,
-            "14": 60,
-            "15": 60,
-            "16": 60
+            "13": 67,
+            "14": 67,
+            "15": 67,
+            "16": 67
           },
           "Branches": []
         }
