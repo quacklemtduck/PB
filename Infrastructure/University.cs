@@ -16,9 +16,11 @@ namespace PB.Infrastructure{
             ICollection<int> EducationtIDList = new List<int>();
             if (Educations != null)
             {
+                //Console.WriteLine("--------------------------------> KOMMER VI HERIND?? ----- Elements: " + Educations.Count+ "--------------------------------> Name: " + Name);
                 foreach (Education e in Educations)
                 {
                     EducationtIDList.Add(e.Id);
+                    //Console.WriteLine("-------> " + e.Name + "<-------");
                 }
             }
             return EducationtIDList;

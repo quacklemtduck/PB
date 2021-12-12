@@ -291,13 +291,13 @@
           },
           "Branches": []
         },
-        "System.Collections.Generic.ICollection`1<System.String> PB.Core.StudentUpdateDTO::get_Projects()": {
+        "System.Collections.Generic.ICollection`1<System.Int32> PB.Core.StudentUpdateDTO::get_Projects()": {
           "Lines": {
             "23": 0
           },
           "Branches": []
         },
-        "System.Collections.Generic.ISet`1<System.String> PB.Core.StudentUpdateDTO::get_Applications()": {
+        "System.Collections.Generic.ICollection`1<System.Int32> PB.Core.StudentUpdateDTO::get_Applications()": {
           "Lines": {
             "24": 0
           },
@@ -1609,15 +1609,9 @@
           },
           "Branches": []
         },
-        "System.String PB.Infrastructure.StudentRepository/<>c::<getApplicationsAsync>b__7_1(PB.Infrastructure.Application)": {
+        "System.Int32 PB.Infrastructure.StudentRepository/<>c::<GetProjectsAsync>b__7_1(PB.Infrastructure.Project)": {
           "Lines": {
-            "108": 0
-          },
-          "Branches": []
-        },
-        "System.String PB.Infrastructure.StudentRepository/<>c::<GetProjectsAsync>b__8_1(PB.Infrastructure.Project)": {
-          "Lines": {
-            "119": 0
+            "118": 0
           },
           "Branches": []
         }
@@ -1695,83 +1689,47 @@
           ]
         }
       },
-      "PB.Infrastructure.StudentRepository/<GetProjectsAsync>d__8": {
-        "System.Void PB.Infrastructure.StudentRepository/<GetProjectsAsync>d__8::MoveNext()": {
+      "PB.Infrastructure.StudentRepository/<GetProjectsAsync>d__7": {
+        "System.Void PB.Infrastructure.StudentRepository/<GetProjectsAsync>d__7::MoveNext()": {
           "Lines": {
             "117": 0,
+            "121": 0,
             "122": 0,
             "123": 0,
             "124": 0,
-            "125": 0,
-            "126": 0,
-            "127": 0,
-            "130": 0,
-            "132": 0,
-            "133": 0
+            "125": 0
           },
           "Branches": [
             {
-              "Line": 122,
-              "Offset": 723,
-              "EndOffset": 449,
-              "Path": 1,
-              "Ordinal": 7,
-              "Hits": 0
-            },
-            {
-              "Line": 124,
-              "Offset": 491,
-              "EndOffset": 493,
-              "Path": 0,
-              "Ordinal": 0,
-              "Hits": 0
-            },
-            {
-              "Line": 124,
-              "Offset": 491,
-              "EndOffset": 513,
-              "Path": 1,
-              "Ordinal": 1,
-              "Hits": 0
-            },
-            {
-              "Line": 126,
-              "Offset": 573,
-              "EndOffset": 575,
-              "Path": 0,
-              "Ordinal": 2,
-              "Hits": 0
-            },
-            {
-              "Line": 126,
-              "Offset": 573,
-              "EndOffset": 579,
+              "Line": 121,
+              "Offset": 571,
+              "EndOffset": 443,
               "Path": 1,
               "Ordinal": 3,
               "Hits": 0
             },
             {
-              "Line": 127,
-              "Offset": 617,
-              "EndOffset": 619,
+              "Line": 123,
+              "Offset": 485,
+              "EndOffset": 487,
               "Path": 0,
-              "Ordinal": 4,
+              "Ordinal": 0,
               "Hits": 0
             },
             {
-              "Line": 127,
-              "Offset": 617,
-              "EndOffset": 623,
+              "Line": 123,
+              "Offset": 485,
+              "EndOffset": 507,
               "Path": 1,
-              "Ordinal": 5,
+              "Ordinal": 1,
               "Hits": 0
             },
             {
-              "Line": 122,
-              "Offset": 723,
-              "EndOffset": 728,
+              "Line": 121,
+              "Offset": 571,
+              "EndOffset": 576,
               "Path": 0,
-              "Ordinal": 6,
+              "Ordinal": 2,
               "Hits": 0
             }
           ]
@@ -1827,52 +1785,6 @@
               "EndOffset": 482,
               "Path": 1,
               "Ordinal": 1,
-              "Hits": 0
-            }
-          ]
-        }
-      },
-      "PB.Infrastructure.StudentRepository/<getApplicationsAsync>d__7": {
-        "System.Void PB.Infrastructure.StudentRepository/<getApplicationsAsync>d__7::MoveNext()": {
-          "Lines": {
-            "107": 0,
-            "110": 0,
-            "111": 0,
-            "112": 0,
-            "113": 0,
-            "114": 0
-          },
-          "Branches": [
-            {
-              "Line": 110,
-              "Offset": 578,
-              "EndOffset": 443,
-              "Path": 1,
-              "Ordinal": 3,
-              "Hits": 0
-            },
-            {
-              "Line": 112,
-              "Offset": 485,
-              "EndOffset": 487,
-              "Path": 0,
-              "Ordinal": 0,
-              "Hits": 0
-            },
-            {
-              "Line": 112,
-              "Offset": 485,
-              "EndOffset": 507,
-              "Path": 1,
-              "Ordinal": 1,
-              "Hits": 0
-            },
-            {
-              "Line": 110,
-              "Offset": 578,
-              "EndOffset": 583,
-              "Path": 0,
-              "Ordinal": 2,
               "Hits": 0
             }
           ]
@@ -2128,50 +2040,10 @@
           "Lines": {
             "15": 0,
             "16": 0,
-            "17": 0,
-            "18": 0,
-            "19": 0,
-            "20": 0,
-            "21": 0,
-            "22": 0,
-            "23": 0,
-            "24": 0,
-            "25": 0
+            "26": 0,
+            "27": 0
           },
-          "Branches": [
-            {
-              "Line": 17,
-              "Offset": 18,
-              "EndOffset": 20,
-              "Path": 0,
-              "Ordinal": 0,
-              "Hits": 0
-            },
-            {
-              "Line": 19,
-              "Offset": 64,
-              "EndOffset": 36,
-              "Path": 1,
-              "Ordinal": 3,
-              "Hits": 0
-            },
-            {
-              "Line": 19,
-              "Offset": 64,
-              "EndOffset": 66,
-              "Path": 0,
-              "Ordinal": 2,
-              "Hits": 0
-            },
-            {
-              "Line": 17,
-              "Offset": 18,
-              "EndOffset": 80,
-              "Path": 1,
-              "Ordinal": 1,
-              "Hits": 0
-            }
-          ]
+          "Branches": []
         }
       }
     },

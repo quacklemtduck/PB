@@ -103,15 +103,15 @@ namespace PB.Infrastructure
         string.IsNullOrWhiteSpace(name) ? null : await _context.Universities.FirstOrDefaultAsync(s => s.Name == name) ?? new University { Name = name };
 
 
-        private async IAsyncEnumerable<Application> getApplicationsAsync(IEnumerable<string> applications)
-        {
-            var existing = await _context.Applications.Where(a => applications.Contains(a.Title)).ToDictionaryAsync(a => a.Title);
+        // private async IAsyncEnumerable<Application> getApplicationsAsync(IEnumerable<string> applications)
+        // {
+        //     var existing = await _context.Applications.Where(a => applications.Contains(a.Title)).ToDictionaryAsync(a => a.Title);
 
-            foreach (var application in applications)
-            {
-                yield return existing.TryGetValue(application, out var a) ? a : new Application { Title = application };
-            }
-        }
+        //     foreach (var application in applications)
+        //     {
+        //         yield return existing.TryGetValue(application, out var a) ? a : new Application { Title = application };
+        //     }
+        // }
 
         private async IAsyncEnumerable<Project> GetProjectsAsync(IEnumerable<int> projects)
         {

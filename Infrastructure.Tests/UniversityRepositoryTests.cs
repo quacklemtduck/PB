@@ -91,6 +91,18 @@ namespace PB.Infrastructure.Tests
             Assert.Empty(university?.Educations);
         }
 
+        [Fact]
+        public async Task ReadByIDAsync_given_id_exists_returns_ITU()
+        {
+            var id = "ITU";
+            var name = "IT-Universitet i København";
+            var university = await _repository.ReadByIDAsync(id);
+            
+            Assert.Equal(id, university?.Id);
+            Assert.Equal(name, university?.Name);
+            Assert.Empty(university?.Educations);
+        }
+
 
         private bool disposed;
 
