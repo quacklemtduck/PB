@@ -30,8 +30,12 @@ namespace PB.Server.Controllers
         [Authorize]
         [HttpGet]
         public async Task<IReadOnlyCollection<ProjectListDTO>> GetAllFromSupervisor(){
+            // Console.WriteLine("----------------!!: " + ClaimTypes.NameIdentifier + "---------------");
+            // Console.WriteLine("----------------!!: " +  User.FindFirstValue(ClaimTypes.NameIdentifier) + "---------------");
+
            var user = User.FindFirstValue(ClaimTypes.NameIdentifier); 
-            //Console.WriteLine(ClaimTypes.Name);
+        //    Console.WriteLine("---------------- B ---------------");
+            
             return await _repository.ListAllAsync(user);
         }
 
@@ -95,6 +99,14 @@ namespace PB.Server.Controllers
         [ProducesResponseType(201)]
         public async Task<IActionResult> UpdateStatus(ProjectVisibilityUpdateDTO dto){
             var res = await _repository.UpdateStatusAsync(dto);
+            return res.ToActionResult();
+        }
+
+        [HttpPut]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(201)]
+        public async Task<IActionResult> UpdateChosenStudents(ProjectChosenStudentsUpdateDTO dto){
+            var res = await _repository.UpdateChosenStudentsAsync(dto);
             return res.ToActionResult();
         }
     }

@@ -36,9 +36,9 @@ namespace PB.Infrastructure
                                  entity.Supervisor?.Name,
                                  //convertDateTimeToString(entity.Deadline),
                                  entity.Notification,
-                                 entity.ChosenStudents.Select(s => s.Name).ToHashSet(),
+                                 entity.ChosenStudents.Select(s => s.Id).ToHashSet(),
                                  //entity.Tags.Select(t => t.TagName).ToHashSet(),
-                                 entity.Applications.Select(a => a.Title).ToHashSet(),
+                                 entity.Applications.Select(a => a.Id).ToHashSet(),
                                  entity.Educations.Select(u => u.Id).ToHashSet(),
                                  entity.Status
                              );
@@ -83,9 +83,9 @@ namespace PB.Infrastructure
                                p.Supervisor == null ? null : p.Supervisor.Id,
                                //convertDateTimeToString(p.Deadline),
                                p.Notification,
-                               p.ChosenStudents.Select(s => s.Name).ToHashSet(),
+                               p.ChosenStudents.Select(s => s.Id).ToHashSet(),
                                //p.Tags.Select(t => t.TagName).ToHashSet(),
-                               p.Applications.Select(a => a.Title).ToHashSet(),
+                               p.Applications.Select(a => a.Id).ToHashSet(),
                                p.Educations.Select(u => u.Id).ToHashSet(),
                                p.Status
                            );
@@ -158,24 +158,24 @@ namespace PB.Infrastructure
         //     }
         // }
 
-        private async IAsyncEnumerable<Student> GetStudentsAsync(IEnumerable<string> students)
+        private async IAsyncEnumerable<Student> GetStudentsAsync(IEnumerable<int> students)
         {
-            var existing = await _context.Students.Where(s => students.Contains(s.Name)).ToDictionaryAsync(s => s.Name);
+            var existing = await _context.Students.Where(s => students.Contains(s.Id)).ToDictionaryAsync(s => s.Id);
 
             foreach (var student in students)
             {
-                yield return existing.TryGetValue(student, out var s) ? s : new Student { Name = student };
+                yield return existing.TryGetValue(student, out var s) ? s : new Student { Id = student };
             }
         }
 
-        private async IAsyncEnumerable<Application> GetApplicationsAsync(IEnumerable<string> applications)
+        private async IAsyncEnumerable<Application> GetApplicationsAsync(IEnumerable<int> applications)
         {
-            var existing = await _context.Applications.Where(a => applications.Contains(a.Title)).ToDictionaryAsync(a => a.Title);
+            var existing = await _context.Applications.Where(a => applications.Contains(a.Id)).ToDictionaryAsync(a => a.Id);
 
             foreach (var application in applications)
             {
                 //Console.WriteLine("===========>>Application Title: " + application);
-                yield return existing.TryGetValue(application, out var a) ? a : new Application { Title = application };
+                yield return existing.TryGetValue(application, out var a) ? a : new Application { Id = application };
             }
         }
 

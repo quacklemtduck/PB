@@ -2,9 +2,9 @@
 
     public record ProjectListDTO(int ID, string Title, string Description, Status Status);
     public record ProjectVisibilityUpdateDTO(int ID, Status Status);
-    public record ProjectChosenStudentsUpdateDTO(int ID, ICollection<string> ChosenStudents);
+    public record ProjectChosenStudentsUpdateDTO(int ID, ICollection<int> ChosenStudents);
     public record ProjectDetailsDTO(
-        int ID, string Title, string? Description, string? Supervisor, bool Notification, ICollection<string> ChosenStudents, ISet<string> Applications, ISet<int> Educations, Status Status);
+        int ID, string Title, string? Description, string? Supervisor, bool Notification, ICollection<int> ChosenStudents, ISet<int> Applications, ISet<int> Educations, Status Status);
     public record ProjectCreateDTO {
         public string? Title { get; set; } //TODO: not nullable
 
@@ -27,9 +27,9 @@
 
     public record ProjectUpdateDTO : ProjectCreateDTO {
         public int ID { get; init; }
-        public ISet<string> Applications { get; set; } = new HashSet<string>();
+        public ISet<int> Applications { get; set; } = new HashSet<int>();
 
-        public ICollection<string> ChosenStudents {get; set;}  = new HashSet<string>();
+        public ICollection<int> ChosenStudents {get; set;}  = new HashSet<int>();
 
     }
 
