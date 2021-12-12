@@ -38,7 +38,6 @@ namespace Infrastructure.Tests
         public async Task ReadAsync_given_id_exists_returns_Student()
         {
             
-            
             var option = await _repository.ReadAsync(2);
             var student = option.Value;
 

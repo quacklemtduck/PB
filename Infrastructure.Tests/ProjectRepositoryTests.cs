@@ -290,34 +290,47 @@ namespace PB.Infrastructure.Tests
             }
         }
 
-        /*[Theory]
-        [InlineData(7, "KU", "Markus", "Markus@gmail.com")]
-        [InlineData(7, "KU", "Gustav", "Gustav@gmail.com")]
-        [InlineData(7, "KU", "Daniel", "Daniel@gmail.com")]
-        [InlineData(7, "KU", "Jacob", "Jacob@gmail.com")]
-        [InlineData(7, "KU", "Andreas", "Andreas@gmail.com")]
-        [InlineData(7, "KU", "Line", "Line@gmail.com")]
-        public async Task CreateAsync_creates_new_project(int id, string projectTitle, string projectDescription, bool notification, Status status)
+        [Theory]
+        [InlineData("Project 6", "This is project 6", false, Status.Hidden, 0)]
+        [InlineData("Closed project", "This is a closed project", true, Status.Closed, 1)]
+        [InlineData("Visible project", "This is a visible project", true, Status.Visible, 3)]
+        public async Task CreateAsync_creates_new_project(string projectTitle, string projectDescription, bool notification, Status status, int numberOfEducations)
         {
-            var universityRepository = new UniversityRepository(_context);
-            var university = _context.Universities.Find(universityAbbreviation);
+            SupervisorRepository supervisorRepository = new SupervisorRepository(_context);
+            var supervisorID = "1";
+
+            var educations = new HashSet<int>();
+            for (int i = 1; i < numberOfEducations+1; i++)
+            {
+                educations.Add(i);
+            }
 
             var project = new ProjectCreateDTO {
                 Title = projectTitle,
                 Description = projectDescription,
-                Supervisor = supervisor,
+                Supervisor = supervisorID,
                 Notification = notification,
                 Status = status,
-                Educations = new HashSet<int>()
+                Educations = educations
             };
             
             var created = await _repository.CreateAsync(project);
 
-            Assert.Equal(id, created.ID);
+            var projectID = 6;
+            Assert.Equal(projectID, created.ID);
             Assert.Equal(projectTitle, created.Title);
-            Assert.Equal()
+            Assert.Equal(projectDescription, created.Description);
+            Assert.Equal(_context.Supervisors.Find(supervisorID)?.Name, created.Supervisor);
+            Assert.Equal(notification, created.Notification);
+            Assert.Equal(status, created.Status);
+            Assert.Equal(numberOfEducations, created.Educations.Count);
+
+            for (int i = 1; i < numberOfEducations +1; i++)
+            {
+                Assert.Contains(i, educations);
+            }    
             
-        }*/
+        }
 
         public void Dispose()
         {
