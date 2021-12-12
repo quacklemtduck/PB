@@ -17,15 +17,15 @@ namespace PB.Infrastructure
         public async Task<IReadOnlyCollection<EducationDetailsDTO>> ReadAllByUniversityAsync(string universityId)
         {
             return await _context.Educations
-                .Where(e => e.UniversityID == universityId)
-                .Select(e => new EducationDetailsDTO(e.Id, e.Name, e.Grade, e.UniversityID))
+                .Where(e => e.University.Id == universityId)
+                .Select(e => new EducationDetailsDTO(e.Id, e.Name, e.Grade, e.University.Id))
                 .ToListAsync();
         }
 
         public async Task<EducationDetailsDTO?> ReadByIDAsync(int educationId)
         {
             var e = await _context.Educations.FindAsync(educationId);
-            return e == null ? null : new EducationDetailsDTO( e.Id, e.Name, e.Grade, e.UniversityID);
+            return e == null ? null : new EducationDetailsDTO( e.Id, e.Name, e.Grade, e.University.Id);
         }
 
     }

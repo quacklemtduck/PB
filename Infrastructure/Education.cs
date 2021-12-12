@@ -14,7 +14,7 @@ namespace PB.Infrastructure
 
         [StringLength(50)]
         public string? Grade { get; set; }
-        public string? UniversityID { get; set; }
+        //public string? UniversityID { get; set; }
 
         public University? University { get; set; }
     }

@@ -58,6 +58,9 @@ app.UseIdentityServer();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.SeedDatabase();
+app.EnsureDatabaseCreated();
+
 
 app.MapRazorPages();
 app.MapControllers();
