@@ -140,12 +140,6 @@
           },
           "Branches": []
         },
-        "T PB.Core.Option`1::op_Implicit(PB.Core.Option`1<T>)": {
-          "Lines": {
-            "25": 0
-          },
-          "Branches": []
-        },
         "PB.Core.Option`1<T> PB.Core.Option`1::op_Implicit(T)": {
           "Lines": {
             "27": 8
@@ -262,14 +256,6 @@
       }
     },
     "/Volumes/TOSHIBA EXT/ITU - Andet år/BDSA/PB/Core/StudentDTO.cs": {
-      "PB.Core.StudentDTO": {
-        "System.Void PB.Core.StudentDTO::.ctor()": {
-          "Lines": {
-            "3": 0
-          },
-          "Branches": []
-        }
-      },
       "PB.Core.StudentDetailsDTO": {
         "System.Int32 PB.Core.StudentDetailsDTO::get_Id()": {
           "Lines": {

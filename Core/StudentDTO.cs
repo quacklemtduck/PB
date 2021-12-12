@@ -1,6 +1,6 @@
 namespace PB.Core;
 
-public record StudentDTO();
+//public record StudentDTO();
 
 public record StudentDetailsDTO(int Id, string Name, string? University, string Email, ICollection<string>? Projects, ISet<string> Applications);
 public record StudentCreateDTO
