@@ -77,6 +77,35 @@ namespace Infrastructure.Tests
             Assert.Equal(NotFound, response);
         }
 
+
+        [Fact]
+        public async Task UpdateAsync_updates_existing_Student()
+        {
+            var supervisor = new Supervisor { Id = "1", Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
+            var student = _context.Students.Find(1);
+
+            var studentUpdateDTO = new StudentUpdateDTO
+            {
+                Id = student.Id,
+                Name = "Lars",
+                Email = "Lars@gmail.com",
+                Projects = new List<string>(),
+                Applications = new HashSet<string>()
+            };
+
+
+             var response = await _repository.UpdateAsync(1, studentUpdateDTO);
+
+             Assert.Equal(Updated, response);
+            var StudentUpdated = (await _repository.ReadAsync(1)).Value;
+
+            Assert.Equal("Lars", StudentUpdated.Name);
+            Assert.Equal("Lars@gmail.com", StudentUpdated.Email);
+            Assert.Equal(_context.Universities.Find("KU").Name, StudentUpdated.University);
+            Assert.Empty(StudentUpdated.Applications);
+        }
+
+
         [Theory]
         [InlineData(7, "KU", "Markus", "Markus@gmail.com")]
         [InlineData(7, "KU", "Gustav", "Gustav@gmail.com")]
