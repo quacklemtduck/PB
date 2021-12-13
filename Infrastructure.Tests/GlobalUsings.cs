@@ -9,3 +9,8 @@ global using PB.Infrastructure;
 global using PB.Core;
 global using static PB.Core.Response;
 global using Duende.IdentityServer.EntityFramework.Options;
+global using MailKit.Net.Pop3;
+global using MailKit.Net.Imap;
+global using MailKit.Search;
+global using MailKit;
+global using System.Threading.Tasks;

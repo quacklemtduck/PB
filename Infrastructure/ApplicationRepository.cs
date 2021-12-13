@@ -11,7 +11,7 @@ namespace PB.Infrastructure
         }
 
         public async Task<ApplicationDetailsDTO> CreateAsync(ApplicationCreateDTO application)
-        {
+        {   
             var entity = new Application{
                 Title = application.Title,
                 Description = application.Description,
@@ -21,6 +21,9 @@ namespace PB.Infrastructure
             _context.Applications.Add(entity);
 
             await _context.SaveChangesAsync();
+
+            await EmailSender.SendNewApplicationNotificationAsync(entity);
+
             return new ApplicationDetailsDTO(entity.Id,entity.StudentID,entity.ProjectID,entity.Description,entity.Title);
         }
 

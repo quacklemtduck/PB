@@ -42,9 +42,9 @@ namespace PB.Infrastructure
                                  entity.Status
                              );
         }
-
+        //add notifications for students who applied to a deleted project??
         public async Task<Response> DeleteAsync(int projectID)
-        {
+        { 
             var entity = await _context.Projects.FindAsync(projectID);
 
             if (entity == null)
@@ -54,6 +54,8 @@ namespace PB.Infrastructure
 
             _context.Projects.Remove(entity);
             await _context.SaveChangesAsync();
+            //Sends notifications to students if project is deleted
+            //await EmailSender.SendProjectDeletedNotificationAsync(entity);
 
             return Response.Deleted;
         }
@@ -91,7 +93,7 @@ namespace PB.Infrastructure
 
             return await projects.FirstOrDefaultAsync();
         }
-
+        //add notifications for students who applied to an updated project??
         public async Task<Response> UpdateAsync(ProjectUpdateDTO project)
         {
             var entity = await _context.Projects.Include(p => p.ChosenStudents).Include(p => p.Applications).Include(p => p.Educations).FirstOrDefaultAsync(p => p.Id == project.ID);
@@ -126,9 +128,7 @@ namespace PB.Infrastructure
             entity.Status = dto.Status;
             await _context.SaveChangesAsync();
             return Response.Updated;
-        }
-
-        
+        }        
 
 
         //help methods:

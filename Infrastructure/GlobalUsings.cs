@@ -13,3 +13,6 @@ global using System;
 global using System.Globalization;
 global using static PB.Core.Response;
 global using Microsoft.CodeAnalysis;
+global using MailKit.Net.Smtp;
+global using MailKit;
+global using MimeKit;
