@@ -94,21 +94,23 @@ namespace PB.Server.Controllers
                => (await _repository.UpdateAsync(project)).ToActionResult();
 
         //[Authorize] //Supervisor
-        [HttpPost("{id}")]
+        [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> DeleteProject(ProjectDeleteDTO req)
         {
-            var result = await _repository.ReadByIDAsync(id);
+            Console.WriteLine($"---------{req.ID}----------HHEHEHEHEEH-------------");
+            var result = await _repository.ReadByIDAsync(req.ID);
             if (result.IsSome)
             {
+                Console.WriteLine("---------FOUDN SOMETHING-------");
                 var user = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 if (user != null)
                 {
                     Console.WriteLine($"-------KIG HER {user} -- {result.Value.Supervisor}");
                     if (user == result.Value.Supervisor)
                     {
-                        return (await _repository.DeleteAsync(id)).ToActionResult();
+                        return (await _repository.DeleteAsync(req.ID)).ToActionResult();
                     }
                 }
 
@@ -120,7 +122,6 @@ namespace PB.Server.Controllers
                 return NotFound();
             }
         }
-        //=> (await _repository.DeleteAsync(id)).ToActionResult();
 
         [HttpPut]
         [ProducesResponseType(404)]
