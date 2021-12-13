@@ -4,6 +4,7 @@
 @using System.Net.Http
 @inject HttpClient http
 @inject NavigationManager NavigationManager
+@inject IJSRuntime JsRuntime
 
 <style>
     form .row {
@@ -81,6 +82,8 @@ else
             var created = await res.Content.ReadFromJsonAsync<ProjectDetailsDTO>();
             var uri = $"{NavigationManager.BaseUri}project/{created.ID}";
             NavigationManager.NavigateTo(uri);
+            await JsRuntime.InvokeVoidAsync("alert", "Project created succesfully!"); //Popup when succesfully created project.
+
         }
     //Called when you press save on project form
     }
