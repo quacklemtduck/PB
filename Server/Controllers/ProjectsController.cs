@@ -94,7 +94,7 @@ namespace PB.Server.Controllers
                => (await _repository.UpdateAsync(project)).ToActionResult();
 
         //[Authorize] //Supervisor
-        [HttpDelete("{id}")]
+        [HttpPost("{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
         public async Task<IActionResult> Delete(int id)
