@@ -148,10 +148,10 @@
         },
         "System.Void PB.Core.Option`1::.ctor(T)": {
           "Lines": {
-            "20": 98,
-            "21": 98,
-            "22": 98,
-            "23": 98
+            "20": 99,
+            "21": 99,
+            "22": 99,
+            "23": 99
           },
           "Branches": []
         }
@@ -389,7 +389,7 @@
         },
         "System.String PB.Infrastructure.Application::get_Title()": {
           "Lines": {
-            "7": 49
+            "7": 50
           },
           "Branches": []
         },
@@ -407,7 +407,7 @@
         },
         "PB.Infrastructure.Student PB.Infrastructure.Application::get_Student()": {
           "Lines": {
-            "10": 44
+            "10": 45
           },
           "Branches": []
         },
@@ -419,7 +419,7 @@
         },
         "PB.Infrastructure.Project PB.Infrastructure.Application::get_Project()": {
           "Lines": {
-            "12": 44
+            "12": 45
           },
           "Branches": []
         }
@@ -429,13 +429,13 @@
       "PB.Infrastructure.ApplicationDbContext": {
         "Microsoft.EntityFrameworkCore.DbSet`1<PB.Infrastructure.Project> PB.Infrastructure.ApplicationDbContext::get_Projects()": {
           "Lines": {
-            "17": 74
+            "17": 78
           },
           "Branches": []
         },
         "Microsoft.EntityFrameworkCore.DbSet`1<PB.Infrastructure.Student> PB.Infrastructure.ApplicationDbContext::get_Students()": {
           "Lines": {
-            "18": 82
+            "18": 83
           },
           "Branches": []
         },
@@ -447,13 +447,13 @@
         },
         "Microsoft.EntityFrameworkCore.DbSet`1<PB.Infrastructure.Application> PB.Infrastructure.ApplicationDbContext::get_Applications()": {
           "Lines": {
-            "20": 39
+            "20": 40
           },
           "Branches": []
         },
         "Microsoft.EntityFrameworkCore.DbSet`1<PB.Infrastructure.University> PB.Infrastructure.ApplicationDbContext::get_Universities()": {
           "Lines": {
-            "22": 202
+            "22": 203
           },
           "Branches": []
         },
@@ -474,9 +474,9 @@
         },
         "System.Void PB.Infrastructure.ApplicationDbContext::.ctor(Microsoft.EntityFrameworkCore.DbContextOptions,Microsoft.Extensions.Options.IOptions`1<Duende.IdentityServer.EntityFramework.Options.OperationalStoreOptions>)": {
           "Lines": {
-            "13": 75,
-            "14": 75,
-            "15": 75
+            "13": 76,
+            "14": 76,
+            "15": 76
           },
           "Branches": []
         }
@@ -1116,19 +1116,19 @@
       "PB.Infrastructure.Project": {
         "System.Int32 PB.Infrastructure.Project::get_Id()": {
           "Lines": {
-            "7": 134
+            "7": 139
           },
           "Branches": []
         },
         "System.String PB.Infrastructure.Project::get_Title()": {
           "Lines": {
-            "9": 138
+            "9": 143
           },
           "Branches": []
         },
         "System.String PB.Infrastructure.Project::get_Description()": {
           "Lines": {
-            "10": 137
+            "10": 142
           },
           "Branches": []
         },
@@ -1140,7 +1140,7 @@
         },
         "PB.Infrastructure.Supervisor PB.Infrastructure.Project::get_Supervisor()": {
           "Lines": {
-            "12": 135
+            "12": 140
           },
           "Branches": []
         },
@@ -1158,19 +1158,19 @@
         },
         "System.Collections.Generic.ICollection`1<PB.Infrastructure.Application> PB.Infrastructure.Project::get_Applications()": {
           "Lines": {
-            "17": 137
+            "17": 142
           },
           "Branches": []
         },
         "System.Collections.Generic.ICollection`1<PB.Infrastructure.Education> PB.Infrastructure.Project::get_Educations()": {
           "Lines": {
-            "18": 140
+            "18": 145
           },
           "Branches": []
         },
         "System.Collections.Generic.ICollection`1<PB.Infrastructure.Student> PB.Infrastructure.Project::get_ChosenStudents()": {
           "Lines": {
-            "20": 138
+            "20": 143
           },
           "Branches": []
         }
@@ -1180,10 +1180,10 @@
       "PB.Infrastructure.ProjectRepository": {
         "System.Void PB.Infrastructure.ProjectRepository::.ctor(PB.Infrastructure.ApplicationDbContext)": {
           "Lines": {
-            "9": 23,
-            "10": 23,
-            "11": 23,
-            "12": 23
+            "9": 24,
+            "10": 24,
+            "11": 24,
+            "12": 24
           },
           "Branches": []
         }
@@ -1272,15 +1272,15 @@
       "PB.Infrastructure.ProjectRepository/<DeleteAsync>d__3": {
         "System.Void PB.Infrastructure.ProjectRepository/<DeleteAsync>d__3::MoveNext()": {
           "Lines": {
-            "48": 7,
-            "49": 7,
-            "51": 7,
+            "48": 8,
+            "49": 8,
+            "51": 8,
             "52": 1,
             "53": 1,
-            "56": 6,
-            "57": 6,
-            "59": 6,
-            "60": 7
+            "56": 7,
+            "57": 7,
+            "59": 7,
+            "60": 8
           },
           "Branches": [
             {
@@ -1297,7 +1297,7 @@
               "EndOffset": 208,
               "Path": 1,
               "Ordinal": 1,
-              "Hits": 6
+              "Hits": 7
             }
           ]
         }
@@ -1554,31 +1554,31 @@
         },
         "System.String PB.Infrastructure.Student::get_Name()": {
           "Lines": {
-            "8": 184
+            "8": 185
           },
           "Branches": []
         },
         "System.String PB.Infrastructure.Student::get_Email()": {
           "Lines": {
-            "11": 172
+            "11": 173
           },
           "Branches": []
         },
         "System.Collections.Generic.ICollection`1<PB.Infrastructure.Project> PB.Infrastructure.Student::get_Projects()": {
           "Lines": {
-            "13": 184
+            "13": 185
           },
           "Branches": []
         },
         "System.Collections.Generic.ICollection`1<PB.Infrastructure.Application> PB.Infrastructure.Student::get_Applications()": {
           "Lines": {
-            "15": 182
+            "15": 183
           },
           "Branches": []
         },
         "PB.Infrastructure.University PB.Infrastructure.Student::get_University()": {
           "Lines": {
-            "16": 170
+            "16": 171
           },
           "Branches": []
         }
@@ -1836,25 +1836,25 @@
       "PB.Infrastructure.Supervisor": {
         "System.String PB.Infrastructure.Supervisor::get_Id()": {
           "Lines": {
-            "5": 85
+            "5": 86
           },
           "Branches": []
         },
         "System.String PB.Infrastructure.Supervisor::get_Name()": {
           "Lines": {
-            "8": 90
+            "8": 91
           },
           "Branches": []
         },
         "System.String PB.Infrastructure.Supervisor::get_Email()": {
           "Lines": {
-            "12": 83
+            "12": 84
           },
           "Branches": []
         },
         "System.Collections.Generic.ICollection`1<PB.Infrastructure.Project> PB.Infrastructure.Supervisor::get_Projects()": {
           "Lines": {
-            "14": 161
+            "14": 163
           },
           "Branches": []
         }
@@ -2032,7 +2032,7 @@
         },
         "System.Collections.Generic.ICollection`1<PB.Infrastructure.Education> PB.Infrastructure.University::get_Educations()": {
           "Lines": {
-            "12": 473
+            "12": 479
           },
           "Branches": []
         },
@@ -2117,10 +2117,10 @@
         },
         "System.Void PB.Infrastructure.UniversityRepository::.ctor(PB.Infrastructure.ApplicationDbContext)": {
           "Lines": {
-            "13": 82,
-            "14": 82,
-            "15": 82,
-            "16": 82
+            "13": 83,
+            "14": 83,
+            "15": 83,
+            "16": 83
           },
           "Branches": []
         }

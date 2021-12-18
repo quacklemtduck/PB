@@ -89,6 +89,16 @@ namespace PB.Infrastructure.Tests
         }
 
         [Fact]
+        public async Task DeleteAsync_deletes_the_last_and_returns_Deleted()
+        {
+            var response = await _repository.DeleteAsync(5);
+
+            var entity = await _context.Projects.FindAsync(5);
+
+            Assert.Equal(Response.Deleted, response);
+            Assert.Null(entity);
+        }
+        [Fact]
         public async Task ListAllAsync_returns_all_projects()
         {
             var projects = await _repository.ListAllAsync();
@@ -260,6 +270,53 @@ namespace PB.Infrastructure.Tests
 
 
         [Fact]
+        public async Task UpdateAsync_adds_two_students_with_same_name_existing_Project()
+        {
+            var university = _context.Universities.Find("KU");
+            var student1 = new Student {Name = "Test", Email = "Test1@gmail.com", University = university };
+            var student2 = new Student {Name = "Test", Email = "Test2@gmail.com", University = university };
+            _context.Students.AddRange(
+                student1, student2
+            );
+            _context.SaveChanges();
+
+            var supervisor = new Supervisor { Id = "1", Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
+
+            var ChosenStudents = new HashSet<int>();
+            ChosenStudents.Add(student1.Id);
+            ChosenStudents.Add(student2.Id);
+
+            var project = new ProjectChosenStudentsUpdateDTO(4, ChosenStudents);
+
+            var response = await _repository.UpdateChosenStudentsAsync(project);
+
+            Assert.Equal(Updated, response);
+            var projectUpdated = (await _repository.ReadByIDAsync(4)).Value;
+
+
+            Assert.Equal("Project4", projectUpdated.Title);
+            Assert.Equal("This is project 4", projectUpdated.Description);
+            Assert.Equal(false, projectUpdated.Notification);
+            Assert.Equal(Status.Visible, projectUpdated.Status);
+            Assert.Empty(projectUpdated.Applications);
+            Assert.Empty(projectUpdated.Educations);
+
+
+            // foreach (string student in projectUpdated.ChosenStudents)
+            // {
+            //     Console.WriteLine("---------------------------------" + student + "------------------------------------");
+            // }
+
+            Assert.Equal(2, projectUpdated.ChosenStudents.Count);
+            Assert.True(projectUpdated.ChosenStudents.Contains(student1.Id));
+            Assert.True(projectUpdated.ChosenStudents.Contains(student2.Id));
+            Assert.Equal(2, projectUpdated.ChosenStudents.Count());
+
+            Assert.Empty(projectUpdated.Applications);
+            Assert.Empty(projectUpdated.Educations);
+        }
+
+                [Fact]
         public async Task UpdateAsync_adds_students_existing_Project()
         {
             var university = _context.Universities.Find("KU");
