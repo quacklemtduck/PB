@@ -32,3 +32,7 @@
 
     }
 
+    public record ProjectDeleteDTO{
+        public int ID {get; init;}
+    }
+

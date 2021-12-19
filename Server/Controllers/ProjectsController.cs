@@ -29,8 +29,9 @@ namespace PB.Server.Controllers
 
         [Authorize]
         [HttpGet]
-        public async Task<IReadOnlyCollection<ProjectListDTO>> GetAllFromSupervisor(){
-           var user = User.FindFirstValue(ClaimTypes.NameIdentifier); 
+        public async Task<IReadOnlyCollection<ProjectListDTO>> GetAllFromSupervisor()
+        {
+            var user = User.FindFirstValue(ClaimTypes.NameIdentifier);
             //Console.WriteLine(ClaimTypes.Name);
             return await _repository.ListAllAsync(user);
         }
@@ -40,25 +41,34 @@ namespace PB.Server.Controllers
         [ProducesResponseType(401)]
         [ProducesResponseType(typeof(ProjectDetailsDTO), 200)]
         [HttpGet("{id}", Name = "Get")]
-        public async Task<ActionResult<ProjectDetailsDTO>> Get(int id){
+        public async Task<ActionResult<ProjectDetailsDTO>> Get(int id)
+        {
             Console.WriteLine("---------------- GOT REQUEST ---------------");
             var result = await _repository.ReadByIDAsync(id);
-            if(result.IsSome){
-                if (result.Value.Status != Status.Visible){
+            if (result.IsSome)
+            {
+                if (result.Value.Status != Status.Visible)
+                {
                     var user = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                    if(user != null){
+                    if (user != null)
+                    {
                         Console.WriteLine($"-------KIG HER {user} -- {result.Value.Supervisor}");
-                        if(user == result.Value.Supervisor){
+                        if (user == result.Value.Supervisor)
+                        {
                             return result.ToActionResult();
                         }
                     }
 
                     return Unauthorized();
-                    
-                } else{
+
+                }
+                else
+                {
                     return result.ToActionResult();
                 }
-            }else{
+            }
+            else
+            {
                 return result.ToActionResult();
             }
         }
@@ -84,16 +94,37 @@ namespace PB.Server.Controllers
                => (await _repository.UpdateAsync(project)).ToActionResult();
 
         //[Authorize] //Supervisor
-        [HttpDelete("{id}")]
+        [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
-        public async Task<IActionResult> Delete(int id)
-              => (await _repository.DeleteAsync(id)).ToActionResult();
+        public async Task<IActionResult> DeleteProject(ProjectDeleteDTO req)
+        {
+            var result = await _repository.ReadByIDAsync(req.ID);
+            if (result != null)
+            {
+                var user = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                if (user != null)
+                {
+                    if (user == result.Value.Supervisor)
+                    {
+                        return (await _repository.DeleteAsync(req.ID)).ToActionResult();
+                    }
+                }
+
+                return Unauthorized();
+
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
 
         [HttpPut]
         [ProducesResponseType(404)]
         [ProducesResponseType(201)]
-        public async Task<IActionResult> UpdateStatus(ProjectVisibilityUpdateDTO dto){
+        public async Task<IActionResult> UpdateStatus(ProjectVisibilityUpdateDTO dto)
+        {
             var res = await _repository.UpdateStatusAsync(dto);
             return res.ToActionResult();
         }

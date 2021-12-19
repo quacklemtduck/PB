@@ -18,12 +18,16 @@
             </div>
             <div>
                 <p>Visibility: @project.Status</p>
-                @if(project.Status == Status.Visible){
-                <RadzenButton Click=@(args => ChangeVisibility(project.ID, Status.Hidden)) Text="Make Hidden"/>
-                }else{
-                    <RadzenButton Click=@(args => ChangeVisibility(project.ID, Status.Visible)) Text="Make Visible"/>
+                @if (project.Status == Status.Visible)
+                {
+                    <RadzenButton Click=@(args => ChangeVisibility(project.ID, Status.Hidden)) Text="Make Hidden" />
+                }
+                else
+                {
+                    <RadzenButton Click=@(args => ChangeVisibility(project.ID, Status.Visible)) Text="Make Visible" />
                 }
             </div>
+            <RadzenButton Click=@(args => DeleteProject(project.ID)) Text="Delete" />
         </RadzenCard>
     </Template>
 </RadzenDataList>
@@ -39,6 +43,17 @@
     async void ChangeVisibility(int id, Status status)
     {
         var result = await ProjectService.UpdateProjectVisibility(http, new ProjectVisibilityUpdateDTO(id, status));
+        if (result.IsSuccessStatusCode)
+        {
+            await OnInitializedAsync();
+            StateHasChanged();
+        }
+    }
+
+    async void DeleteProject(int id)
+    {
+        Console.WriteLine($"Id: {id}");
+        var result = await ProjectService.DeleteProject(http, id);
         if (result.IsSuccessStatusCode)
         {
             await OnInitializedAsync();

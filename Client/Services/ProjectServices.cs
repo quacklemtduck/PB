@@ -31,6 +31,11 @@ namespace PB.Client.Services
             var result = await http.PutAsJsonAsync("api/Projects/UpdateStatus", req);
             return result;
         }
+
+        public async static Task<HttpResponseMessage?> DeleteProject(HttpClient http, int id){
+            var result = await http.PostAsJsonAsync("api/Projects/DeleteProject", new ProjectDeleteDTO{ID=id});
+            return result;
+        }
     }
 
 }

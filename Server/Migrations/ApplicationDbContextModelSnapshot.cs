@@ -158,6 +158,21 @@ namespace PB.Server.Migrations
                     b.ToTable("PersistedGrants", (string)null);
                 });
 
+            modelBuilder.Entity("EducationProject", b =>
+                {
+                    b.Property<int>("EducationsId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ProjectsId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("EducationsId", "ProjectsId");
+
+                    b.HasIndex("ProjectsId");
+
+                    b.ToTable("EducationProject");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -406,15 +421,10 @@ namespace PB.Server.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("ProjectId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("UniversityId")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ProjectId");
 
                     b.HasIndex("UniversityId");
 
@@ -541,6 +551,21 @@ namespace PB.Server.Migrations
                     b.ToTable("ProjectStudent");
                 });
 
+            modelBuilder.Entity("EducationProject", b =>
+                {
+                    b.HasOne("PB.Infrastructure.Education", null)
+                        .WithMany()
+                        .HasForeignKey("EducationsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PB.Infrastructure.Project", null)
+                        .WithMany()
+                        .HasForeignKey("ProjectsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -613,10 +638,6 @@ namespace PB.Server.Migrations
 
             modelBuilder.Entity("PB.Infrastructure.Education", b =>
                 {
-                    b.HasOne("PB.Infrastructure.Project", null)
-                        .WithMany("Educations")
-                        .HasForeignKey("ProjectId");
-
                     b.HasOne("PB.Infrastructure.University", "University")
                         .WithMany("Educations")
                         .HasForeignKey("UniversityId");
@@ -662,8 +683,6 @@ namespace PB.Server.Migrations
             modelBuilder.Entity("PB.Infrastructure.Project", b =>
                 {
                     b.Navigation("Applications");
-
-                    b.Navigation("Educations");
                 });
 
             modelBuilder.Entity("PB.Infrastructure.Student", b =>

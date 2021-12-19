@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PB.Server.Migrations
 {
-    public partial class UniEdu : Migration
+    public partial class delete : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -275,6 +275,26 @@ namespace PB.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Educations",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    Grade = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    UniversityId = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Educations", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Educations_Universities_UniversityId",
+                        column: x => x.UniversityId,
+                        principalTable: "Universities",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Students",
                 columns: table => new
                 {
@@ -295,29 +315,27 @@ namespace PB.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Educations",
+                name: "EducationProject",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
-                    Grade = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
-                    UniversityId = table.Column<string>(type: "TEXT", nullable: true),
-                    ProjectId = table.Column<int>(type: "INTEGER", nullable: true)
+                    EducationsId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ProjectsId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Educations", x => x.Id);
+                    table.PrimaryKey("PK_EducationProject", x => new { x.EducationsId, x.ProjectsId });
                     table.ForeignKey(
-                        name: "FK_Educations_Projects_ProjectId",
-                        column: x => x.ProjectId,
+                        name: "FK_EducationProject_Educations_EducationsId",
+                        column: x => x.EducationsId,
+                        principalTable: "Educations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EducationProject_Projects_ProjectsId",
+                        column: x => x.ProjectsId,
                         principalTable: "Projects",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Educations_Universities_UniversityId",
-                        column: x => x.UniversityId,
-                        principalTable: "Universities",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -431,9 +449,9 @@ namespace PB.Server.Migrations
                 column: "Expiration");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Educations_ProjectId",
-                table: "Educations",
-                column: "ProjectId");
+                name: "IX_EducationProject_ProjectsId",
+                table: "EducationProject",
+                column: "ProjectsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Educations_UniversityId",
@@ -505,7 +523,7 @@ namespace PB.Server.Migrations
                 name: "DeviceCodes");
 
             migrationBuilder.DropTable(
-                name: "Educations");
+                name: "EducationProject");
 
             migrationBuilder.DropTable(
                 name: "Keys");
@@ -524,6 +542,9 @@ namespace PB.Server.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Educations");
 
             migrationBuilder.DropTable(
                 name: "Projects");
