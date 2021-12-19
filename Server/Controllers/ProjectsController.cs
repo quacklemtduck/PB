@@ -100,7 +100,7 @@ namespace PB.Server.Controllers
         public async Task<IActionResult> DeleteProject(ProjectDeleteDTO req)
         {
             var result = await _repository.ReadByIDAsync(req.ID);
-            if (result.IsSome)
+            if (result != null)
             {
                 var user = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 if (user != null)
