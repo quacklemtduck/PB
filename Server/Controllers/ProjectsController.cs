@@ -81,6 +81,7 @@ namespace PB.Server.Controllers
             project.Supervisor = User.FindFirstValue(ClaimTypes.NameIdentifier);
             Console.WriteLine("----------------------------- KIG HER ---------------------------");
             Console.WriteLine(project.Supervisor);
+            Console.WriteLine(project.Id);
             var created = await _repository.CreateAsync(project);
 
             return CreatedAtRoute("Get", new { created.ID }, created);

@@ -14,7 +14,7 @@
 
 <h2>Create new project</h2>
 
-@if (project == null)
+@if (project == null || Educations == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -72,7 +72,10 @@ else
 }
 
 @code {
-    private TempProject project {get; set;} = new TempProject();
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public int? Pid {get; set;}
+    private TempProject? project {get; set;}
     //IEnumerable<int> ChosenEducations;
     ICollection<EducationDetailsDTO> Educations;
     public class TempProject
@@ -85,16 +88,27 @@ else
 
 
 
-        protected override async Task OnInitializedAsync()
-        {
-            Educations = (await UniversityService.GetAllEducations(http)).OrderBy(e => e.UniversityId).ThenBy(e => e.Name).ToList();
-        }
+    protected override async Task OnInitializedAsync()
+    {
+        Educations = (await UniversityService.GetAllEducations(http)).OrderBy(e => e.UniversityId).ThenBy(e => e.Name).ToList();
 
+        if(Pid != null){
+            var result = await ProjectService.GetProject(http, Pid);
+            if(result != null){
+                project = new TempProject{Title=result.Title, Notification=result.Notification, Description=result.Description, ChosenEducations=result.Educations};
+            }else{
+                project = new TempProject();
+            }
+        }else{
+            project = new TempProject();
+        }
+    }
     
 
     async void Submit(TempProject arg)
     {
         var req = new ProjectCreateDTO{Title= arg.Title, Description=arg.Description, Notification= arg.Notification, Educations= arg.ChosenEducations.ToHashSet()};
+        if(Pid != null){req.Id = Pid;}
         Console.WriteLine(arg.Notification);
         Console.WriteLine(arg.Title);
         Console.WriteLine(arg.Description);
@@ -123,6 +137,6 @@ else
 
     void Cancel()
     {
-        //Called when you press cancel on project form
+        NavigationManager.NavigateTo($"{NavigationManager.BaseUri}MyProjects");
     }
-}5ValueProperty56Chang67Style78Class8990Changed0        __builder.AddAttribute(__seq11, "ValueExpression", __arg11);
+}

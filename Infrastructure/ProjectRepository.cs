@@ -33,10 +33,8 @@ namespace PB.Infrastructure
                                  entity.Title,
                                  entity.Description,
                                  entity.Supervisor?.Name,
-                                 //convertDateTimeToString(entity.Deadline),
                                  entity.Notification,
                                  entity.ChosenStudents.Select(s => s.Name).ToHashSet(),
-                                 //entity.Tags.Select(t => t.TagName).ToHashSet(),
                                  entity.Applications.Select(a => a.Title).ToHashSet(),
                                  entity.Educations.Select(u => u.Id).ToHashSet(),
                                  entity.Status
