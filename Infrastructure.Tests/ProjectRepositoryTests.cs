@@ -125,7 +125,7 @@ namespace PB.Infrastructure.Tests
 
             var project = new ProjectUpdateDTO
             {
-                ID = 42,
+                Id = 42,
                 Title = "Project5",
                 Description = "This is project 5",
                 Supervisor = supervisor.ToString(),
@@ -148,7 +148,7 @@ namespace PB.Infrastructure.Tests
 
             var project = new ProjectUpdateDTO
             {
-                ID = 5,
+                Id = 5,
                 Title = "newProject5",
                 Description = "This is project 5, version 2",
                 Notification = false,
@@ -162,8 +162,8 @@ namespace PB.Infrastructure.Tests
             Assert.Equal(Updated, response);
             var projectUpdated = (await _repository.ReadByIDAsync(5)).Value;
             Assert.Equal("newProject5", projectUpdated.Title);
-            Assert.Empty(projectUpdated.ChosenStudents);
-            Assert.Empty(projectUpdated.Applications);
+            //Assert.Empty(projectUpdated.ChosenStudents);
+            //Assert.Empty(projectUpdated.Applications);
             Assert.Empty(projectUpdated.Educations);
         }
 
@@ -177,7 +177,7 @@ namespace PB.Infrastructure.Tests
 
             var project = new ProjectUpdateDTO
             {
-                ID = 5,
+                Id = 5,
                 Title = "newProject5",
                 Description = "This is project 5, version 2",
                 Supervisor = "Supervisor1",
@@ -194,10 +194,9 @@ namespace PB.Infrastructure.Tests
             var projectUpdated = (await _repository.ReadByIDAsync(5)).Value;
             
             Assert.Equal("newProject5" , projectUpdated.Title);
-            Assert.Equal(1 , projectUpdated.ChosenStudents.Count);
-            Assert.True(projectUpdated.ChosenStudents.Contains(student.Name));
-            Assert.Equal(1, projectUpdated.ChosenStudents.Count());
-            Assert.Empty(projectUpdated.Applications);
+            //Assert.Equal(1 , projectUpdated.ChosenStudents.Count);
+            //Assert.True(projectUpdated.ChosenStudents.Contains(student.Name));
+            //Assert.Empty(projectUpdated.Applications);
             Assert.Empty(projectUpdated.Educations);
         }
 
@@ -213,7 +212,7 @@ namespace PB.Infrastructure.Tests
 
             var project = new ProjectUpdateDTO
             {
-                ID = 5,
+                Id = 5,
                 Title = "newProject5",
                 Description = "This is project 5, version 2",
                 Supervisor = "Supervisor1",
