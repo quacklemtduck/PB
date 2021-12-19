@@ -17,7 +17,7 @@ namespace PB.Client.Services
             }
         }
 
-        public async static Task<HttpResponseMessage?> CreateProject(HttpClient http, ProjectCreateDTO req){
+        public async static Task<HttpResponseMessage?> PostProject(HttpClient http, ProjectCreateDTO req){
             var result = await http.PostAsJsonAsync("api/Projects/Post", req);
             return result;
         }

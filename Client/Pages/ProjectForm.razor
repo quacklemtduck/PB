@@ -12,7 +12,6 @@
     }
 </style>
 
-<h2>Create new project</h2>
 
 @if (project == null || Educations == null)
 {
@@ -20,6 +19,11 @@
 }
 else
 {
+    @if(IsEditing){
+<h2>Edit project</h2>
+}else{
+<h2>Create new project</h2>
+}
     <RadzenTemplateForm Data="@project" Submit="@((TempProject args) => { Submit(args); })">
 
         <RadzenFieldset Text="" style="width: 100%;">
@@ -75,6 +79,7 @@ else
     [Parameter]
     [SupplyParameterFromQuery]
     public int? Pid {get; set;}
+    public bool IsEditing {get; set;}
     private TempProject? project {get; set;}
     //IEnumerable<int> ChosenEducations;
     ICollection<EducationDetailsDTO> Educations;
@@ -84,6 +89,8 @@ else
         public bool Notification { get; set; }
         public string Description { get; set; }
         public IEnumerable<int> ChosenEducations { get; set; } = new HashSet<int>();
+        
+        public Status Status {get; set;} = Status.Hidden;
     }
 
 
@@ -95,8 +102,10 @@ else
         if(Pid != null){
             var result = await ProjectService.GetProject(http, Pid);
             if(result != null){
-                project = new TempProject{Title=result.Title, Notification=result.Notification, Description=result.Description, ChosenEducations=result.Educations};
+                IsEditing = true;
+                project = new TempProject{Title=result.Title, Notification=result.Notification, Description=result.Description, ChosenEducations=result.Educations, Status=result.Status};
             }else{
+                Pid = null;
                 project = new TempProject();
             }
         }else{
@@ -107,13 +116,13 @@ else
 
     async void Submit(TempProject arg)
     {
-        var req = new ProjectCreateDTO{Title= arg.Title, Description=arg.Description, Notification= arg.Notification, Educations= arg.ChosenEducations.ToHashSet()};
+        var req = new ProjectCreateDTO{Title= arg.Title, Description=arg.Description, Notification= arg.Notification, Educations= arg.ChosenEducations.ToHashSet(), Status=arg.Status};
         if(Pid != null){req.Id = Pid;}
         Console.WriteLine(arg.Notification);
         Console.WriteLine(arg.Title);
         Console.WriteLine(arg.Description);
         Console.WriteLine(arg.ChosenEducations.First());
-        var res = await ProjectService.CreateProject(http, req);
+        var res = await ProjectService.PostProject(http, req);
         Console.WriteLine(res!.ToString());
         if (res.IsSuccessStatusCode)
         {

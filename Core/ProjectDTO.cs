@@ -26,7 +26,6 @@
     }
 
     public record ProjectUpdateDTO : ProjectCreateDTO {
-        public int ID { get; init; }
         public ISet<string> Applications { get; set; } = new HashSet<string>();
 
         public ICollection<string> ChosenStudents {get; set;}  = new HashSet<string>();
