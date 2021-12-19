@@ -99,15 +99,12 @@ namespace PB.Server.Controllers
         [ProducesResponseType(404)]
         public async Task<IActionResult> DeleteProject(ProjectDeleteDTO req)
         {
-            Console.WriteLine($"---------{req.ID}----------HHEHEHEHEEH-------------");
             var result = await _repository.ReadByIDAsync(req.ID);
             if (result.IsSome)
             {
-                Console.WriteLine("---------FOUDN SOMETHING-------");
                 var user = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 if (user != null)
                 {
-                    Console.WriteLine($"-------KIG HER {user} -- {result.Value.Supervisor}");
                     if (user == result.Value.Supervisor)
                     {
                         return (await _repository.DeleteAsync(req.ID)).ToActionResult();
