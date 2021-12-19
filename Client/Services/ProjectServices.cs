@@ -36,6 +36,10 @@ namespace PB.Client.Services
             var result = await http.PostAsJsonAsync("api/Projects/DeleteProject", new ProjectDeleteDTO{ID=id});
             return result;
         }
+
+        public async static Task<ICollection<EducationDetailsDTO>> GetAllEducations(HttpClient http){
+            return await http.GetFromJsonAsync<EducationDetailsDTO[]>("api/University/GetAllEducations");
+        }
     }
 
 }

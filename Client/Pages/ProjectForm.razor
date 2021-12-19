@@ -47,6 +47,18 @@ else
                     <RadzenTextArea @bind-Value=@project.Description style="width: 100%" Name="Description" />
                 </div>
             </div>
+            <div class="row">
+                <RadzenCard>
+                <h4>Select Educations</h4>
+                <p>Select the educations that you want your project to be visible to!</p>
+                <RadzenListBox AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" @bind-Value=@project.ChosenEducations Multiple="true" Data=@Educations
+                               TextProperty="Name" ValueProperty="Id" Change=@(args => OnEducationChange(args)) Style="height:200px" Class="w-100">
+                    <Template Context="innercontext">
+                        @((innercontext as EducationDetailsDTO).UniversityId) - @((innercontext as EducationDetailsDTO).Name) - @((innercontext as EducationDetailsDTO).Grade)
+                    </Template>
+                </RadzenListBox>
+            </RadzenCard>
+            </div>
         </RadzenFieldset>
 
         <div class="row justify-content-center">
@@ -61,20 +73,32 @@ else
 
 @code {
     private TempProject project {get; set;} = new TempProject();
+    //IEnumerable<int> ChosenEducations;
+    ICollection<EducationDetailsDTO> Educations;
     public class TempProject
     {
         public string Title { get; set; }
         public bool Notification { get; set; }
         public string Description { get; set; }
-        public ISet<int> Educations { get; set; } = new HashSet<int>();
+        public IEnumerable<int> ChosenEducations { get; set; } = new HashSet<int>();
     }
+
+
+
+        protected override async Task OnInitializedAsync()
+        {
+            Educations = (await UniversityService.GetAllEducations(http)).OrderBy(e => e.UniversityId).ThenBy(e => e.Name).ToList();
+        }
+
+    
 
     async void Submit(TempProject arg)
     {
-        var req = new ProjectCreateDTO{Title= arg.Title, Description=arg.Description, Notification= arg.Notification, Educations= arg.Educations};
+        var req = new ProjectCreateDTO{Title= arg.Title, Description=arg.Description, Notification= arg.Notification, Educations= arg.ChosenEducations.ToHashSet()};
         Console.WriteLine(arg.Notification);
         Console.WriteLine(arg.Title);
         Console.WriteLine(arg.Description);
+        Console.WriteLine(arg.ChosenEducations.First());
         var res = await ProjectService.CreateProject(http, req);
         Console.WriteLine(res!.ToString());
         if (res.IsSuccessStatusCode)
@@ -88,6 +112,10 @@ else
     //Called when you press save on project form
     }
 
+    void OnEducationChange(object O){
+        Console.WriteLine(O);
+    }
+
     void OnChange(bool? value, string name)
     {
         
@@ -97,4 +125,4 @@ else
     {
         //Called when you press cancel on project form
     }
-}
+}5ValueProperty56Chang67Style78Class8990Changed0        __builder.AddAttribute(__seq11, "ValueExpression", __arg11);

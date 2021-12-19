@@ -21,7 +21,7 @@ namespace PB.Infrastructure
                 //Deadline = convertStringToDateTime(project.Deadline),
                 Notification = project.Notification,
                 //Tags = await GetTagsAsync(project.Tags).ToListAsync(),
-                Educations = _context.Educations.Where(e => !project.Educations.Any(e2 => e2 == e.Id)).ToList()
+                Educations = _context.Educations.Where(e => project.Educations.Any(e2 => e2 == e.Id)).ToList()
             };
 
             _context.Projects.Add(entity);
