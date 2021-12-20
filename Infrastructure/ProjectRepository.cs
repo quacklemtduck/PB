@@ -41,8 +41,8 @@ namespace PB.Infrastructure
                                  entity.Description,
                                  entity.Supervisor?.Name,
                                  entity.Notification,
-                                 entity.ChosenStudents.Select(s => s.Name).ToHashSet(),
-                                 entity.Applications.Select(a => a.Title).ToHashSet(),
+                                 entity.ChosenStudents.Select(s => s.Id).ToHashSet(),
+                                 entity.Applications.Select(a => a.Title).ToList(),
                                  entity.Educations.Select(u => u.Id).ToHashSet(),
                                  entity.Status
                              );
@@ -87,9 +87,9 @@ namespace PB.Infrastructure
                                p.Supervisor == null ? null : p.Supervisor.Id,
                                //convertDateTimeToString(p.Deadline),
                                p.Notification,
-                               p.ChosenStudents.Select(s => s.Name).ToHashSet(),
+                               p.ChosenStudents.Select(s => s.Id).ToList(),
                                //p.Tags.Select(t => t.TagName).ToHashSet(),
-                               p.Applications.Select(a => a.Title).ToHashSet(),
+                               p.Applications.Select(a => a.Title).ToList(),
                                p.Educations.Select(u => u.Id).ToHashSet(),
                                p.Status
                            );
