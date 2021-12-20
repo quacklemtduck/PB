@@ -81,6 +81,19 @@ namespace PB.Server.Controllers
             project.Supervisor = User.FindFirstValue(ClaimTypes.NameIdentifier);
             Console.WriteLine("----------------------------- KIG HER ---------------------------");
             Console.WriteLine(project.Supervisor);
+            Console.WriteLine(project.Id);
+            if(project.Id != null){
+                var result = await _repository.ReadByIDAsync(project.Id.GetValueOrDefault());
+                if(result != null){
+                    if(User.FindFirstValue(ClaimTypes.NameIdentifier) == result.Value.Supervisor){
+                        var res = await _repository.UpdateAsync(project);
+                        if(res == Core.Response.Updated){
+                            result = await _repository.ReadByIDAsync(project.Id.GetValueOrDefault());
+                            return CreatedAtRoute("Get", new { result.Value.ID }, result.Value);
+                        }
+                    }
+                }
+            }
             var created = await _repository.CreateAsync(project);
 
             return CreatedAtRoute("Get", new { created.ID }, created);
