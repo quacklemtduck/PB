@@ -14,6 +14,12 @@ namespace PB.Infrastructure
         {
             _context = context;
         }
+
+        public async Task<IReadOnlyCollection<EducationDetailsDTO>> ReadAllAsync()
+        {
+            return await _context.Educations.Select(e => new EducationDetailsDTO(e.Id, e.Name, e.Grade, e.University.Id)).ToListAsync();
+        }
+
         public async Task<IReadOnlyCollection<EducationDetailsDTO>> ReadAllByUniversityAsync(string universityId)
         {
             return await _context.Educations

@@ -3,6 +3,7 @@
 @using PB.Core
 @using System.Net.Http
 @inject HttpClient http
+@inject NavigationManager NavigationManager
 
 <h1>MyProjects</h1>
 
@@ -27,6 +28,7 @@
                     <RadzenButton Click=@(args => ChangeVisibility(project.ID, Status.Visible)) Text="Make Visible" />
                 }
             </div>
+            <RadzenButton Click=@(args => EditProject(project.ID)) Text="Edit" />
             <RadzenButton Click=@(args => DeleteProject(project.ID)) Text="Delete" />
         </RadzenCard>
     </Template>
@@ -60,5 +62,9 @@
             StateHasChanged();
         }
     }
+
+    void EditProject(int id){
+        NavigationManager.NavigateTo($"{NavigationManager.BaseUri}projectform?pid={id}");
+    } 
 
 }

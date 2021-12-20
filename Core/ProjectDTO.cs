@@ -5,6 +5,7 @@
     public record ProjectDetailsDTO(
         int ID, string Title, string? Description, string? Supervisor, bool Notification, ICollection<string> ChosenStudents, ISet<string> Applications, ISet<int> Educations, Status Status);
     public record ProjectCreateDTO {
+        public int? Id {get; set;}
         public string? Title { get; set; } //TODO: not nullable
 
         public string? Description { get; set; }
@@ -25,7 +26,6 @@
     }
 
     public record ProjectUpdateDTO : ProjectCreateDTO {
-        public int ID { get; init; }
         public ISet<string> Applications { get; set; } = new HashSet<string>();
 
         public ICollection<string> ChosenStudents {get; set;}  = new HashSet<string>();
