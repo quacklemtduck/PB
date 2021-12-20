@@ -14,8 +14,10 @@ namespace PB.Infrastructure
 
         [StringLength(50)]
         public string? Grade { get; set; }
-        public string? UniversityID { get; set; }
+        //public string? UniversityID { get; set; }
 
         public University? University { get; set; }
+
+        public ICollection<Project> Projects {get; set;} = new HashSet<Project>();
     }
 }

@@ -11,7 +11,7 @@ namespace PB.Core
         Task<Response> DeleteAsync(int projectID);
 
         ////Update: Update state, Add application, Edit
-        Task<Response> UpdateAsync(ProjectUpdateDTO project); //Edit
+        Task<Response> UpdateAsync(ProjectCreateDTO project); //Edit
         /*Task<Response> UpdateStateAsync(int ID, ProjectUpdateDTO project);
         Task<Response> UpdateAddApplicationAsync(int ID, ProjectUpdateDTO project);
         Task<Response> UpdateChooseStudentsAsync(int ID, ProjectUpdateDTO project);*/

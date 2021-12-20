@@ -4,6 +4,7 @@
 @using System.Net.Http
 @inject HttpClient http
 @inject NavigationManager NavigationManager
+@inject IJSRuntime JsRuntime
 
 <style>
     form .row {
@@ -11,14 +12,18 @@
     }
 </style>
 
-<h2>Create new project</h2>
 
-@if (project == null)
+@if (project == null || Educations == null)
 {
     <p><em>Loading...</em></p>
 }
 else
 {
+    @if(IsEditing){
+<h2>Edit project</h2>
+}else{
+<h2>Create new project</h2>
+}
     <RadzenTemplateForm Data="@project" Submit="@((TempProject args) => { Submit(args); })">
 
         <RadzenFieldset Text="" style="width: 100%;">
@@ -46,6 +51,18 @@ else
                     <RadzenTextArea @bind-Value=@project.Description style="width: 100%" Name="Description" />
                 </div>
             </div>
+            <div class="row">
+                <RadzenCard>
+                <h4>Select Educations</h4>
+                <p>Select the educations that you want your project to be visible to!</p>
+                <RadzenListBox AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" @bind-Value=@project.ChosenEducations Multiple="true" Data=@Educations
+                               TextProperty="Name" ValueProperty="Id" Change=@(args => OnEducationChange(args)) Style="height:200px" Class="w-100">
+                    <Template Context="innercontext">
+                        @((innercontext as EducationDetailsDTO).UniversityId) - @((innercontext as EducationDetailsDTO).Name) - @((innercontext as EducationDetailsDTO).Grade)
+                    </Template>
+                </RadzenListBox>
+            </RadzenCard>
+            </div>
         </RadzenFieldset>
 
         <div class="row justify-content-center">
@@ -59,30 +76,67 @@ else
 }
 
 @code {
-    private TempProject project {get; set;} = new TempProject();
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public int? Pid {get; set;}
+    public bool IsEditing {get; set;}
+    private TempProject? project {get; set;}
+    //IEnumerable<int> ChosenEducations;
+    ICollection<EducationDetailsDTO> Educations;
     public class TempProject
     {
         public string Title { get; set; }
         public bool Notification { get; set; }
         public string Description { get; set; }
-        public ISet<int> Educations { get; set; } = new HashSet<int>();
+        public IEnumerable<int> ChosenEducations { get; set; } = new HashSet<int>();
+        
+        public Status Status {get; set;} = Status.Hidden;
     }
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        Educations = (await UniversityService.GetAllEducations(http)).OrderBy(e => e.UniversityId).ThenBy(e => e.Name).ToList();
+
+        if(Pid != null){
+            var result = await ProjectService.GetProject(http, Pid);
+            if(result != null){
+                IsEditing = true;
+                project = new TempProject{Title=result.Title, Notification=result.Notification, Description=result.Description, ChosenEducations=result.Educations, Status=result.Status};
+            }else{
+                Pid = null;
+                project = new TempProject();
+            }
+        }else{
+            project = new TempProject();
+        }
+    }
+    
 
     async void Submit(TempProject arg)
     {
-        var req = new ProjectCreateDTO{Title= arg.Title, Description=arg.Description, Notification= arg.Notification, Educations= arg.Educations};
+        var req = new ProjectCreateDTO{Title= arg.Title, Description=arg.Description, Notification= arg.Notification, Educations= arg.ChosenEducations.ToHashSet(), Status=arg.Status};
+        if(Pid != null){req.Id = Pid;}
         Console.WriteLine(arg.Notification);
         Console.WriteLine(arg.Title);
         Console.WriteLine(arg.Description);
-        var res = await ProjectService.CreateProject(http, req);
+        Console.WriteLine(arg.ChosenEducations.First());
+        var res = await ProjectService.PostProject(http, req);
         Console.WriteLine(res!.ToString());
         if (res.IsSuccessStatusCode)
         {
             var created = await res.Content.ReadFromJsonAsync<ProjectDetailsDTO>();
             var uri = $"{NavigationManager.BaseUri}project/{created.ID}";
             NavigationManager.NavigateTo(uri);
+            await JsRuntime.InvokeVoidAsync("alert", "Project created succesfully!"); //Popup when succesfully created project.
+
         }
     //Called when you press save on project form
+    }
+
+    void OnEducationChange(object O){
+        Console.WriteLine(O);
     }
 
     void OnChange(bool? value, string name)
@@ -92,6 +146,6 @@ else
 
     void Cancel()
     {
-        //Called when you press cancel on project form
+        NavigationManager.NavigateTo($"{NavigationManager.BaseUri}MyProjects");
     }
 }

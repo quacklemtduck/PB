@@ -18,10 +18,10 @@ namespace PB.Infrastructure
                 Title = project.Title,
                 Description = project.Description,
                 Supervisor = _context.Supervisors.Find(project.Supervisor),
-                //Deadline = convertStringToDateTime(project.Deadline),
                 Notification = project.Notification,
                 //Tags = await GetTagsAsync(project.Tags).ToListAsync(),
                 Status = project.Status,
+
                 Educations = _context.Educations.Where(e => project.Educations.Any(e2 => e2 == e.Id)).ToList()
             };
 
@@ -34,11 +34,11 @@ namespace PB.Infrastructure
                                  entity.Title,
                                  entity.Description,
                                  entity.Supervisor?.Name,
-                                 //convertDateTimeToString(entity.Deadline),
                                  entity.Notification,
                                  entity.ChosenStudents.Select(s => s.Id).ToHashSet(),
                                  //entity.Tags.Select(t => t.TagName).ToHashSet(),
                                  entity.Applications.Select(a => a.Id).ToHashSet(),
+
                                  entity.Educations.Select(u => u.Id).ToHashSet(),
                                  entity.Status
                              );
@@ -93,9 +93,9 @@ namespace PB.Infrastructure
             return await projects.FirstOrDefaultAsync();
         }
 
-        public async Task<Response> UpdateAsync(ProjectUpdateDTO project)
+        public async Task<Response> UpdateAsync(ProjectCreateDTO project)
         {
-            var entity = await _context.Projects.Include(p => p.ChosenStudents).Include(p => p.Applications).Include(p => p.Educations).FirstOrDefaultAsync(p => p.Id == project.ID);
+            var entity = await _context.Projects.Include(p => p.ChosenStudents).Include(p => p.Applications).Include(p => p.Educations).FirstOrDefaultAsync(p => p.Id == project.Id);
 
             //var entity = await _context.Projects.FirstOrDefaultAsync(p => p.Id == project.ID);
 
@@ -106,13 +106,10 @@ namespace PB.Infrastructure
 
                 entity.Title = project.Title;
                 entity.Description = project.Description;
-                //entity.Supervisor = await getSupervisorAsync(project.Supervisor);
-                //entity.Deadline = convertStringToDateTime(project.Deadline);
                 entity.Notification = project.Notification;
-                entity.Status = project.Status!;
-                entity.ChosenStudents = await GetStudentsAsync(project.ChosenStudents).ToListAsync();
-                //entity.Tags = await GetTagsAsync(project.Tags).ToListAsync();
-                entity.Applications = await GetApplicationsAsync(project.Applications).ToListAsync();
+                entity.Status = project.Status;
+                //entity.ChosenStudents = await GetStudentsAsync(project.ChosenStudents).ToListAsync();
+                //entity.Applications = await GetApplicationsAsync(project.Applications).ToListAsync();
                 entity.Educations = _context.Educations.Where(e => project.Educations.Any(e2 => e2 == e.Id)).ToList();
 
 

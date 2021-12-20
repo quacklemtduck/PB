@@ -17,7 +17,7 @@ namespace PB.Client.Services
             }
         }
 
-        public async static Task<HttpResponseMessage?> CreateProject(HttpClient http, ProjectCreateDTO req){
+        public async static Task<HttpResponseMessage?> PostProject(HttpClient http, ProjectCreateDTO req){
             var result = await http.PostAsJsonAsync("api/Projects/Post", req);
             return result;
         }
@@ -30,6 +30,15 @@ namespace PB.Client.Services
         public async static Task<HttpResponseMessage?> UpdateProjectVisibility(HttpClient http, ProjectVisibilityUpdateDTO req){
             var result = await http.PutAsJsonAsync("api/Projects/UpdateStatus", req);
             return result;
+        }
+
+        public async static Task<HttpResponseMessage?> DeleteProject(HttpClient http, int id){
+            var result = await http.PostAsJsonAsync("api/Projects/DeleteProject", new ProjectDeleteDTO{ID=id});
+            return result;
+        }
+
+        public async static Task<ICollection<EducationDetailsDTO>> GetAllEducations(HttpClient http){
+            return await http.GetFromJsonAsync<EducationDetailsDTO[]>("api/University/GetAllEducations");
         }
     }
 

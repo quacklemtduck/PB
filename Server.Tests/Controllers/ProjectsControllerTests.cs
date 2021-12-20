@@ -202,26 +202,10 @@ namespace PB.Server.Tests.Controllers
             var controller = new ProjectsController(logger.Object, repository.Object);
 
             // Act
-            var response = await controller.Delete(42);
+            var response = await controller.DeleteProject(new ProjectDeleteDTO{ID = 42});
 
             // Assert
             Assert.IsType<NotFoundResult>(response);
-        }
-
-        [Fact]
-        public async Task Delete_given_existing_returns_NoContent()
-        {
-            // Arrange
-            var logger = new Mock<ILogger<ProjectsController>>();
-            var repository = new Mock<IProjectRepository>();
-            repository.Setup(m => m.DeleteAsync(1)).ReturnsAsync(Response.Deleted);
-            var controller = new ProjectsController(logger.Object, repository.Object);
-
-            // Act
-            var response = await controller.Delete(1);
-
-            // Assert
-            Assert.IsType<NoContentResult>(response);
         }
     }
 
