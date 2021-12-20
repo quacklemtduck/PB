@@ -423,6 +423,13 @@ namespace PB.Infrastructure
             ctx.Educations.Add(new Education { Name = "Landskabsarkitektur", Grade = "Bachelor", University = ctx.Universities.Find("KU") });
             ctx.Educations.Add(new Education { Name = "Mellemøststudier (Kandidat)", Grade = "Kandidat", University = ctx.Universities.Find("SDU") });
 
+            if (ctx.Students.Count() == 0){
+                foreach (var edu in ctx.Educations)
+                {
+                    ctx.Students.Add(new Student{Name="Lars Larsen", Email="lars.larsen@gmail.com", Education=edu});
+                }
+            }
+
             ctx.SaveChanges();
         }
     }
