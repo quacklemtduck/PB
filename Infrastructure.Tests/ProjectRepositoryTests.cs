@@ -330,19 +330,7 @@ namespace PB.Infrastructure.Tests
             var ChosenStudents = new HashSet<int>();
             ChosenStudents.Add(student1.Id);
             ChosenStudents.Add(student2.Id);
-            var project = new ProjectUpdateDTO
-            {
-                Id = 5,
-                Title = "newProject5",
-                Description = "This is project 5, version 2",
-                Supervisor = "Supervisor1",
-                Notification = false,
-                //ChosenStudents = new HashSet<string>() { student.Name },
-                ChosenStudents = ChosenStudents,
-                Applications = new HashSet<string>(),
-                Educations = new HashSet<int>()
-            };
-
+ 
 
             var project = new ProjectChosenStudentsUpdateDTO(4, ChosenStudents);
 
@@ -371,13 +359,6 @@ namespace PB.Infrastructure.Tests
             Assert.Equal(2, projectUpdated.ChosenStudents.Count());
 
             Assert.Empty(projectUpdated.Applications);
-            var projectUpdated = (await _repository.ReadByIDAsync(5)).Value;
-            
-            Assert.Equal("newProject5" , projectUpdated.Title);
-            //Assert.Equal(1 , projectUpdated.ChosenStudents.Count);
-            //Assert.True(projectUpdated.ChosenStudents.Contains(student.Name));
-            //Assert.Empty(projectUpdated.Applications);
-            Assert.Empty(projectUpdated.Educations);
         }
 
 

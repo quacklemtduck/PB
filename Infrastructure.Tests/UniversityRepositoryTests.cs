@@ -16,6 +16,7 @@ namespace PB.Infrastructure.Tests
             var options = new Option<OperationalStoreOptions>(new OperationalStoreOptions());
             var context = new ApplicationDbContext(builder.Options, options);
             context.Database.EnsureCreated();
+            context.Seed();
 
             var universityRepository = new UniversityRepository(context);
             var university = context.Universities.Find("ITU");
@@ -85,6 +86,8 @@ namespace PB.Infrastructure.Tests
         {
             
             var university = await _repository.ReadByIDAsync(id);
+            Assert.NotNull(university);
+            
             
             Assert.Equal(id, university?.Id);
             Assert.Equal(name, university?.Name);
