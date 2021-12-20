@@ -10,13 +10,14 @@ namespace PB.Infrastructure
     {
         public static void Seed(this ApplicationDbContext ctx)
         {
-            if (ctx.Universities.Count() != 0 || ctx.Educations.Count() != 0) return;
+            if (ctx.Universities.Count() == 0){
 
             ctx.Universities.Add(new University { Name = "IT-Universitet i København", Id = "ITU" });
             ctx.Universities.Add(new University { Name = "Copenhagen Business School", Id = "CBS" });
             ctx.Universities.Add(new University { Name = "Københavns Universitet", Id = "KU" });
             ctx.Universities.Add(new University { Name = "Syddansk Universitet", Id = "SDU" });
-
+            }
+            if(ctx.Universities.Count() != 0 && ctx.Educations.Count() == 0){
             ctx.Educations.Add(new Education { Name = "Klinisk sygepleje (kandidat)", Grade = "Kandidat", University = ctx.Universities.Find("SDU") });
             ctx.Educations.Add(new Education { Name = "Veterinærmedicin", Grade = "Bachelor", University = ctx.Universities.Find("KU") });
             ctx.Educations.Add(new Education { Name = "Erhvervsøkonomi - International Business", Grade = "Kandidat", University = ctx.Universities.Find("CBS") });
@@ -422,6 +423,7 @@ namespace PB.Infrastructure
             ctx.Educations.Add(new Education { Name = "Diplomingeniør i elektronik", Grade = "Bachelor", University = ctx.Universities.Find("SDU") });
             ctx.Educations.Add(new Education { Name = "Landskabsarkitektur", Grade = "Bachelor", University = ctx.Universities.Find("KU") });
             ctx.Educations.Add(new Education { Name = "Mellemøststudier (Kandidat)", Grade = "Kandidat", University = ctx.Universities.Find("SDU") });
+            }
 
             if (ctx.Students.Count() == 0){
                 foreach (var edu in ctx.Educations)

@@ -28,10 +28,11 @@ namespace PB.Infrastructure
             return new StudentDetailsDTO(
                         entity.Id,
                         entity.Name,
-                        entity.Education.Id,
+                        entity.Education.Name,
                         entity.Email,
                         entity.Projects.Select(p => p.Title).ToHashSet(),
-                        entity.Applications.Select(a => a.Title).ToHashSet()
+                        entity.Applications.Select(a => a.Title).ToHashSet(),
+                        entity.Education.University.Name
             );
         }
 
@@ -49,10 +50,11 @@ namespace PB.Infrastructure
                            select new StudentDetailsDTO(
                                s.Id, 
                                s.Name, 
-                               s.Education.Id, 
+                               s.Education.Name, 
                                s.Email, 
                                s.Projects.Select(p => p.Title).ToHashSet(), 
-                               s.Applications.Select(a => a.Title).ToHashSet()
+                               s.Applications.Select(a => a.Title).ToHashSet(),
+                               s.Education.University.Name
                            );
 
             return await students.FirstOrDefaultAsync();

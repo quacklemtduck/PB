@@ -2,7 +2,7 @@ namespace PB.Core;
 
 public record StudentDTO();
 
-public record StudentDetailsDTO(int Id, string Name, int EducationId, string Email, ICollection<string>? Projects, ISet<string> Applications);
+public record StudentDetailsDTO(int Id, string Name, string Education, string Email, ICollection<string>? Projects, ISet<string> Applications, string University);
 public record StudentCreateDTO
 {
     [StringLength(50)]

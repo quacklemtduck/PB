@@ -12,7 +12,7 @@
         
         public string? Description { get; set; }
 
-        public string? Supervisor { get; set; }
+        public string? SupervisorId { get; set; }
 
         //public string? Deadline { get; set; } //can this be a string
 

@@ -1,0 +1,82 @@
+@page "/Project/{projectId:int}/Applications"
+@attribute [Authorize]
+@using Microsoft.AspNetCore.Authorization
+@using PB.Client.Services
+@using PB.Core
+@using System.Net.Http
+@inject HttpClient http
+@inject NavigationManager NavigationManager
+@inject IHttpClientFactory ClientFactory
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Components.Authorization
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<h1>Applications</h1>
+@if (applications != null)
+{
+    @if (applications.Count != 0)
+    {
+
+        <RadzenDataList WrapItems="true" AllowPaging="true" Data="@applications" TItem="fullApplication" PageSize="5">
+            <Template Context="application">
+                <RadzenCard Style="width:100%;">
+                    <h3>@application.application.Title</h3>
+                    <p>Student: @application.student.Name</p>
+                    <p>University: @application.student.University</p>
+                    <p>Education: @application.student.Education</p>
+                    <br>
+                    <p>@application.application.Description</p>
+                </RadzenCard>
+            </Template>
+        </RadzenDataList>
+    }
+    else
+    {
+        <h2>You do not have any applications yet.</h2>
+    }
+}
+else
+{
+    <p>loading....</p>
+}
+
+<h1>Chosen applicants</h1>
+
+
+
+@code {
+    [Parameter]
+    public int ProjectId { get; set; }
+
+
+    private ICollection<fullApplication>? applications;
+
+    public class fullApplication
+    {
+        public ApplicationDetailsDTO application { get; set; }
+        public StudentDetailsDTO student { get; set; }
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        if (ProjectId != 0)
+        {
+            var apps = await ProjectService.GetApplications(http, ProjectId);
+            var temp = new List<fullApplication>();
+            foreach (var item in apps)
+            {
+                temp.Add(new fullApplication
+                {
+                    application = item,
+                    student = await StudentServices.GetStudentAsync(http,
+                item.studentId)
+                });
+            }
+            applications = temp;
+        }
+
+        await base.OnParametersSetAsync();
+    }
+}

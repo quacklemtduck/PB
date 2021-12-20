@@ -40,6 +40,18 @@ namespace PB.Client.Services
         public async static Task<ICollection<EducationDetailsDTO>> GetAllEducations(HttpClient http){
             return await http.GetFromJsonAsync<EducationDetailsDTO[]>("api/University/GetAllEducations");
         }
+
+        public async static Task<ICollection<ApplicationDetailsDTO>> GetApplications(HttpClient http, int projectId){
+            try
+            {
+                 var result = await http.GetFromJsonAsync<ApplicationDetailsDTO[]>($"api/Application/GetFromProject/{projectId}");
+                 return result;
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
     }
 
 }

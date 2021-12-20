@@ -17,12 +17,21 @@ namespace PB.Infrastructure
             {
                 Title = project.Title,
                 Description = project.Description,
-                Supervisor = _context.Supervisors.Find(project.Supervisor),
+                Supervisor = _context.Supervisors.Find(project.SupervisorId),
                 Notification = project.Notification,
                 Educations = _context.Educations.Where(e => project.Educations.Any(e2 => e2 == e.Id)).ToList()
             };
 
             _context.Projects.Add(entity);
+
+            //Adding dummy applications
+            var students = _context.Students.Where(s => project.Educations.Any(e2 => e2 == s.EducationId)).ToList();
+            foreach (var student in students)
+            {
+                Console.WriteLine("Adding application");
+                _context.Applications.Add(new Application{Title="Dummy Application", Description="Hello, i would like to join your project", Student=student, Project=entity});
+            }
+                          //  .Select(s => _context.Applications.Add(new Application{Title="Dummy Application", Description="Hello, i would like to join your project", Student=s, Project=entity}));
 
             await _context.SaveChangesAsync();
 

@@ -468,6 +468,9 @@ namespace PB.Server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("EducationId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Email")
                         .HasColumnType("TEXT");
 
@@ -475,12 +478,9 @@ namespace PB.Server.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("UniversityId")
-                        .HasColumnType("TEXT");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UniversityId");
+                    b.HasIndex("EducationId");
 
                     b.ToTable("Students");
                 });
@@ -658,11 +658,13 @@ namespace PB.Server.Migrations
 
             modelBuilder.Entity("PB.Infrastructure.Student", b =>
                 {
-                    b.HasOne("PB.Infrastructure.University", "University")
+                    b.HasOne("PB.Infrastructure.Education", "Education")
                         .WithMany()
-                        .HasForeignKey("UniversityId");
+                        .HasForeignKey("EducationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("University");
+                    b.Navigation("Education");
                 });
 
             modelBuilder.Entity("ProjectStudent", b =>
