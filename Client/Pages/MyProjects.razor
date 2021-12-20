@@ -4,35 +4,54 @@
 @using System.Net.Http
 @inject HttpClient http
 @inject NavigationManager NavigationManager
+@using Microsoft.AspNetCore.Components
+@using Radzen.Blazor
+@inject Radzen.DialogService DialogService
 
-<h1>MyProjects</h1>
+<h1>My Projects</h1>
 
-<RadzenDataList WrapItems="true" AllowPaging="true" Data="@projects" TItem="ProjectListDTO">
-    <Template Context="project">
-        <RadzenCard class="m-3">
-            <h3 class="h5"><a href="/project/@project.ID">@project.Title</a></h3>
-            <b class="h5">Description</b>
-            <div class="row">
-                <div class="col-md-4">
-                    <b>@project.Description.Substring(0,Math.Min(project.Description.Length, 20))</b>
-                </div>
-            </div>
-            <div>
-                <p>Visibility: @project.Status</p>
-                @if (project.Status == Status.Visible)
-                {
-                    <RadzenButton Click=@(args => ChangeVisibility(project.ID, Status.Hidden)) Text="Make Hidden" />
-                }
-                else
-                {
+<div class="container">
+    <div class="row py-5">
+        <div class="col">
+            <RadzenCard>
+
+                <RadzenDataList WrapItems="true" AllowPaging="true" Data="@projects" TItem="ProjectListDTO" PageSize="5" >
+                    <Template Context="project">
+                        <RadzenCard Style="width: 100%; padding: 0; overflow: hidden;">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-2 p-2 project-title">
+                                            <h3 class="h5"><a href="/project/@project.ID">@(project.Title.Substring(0,Math.Min(project.Title.Length, 40)))</a></h3>
+                                    </div>
+                                    <div class="col-lg-7 p-3">
+                                        <div class="row d-flex">
+                                            <div class="col-md-6 col-lg-5">
+                                                <h5 class="mb-0">Description:</h5>
+                                                <p class="mb-sm-2 mb-lg-0">@(project.Description.Substring(0,Math.Min(project.Description.Length, 80)))</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p>Visibility: @project.Status</p>
+                                @if (project.Status == Status.Visible)
+                                {
+                                <RadzenButton Click=@(args => ChangeVisibility(project.ID, Status.Hidden)) Text="Make Hidden" />
+                                }
+                                else
+                                {
                     <RadzenButton Click=@(args => ChangeVisibility(project.ID, Status.Visible)) Text="Make Visible" />
                 }
-            </div>
             <RadzenButton Click=@(args => EditProject(project.ID)) Text="Edit" />
             <RadzenButton Click=@(args => DeleteProject(project.ID)) Text="Delete" />
-        </RadzenCard>
-    </Template>
-</RadzenDataList>
+                            </div>
+                        </RadzenCard>
+                    </Template>
+                </RadzenDataList>
+
+            </RadzenCard>
+        </div>
+    </div>
+</div>
 
 @code {
 
@@ -54,17 +73,21 @@
 
     async void DeleteProject(int id)
     {
-        Console.WriteLine($"Id: {id}");
-        var result = await ProjectService.DeleteProject(http, id);
-        if (result.IsSuccessStatusCode)
-        {
-            await OnInitializedAsync();
-            StateHasChanged();
+        var confirmResult = await DialogService.Confirm("Are you sure you want to delete the project?", 
+        "Delete Project", new ConfirmOptions() { OkButtonText = "Yes", CancelButtonText = "No" });
+
+        if(confirmResult.HasValue && confirmResult.Value) {
+            Console.WriteLine($"Id: {id}");
+            var result = await ProjectService.DeleteProject(http, id);
+            if (result.IsSuccessStatusCode)
+            {
+                await OnInitializedAsync();
+                StateHasChanged();
+            }
         }
     }
 
     void EditProject(int id){
         NavigationManager.NavigateTo($"{NavigationManager.BaseUri}projectform?pid={id}");
     } 
-
 }
