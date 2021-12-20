@@ -87,8 +87,6 @@ namespace PB.Infrastructure.Tests
             
             var university = await _repository.ReadByIDAsync(id);
             Assert.NotNull(university);
-            
-            
             Assert.Equal(id, university?.Id);
             Assert.Equal(name, university?.Name);
             Assert.Empty(university?.Educations);
