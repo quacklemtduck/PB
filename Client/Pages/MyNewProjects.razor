@@ -8,7 +8,8 @@
 @using Radzen.Blazor
 @inject Radzen.DialogService DialogService
 
-<h1>Projects</h1>
+<h1>My Projects</h1>
+
 <div class="container">
     <div class="row py-5">
         <div class="col">
@@ -20,18 +21,10 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col-lg-2 p-2 project-title">
-                                            <b >@(project.Title)</b>
+                                            <h3 class="h5"><a href="/project/@project.ID">@project.Title</a></h3>
                                     </div>
                                     <div class="col-lg-7 p-3">
                                         <div class="row d-flex">
-                                            <div class="col-md-6 col-lg-3">
-                                                <h5 class="mb-0">Supervisor:</h5>
-                                                <p class="mb-sm-2 mb-lg-0">@(project.Title)</p>
-                                            </div>
-                                            <div class="col-md-6 col-lg-3">
-                                                <h5 class="mb-0">Created on:</h5>
-                                                <p class="mb-sm-2 mb-lg-0">@(project.Title)</p>
-                                            </div>
                                             <div class="col-md-6 col-lg-5">
                                                 <h5 class="mb-0">Description:</h5>
                                                 <p class="mb-sm-2 mb-lg-0">@(project.Description.Substring(0,Math.Min(project.Description.Length, 20)))</p>
@@ -39,6 +32,17 @@
                                         </div>
 
                                     </div>
+                                    <p>Visibility: @project.Status</p>
+                                    @if (project.Status == Status.Visible)
+                                    {
+                                    <RadzenButton Click=@(args => ChangeVisibility(project.ID, Status.Hidden)) Text="Make Hidden" />
+                                    }
+                                    else
+                                    {
+                                    <RadzenButton Click=@(args => ChangeVisibility(project.ID, Status.Visible)) Text="Make Visible" />
+                                    }
+                                    <RadzenButton Click=@(args => EditProject(project.ID)) Text="Edit" />
+                                    <RadzenButton Click=@(args => DeleteProject(project.ID)) Text="Delete" />
                                     <div class="col-lg-2 p-3">
                                         <RadzenButton Text="Go To" Class="w-100" />
                                     </div>
@@ -70,5 +74,21 @@
             StateHasChanged();
         }
     }
+
+    async void DeleteProject(int id)
+    {
+        Console.WriteLine($"Id: {id}");
+        var result = await ProjectService.DeleteProject(http, id);
+        if (result.IsSuccessStatusCode)
+        {
+            await OnInitializedAsync();
+            StateHasChanged();
+        }
+    }
+
+    void EditProject(int id)
+    {
+        NavigationManager.NavigateTo($"{NavigationManager.BaseUri}projectform?pid={id}");
+    } 
 
 }
