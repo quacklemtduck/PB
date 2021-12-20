@@ -103,7 +103,8 @@ else
     {
      await DialogService.OpenAsync("Project creation success!", ds =>
         @<div>
-            You have successfully created a project.
+            You have successfully created a project
+            <RadzenImage Path="checkmark.png" Style="width: 12%; margin: 1rem;"/> 
         </div>, new DialogOptions() { CloseDialogOnOverlayClick = true });
     }
 
