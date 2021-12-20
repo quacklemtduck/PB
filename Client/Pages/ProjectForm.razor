@@ -133,7 +133,7 @@ else
             var uri = $"{NavigationManager.BaseUri}project/{created.ID}";
             NavigationManager.NavigateTo(uri);
             await ShowCloseableFromOverlayDialog();
-        }
+        } 
     }
 
     void OnEducationChange(object O){
@@ -152,11 +152,20 @@ else
 
     async Task ShowCloseableFromOverlayDialog()
     {
-     await DialogService.OpenAsync("Project creation success!", ds =>
-        @<div>
+        if(!IsEditing) {
+        await DialogService.OpenAsync("Project creation success!", ds =>
+            @<div>
             You have successfully created a project
+            <RadzenImage Path="checkmark.png" Style="width: 12%; margin: 1rem;" /> 
+        </div>, new DialogOptions() { CloseDialogOnOverlayClick = true });
+        } else
+        {
+            await DialogService.OpenAsync("Project change success!", ds =>
+        @<div>
+            You have successfully edited the project
             <RadzenImage Path="checkmark.png" Style="width: 12%; margin: 1rem;"/> 
         </div>, new DialogOptions() { CloseDialogOnOverlayClick = true });
+        }
     }
 
     protected override void OnInitialized()
