@@ -8,5 +8,8 @@ namespace PB.Core
          Task<Response> UpdateAsync(int id, ApplicationUpdateDTO appliation);
 
          Task<IReadOnlyCollection<ApplicationDetailsDTO>> ReadFromProject(int projectId);
+
+         Task<Response> Approve(int id);
+         Task<Response> Decline(int id);
     }
 }

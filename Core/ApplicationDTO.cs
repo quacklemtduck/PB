@@ -15,3 +15,6 @@ public record ApplicationCreateDTO
         Title = _title;
     }
 }
+
+public record ApplicationIdDTO(int Id);
+

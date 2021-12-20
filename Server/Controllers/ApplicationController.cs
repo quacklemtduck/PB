@@ -58,6 +58,40 @@ public class ApplicationController : ControllerBase
     }
 
     [Authorize]
+    [HttpPut]
+    [ProducesResponseType(204)]
+    [ProducesResponseType(404)]
+    [ProducesResponseType(401)]
+    public async Task<IActionResult> Approve(ApplicationIdDTO req){
+        var result = await _ApplicationRepository.ReadAsync(req.Id);
+        if(result.IsNone){
+            return NotFound();
+        }
+        var project = await _ProjectRepository.ReadByIDAsync(result.Value.projectId);
+        if(project.Value.Supervisor == User.FindFirstValue(ClaimTypes.NameIdentifier)){
+            return (await _ApplicationRepository.Approve(req.Id)).ToActionResult();
+        }
+        return Unauthorized();
+    }
+
+    [Authorize]
+    [HttpPut]
+    [ProducesResponseType(204)]
+    [ProducesResponseType(404)]
+    [ProducesResponseType(401)]
+    public async Task<IActionResult> Decline(ApplicationIdDTO req){
+        var result = await _ApplicationRepository.ReadAsync(req.Id);
+        if(result.IsNone){
+            return NotFound();
+        }
+        var project = await _ProjectRepository.ReadByIDAsync(result.Value.projectId);
+        if(project.Value.Supervisor == User.FindFirstValue(ClaimTypes.NameIdentifier)){
+            return (await _ApplicationRepository.Decline(req.Id)).ToActionResult();
+        }
+        return Unauthorized();
+    }
+
+    [Authorize]
     [HttpPut("{id}")]
     [ProducesResponseType(204)]
     [ProducesResponseType(404)]

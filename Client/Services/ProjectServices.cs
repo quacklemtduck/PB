@@ -52,6 +52,16 @@ namespace PB.Client.Services
                 throw;
             }
         }
+
+        public async static Task<HttpResponseMessage?> ApproveApplication(HttpClient http, int id){
+            var result = await http.PutAsJsonAsync("api/Application/Approve", new ApplicationIdDTO(id));
+            return result;
+        }
+
+        public async static Task<HttpResponseMessage?> DeclineApplication(HttpClient http, int id){
+            var result = await http.PutAsJsonAsync("api/Application/Decline", new ApplicationIdDTO(id));
+            return result;
+        }
     }
 
 }

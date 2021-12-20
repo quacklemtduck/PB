@@ -62,5 +62,24 @@ namespace PB.Infrastructure
             Console.WriteLine($"--------------NUMBER OF APPLICATIONS: {project.Applications.Count()}");
             return result;
         }
+
+        public async Task<Response> Approve(int id){
+            var entity = await _context.Applications.Include(x => x.Project).Include(x => x.Student).Where(e => e.Id == id).FirstOrDefaultAsync();
+            entity.Project.ChosenStudents.Add(entity.Student);
+            if(entity == null) return Response.NotFound;
+            _context.Applications.Remove(entity);
+            await _context.SaveChangesAsync();
+            return Response.Updated;
+        }
+
+        public async Task<Response> Decline(int id)
+        {
+            var entity = await _context.Applications.FindAsync(id);
+            if(entity == null) return Response.NotFound;
+
+            _context.Applications.Remove(entity);
+            await _context.SaveChangesAsync();
+            return Response.Deleted;
+        }
     }
 }
