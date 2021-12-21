@@ -46,7 +46,7 @@ namespace Infrastructure.Tests
             Assert.Equal(2, student.Id);
             Assert.Equal("student2", student.Name);
             Assert.Equal("student2@gmail.com", student.Email);
-            Assert.Equal("Københavns Universitet", student.University);
+            Assert.Equal("Syddansk Universitet", student.University);
         }
 
         [Fact]

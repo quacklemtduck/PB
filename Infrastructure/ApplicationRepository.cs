@@ -33,7 +33,7 @@ namespace PB.Infrastructure
         public async Task<IReadOnlyCollection<ApplicationDetailsDTO>> ReadAllAsync()
         {
             return await _context.Applications
-                .Select(a => new ApplicationDetailsDTO(a.Id,a.StudentID,a.ProjectID,a.Description,a.Title, _context.Students.Find(a.StudentID).Name))
+                .Select(a => new ApplicationDetailsDTO(a.Id,a.StudentID,a.ProjectID,a.Description,a.Title, _context.Students.Where(x => x.Id == a.StudentID).FirstOrDefault().Name))
                 .ToListAsync();
         }
 

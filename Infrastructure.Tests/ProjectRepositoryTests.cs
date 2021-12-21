@@ -16,6 +16,7 @@ namespace PB.Infrastructure.Tests
             var options = new Option<OperationalStoreOptions>(new OperationalStoreOptions());
             var context = new ApplicationDbContext(builder.Options, options);
             context.Database.EnsureCreated();
+            context.SeedEducations();
 
             var supervisor = new Supervisor { Id = "1", Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
             //context.Supervisors.Add(supervisor);
