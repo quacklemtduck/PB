@@ -449,7 +449,7 @@ namespace PB.Infrastructure
         }
 
         private static void ReadRandomNames(){
-            var path = Path.Combine(Environment.CurrentDirectory, @"Model\", "fakenames.csv");
+            var path = Path.Combine(Environment.CurrentDirectory, @"Model", "fakenames.csv");
             var lines = System.IO.File.ReadAllLines(path);
             
             foreach (var item in lines)
