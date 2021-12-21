@@ -15,7 +15,7 @@ namespace PB.Infrastructure
             var entity = new Student
             {
                 Name = student.Name,
-                University = await getUniversityAsync(student.University),
+                Education = await _context.Educations.FindAsync(student.EducationId),
                 Email = student.Email
             };
 
@@ -28,10 +28,11 @@ namespace PB.Infrastructure
             return new StudentDetailsDTO(
                         entity.Id,
                         entity.Name,
-                        entity.University?.Name,
+                        entity.Education.Name,
                         entity.Email,
                         entity.Projects.Select(p => p.Title).ToHashSet(),
-                        entity.Applications.Select(a => a.Title).ToHashSet()
+                        entity.Applications.Select(a => a.Title).ToHashSet(),
+                        entity.Education.University.Name
             );
         }
 
@@ -47,12 +48,13 @@ namespace PB.Infrastructure
             var students = from s in _context.Students
                            where s.Id == studentId
                            select new StudentDetailsDTO(
-                               s.Id,
-                               s.Name,
-                               s.University.Name,
-                               s.Email,
-                               s.Projects.Select(p => p.Title).ToHashSet(),
-                               s.Applications.Select(a => a.Title).ToHashSet()
+                               s.Id, 
+                               s.Name, 
+                               s.Education.Name, 
+                               s.Email, 
+                               s.Projects.Select(p => p.Title).ToHashSet(), 
+                               s.Applications.Select(a => a.Title).ToHashSet(),
+                               s.Education.University.Name
                            );
 
             return await students.FirstOrDefaultAsync();
@@ -66,18 +68,11 @@ namespace PB.Infrastructure
                 return NotFound;
             }
 
-
-
             entity.Name = student.Name;
-            //entity.University = await getUniversityAsync(student.University);
+            entity.Education = await _context.Educations.FindAsync(student.EducationId);
             entity.Email = student.Email;
-
             entity.Projects = await GetProjectsAsync(student.Projects).ToListAsync();
-
-
-            //entity.Applications = await getApplicationsAsync(student.Applications).ToListAsync();
-
-
+            
             await _context.SaveChangesAsync();
 
             return Updated;

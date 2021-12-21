@@ -5,13 +5,16 @@
     public record ProjectChosenStudentsUpdateDTO(int ID, ICollection<int> ChosenStudents);
     public record ProjectDetailsDTO(
         int ID, string Title, string? Description, string? Supervisor, bool Notification, ICollection<int> ChosenStudents, ISet<int> Applications, ISet<int> Educations, Status Status);
+        //int ID, string Title, string? Description, string? Supervisor, bool Notification, ICollection<int> ChosenStudents, ICollection<string> Applications, ISet<int> Educations, Status Status);
     public record ProjectCreateDTO {
         public int? Id {get; set;}
+      
+        [CustomValidation(typeof(Validation), nameof(Validation.ValidateProject))]
         public string? Title { get; set; } //TODO: not nullable
-
+        
         public string? Description { get; set; }
 
-        public string? Supervisor { get; set; }
+        public string? SupervisorId { get; set; }
 
         //public string? Deadline { get; set; } //can this be a string
 

@@ -14,11 +14,11 @@ namespace PB.Server.Tests.Controllers
             // Arrange
             var university = new University { Name = "Københavns Universitet", Id = "KU" };
             var supervisor = new Supervisor { Id = "1", Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
-
             var logger = new Mock<ILogger<ProjectsController>>();
             var toCreate = new ProjectCreateDTO();
             var created = new ProjectDetailsDTO(1, "Project1", "This is project 1", supervisor.Name, false, new HashSet<int>(), new HashSet<int>(), new HashSet<int>(), Status.Visible);
             var repository = new Mock<IProjectRepository>();
+
             repository.Setup(m => m.CreateAsync(toCreate)).ReturnsAsync(created);
             var controller = new ProjectsController(logger.Object, repository.Object);
 
@@ -109,6 +109,7 @@ namespace PB.Server.Tests.Controllers
             var logger = new Mock<ILogger<ProjectsController>>();
             var repository = new Mock<IProjectRepository>();
             var project = new ProjectDetailsDTO(1, "Project1", "This is project 1", supervisor.Name, false, new HashSet<int>(), new HashSet<int>(), new HashSet<int>(), Status.Visible);
+            
             repository.Setup(m => m.ReadByIDAsync(1)).ReturnsAsync(project);
             var controller = new ProjectsController(logger.Object, repository.Object);
 
