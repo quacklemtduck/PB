@@ -60,6 +60,13 @@ namespace PB.Infrastructure
                        .ToListAsync())
                        .AsReadOnly();
         
+        public async Task<IReadOnlyCollection<ProjectListDTO>> ListAllVisibleAsync() =>
+                (await _context.Projects
+                       .Where(p => p.Status == Status.Visible)
+                       .Select(p => new ProjectListDTO(p.Id, p.Title, p.Description, p.Status))
+                       .ToListAsync())
+                       .AsReadOnly();
+        
         public async Task<IReadOnlyCollection<ProjectListDTO>> ListAllAsync(string SupervisorID) =>
                 (await _context.Projects
                         .Where(p => SupervisorID == p.SupervisorID)
@@ -99,13 +106,13 @@ namespace PB.Infrastructure
                 return Response.NotFound;
             }
 
-                entity.Title = project.Title;
-                entity.Description = project.Description;
-                entity.Notification = project.Notification;
-                entity.Status = project.Status;
-                //entity.ChosenStudents = await GetStudentsAsync(project.ChosenStudents).ToListAsync();
-                //entity.Applications = await GetApplicationsAsync(project.Applications).ToListAsync();
-                entity.Educations = _context.Educations.Where(e => project.Educations.Any(e2 => e2 == e.Id)).ToList();
+            entity.Title = project.Title;
+            entity.Description = project.Description;
+            entity.Notification = project.Notification;
+            entity.Status = project.Status;
+            //entity.ChosenStudents = await GetStudentsAsync(project.ChosenStudents).ToListAsync();
+            //entity.Applications = await GetApplicationsAsync(project.Applications).ToListAsync();
+            entity.Educations = _context.Educations.Where(e => project.Educations.Any(e2 => e2 == e.Id)).ToList();
 
 
             await _context.SaveChangesAsync();
@@ -113,7 +120,8 @@ namespace PB.Infrastructure
             return Response.Updated;
         }
 
-        public async Task<Response> UpdateStatusAsync(ProjectVisibilityUpdateDTO dto){
+        public async Task<Response> UpdateStatusAsync(ProjectVisibilityUpdateDTO dto)
+        {
             var entity = await _context.Projects.FindAsync(dto.ID);
             if (entity == null) return Response.NotFound;
             entity.Status = dto.Status;
@@ -121,7 +129,7 @@ namespace PB.Infrastructure
             return Response.Updated;
         }
 
-        
+
 
 
         //help methods:
@@ -170,7 +178,8 @@ namespace PB.Infrastructure
         private async Task<Supervisor?> getSupervisorAsync(string? name) =>
         string.IsNullOrWhiteSpace(name) ? null : await _context.Supervisors.FirstOrDefaultAsync(s => s.Name == name) ?? new Supervisor { Name = name };
 
-        public static string convertDateTimeToString(DateTime? dateTime){
+        public static string convertDateTimeToString(DateTime? dateTime)
+        {
             const string FMT = "O";
             DateTime nonNullableDateTime = dateTime ?? DateTime.Now.AddMonths(1);
             return nonNullableDateTime.ToString(FMT);
@@ -178,8 +187,9 @@ namespace PB.Infrastructure
 
         }
 
-        public static DateTime convertStringToDateTime(string deadline){
-            const string FMT = "O";
+        public static DateTime convertStringToDateTime(string deadline)
+        {
+             const string FMT = "O";
             return DateTime.ParseExact(deadline, FMT, CultureInfo.InvariantCulture);
         }
 

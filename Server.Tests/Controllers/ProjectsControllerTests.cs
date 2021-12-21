@@ -61,6 +61,25 @@ namespace PB.Server.Tests.Controllers
             Assert.Equal(expected, actual);
         }
 
+        [Fact]
+        public async Task Get_visible_returns_Projects_from_repo()
+        {
+            // Arrange
+            var logger = new Mock<ILogger<ProjectsController>>();
+            var expected = Array.Empty<ProjectListDTO>();
+            var repository = new Mock<IProjectRepository>();
+            
+            repository.Setup(m => m.ListAllVisibleAsync()).ReturnsAsync(expected);
+
+            var controller = new ProjectsController(logger.Object, repository.Object);
+
+            // Act
+            var actual = await controller.GetAllVisible();
+
+            // Assert
+            Assert.Equal(expected, actual);
+        }
+        
         public async Task Get_returns_Supervisors_projects_from_repo()
         {
             var supervisor = new Supervisor { Id = "1", Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };

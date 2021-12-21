@@ -17,6 +17,18 @@ namespace PB.Client.Services
             }
         }
 
+        public async static Task<ICollection<ProjectListDTO>> GetVisibleProjects(HttpClient http){
+            try
+            {
+                 var result = await http.GetFromJsonAsync<ProjectListDTO[]>("api/Projects/GetAllVisible");
+                 return result;
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
         public async static Task<HttpResponseMessage?> PostProject(HttpClient http, ProjectCreateDTO req){
             var result = await http.PostAsJsonAsync("api/Projects/Post", req);
             return result;
