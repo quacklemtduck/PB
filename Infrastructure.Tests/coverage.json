@@ -58,13 +58,13 @@
       "PB.Core.Extensions/<ToListAsync>d__0`1": {
         "System.Void PB.Core.Extensions/<ToListAsync>d__0`1::MoveNext()": {
           "Lines": {
-            "7": 7,
-            "8": 7,
-            "9": 29,
-            "10": 7,
-            "11": 4,
-            "12": 7,
-            "13": 7
+            "7": 9,
+            "8": 9,
+            "9": 45,
+            "10": 9,
+            "11": 9,
+            "12": 9,
+            "13": 9
           },
           "Branches": [
             {
@@ -73,7 +73,7 @@
               "EndOffset": 102,
               "Path": 1,
               "Ordinal": 1,
-              "Hits": 4
+              "Hits": 9
             },
             {
               "Line": 9,
@@ -81,7 +81,7 @@
               "EndOffset": 271,
               "Path": 0,
               "Ordinal": 0,
-              "Hits": 7
+              "Hits": 9
             },
             {
               "Line": 9,
@@ -97,7 +97,7 @@
               "EndOffset": 435,
               "Path": 1,
               "Ordinal": 3,
-              "Hits": 7
+              "Hits": 9
             }
           ]
         }
@@ -107,7 +107,7 @@
       "PB.Core.Option`1": {
         "T PB.Core.Option`1::get_Value()": {
           "Lines": {
-            "14": 22
+            "14": 23
           },
           "Branches": [
             {
@@ -124,7 +124,7 @@
               "EndOffset": 21,
               "Path": 1,
               "Ordinal": 1,
-              "Hits": 22
+              "Hits": 23
             }
           ]
         },
@@ -142,16 +142,16 @@
         },
         "PB.Core.Option`1<T> PB.Core.Option`1::op_Implicit(T)": {
           "Lines": {
-            "27": 23
+            "27": 24
           },
           "Branches": []
         },
         "System.Void PB.Core.Option`1::.ctor(T)": {
           "Lines": {
-            "20": 99,
-            "21": 99,
-            "22": 99,
-            "23": 99
+            "20": 97,
+            "21": 97,
+            "22": 97,
+            "23": 97
           },
           "Branches": []
         }
@@ -177,7 +177,7 @@
       "PB.Core.ProjectChosenStudentsUpdateDTO": {
         "System.Int32 PB.Core.ProjectChosenStudentsUpdateDTO::get_ID()": {
           "Lines": {
-            "5": 9
+            "5": 14
           },
           "Branches": []
         }
@@ -185,51 +185,57 @@
       "PB.Core.ProjectDetailsDTO": {
         "System.Int32 PB.Core.ProjectDetailsDTO::get_ID()": {
           "Lines": {
-            "7": 172
+            "7": 192
           },
           "Branches": []
         },
         "System.Void PB.Core.ProjectDetailsDTO::.ctor(System.Int32,System.String,System.String,System.String,System.Boolean,System.Collections.Generic.ICollection`1<System.Int32>,System.Collections.Generic.ISet`1<System.Int32>,System.Collections.Generic.ISet`1<System.Int32>,PB.Core.Status)": {
           "Lines": {
-            "6": 10
+            "6": 11
           },
           "Branches": []
         }
       },
       "PB.Core.ProjectCreateDTO": {
+        "System.Nullable`1<System.Int32> PB.Core.ProjectCreateDTO::get_Id()": {
+          "Lines": {
+            "9": 6
+          },
+          "Branches": []
+        },
         "System.String PB.Core.ProjectCreateDTO::get_Title()": {
           "Lines": {
-            "9": 11
+            "10": 12
           },
           "Branches": []
         },
         "System.String PB.Core.ProjectCreateDTO::get_Description()": {
           "Lines": {
-            "11": 11
+            "12": 12
           },
           "Branches": []
         },
         "System.String PB.Core.ProjectCreateDTO::get_Supervisor()": {
           "Lines": {
-            "13": 8
+            "14": 8
           },
           "Branches": []
         },
         "System.Boolean PB.Core.ProjectCreateDTO::get_Notification()": {
           "Lines": {
-            "17": 11
+            "18": 11
           },
           "Branches": []
         },
         "PB.Core.Status PB.Core.ProjectCreateDTO::get_Status()": {
           "Lines": {
-            "19": 14
+            "20": 14
           },
           "Branches": []
         },
         "System.Collections.Generic.ISet`1<System.Int32> PB.Core.ProjectCreateDTO::get_Educations()": {
           "Lines": {
-            "24": 17
+            "25": 17
           },
           "Branches": []
         }
@@ -237,19 +243,27 @@
       "PB.Core.ProjectUpdateDTO": {
         "System.Int32 PB.Core.ProjectUpdateDTO::get_ID()": {
           "Lines": {
-            "29": 6
+            "30": 0
           },
           "Branches": []
         },
         "System.Collections.Generic.ISet`1<System.Int32> PB.Core.ProjectUpdateDTO::get_Applications()": {
           "Lines": {
-            "30": 8
+            "31": 6
           },
           "Branches": []
         },
         "System.Collections.Generic.ICollection`1<System.Int32> PB.Core.ProjectUpdateDTO::get_ChosenStudents()": {
           "Lines": {
-            "32": 8
+            "33": 6
+          },
+          "Branches": []
+        }
+      },
+      "PB.Core.ProjectDeleteDTO": {
+        "System.Int32 PB.Core.ProjectDeleteDTO::get_ID()": {
+          "Lines": {
+            "38": 0
           },
           "Branches": []
         }
@@ -363,7 +377,7 @@
       "PB.Core.UniversityDetailsDTO": {
         "System.String PB.Core.UniversityDetailsDTO::get_Id()": {
           "Lines": {
-            "11": 79
+            "11": 81
           },
           "Branches": []
         }
@@ -371,7 +385,7 @@
       "PB.Core.EducationDetailsDTO": {
         "System.Int32 PB.Core.EducationDetailsDTO::get_Id()": {
           "Lines": {
-            "13": 240
+            "13": 84
           },
           "Branches": []
         }
@@ -383,13 +397,13 @@
       "PB.Infrastructure.Application": {
         "System.Int32 PB.Infrastructure.Application::get_Id()": {
           "Lines": {
-            "5": 26
+            "5": 25
           },
           "Branches": []
         },
         "System.String PB.Infrastructure.Application::get_Title()": {
           "Lines": {
-            "7": 50
+            "7": 51
           },
           "Branches": []
         },
@@ -407,7 +421,7 @@
         },
         "PB.Infrastructure.Student PB.Infrastructure.Application::get_Student()": {
           "Lines": {
-            "10": 45
+            "10": 46
           },
           "Branches": []
         },
@@ -419,7 +433,7 @@
         },
         "PB.Infrastructure.Project PB.Infrastructure.Application::get_Project()": {
           "Lines": {
-            "12": 45
+            "12": 46
           },
           "Branches": []
         }
@@ -429,54 +443,52 @@
       "PB.Infrastructure.ApplicationDbContext": {
         "Microsoft.EntityFrameworkCore.DbSet`1<PB.Infrastructure.Project> PB.Infrastructure.ApplicationDbContext::get_Projects()": {
           "Lines": {
-            "17": 78
+            "16": 81
           },
           "Branches": []
         },
         "Microsoft.EntityFrameworkCore.DbSet`1<PB.Infrastructure.Student> PB.Infrastructure.ApplicationDbContext::get_Students()": {
           "Lines": {
-            "18": 83
+            "17": 84
           },
           "Branches": []
         },
         "Microsoft.EntityFrameworkCore.DbSet`1<PB.Infrastructure.Supervisor> PB.Infrastructure.ApplicationDbContext::get_Supervisors()": {
           "Lines": {
-            "19": 27
+            "18": 27
           },
           "Branches": []
         },
         "Microsoft.EntityFrameworkCore.DbSet`1<PB.Infrastructure.Application> PB.Infrastructure.ApplicationDbContext::get_Applications()": {
           "Lines": {
-            "20": 40
+            "19": 39
           },
           "Branches": []
         },
         "Microsoft.EntityFrameworkCore.DbSet`1<PB.Infrastructure.University> PB.Infrastructure.ApplicationDbContext::get_Universities()": {
           "Lines": {
-            "22": 203
+            "21": 14138
           },
           "Branches": []
         },
         "Microsoft.EntityFrameworkCore.DbSet`1<PB.Infrastructure.Education> PB.Infrastructure.ApplicationDbContext::get_Educations()": {
           "Lines": {
-            "23": 14
+            "22": 13815
           },
           "Branches": []
         },
         "System.Void PB.Infrastructure.ApplicationDbContext::OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)": {
           "Lines": {
+            "25": 2,
             "26": 2,
-            "27": 2,
-            "28": 2,
             "29": 2
           },
           "Branches": []
         },
         "System.Void PB.Infrastructure.ApplicationDbContext::.ctor(Microsoft.EntityFrameworkCore.DbContextOptions,Microsoft.Extensions.Options.IOptions`1<Duende.IdentityServer.EntityFramework.Options.OperationalStoreOptions>)": {
           "Lines": {
-            "13": 76,
-            "14": 76,
-            "15": 76
+            "13": 73,
+            "14": 146
           },
           "Branches": []
         }
@@ -605,31 +617,31 @@
       "PB.Infrastructure.Education": {
         "System.Int32 PB.Infrastructure.Education::get_Id()": {
           "Lines": {
-            "11": 823
+            "11": 1185
           },
           "Branches": []
         },
         "System.String PB.Infrastructure.Education::get_Name()": {
           "Lines": {
-            "13": 819
+            "13": 13773
           },
           "Branches": []
         },
         "System.String PB.Infrastructure.Education::get_Grade()": {
           "Lines": {
-            "16": 819
-          },
-          "Branches": []
-        },
-        "System.String PB.Infrastructure.Education::get_UniversityID()": {
-          "Lines": {
-            "17": 819
+            "16": 13772
           },
           "Branches": []
         },
         "PB.Infrastructure.University PB.Infrastructure.Education::get_University()": {
           "Lines": {
-            "19": 0
+            "19": 13773
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.ICollection`1<PB.Infrastructure.Project> PB.Infrastructure.Education::get_Projects()": {
+          "Lines": {
+            "21": 13774
           },
           "Branches": []
         }
@@ -639,48 +651,58 @@
       "PB.Infrastructure.EducationRepository": {
         "System.Void PB.Infrastructure.EducationRepository::.ctor(PB.Infrastructure.ApplicationDbContext)": {
           "Lines": {
-            "7": 9,
-            "8": 9,
-            "9": 9,
-            "10": 9
+            "7": 5,
+            "8": 5,
+            "9": 5,
+            "10": 5
           },
           "Branches": []
         }
       },
-      "PB.Infrastructure.EducationRepository/<ReadAllByUniversityAsync>d__2": {
-        "System.Void PB.Infrastructure.EducationRepository/<ReadAllByUniversityAsync>d__2::MoveNext()": {
+      "PB.Infrastructure.EducationRepository/<ReadAllAsync>d__2": {
+        "System.Void PB.Infrastructure.EducationRepository/<ReadAllAsync>d__2::MoveNext()": {
           "Lines": {
-            "12": 1,
-            "13": 1,
-            "14": 1,
-            "15": 1,
-            "16": 1,
-            "17": 1
+            "13": 0,
+            "14": 0,
+            "15": 0
           },
           "Branches": []
         }
       },
-      "PB.Infrastructure.EducationRepository/<ReadByIDAsync>d__3": {
-        "System.Void PB.Infrastructure.EducationRepository/<ReadByIDAsync>d__3::MoveNext()": {
+      "PB.Infrastructure.EducationRepository/<ReadAllByUniversityAsync>d__3": {
+        "System.Void PB.Infrastructure.EducationRepository/<ReadAllByUniversityAsync>d__3::MoveNext()": {
           "Lines": {
-            "20": 8,
-            "21": 8,
-            "22": 8,
-            "23": 8
+            "18": 1,
+            "19": 1,
+            "20": 1,
+            "21": 1,
+            "22": 1,
+            "23": 1
+          },
+          "Branches": []
+        }
+      },
+      "PB.Infrastructure.EducationRepository/<ReadByIDAsync>d__4": {
+        "System.Void PB.Infrastructure.EducationRepository/<ReadByIDAsync>d__4::MoveNext()": {
+          "Lines": {
+            "26": 3,
+            "27": 3,
+            "28": 3,
+            "29": 3
           },
           "Branches": [
             {
-              "Line": 22,
+              "Line": 28,
               "Offset": 180,
               "EndOffset": 182,
               "Path": 0,
               "Ordinal": 0,
-              "Hits": 7
+              "Hits": 2
             },
             {
-              "Line": 22,
+              "Line": 28,
               "Offset": 180,
-              "EndOffset": 233,
+              "EndOffset": 238,
               "Path": 1,
               "Ordinal": 1,
               "Hits": 1
@@ -691,424 +713,456 @@
     },
     "/Volumes/TOSHIBA EXT/ITU - Andet år/BDSA/PB/Infrastructure/ModelBuilderExtensions.cs": {
       "PB.Infrastructure.ModelBuilderExtensions": {
-        "System.Void PB.Infrastructure.ModelBuilderExtensions::Seed(Microsoft.EntityFrameworkCore.ModelBuilder)": {
+        "System.Void PB.Infrastructure.ModelBuilderExtensions::Seed(PB.Infrastructure.ApplicationDbContext)": {
           "Lines": {
-            "6": 2,
-            "7": 2,
-            "8": 2,
-            "9": 2,
-            "10": 2,
-            "11": 2,
-            "12": 2,
-            "13": 2,
-            "15": 2,
-            "16": 2,
-            "17": 2,
-            "18": 2,
-            "19": 2,
-            "20": 2,
-            "21": 2,
-            "22": 2,
-            "23": 2,
-            "24": 2,
-            "25": 2,
-            "26": 2,
-            "27": 2,
-            "28": 2,
-            "29": 2,
-            "30": 2,
-            "31": 2,
-            "32": 2,
-            "33": 2,
-            "34": 2,
-            "35": 2,
-            "36": 2,
-            "37": 2,
-            "38": 2,
-            "39": 2,
-            "40": 2,
-            "41": 2,
-            "42": 2,
-            "43": 2,
-            "44": 2,
-            "45": 2,
-            "46": 2,
-            "47": 2,
-            "48": 2,
-            "49": 2,
-            "50": 2,
-            "51": 2,
-            "52": 2,
-            "53": 2,
-            "54": 2,
-            "55": 2,
-            "56": 2,
-            "57": 2,
-            "58": 2,
-            "59": 2,
-            "60": 2,
-            "61": 2,
-            "62": 2,
-            "63": 2,
-            "64": 2,
-            "65": 2,
-            "66": 2,
-            "67": 2,
-            "68": 2,
-            "69": 2,
-            "70": 2,
-            "71": 2,
-            "72": 2,
-            "73": 2,
-            "74": 2,
-            "75": 2,
-            "76": 2,
-            "77": 2,
-            "78": 2,
-            "79": 2,
-            "80": 2,
-            "81": 2,
-            "82": 2,
-            "83": 2,
-            "84": 2,
-            "85": 2,
-            "86": 2,
-            "87": 2,
-            "88": 2,
-            "89": 2,
-            "90": 2,
-            "91": 2,
-            "92": 2,
-            "93": 2,
-            "94": 2,
-            "95": 2,
-            "96": 2,
-            "97": 2,
-            "98": 2,
-            "99": 2,
-            "100": 2,
-            "101": 2,
-            "102": 2,
-            "103": 2,
-            "104": 2,
-            "105": 2,
-            "106": 2,
-            "107": 2,
-            "108": 2,
-            "109": 2,
-            "110": 2,
-            "111": 2,
-            "112": 2,
-            "113": 2,
-            "114": 2,
-            "115": 2,
-            "116": 2,
-            "117": 2,
-            "118": 2,
-            "119": 2,
-            "120": 2,
-            "121": 2,
-            "122": 2,
-            "123": 2,
-            "124": 2,
-            "125": 2,
-            "126": 2,
-            "127": 2,
-            "128": 2,
-            "129": 2,
-            "130": 2,
-            "131": 2,
-            "132": 2,
-            "133": 2,
-            "134": 2,
-            "135": 2,
-            "136": 2,
-            "137": 2,
-            "138": 2,
-            "139": 2,
-            "140": 2,
-            "141": 2,
-            "142": 2,
-            "143": 2,
-            "144": 2,
-            "145": 2,
-            "146": 2,
-            "147": 2,
-            "148": 2,
-            "149": 2,
-            "150": 2,
-            "151": 2,
-            "152": 2,
-            "153": 2,
-            "154": 2,
-            "155": 2,
-            "156": 2,
-            "157": 2,
-            "158": 2,
-            "159": 2,
-            "160": 2,
-            "161": 2,
-            "162": 2,
-            "163": 2,
-            "164": 2,
-            "165": 2,
-            "166": 2,
-            "167": 2,
-            "168": 2,
-            "169": 2,
-            "170": 2,
-            "171": 2,
-            "172": 2,
-            "173": 2,
-            "174": 2,
-            "175": 2,
-            "176": 2,
-            "177": 2,
-            "178": 2,
-            "179": 2,
-            "180": 2,
-            "181": 2,
-            "182": 2,
-            "183": 2,
-            "184": 2,
-            "185": 2,
-            "186": 2,
-            "187": 2,
-            "188": 2,
-            "189": 2,
-            "190": 2,
-            "191": 2,
-            "192": 2,
-            "193": 2,
-            "194": 2,
-            "195": 2,
-            "196": 2,
-            "197": 2,
-            "198": 2,
-            "199": 2,
-            "200": 2,
-            "201": 2,
-            "202": 2,
-            "203": 2,
-            "204": 2,
-            "205": 2,
-            "206": 2,
-            "207": 2,
-            "208": 2,
-            "209": 2,
-            "210": 2,
-            "211": 2,
-            "212": 2,
-            "213": 2,
-            "214": 2,
-            "215": 2,
-            "216": 2,
-            "217": 2,
-            "218": 2,
-            "219": 2,
-            "220": 2,
-            "221": 2,
-            "222": 2,
-            "223": 2,
-            "224": 2,
-            "225": 2,
-            "226": 2,
-            "227": 2,
-            "228": 2,
-            "229": 2,
-            "230": 2,
-            "231": 2,
-            "232": 2,
-            "233": 2,
-            "234": 2,
-            "235": 2,
-            "236": 2,
-            "237": 2,
-            "238": 2,
-            "239": 2,
-            "240": 2,
-            "241": 2,
-            "242": 2,
-            "243": 2,
-            "244": 2,
-            "245": 2,
-            "246": 2,
-            "247": 2,
-            "248": 2,
-            "249": 2,
-            "250": 2,
-            "251": 2,
-            "252": 2,
-            "253": 2,
-            "254": 2,
-            "255": 2,
-            "256": 2,
-            "257": 2,
-            "258": 2,
-            "259": 2,
-            "260": 2,
-            "261": 2,
-            "262": 2,
-            "263": 2,
-            "264": 2,
-            "265": 2,
-            "266": 2,
-            "267": 2,
-            "268": 2,
-            "269": 2,
-            "270": 2,
-            "271": 2,
-            "272": 2,
-            "273": 2,
-            "274": 2,
-            "275": 2,
-            "276": 2,
-            "277": 2,
-            "278": 2,
-            "279": 2,
-            "280": 2,
-            "281": 2,
-            "282": 2,
-            "283": 2,
-            "284": 2,
-            "285": 2,
-            "286": 2,
-            "287": 2,
-            "288": 2,
-            "289": 2,
-            "290": 2,
-            "291": 2,
-            "292": 2,
-            "293": 2,
-            "294": 2,
-            "295": 2,
-            "296": 2,
-            "297": 2,
-            "298": 2,
-            "299": 2,
-            "300": 2,
-            "301": 2,
-            "302": 2,
-            "303": 2,
-            "304": 2,
-            "305": 2,
-            "306": 2,
-            "307": 2,
-            "308": 2,
-            "309": 2,
-            "310": 2,
-            "311": 2,
-            "312": 2,
-            "313": 2,
-            "314": 2,
-            "315": 2,
-            "316": 2,
-            "317": 2,
-            "318": 2,
-            "319": 2,
-            "320": 2,
-            "321": 2,
-            "322": 2,
-            "323": 2,
-            "324": 2,
-            "325": 2,
-            "326": 2,
-            "327": 2,
-            "328": 2,
-            "329": 2,
-            "330": 2,
-            "331": 2,
-            "332": 2,
-            "333": 2,
-            "334": 2,
-            "335": 2,
-            "336": 2,
-            "337": 2,
-            "338": 2,
-            "339": 2,
-            "340": 2,
-            "341": 2,
-            "342": 2,
-            "343": 2,
-            "344": 2,
-            "345": 2,
-            "346": 2,
-            "347": 2,
-            "348": 2,
-            "349": 2,
-            "350": 2,
-            "351": 2,
-            "352": 2,
-            "353": 2,
-            "354": 2,
-            "355": 2,
-            "356": 2,
-            "357": 2,
-            "358": 2,
-            "359": 2,
-            "360": 2,
-            "361": 2,
-            "362": 2,
-            "363": 2,
-            "364": 2,
-            "365": 2,
-            "366": 2,
-            "367": 2,
-            "368": 2,
-            "369": 2,
-            "370": 2,
-            "371": 2,
-            "372": 2,
-            "373": 2,
-            "374": 2,
-            "375": 2,
-            "376": 2,
-            "377": 2,
-            "378": 2,
-            "379": 2,
-            "380": 2,
-            "381": 2,
-            "382": 2,
-            "383": 2,
-            "384": 2,
-            "385": 2,
-            "386": 2,
-            "387": 2,
-            "388": 2,
-            "389": 2,
-            "390": 2,
-            "391": 2,
-            "392": 2,
-            "393": 2,
-            "394": 2,
-            "395": 2,
-            "396": 2,
-            "397": 2,
-            "398": 2,
-            "399": 2,
-            "400": 2,
-            "401": 2,
-            "402": 2,
-            "403": 2,
-            "404": 2,
-            "405": 2,
-            "406": 2,
-            "407": 2,
-            "408": 2,
-            "409": 2,
-            "410": 2,
-            "411": 2,
-            "412": 2,
-            "413": 2,
-            "414": 2,
-            "415": 2,
-            "416": 2,
-            "417": 2,
-            "418": 2,
-            "419": 2,
-            "420": 2
+            "6": 34,
+            "7": 34,
+            "9": 34,
+            "10": 34,
+            "11": 34,
+            "12": 34,
+            "14": 34,
+            "15": 34,
+            "16": 34,
+            "17": 34,
+            "18": 34,
+            "19": 34,
+            "20": 34,
+            "21": 34,
+            "22": 34,
+            "23": 34,
+            "24": 34,
+            "25": 34,
+            "26": 34,
+            "27": 34,
+            "28": 34,
+            "29": 34,
+            "30": 34,
+            "31": 34,
+            "32": 34,
+            "33": 34,
+            "34": 34,
+            "35": 34,
+            "36": 34,
+            "37": 34,
+            "38": 34,
+            "39": 34,
+            "40": 34,
+            "41": 34,
+            "42": 34,
+            "43": 34,
+            "44": 34,
+            "45": 34,
+            "46": 34,
+            "47": 34,
+            "48": 34,
+            "49": 34,
+            "50": 34,
+            "51": 34,
+            "52": 34,
+            "53": 34,
+            "54": 34,
+            "55": 34,
+            "56": 34,
+            "57": 34,
+            "58": 34,
+            "59": 34,
+            "60": 34,
+            "61": 34,
+            "62": 34,
+            "63": 34,
+            "64": 34,
+            "65": 34,
+            "66": 34,
+            "67": 34,
+            "68": 34,
+            "69": 34,
+            "70": 34,
+            "71": 34,
+            "72": 34,
+            "73": 34,
+            "74": 34,
+            "75": 34,
+            "76": 34,
+            "77": 34,
+            "78": 34,
+            "79": 34,
+            "80": 34,
+            "81": 34,
+            "82": 34,
+            "83": 34,
+            "84": 34,
+            "85": 34,
+            "86": 34,
+            "87": 34,
+            "88": 34,
+            "89": 34,
+            "90": 34,
+            "91": 34,
+            "92": 34,
+            "93": 34,
+            "94": 34,
+            "95": 34,
+            "96": 34,
+            "97": 34,
+            "98": 34,
+            "99": 34,
+            "100": 34,
+            "101": 34,
+            "102": 34,
+            "103": 34,
+            "104": 34,
+            "105": 34,
+            "106": 34,
+            "107": 34,
+            "108": 34,
+            "109": 34,
+            "110": 34,
+            "111": 34,
+            "112": 34,
+            "113": 34,
+            "114": 34,
+            "115": 34,
+            "116": 34,
+            "117": 34,
+            "118": 34,
+            "119": 34,
+            "120": 34,
+            "121": 34,
+            "122": 34,
+            "123": 34,
+            "124": 34,
+            "125": 34,
+            "126": 34,
+            "127": 34,
+            "128": 34,
+            "129": 34,
+            "130": 34,
+            "131": 34,
+            "132": 34,
+            "133": 34,
+            "134": 34,
+            "135": 34,
+            "136": 34,
+            "137": 34,
+            "138": 34,
+            "139": 34,
+            "140": 34,
+            "141": 34,
+            "142": 34,
+            "143": 34,
+            "144": 34,
+            "145": 34,
+            "146": 34,
+            "147": 34,
+            "148": 34,
+            "149": 34,
+            "150": 34,
+            "151": 34,
+            "152": 34,
+            "153": 34,
+            "154": 34,
+            "155": 34,
+            "156": 34,
+            "157": 34,
+            "158": 34,
+            "159": 34,
+            "160": 34,
+            "161": 34,
+            "162": 34,
+            "163": 34,
+            "164": 34,
+            "165": 34,
+            "166": 34,
+            "167": 34,
+            "168": 34,
+            "169": 34,
+            "170": 34,
+            "171": 34,
+            "172": 34,
+            "173": 34,
+            "174": 34,
+            "175": 34,
+            "176": 34,
+            "177": 34,
+            "178": 34,
+            "179": 34,
+            "180": 34,
+            "181": 34,
+            "182": 34,
+            "183": 34,
+            "184": 34,
+            "185": 34,
+            "186": 34,
+            "187": 34,
+            "188": 34,
+            "189": 34,
+            "190": 34,
+            "191": 34,
+            "192": 34,
+            "193": 34,
+            "194": 34,
+            "195": 34,
+            "196": 34,
+            "197": 34,
+            "198": 34,
+            "199": 34,
+            "200": 34,
+            "201": 34,
+            "202": 34,
+            "203": 34,
+            "204": 34,
+            "205": 34,
+            "206": 34,
+            "207": 34,
+            "208": 34,
+            "209": 34,
+            "210": 34,
+            "211": 34,
+            "212": 34,
+            "213": 34,
+            "214": 34,
+            "215": 34,
+            "216": 34,
+            "217": 34,
+            "218": 34,
+            "219": 34,
+            "220": 34,
+            "221": 34,
+            "222": 34,
+            "223": 34,
+            "224": 34,
+            "225": 34,
+            "226": 34,
+            "227": 34,
+            "228": 34,
+            "229": 34,
+            "230": 34,
+            "231": 34,
+            "232": 34,
+            "233": 34,
+            "234": 34,
+            "235": 34,
+            "236": 34,
+            "237": 34,
+            "238": 34,
+            "239": 34,
+            "240": 34,
+            "241": 34,
+            "242": 34,
+            "243": 34,
+            "244": 34,
+            "245": 34,
+            "246": 34,
+            "247": 34,
+            "248": 34,
+            "249": 34,
+            "250": 34,
+            "251": 34,
+            "252": 34,
+            "253": 34,
+            "254": 34,
+            "255": 34,
+            "256": 34,
+            "257": 34,
+            "258": 34,
+            "259": 34,
+            "260": 34,
+            "261": 34,
+            "262": 34,
+            "263": 34,
+            "264": 34,
+            "265": 34,
+            "266": 34,
+            "267": 34,
+            "268": 34,
+            "269": 34,
+            "270": 34,
+            "271": 34,
+            "272": 34,
+            "273": 34,
+            "274": 34,
+            "275": 34,
+            "276": 34,
+            "277": 34,
+            "278": 34,
+            "279": 34,
+            "280": 34,
+            "281": 34,
+            "282": 34,
+            "283": 34,
+            "284": 34,
+            "285": 34,
+            "286": 34,
+            "287": 34,
+            "288": 34,
+            "289": 34,
+            "290": 34,
+            "291": 34,
+            "292": 34,
+            "293": 34,
+            "294": 34,
+            "295": 34,
+            "296": 34,
+            "297": 34,
+            "298": 34,
+            "299": 34,
+            "300": 34,
+            "301": 34,
+            "302": 34,
+            "303": 34,
+            "304": 34,
+            "305": 34,
+            "306": 34,
+            "307": 34,
+            "308": 34,
+            "309": 34,
+            "310": 34,
+            "311": 34,
+            "312": 34,
+            "313": 34,
+            "314": 34,
+            "315": 34,
+            "316": 34,
+            "317": 34,
+            "318": 34,
+            "319": 34,
+            "320": 34,
+            "321": 34,
+            "322": 34,
+            "323": 34,
+            "324": 34,
+            "325": 34,
+            "326": 34,
+            "327": 34,
+            "328": 34,
+            "329": 34,
+            "330": 34,
+            "331": 34,
+            "332": 34,
+            "333": 34,
+            "334": 34,
+            "335": 34,
+            "336": 34,
+            "337": 34,
+            "338": 34,
+            "339": 34,
+            "340": 34,
+            "341": 34,
+            "342": 34,
+            "343": 34,
+            "344": 34,
+            "345": 34,
+            "346": 34,
+            "347": 34,
+            "348": 34,
+            "349": 34,
+            "350": 34,
+            "351": 34,
+            "352": 34,
+            "353": 34,
+            "354": 34,
+            "355": 34,
+            "356": 34,
+            "357": 34,
+            "358": 34,
+            "359": 34,
+            "360": 34,
+            "361": 34,
+            "362": 34,
+            "363": 34,
+            "364": 34,
+            "365": 34,
+            "366": 34,
+            "367": 34,
+            "368": 34,
+            "369": 34,
+            "370": 34,
+            "371": 34,
+            "372": 34,
+            "373": 34,
+            "374": 34,
+            "375": 34,
+            "376": 34,
+            "377": 34,
+            "378": 34,
+            "379": 34,
+            "380": 34,
+            "381": 34,
+            "382": 34,
+            "383": 34,
+            "384": 34,
+            "385": 34,
+            "386": 34,
+            "387": 34,
+            "388": 34,
+            "389": 34,
+            "390": 34,
+            "391": 34,
+            "392": 34,
+            "393": 34,
+            "394": 34,
+            "395": 34,
+            "396": 34,
+            "397": 34,
+            "398": 34,
+            "399": 34,
+            "400": 34,
+            "401": 34,
+            "402": 34,
+            "403": 34,
+            "404": 34,
+            "405": 34,
+            "406": 34,
+            "407": 34,
+            "408": 34,
+            "409": 34,
+            "410": 34,
+            "411": 34,
+            "412": 34,
+            "413": 34,
+            "414": 34,
+            "415": 34,
+            "416": 34,
+            "417": 34,
+            "418": 34,
+            "420": 34,
+            "421": 34
           },
-          "Branches": []
+          "Branches": [
+            {
+              "Line": 7,
+              "Offset": 12,
+              "EndOffset": 14,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 34
+            },
+            {
+              "Line": 7,
+              "Offset": 12,
+              "EndOffset": 30,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 7,
+              "Offset": 33,
+              "EndOffset": 40,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 34
+            },
+            {
+              "Line": 7,
+              "Offset": 33,
+              "EndOffset": 30586,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 34
+            }
+          ]
         }
       }
     },
@@ -1116,19 +1170,19 @@
       "PB.Infrastructure.Project": {
         "System.Int32 PB.Infrastructure.Project::get_Id()": {
           "Lines": {
-            "7": 139
+            "7": 144
           },
           "Branches": []
         },
         "System.String PB.Infrastructure.Project::get_Title()": {
           "Lines": {
-            "9": 143
+            "9": 148
           },
           "Branches": []
         },
         "System.String PB.Infrastructure.Project::get_Description()": {
           "Lines": {
-            "10": 142
+            "10": 147
           },
           "Branches": []
         },
@@ -1140,7 +1194,7 @@
         },
         "PB.Infrastructure.Supervisor PB.Infrastructure.Project::get_Supervisor()": {
           "Lines": {
-            "12": 140
+            "12": 145
           },
           "Branches": []
         },
@@ -1158,19 +1212,19 @@
         },
         "System.Collections.Generic.ICollection`1<PB.Infrastructure.Application> PB.Infrastructure.Project::get_Applications()": {
           "Lines": {
-            "17": 142
+            "17": 145
           },
           "Branches": []
         },
         "System.Collections.Generic.ICollection`1<PB.Infrastructure.Education> PB.Infrastructure.Project::get_Educations()": {
           "Lines": {
-            "18": 145
+            "18": 150
           },
           "Branches": []
         },
         "System.Collections.Generic.ICollection`1<PB.Infrastructure.Student> PB.Infrastructure.Project::get_ChosenStudents()": {
           "Lines": {
-            "20": 143
+            "20": 147
           },
           "Branches": []
         }
@@ -1180,10 +1234,10 @@
       "PB.Infrastructure.ProjectRepository": {
         "System.Void PB.Infrastructure.ProjectRepository::.ctor(PB.Infrastructure.ApplicationDbContext)": {
           "Lines": {
-            "9": 24,
-            "10": 24,
-            "11": 24,
-            "12": 24
+            "9": 25,
+            "10": 25,
+            "11": 25,
+            "12": 25
           },
           "Branches": []
         }
@@ -1191,31 +1245,37 @@
       "PB.Infrastructure.ProjectRepository/<>c": {
         "System.Int32 PB.Infrastructure.ProjectRepository/<>c::<CreateAsync>b__2_0(PB.Infrastructure.Student)": {
           "Lines": {
-            "39": 0
+            "40": 0
           },
           "Branches": []
         },
         "System.Int32 PB.Infrastructure.ProjectRepository/<>c::<CreateAsync>b__2_1(PB.Infrastructure.Application)": {
           "Lines": {
-            "41": 0
+            "42": 0
           },
           "Branches": []
         },
         "System.Int32 PB.Infrastructure.ProjectRepository/<>c::<CreateAsync>b__2_2(PB.Infrastructure.Education)": {
           "Lines": {
-            "42": 4
+            "44": 4
           },
           "Branches": []
         },
         "System.Int32 PB.Infrastructure.ProjectRepository/<>c::<GetStudentsAsync>b__10_1(PB.Infrastructure.Student)": {
           "Lines": {
-            "163": 5
+            "165": 6
           },
           "Branches": []
         },
         "System.Int32 PB.Infrastructure.ProjectRepository/<>c::<GetApplicationsAsync>b__11_1(PB.Infrastructure.Application)": {
           "Lines": {
-            "173": 3
+            "175": 0
+          },
+          "Branches": []
+        },
+        "System.Int32 PB.Infrastructure.ProjectRepository/<>c::<GetEducationsAsync>b__12_1(PB.Infrastructure.Education)": {
+          "Lines": {
+            "186": 5
           },
           "Branches": []
         }
@@ -1235,33 +1295,34 @@
             "24": 3,
             "25": 3,
             "26": 3,
-            "28": 3,
+            "27": 3,
             "30": 3,
             "32": 3,
-            "33": 3,
             "34": 3,
             "35": 3,
             "36": 3,
             "37": 3,
             "38": 3,
-            "40": 3,
+            "39": 3,
+            "41": 3,
             "43": 3,
-            "44": 3,
-            "45": 3
+            "45": 3,
+            "46": 3,
+            "47": 3
           },
           "Branches": [
             {
-              "Line": 32,
-              "Offset": 621,
-              "EndOffset": 623,
+              "Line": 34,
+              "Offset": 572,
+              "EndOffset": 574,
               "Path": 0,
               "Ordinal": 0,
               "Hits": 0
             },
             {
-              "Line": 32,
-              "Offset": 621,
-              "EndOffset": 627,
+              "Line": 34,
+              "Offset": 572,
+              "EndOffset": 578,
               "Path": 1,
               "Ordinal": 1,
               "Hits": 3
@@ -1272,19 +1333,19 @@
       "PB.Infrastructure.ProjectRepository/<DeleteAsync>d__3": {
         "System.Void PB.Infrastructure.ProjectRepository/<DeleteAsync>d__3::MoveNext()": {
           "Lines": {
-            "48": 8,
-            "49": 8,
+            "50": 8,
             "51": 8,
-            "52": 1,
-            "53": 1,
-            "56": 7,
-            "57": 7,
+            "53": 8,
+            "54": 1,
+            "55": 1,
+            "58": 7,
             "59": 7,
-            "60": 8
+            "61": 7,
+            "62": 8
           },
           "Branches": [
             {
-              "Line": 51,
+              "Line": 53,
               "Offset": 198,
               "EndOffset": 200,
               "Path": 0,
@@ -1292,7 +1353,7 @@
               "Hits": 1
             },
             {
-              "Line": 51,
+              "Line": 53,
               "Offset": 198,
               "EndOffset": 208,
               "Path": 1,
@@ -1305,24 +1366,24 @@
       "PB.Infrastructure.ProjectRepository/<GetApplicationsAsync>d__11": {
         "System.Void PB.Infrastructure.ProjectRepository/<GetApplicationsAsync>d__11::MoveNext()": {
           "Lines": {
-            "172": 2,
-            "175": 8,
-            "176": 1,
-            "178": 1,
-            "179": 1,
-            "180": 2
+            "174": 0,
+            "177": 0,
+            "178": 0,
+            "180": 0,
+            "181": 0,
+            "182": 0
           },
           "Branches": [
             {
-              "Line": 175,
+              "Line": 177,
               "Offset": 571,
               "EndOffset": 443,
               "Path": 1,
               "Ordinal": 3,
-              "Hits": 1
+              "Hits": 0
             },
             {
-              "Line": 178,
+              "Line": 180,
               "Offset": 485,
               "EndOffset": 487,
               "Path": 0,
@@ -1330,20 +1391,66 @@
               "Hits": 0
             },
             {
-              "Line": 178,
+              "Line": 180,
               "Offset": 485,
               "EndOffset": 507,
               "Path": 1,
               "Ordinal": 1,
-              "Hits": 1
+              "Hits": 0
             },
             {
-              "Line": 175,
+              "Line": 177,
               "Offset": 571,
               "EndOffset": 576,
               "Path": 0,
               "Ordinal": 2,
-              "Hits": 2
+              "Hits": 0
+            }
+          ]
+        }
+      },
+      "PB.Infrastructure.ProjectRepository/<GetEducationsAsync>d__12": {
+        "System.Void PB.Infrastructure.ProjectRepository/<GetEducationsAsync>d__12::MoveNext()": {
+          "Lines": {
+            "185": 5,
+            "188": 23,
+            "189": 4,
+            "191": 4,
+            "192": 4,
+            "193": 5
+          },
+          "Branches": [
+            {
+              "Line": 188,
+              "Offset": 571,
+              "EndOffset": 443,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 4
+            },
+            {
+              "Line": 191,
+              "Offset": 485,
+              "EndOffset": 487,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 4
+            },
+            {
+              "Line": 191,
+              "Offset": 485,
+              "EndOffset": 507,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 188,
+              "Offset": 571,
+              "EndOffset": 576,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 5
             }
           ]
         }
@@ -1351,24 +1458,24 @@
       "PB.Infrastructure.ProjectRepository/<GetStudentsAsync>d__10": {
         "System.Void PB.Infrastructure.ProjectRepository/<GetStudentsAsync>d__10::MoveNext()": {
           "Lines": {
-            "162": 3,
-            "165": 13,
-            "166": 2,
-            "167": 2,
-            "168": 2,
-            "169": 3
+            "164": 2,
+            "167": 14,
+            "168": 4,
+            "169": 4,
+            "170": 4,
+            "171": 2
           },
           "Branches": [
             {
-              "Line": 165,
+              "Line": 167,
               "Offset": 571,
               "EndOffset": 443,
               "Path": 1,
               "Ordinal": 3,
-              "Hits": 2
+              "Hits": 4
             },
             {
-              "Line": 167,
+              "Line": 169,
               "Offset": 485,
               "EndOffset": 487,
               "Path": 0,
@@ -1376,20 +1483,20 @@
               "Hits": 0
             },
             {
-              "Line": 167,
+              "Line": 169,
               "Offset": 485,
               "EndOffset": 507,
               "Path": 1,
               "Ordinal": 1,
-              "Hits": 2
+              "Hits": 4
             },
             {
-              "Line": 165,
+              "Line": 167,
               "Offset": 571,
               "EndOffset": 576,
               "Path": 0,
               "Ordinal": 2,
-              "Hits": 3
+              "Hits": 2
             }
           ]
         }
@@ -1397,10 +1504,10 @@
       "PB.Infrastructure.ProjectRepository/<ListAllAsync>d__4": {
         "System.Void PB.Infrastructure.ProjectRepository/<ListAllAsync>d__4::MoveNext()": {
           "Lines": {
-            "63": 1,
-            "64": 1,
             "65": 1,
-            "66": 1
+            "66": 1,
+            "67": 1,
+            "68": 1
           },
           "Branches": []
         }
@@ -1408,11 +1515,11 @@
       "PB.Infrastructure.ProjectRepository/<ListAllAsync>d__5": {
         "System.Void PB.Infrastructure.ProjectRepository/<ListAllAsync>d__5::MoveNext()": {
           "Lines": {
-            "69": 1,
-            "70": 1,
             "71": 1,
             "72": 1,
-            "73": 1
+            "73": 1,
+            "74": 1,
+            "75": 1
           },
           "Branches": []
         }
@@ -1420,24 +1527,24 @@
       "PB.Infrastructure.ProjectRepository/<ReadByIDAsync>d__6": {
         "System.Void PB.Infrastructure.ProjectRepository/<ReadByIDAsync>d__6::MoveNext()": {
           "Lines": {
-            "76": 8,
-            "77": 8,
-            "78": 8,
-            "79": 8,
-            "80": 8,
-            "81": 8,
-            "82": 8,
-            "83": 8,
-            "84": 8,
-            "85": 8,
-            "86": 8,
-            "87": 8,
-            "88": 8,
-            "89": 8,
-            "90": 8,
-            "91": 8,
-            "93": 8,
-            "94": 8
+            "78": 9,
+            "80": 9,
+            "81": 9,
+            "82": 9,
+            "83": 9,
+            "84": 9,
+            "85": 9,
+            "86": 9,
+            "87": 9,
+            "88": 9,
+            "89": 9,
+            "90": 9,
+            "91": 9,
+            "92": 9,
+            "93": 9,
+            "94": 9,
+            "97": 9,
+            "98": 9
           },
           "Branches": []
         }
@@ -1445,35 +1552,33 @@
       "PB.Infrastructure.ProjectRepository/<UpdateAsync>d__7": {
         "System.Void PB.Infrastructure.ProjectRepository/<UpdateAsync>d__7::MoveNext()": {
           "Lines": {
-            "97": 3,
-            "98": 3,
+            "101": 3,
             "102": 3,
-            "103": 1,
-            "104": 1,
-            "107": 2,
-            "108": 2,
+            "106": 3,
+            "107": 1,
+            "108": 1,
             "111": 2,
             "112": 2,
             "113": 2,
-            "115": 2,
-            "116": 2,
-            "119": 2,
+            "114": 2,
+            "117": 2,
             "121": 2,
-            "122": 3
+            "123": 2,
+            "124": 3
           },
           "Branches": [
             {
-              "Line": 102,
-              "Offset": 543,
-              "EndOffset": 545,
+              "Line": 106,
+              "Offset": 549,
+              "EndOffset": 551,
               "Path": 0,
               "Ordinal": 0,
               "Hits": 1
             },
             {
-              "Line": 102,
-              "Offset": 543,
-              "EndOffset": 553,
+              "Line": 106,
+              "Offset": 549,
+              "EndOffset": 559,
               "Path": 1,
               "Ordinal": 1,
               "Hits": 2
@@ -1484,17 +1589,17 @@
       "PB.Infrastructure.ProjectRepository/<UpdateChosenStudentsAsync>d__9": {
         "System.Void PB.Infrastructure.ProjectRepository/<UpdateChosenStudentsAsync>d__9::MoveNext()": {
           "Lines": {
-            "134": 2,
-            "135": 2,
+            "136": 3,
             "137": 3,
-            "139": 1,
-            "141": 1,
-            "143": 1,
-            "144": 2
+            "139": 4,
+            "141": 2,
+            "143": 2,
+            "145": 2,
+            "146": 3
           },
           "Branches": [
             {
-              "Line": 137,
+              "Line": 139,
               "Offset": 410,
               "EndOffset": 412,
               "Path": 0,
@@ -1502,12 +1607,12 @@
               "Hits": 1
             },
             {
-              "Line": 137,
+              "Line": 139,
               "Offset": 410,
               "EndOffset": 419,
               "Path": 1,
               "Ordinal": 1,
-              "Hits": 1
+              "Hits": 2
             }
           ]
         }
@@ -1515,17 +1620,17 @@
       "PB.Infrastructure.ProjectRepository/<UpdateStatusAsync>d__8": {
         "System.Void PB.Infrastructure.ProjectRepository/<UpdateStatusAsync>d__8::MoveNext()": {
           "Lines": {
-            "124": 4,
-            "125": 4,
-            "126": 5,
-            "127": 3,
+            "126": 4,
+            "127": 4,
+            "128": 5,
             "129": 3,
             "131": 3,
-            "132": 4
+            "133": 3,
+            "134": 4
           },
           "Branches": [
             {
-              "Line": 126,
+              "Line": 128,
               "Offset": 203,
               "EndOffset": 205,
               "Path": 0,
@@ -1533,7 +1638,7 @@
               "Hits": 1
             },
             {
-              "Line": 126,
+              "Line": 128,
               "Offset": 203,
               "EndOffset": 212,
               "Path": 1,
@@ -1548,37 +1653,37 @@
       "PB.Infrastructure.Student": {
         "System.Int32 PB.Infrastructure.Student::get_Id()": {
           "Lines": {
-            "5": 158
+            "5": 164
           },
           "Branches": []
         },
         "System.String PB.Infrastructure.Student::get_Name()": {
           "Lines": {
-            "8": 185
+            "8": 188
           },
           "Branches": []
         },
         "System.String PB.Infrastructure.Student::get_Email()": {
           "Lines": {
-            "11": 173
+            "11": 176
           },
           "Branches": []
         },
         "System.Collections.Generic.ICollection`1<PB.Infrastructure.Project> PB.Infrastructure.Student::get_Projects()": {
           "Lines": {
-            "13": 185
+            "13": 188
           },
           "Branches": []
         },
         "System.Collections.Generic.ICollection`1<PB.Infrastructure.Application> PB.Infrastructure.Student::get_Applications()": {
           "Lines": {
-            "15": 183
+            "15": 186
           },
           "Branches": []
         },
         "PB.Infrastructure.University PB.Infrastructure.Student::get_University()": {
           "Lines": {
-            "16": 171
+            "16": 174
           },
           "Branches": []
         }
@@ -1836,25 +1941,25 @@
       "PB.Infrastructure.Supervisor": {
         "System.String PB.Infrastructure.Supervisor::get_Id()": {
           "Lines": {
-            "5": 86
+            "5": 88
           },
           "Branches": []
         },
         "System.String PB.Infrastructure.Supervisor::get_Name()": {
           "Lines": {
-            "8": 91
+            "8": 93
           },
           "Branches": []
         },
         "System.String PB.Infrastructure.Supervisor::get_Email()": {
           "Lines": {
-            "12": 84
+            "12": 86
           },
           "Branches": []
         },
         "System.Collections.Generic.ICollection`1<PB.Infrastructure.Project> PB.Infrastructure.Supervisor::get_Projects()": {
           "Lines": {
-            "14": 163
+            "14": 167
           },
           "Branches": []
         }
@@ -2020,35 +2125,35 @@
       "PB.Infrastructure.University": {
         "System.String PB.Infrastructure.University::get_Name()": {
           "Lines": {
-            "6": 29
+            "6": 158
           },
           "Branches": []
         },
         "System.String PB.Infrastructure.University::get_Id()": {
           "Lines": {
-            "10": 55
+            "10": 152
           },
           "Branches": []
         },
         "System.Collections.Generic.ICollection`1<PB.Infrastructure.Education> PB.Infrastructure.University::get_Educations()": {
           "Lines": {
-            "12": 479
+            "12": 159
           },
           "Branches": []
         },
         "System.Collections.Generic.ICollection`1<System.Int32> PB.Infrastructure.University::GetEducationIDs()": {
           "Lines": {
-            "15": 10,
-            "16": 10,
-            "17": 10,
-            "18": 10,
-            "20": 30,
-            "21": 0,
-            "22": 0,
-            "24": 0,
-            "25": 10,
-            "26": 10,
-            "27": 10
+            "15": 11,
+            "16": 11,
+            "17": 11,
+            "18": 11,
+            "20": 2383,
+            "21": 1175,
+            "22": 1175,
+            "24": 1175,
+            "25": 11,
+            "26": 11,
+            "27": 11
           },
           "Branches": [
             {
@@ -2057,7 +2162,7 @@
               "EndOffset": 20,
               "Path": 0,
               "Ordinal": 0,
-              "Hits": 10
+              "Hits": 11
             },
             {
               "Line": 20,
@@ -2065,7 +2170,7 @@
               "EndOffset": 36,
               "Path": 1,
               "Ordinal": 3,
-              "Hits": 0
+              "Hits": 1175
             },
             {
               "Line": 20,
@@ -2073,7 +2178,7 @@
               "EndOffset": 66,
               "Path": 0,
               "Ordinal": 2,
-              "Hits": 10
+              "Hits": 11
             },
             {
               "Line": 17,
@@ -2081,7 +2186,7 @@
               "EndOffset": 80,
               "Path": 1,
               "Ordinal": 1,
-              "Hits": 10
+              "Hits": 11
             }
           ]
         }
@@ -2091,10 +2196,10 @@
       "PB.Infrastructure.UniversityRepository": {
         "PB.Core.UniversityDetailsDTO PB.Infrastructure.UniversityRepository::ReadByID(System.String)": {
           "Lines": {
-            "31": 1,
-            "32": 1,
-            "33": 1,
-            "34": 1
+            "31": 3,
+            "32": 3,
+            "33": 3,
+            "34": 3
           },
           "Branches": [
             {
@@ -2103,7 +2208,7 @@
               "EndOffset": 31,
               "Path": 0,
               "Ordinal": 0,
-              "Hits": 0
+              "Hits": 2
             },
             {
               "Line": 33,
@@ -2117,10 +2222,10 @@
         },
         "System.Void PB.Infrastructure.UniversityRepository::.ctor(PB.Infrastructure.ApplicationDbContext)": {
           "Lines": {
-            "13": 83,
-            "14": 83,
-            "15": 83,
-            "16": 83
+            "13": 75,
+            "14": 75,
+            "15": 75,
+            "16": 75
           },
           "Branches": []
         }

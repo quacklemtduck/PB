@@ -32,7 +32,7 @@ namespace PB.Infrastructure.Tests
         public async Task ReadAllAsync_returns_all_Universities()
         {
             var universities = await _repository.ReadAllAsync();
-            Assert.Equal(4, universities.Count-1); //don't count uni abbrv
+            Assert.Equal(4, universities.Count); //don't count uni abbrv
 
             bool[] checker = new bool[4];
             foreach (var univeristy in universities)
@@ -77,19 +77,19 @@ namespace PB.Infrastructure.Tests
 
 
 
-        [Theory]
-        [InlineData("SDU", "Syddansk Universitet")]
-        [InlineData("KU", "Københavns Universitet")]
-        [InlineData("ITU", "IT-Universitet i København")]
-        [InlineData("CBS", "Copenhagen Business School")]
-        public async Task ReadByIDAsync_given_id_exists_returns_University(string id, string name)
+        [Theory] //see data in ModelBuilderExtensions.cs
+        [InlineData("SDU", "Syddansk Universitet", 163)]
+        [InlineData("KU", "Københavns Universitet", 178)]
+        [InlineData("ITU", "IT-Universitet i København", 9)]
+        [InlineData("CBS", "Copenhagen Business School", 55)]
+        public async Task ReadByIDAsync_given_id_exists_returns_University(string id, string name, int educations)
         {
             
             var university = await _repository.ReadByIDAsync(id);
             Assert.NotNull(university);
             Assert.Equal(id, university?.Id);
             Assert.Equal(name, university?.Name);
-            Assert.Empty(university?.Educations);
+            Assert.Equal(educations, university?.Educations?.Count);
         }
 
         [Fact]
@@ -101,7 +101,8 @@ namespace PB.Infrastructure.Tests
             
             Assert.Equal(id, university?.Id);
             Assert.Equal(name, university?.Name);
-            Assert.Empty(university?.Educations);
+
+            Assert.Equal(9, university.Educations.Count);
         }
 
 

@@ -183,22 +183,29 @@ namespace PB.Infrastructure.Tests
 
             var project = new ProjectUpdateDTO
             {
-                Id = 5,
-                Title = "newProject5",
-                Description = "This is project 5, version 2",
+                Id = 4,
+                Title = "newProject4",
+                Description = "This is project 4, version 2",
                 Notification = false,
                 ChosenStudents = new HashSet<int>(),
                 Applications = new HashSet<int>(),
                 Educations = new HashSet<int>()
             };
 
+
+
             var response = await _repository.UpdateAsync(project);
 
-            Assert.Equal(Updated, response);
-            var projectUpdated = (await _repository.ReadByIDAsync(5)).Value;
 
-            Assert.Equal("newProject5", projectUpdated.Title);
-            Assert.Equal("This is project 5, version 2", projectUpdated.Description);
+            Assert.Equal(Updated, response);
+            var projectUpdated = (await _repository.ReadByIDAsync(4)).Value;
+
+            foreach (var app in projectUpdated.Applications) {
+                Console.WriteLine(app);
+            }
+
+            Assert.Equal(project.Title, projectUpdated.Title);
+            Assert.Equal(project.Description, projectUpdated.Description);
             Assert.Equal(false, projectUpdated.Notification);
             Assert.Empty(projectUpdated.ChosenStudents);
             Assert.Empty(projectUpdated.Applications);
@@ -456,10 +463,16 @@ namespace PB.Infrastructure.Tests
             var supervisorID = "1";
 
             var educations = new HashSet<int>();
+            //Console.WriteLine("----------------------AAAAAAAAAAAAAAAAAAAAAAAAAAAADD EDUCATIONS: " + projectTitle);
             for (int i = 1; i < numberOfEducations + 1; i++)
             {
+                //Console.WriteLine(i);
                 educations.Add(i);
             }
+
+            //Console.WriteLine(educations.Count);
+
+            
 
             var project = new ProjectCreateDTO
             {

@@ -92,17 +92,12 @@ namespace PB.Infrastructure.Tests
 
 
         [Theory]
-        [InlineData(71, "Media Technology and Games","Kandidat")]
-        [InlineData(94, "Software Development and Technology", "Kandidat")]
-        [InlineData(134, "Digital Innovation & Management","Kandidat")]
-        [InlineData(150, "Data Science","Bachelor")]
-        [InlineData(170, "Digital Design and Interactive Technologies", "Bachelor")]
-        [InlineData(233, "Digital Design and Interactive Technologies", "Kandidat")]
-        [InlineData(339, "Global Business Informatics","Bachelor")]
-        public async Task ReadByIDAsync_given_id_exists_returns_Education(int id, string expectedName, string expectedDegree)
+        [InlineData(1, "Klinisk sygepleje (kandidat)","Kandidat", "SDU")]
+        [InlineData(2, "Veterinærmedicin", "Bachelor", "KU")]
+        public async Task ReadByIDAsync_given_id_exists_returns_Education(int id, string expectedName, string expectedDegree, string uniAbr)
         {
             var universityRepository = new UniversityRepository(_context);
-            var university = _context.Universities.Find("ITU");
+            var university = _context.Universities.Find(uniAbr);
 
             var education = await _repository.ReadByIDAsync(id);
             

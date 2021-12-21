@@ -22,8 +22,10 @@ namespace PB.Infrastructure
                 //Tags = await GetTagsAsync(project.Tags).ToListAsync(),
                 Status = project.Status,
 
-                Educations = _context.Educations.Where(e => project.Educations.Any(e2 => e2 == e.Id)).ToList()
+                //Educations = _context.Educations.Where(e => project.Educations.Any(e2 => e2 == e.Id)).ToList()
+                Educations = await GetEducationsAsync(project.Educations).ToListAsync()
             };
+            
 
             _context.Projects.Add(entity);
 
@@ -74,6 +76,7 @@ namespace PB.Infrastructure
 
         public async Task<Option<ProjectDetailsDTO>> ReadByIDAsync(int projectId)
         {
+            
             var projects = from p in _context.Projects
                            where p.Id == projectId
                            select new ProjectDetailsDTO(
@@ -89,6 +92,7 @@ namespace PB.Infrastructure
                                p.Educations.Select(u => u.Id).ToHashSet(),
                                p.Status
                            );
+
 
             return await projects.FirstOrDefaultAsync();
         }
@@ -110,7 +114,8 @@ namespace PB.Infrastructure
                 entity.Status = project.Status;
                 //entity.ChosenStudents = await GetStudentsAsync(project.ChosenStudents).ToListAsync();
                 //entity.Applications = await GetApplicationsAsync(project.Applications).ToListAsync();
-                entity.Educations = _context.Educations.Where(e => project.Educations.Any(e2 => e2 == e.Id)).ToList();
+                entity.Educations = await GetEducationsAsync(project.Educations).ToListAsync();
+                //entity.Educations = _context.Educations.Where(e => project.Educations.Any(e2 => e2 == e.Id)).ToList();
 
 
             await _context.SaveChangesAsync();
@@ -173,6 +178,17 @@ namespace PB.Infrastructure
             {
                 //Console.WriteLine("===========>>Application Title: " + application);
                 yield return existing.TryGetValue(application, out var a) ? a : new Application { Id = application };
+            }
+        }
+
+        private async IAsyncEnumerable<Education> GetEducationsAsync(IEnumerable<int> educations)
+        {
+            var existing = await _context.Educations.Where(a => educations.Contains(a.Id)).ToDictionaryAsync(a => a.Id);
+
+            foreach (var education in educations)
+            {
+                //Console.WriteLine("===========>>Application Title: " + application);
+                yield return existing.TryGetValue(education, out var a) ? a : new Education { Id = education };
             }
         }
 
