@@ -1,6 +1,6 @@
 # UniBanken
 
-To run the program, first change directory to Server and add secrets:
+To run the program on windows, first open powershell, change directory to Server and add secrets:
 ```powershell
 $password = "yourpassword"
 $connectionString = "Host=localhost;Username=pb;Password=$password;Database=pb"
