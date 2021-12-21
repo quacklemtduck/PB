@@ -24,7 +24,8 @@ namespace PB.Server.Controllers
         [HttpGet]
         public async Task<IReadOnlyCollection<ProjectListDTO>> GetAll()
             => await _repository.ListAllAsync();
-            
+        
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IReadOnlyCollection<ProjectListDTO>> GetAllVisible()
             => await _repository.ListAllVisibleAsync();

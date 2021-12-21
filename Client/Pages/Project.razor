@@ -18,23 +18,29 @@
 }
 </div>
 
-<RadzenButton ButtonStyle="ButtonStyle.Primary" Text="View Applications" Click=@ApplicationButton Style="background: #4169E1;" />
+@if(isOwner) {
+    <RadzenButton ButtonStyle="ButtonStyle.Primary" Text="View Applications" Click=@ApplicationButton Style="background: #4169E1;" />
+}
 
 @code {
     [Parameter]
     public int? ProjectId {get; set;}
     private ProjectDetailsDTO? project;
-    
+    private bool isOwner;
     private SupervisorDetailsDTO? supervisor;
 
     protected override async Task OnParametersSetAsync()
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
+
+        
+
         if(ProjectId != 0){
             if(user.Identity.IsAuthenticated){
                 project = await ProjectService.GetProject(http, ProjectId);
                 supervisor = await SupervisorServices.GetSupervisorAsync(http, project.Supervisor);
+                isOwner = supervisor.Email == user.Identity.Name;
             }else{
                 var anonClient = ClientFactory.CreateClient("PB.NoAuthenticationClient");
                 project = await ProjectService.GetProject(anonClient, ProjectId);
