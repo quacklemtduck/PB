@@ -149,7 +149,7 @@ else
 
     void Cancel() //Called when you press cancel on project form
     {
-        
+        NavigationManager.NavigateTo($"{NavigationManager.BaseUri}MyProjects");
     }
 
     async Task ShowCloseableFromOverlayDialog()
