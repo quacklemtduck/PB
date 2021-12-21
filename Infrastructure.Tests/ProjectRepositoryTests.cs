@@ -20,10 +20,10 @@ namespace PB.Infrastructure.Tests
             var supervisor = new Supervisor { Id = "1", Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
             //context.Supervisors.Add(supervisor);
             var universityRepository = new UniversityRepository(context);
-            var university = context.Universities.Find("KU");
+            var education = context.Educations.Find(1);
 
 
-            var student = new Student { Name = "Test", Email = "Test@gmail.com", University = university };
+            var student = new Student { Name = "Test", Email = "Test@gmail.com", Education = education };
             context.Students.Add(student);
 
             DateTime deadline = DateTime.Parse("Dec 22, 2021");

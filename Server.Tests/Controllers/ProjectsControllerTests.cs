@@ -17,7 +17,7 @@ namespace PB.Server.Tests.Controllers
 
             var logger = new Mock<ILogger<ProjectsController>>();
             var toCreate = new ProjectCreateDTO();
-            var created = new ProjectDetailsDTO(1, "Project1", "This is project 1", supervisor.Name, false, new HashSet<string>(), new HashSet<string>(), new HashSet<int>(), Status.Visible);
+            var created = new ProjectDetailsDTO(1, "Project1", "This is project 1", supervisor.Name, false, new List<int>(), new List<string>(), new HashSet<int>(), Status.Visible);
             var repository = new Mock<IProjectRepository>();
             repository.Setup(m => m.CreateAsync(toCreate)).ReturnsAsync(created);
             var controller = new ProjectsController(logger.Object, repository.Object);
@@ -106,7 +106,7 @@ namespace PB.Server.Tests.Controllers
 
             var logger = new Mock<ILogger<ProjectsController>>();
             var repository = new Mock<IProjectRepository>();
-            var project = new ProjectDetailsDTO(1, "Project1", "This is project 1", supervisor.Name, false, new HashSet<string>(), new HashSet<string>(), new HashSet<int>(), Status.Visible);
+            var project = new ProjectDetailsDTO(1, "Project1", "This is project 1", supervisor.Name, false, new List<int>(), new List<string>(), new HashSet<int>(), Status.Visible);
             repository.Setup(m => m.ReadByIDAsync(1)).ReturnsAsync(project);
             var controller = new ProjectsController(logger.Object, repository.Object);
 

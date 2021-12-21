@@ -74,9 +74,9 @@ namespace Infrastructure.Tests
             var applications = await _repository.ReadAllAsync();
 
             Assert.Collection(applications,
-                applications => Assert.Equal(new ApplicationDetailsDTO(1, 1, 1, "app 1", "title1"), applications),
-                applications => Assert.Equal(new ApplicationDetailsDTO(2, 2, 1, "app 2", "title2"), applications),
-                applications => Assert.Equal(new ApplicationDetailsDTO(3, 1, 2, "app 3", "title3"), applications)
+                applications => Assert.Equal(new ApplicationDetailsDTO(1, 1, 1, "app 1", "title1", "Student1"), applications),
+                applications => Assert.Equal(new ApplicationDetailsDTO(2, 2, 1, "app 2", "title2", "Student2"), applications),
+                applications => Assert.Equal(new ApplicationDetailsDTO(3, 1, 2, "app 3", "title3", "Student1"), applications)
             );
         }
 

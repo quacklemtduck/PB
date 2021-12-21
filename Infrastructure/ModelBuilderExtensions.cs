@@ -8,7 +8,7 @@ namespace PB.Infrastructure
 {
     public static class ModelBuilderExtensions
     {
-        public static void Seed(this ApplicationDbContext ctx)
+        public static void SeedEducations(this ApplicationDbContext ctx)
         {
             if (ctx.Universities.Count() == 0)
             {
@@ -429,6 +429,12 @@ namespace PB.Infrastructure
                 ctx.SaveChanges();
             }
 
+            
+
+            
+        }
+
+        public static void SeedStudents(this ApplicationDbContext ctx){
             if (ctx.Students.Count() == 0)
             {
                 ReadRandomNames();
@@ -440,8 +446,6 @@ namespace PB.Infrastructure
                 }
                 ctx.SaveChanges();
             }
-
-            
         }
 
         private static void ReadRandomNames(){

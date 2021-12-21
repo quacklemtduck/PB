@@ -112,8 +112,6 @@ namespace PB.Infrastructure
                 entity.Description = project.Description;
                 entity.Notification = project.Notification;
                 entity.Status = project.Status;
-                //entity.ChosenStudents = await GetStudentsAsync(project.ChosenStudents).ToListAsync();
-                //entity.Applications = await GetApplicationsAsync(project.Applications).ToListAsync();
                 entity.Educations = _context.Educations.Where(e => project.Educations.Any(e2 => e2 == e.Id)).ToList();
 
 
