@@ -8,23 +8,55 @@
 @using Microsoft.AspNetCore.Components.Authorization
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @using Radzen.Blazor
+@inject Radzen.DialogService DialogService
 
-<div style="word-wrap:break-word;">
-    @if (project != null){
-    <h1>@project.Title</h1>
-    <p>@project.Description</p>
-    <p>@supervisor.Name</p>
-    <p>@project.Applications.FirstOrDefault()</p>
-}
+<div style="word-wrap:break-word; max-width:800px; margin:auto;">
+    @if (isOwner)
+    {
+        <RadzenCard>
+            <div>
+                <b>Project management</b><br>
+                <RadzenButton ButtonStyle="ButtonStyle.Primary" Text="View Applications" Click=@ApplicationButton
+                Style="background: #4169E1; width: fit-content;" />
+                <RadzenButton ButtonStyle="ButtonStyle.Primary" Text="Edit" Click=@EditButton
+                Style="background:#4169E1; width: fit-content;" />
+                @if (project.Status == Status.Visible)
+                {
+                    <RadzenButton Style="background: #4169E1;" Click=@(args => ChangeVisibility(project.ID, Status.Hidden))
+                Text="Make Hidden" Class="VisibilityButton" />
+                }
+                else
+                {
+                    <RadzenButton Style="background: #4169E1;" Click=@(args => ChangeVisibility(project.ID, Status.Visible))
+                Text="Make Visible" Class="VisibilityButton" />
+                }
+                <RadzenButton Style="background: rgba(255, 0, 0, 0.7);" Click=@(args => DeleteProject(project.ID)) Text="Delete"
+                                    Class="DeleteButton" />
+            </div>
+        </RadzenCard>
+    }
+    @if (project != null)
+    {
+        <RadzenCard>
+            <RadzenCard>
+                <h3>Project Supervisor</h3>
+                <p><b>Name:</b> @supervisor.Name</p>
+                <p><b>Email:</b> @supervisor.Email</p>
+            </RadzenCard>
+            
+            <h1 Style="margin-top: 20px;">@project.Title</h1>
+            <p>@project.Description</p>
+
+            <RadzenButton ButtonStyle="ButtonStyle.Primary" Style="background:#4169E1; width: fit-content; margin:auto; margin-top:20px;" Text="Apply Now" Click=@Apply />
+        </RadzenCard>
+    }
 </div>
 
-@if(isOwner) {
-    <RadzenButton ButtonStyle="ButtonStyle.Primary" Text="View Applications" Click=@ApplicationButton Style="background: #4169E1;" />
-}
+
 
 @code {
     [Parameter]
-    public int? ProjectId {get; set;}
+    public int? ProjectId { get; set; }
     private ProjectDetailsDTO? project;
     private bool isOwner;
     private SupervisorDetailsDTO? supervisor;
@@ -34,14 +66,18 @@
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
 
-        
 
-        if(ProjectId != 0){
-            if(user.Identity.IsAuthenticated){
+
+        if (ProjectId != 0)
+        {
+            if (user.Identity.IsAuthenticated)
+            {
                 project = await ProjectService.GetProject(http, ProjectId);
                 supervisor = await SupervisorServices.GetSupervisorAsync(http, project.Supervisor);
                 isOwner = supervisor.Email == user.Identity.Name;
-            }else{
+            }
+            else
+            {
                 var anonClient = ClientFactory.CreateClient("PB.NoAuthenticationClient");
                 project = await ProjectService.GetProject(anonClient, ProjectId);
                 supervisor = await SupervisorServices.GetSupervisorAsync(anonClient, project.Supervisor);
@@ -51,7 +87,45 @@
         await base.OnParametersSetAsync();
     }
 
-    async Task ApplicationButton() {
+    async Task ApplicationButton()
+    {
         NavigationManager.NavigateTo($"{NavigationManager.BaseUri}Project/{ProjectId}/Applications");
+    }
+    async Task EditButton()
+    {
+        NavigationManager.NavigateTo($"{NavigationManager.BaseUri}projectform?pid={ProjectId}");
+    }
+
+    async void ChangeVisibility(int id, Status status)
+    {
+        var result = await ProjectService.UpdateProjectVisibility(http, new ProjectVisibilityUpdateDTO(id, status));
+        if (result.IsSuccessStatusCode)
+        {
+            await OnParametersSetAsync();
+            StateHasChanged();
+        }
+    }
+
+    async void DeleteProject(int id)
+    {
+        var confirmResult = await DialogService.Confirm("Are you sure you want to delete the project?",
+        "Delete Project", new ConfirmOptions() { OkButtonText = "Yes", CancelButtonText = "No" });
+
+        if (confirmResult.HasValue && confirmResult.Value)
+        {
+            Console.WriteLine($"Id: {id}");
+            var result = await ProjectService.DeleteProject(http, id);
+            if (result.IsSuccessStatusCode)
+            {
+                NavigationManager.NavigateTo($"{NavigationManager.BaseUri}MyProjects");
+            }
+        }
+    }
+
+    async Task Apply(){
+        await DialogService.OpenAsync("Thank You!", ds =>
+        @<div>
+            Thank you for your eagerness for applying, but we have not yet implemented this feature.
+        </div>, new DialogOptions() { CloseDialogOnOverlayClick = true });
     }
 }
