@@ -26,7 +26,11 @@
                                         <div class="row d-flex">
                                             <div class="col-md-6 col-lg-5">
                                                 <h5 class="mb-0">Description:</h5>
-                                                <p class="mb-sm-2 mb-lg-0">@(project.Title.Substring(0,Math.Min(project.Title.Length, 40)))</p>
+                                                @if (project.Description.Length>80){
+                                                    <p class="mb-sm-2 mb-lg-0">@(project.Description.Substring(0,Math.Min(project.Description.Length, 80)))...</p>
+                                                } else {
+                                                    <p class="mb-sm-2 mb-lg-0">@(project.Description.Substring(0,Math.Min(project.Description.Length, 80)))</p>
+                                                }
                                             </div>
                                         </div>
                                     </div>
@@ -78,6 +82,13 @@
         font-weight: bold;
         margin: 1 1rem 0.5rem 0;
     }
+
+    .h5 {
+        padding: 1em 0.3em;
+        text-decoration: none;
+
+    }
+
 </style>
 
 @code {
