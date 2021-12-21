@@ -4,10 +4,11 @@
 @using System.Net.Http
 @inject HttpClient http
 @inject NavigationManager NavigationManager
+@inject Radzen.DialogService DialogService
 
 <h1>MyProjects</h1>
 
-<RadzenDataList WrapItems="true" AllowPaging="true" Data="@projects" TItem="ProjectListDTO">
+<RadzenDataList WrapItems="true" AllowPaging="true" Data="@projects" TItem="ProjectListDTO" >
     <Template Context="project">
         <RadzenCard class="m-3">
             <h3 class="h5"><a href="/project/@project.ID">@project.Title</a></h3>
@@ -54,17 +55,21 @@
 
     async void DeleteProject(int id)
     {
-        Console.WriteLine($"Id: {id}");
-        var result = await ProjectService.DeleteProject(http, id);
-        if (result.IsSuccessStatusCode)
-        {
-            await OnInitializedAsync();
-            StateHasChanged();
+        var confirmResult = await DialogService.Confirm("Are you sure you want to delete the project?", 
+        "Delete Project", new ConfirmOptions() { OkButtonText = "Yes", CancelButtonText = "No" });
+
+        if(confirmResult.HasValue && confirmResult.Value) {
+            Console.WriteLine($"Id: {id}");
+            var result = await ProjectService.DeleteProject(http, id);
+            if (result.IsSuccessStatusCode)
+            {
+                await OnInitializedAsync();
+                StateHasChanged();
+            }
         }
     }
 
     void EditProject(int id){
         NavigationManager.NavigateTo($"{NavigationManager.BaseUri}projectform?pid={id}");
     } 
-
 }
