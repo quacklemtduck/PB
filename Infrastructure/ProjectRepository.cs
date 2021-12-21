@@ -19,6 +19,7 @@ namespace PB.Infrastructure
                 Description = project.Description,
                 Supervisor = _context.Supervisors.Find(project.Supervisor),
                 Notification = project.Notification,
+                Status = project.Status,
                 Educations = _context.Educations.Where(e => project.Educations.Any(e2 => e2 == e.Id)).ToList()
             };
 
