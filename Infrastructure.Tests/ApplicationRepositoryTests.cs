@@ -4,7 +4,7 @@ namespace Infrastructure.Tests
     {
         private readonly ApplicationDbContext _context;
         private readonly ApplicationRepository _repository;
-        
+
         public ApplicationRepositoryTests()
         {
             var connection = new SqliteConnection("Filename=:memory:");
@@ -15,12 +15,12 @@ namespace Infrastructure.Tests
             var context = new ApplicationDbContext(builder.Options, options);
             context.Database.EnsureCreated();
             context.SeedEducations();
-            var student1 = new Student { Id = 1, Name = "Student1", Email="Student1@mail.com", Education = context.Educations.First()};
-            var student2 = new Student { Id = 2, Name = "Student2", Email="Student2@mail.com", Education = context.Educations.First() };
+            var student1 = new Student { Id = 1, Name = "Student1", Email = "Student1@mail.com", Education = context.Educations.First() };
+            var student2 = new Student { Id = 2, Name = "Student2", Email = "Student2@mail.com", Education = context.Educations.First() };
             var supervisor = new Supervisor { Id = "1", Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
             var project1 = new Project { Id = 1, Title = "Project1", Description = "project 1", Supervisor = supervisor };
             var project2 = new Project { Id = 2, Title = "Project2", Description = "project 2", Supervisor = supervisor };
-            
+
 
             context.Applications.AddRange(
                 new Application { Id = 1, Title = "title1", Description = "app 1", Student = student1, Project = project1 },
@@ -38,7 +38,7 @@ namespace Infrastructure.Tests
         [Fact]
         public async Task CreateAsync_creates_new_student_with_generated_id()
         {
-            var application = new ApplicationCreateDTO(2, 2, "title4"){ Description = "app 4"};
+            var application = new ApplicationCreateDTO(2, 2, "title4") { Description = "app 4" };
             var created = await _repository.CreateAsync(application);
 
             Assert.Equal(4, created.Id);
@@ -53,7 +53,7 @@ namespace Infrastructure.Tests
         {
             var option = await _repository.ReadAsync(2);
             Assert.True(option.IsSome);
-            
+
             var app = option.Value;
             Assert.Equal(2, app.Id);
             Assert.Equal("title2", app.Title);
@@ -85,7 +85,7 @@ namespace Infrastructure.Tests
         [Fact]
         public async Task UpdateAsync_given_non_existing_id_returns_NotFound()
         {
-            var application = new ApplicationUpdateDTO(-1,"app","title");
+            var application = new ApplicationUpdateDTO(-1, "app", "title");
             var response = await _repository.UpdateAsync(application.Id, application);
 
             Assert.Equal(NotFound, response);
@@ -94,7 +94,7 @@ namespace Infrastructure.Tests
         [Fact]
         public async Task UpdateAsync_given_existing_id_updates_supervisor()
         {
-            var application = new ApplicationUpdateDTO(1,"app","title");
+            var application = new ApplicationUpdateDTO(1, "app", "title");
             var response = await _repository.UpdateAsync(application.Id, application);
             Assert.Equal(Updated, response);
 

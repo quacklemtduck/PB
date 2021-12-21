@@ -25,7 +25,7 @@
         public async Task<EducationDetailsDTO?> ReadByIDAsync(int educationId)
         {
             var e = await _context.Educations.FindAsync(educationId);
-            return e == null ? null : new EducationDetailsDTO( e.Id, e.Name, e.Grade, e.University.Id);
+            return e == null ? null : new EducationDetailsDTO(e.Id, e.Name, e.Grade, e.University.Id);
         }
 
     }

@@ -5,7 +5,6 @@ namespace PB.Server.Controllers;
 [Authorize]
 [ApiController]
 [Route("api/[controller]/[action]")]
-//[RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes")]
 public class ApplicationController : ControllerBase
 {
     private readonly ILogger<ApplicationController> _logger;
@@ -43,16 +42,23 @@ public class ApplicationController : ControllerBase
 
     [Authorize]
     [HttpGet("{id}", Name = "GetFromProject")]
-    public async Task<ActionResult<IReadOnlyCollection<ApplicationDetailsDTO>>> GetFromProject(int id){
+    public async Task<ActionResult<IReadOnlyCollection<ApplicationDetailsDTO>>> GetFromProject(int id)
+    {
         var project = await _ProjectRepository.ReadByIDAsync(id);
-        if(project.IsSome){
-            if(project.Value.Supervisor == User.FindFirstValue(ClaimTypes.NameIdentifier)){
+        if (project.IsSome)
+        {
+            if (project.Value.Supervisor == User.FindFirstValue(ClaimTypes.NameIdentifier))
+            {
                 var result = await _ApplicationRepository.ReadFromProject(id);
                 return result.ToList();
-            }else{
+            }
+            else
+            {
                 return Unauthorized();
             }
-        }else{
+        }
+        else
+        {
             return new NotFoundResult();
         }
     }
@@ -62,13 +68,16 @@ public class ApplicationController : ControllerBase
     [ProducesResponseType(204)]
     [ProducesResponseType(404)]
     [ProducesResponseType(401)]
-    public async Task<IActionResult> Approve(ApplicationIdDTO req){
+    public async Task<IActionResult> Approve(ApplicationIdDTO req)
+    {
         var result = await _ApplicationRepository.ReadAsync(req.Id);
-        if(result.IsNone){
+        if (result.IsNone)
+        {
             return NotFound();
         }
         var project = await _ProjectRepository.ReadByIDAsync(result.Value.projectId);
-        if(project.Value.Supervisor == User.FindFirstValue(ClaimTypes.NameIdentifier)){
+        if (project.Value.Supervisor == User.FindFirstValue(ClaimTypes.NameIdentifier))
+        {
             return (await _ApplicationRepository.Approve(req.Id)).ToActionResult();
         }
         return Unauthorized();
@@ -79,13 +88,16 @@ public class ApplicationController : ControllerBase
     [ProducesResponseType(204)]
     [ProducesResponseType(404)]
     [ProducesResponseType(401)]
-    public async Task<IActionResult> Decline(ApplicationIdDTO req){
+    public async Task<IActionResult> Decline(ApplicationIdDTO req)
+    {
         var result = await _ApplicationRepository.ReadAsync(req.Id);
-        if(result.IsNone){
+        if (result.IsNone)
+        {
             return NotFound();
         }
         var project = await _ProjectRepository.ReadByIDAsync(result.Value.projectId);
-        if(project.Value.Supervisor == User.FindFirstValue(ClaimTypes.NameIdentifier)){
+        if (project.Value.Supervisor == User.FindFirstValue(ClaimTypes.NameIdentifier))
+        {
             return (await _ApplicationRepository.Decline(req.Id)).ToActionResult();
         }
         return Unauthorized();

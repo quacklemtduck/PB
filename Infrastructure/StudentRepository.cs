@@ -36,23 +36,16 @@ namespace PB.Infrastructure
             );
         }
 
-        /*public async Task<IReadOnlyCollection<StudentDetailsDTO>> ReadAllAsync()
-        {
-            return await _context.Students
-                .Select(s => new StudentDetailsDTO(s.Id, s.Name, s.University.Name, s.Email, s.Projects.Select(p => p.Title).ToHashSet(), s.Applications.Select(a => a.Title).ToHashSet()))
-                .ToListAsync();
-        }*/
-
         public async Task<Option<StudentDetailsDTO>> ReadAsync(int studentId)
         {
             var students = from s in _context.Students
                            where s.Id == studentId
                            select new StudentDetailsDTO(
-                               s.Id, 
-                               s.Name, 
-                               s.Education.Name, 
-                               s.Email, 
-                               s.Projects.Select(p => p.Title).ToHashSet(), 
+                               s.Id,
+                               s.Name,
+                               s.Education.Name,
+                               s.Email,
+                               s.Projects.Select(p => p.Title).ToHashSet(),
                                s.Applications.Select(a => a.Title).ToHashSet(),
                                s.Education.University.Name
                            );
@@ -69,7 +62,7 @@ namespace PB.Infrastructure
             }
             entity.Name = student.Name;
             entity.Email = student.Email;
-            
+
             await _context.SaveChangesAsync();
 
             return Updated;
@@ -94,16 +87,6 @@ namespace PB.Infrastructure
         private async Task<University?> getUniversityAsync(string? name) =>
         string.IsNullOrWhiteSpace(name) ? null : await _context.Universities.FirstOrDefaultAsync(s => s.Name == name) ?? new University { Name = name };
 
-
-        // private async IAsyncEnumerable<Application> getApplicationsAsync(IEnumerable<string> applications)
-        // {
-        //     var existing = await _context.Applications.Where(a => applications.Contains(a.Title)).ToDictionaryAsync(a => a.Title);
-
-        //     foreach (var application in applications)
-        //     {
-        //         yield return existing.TryGetValue(application, out var a) ? a : new Application { Title = application };
-        //     }
-        // }
 
         private async IAsyncEnumerable<Project> GetProjectsAsync(IEnumerable<int> projects)
         {

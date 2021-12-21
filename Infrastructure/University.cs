@@ -1,13 +1,14 @@
-namespace PB.Infrastructure{
+namespace PB.Infrastructure
+{
     public class University
     {
-        
+
         [StringLength(50)]
-        public string? Name {get; set;}
+        public string? Name { get; set; }
 
         [StringLength(10)]
         [Key]
-        public string? Id {get; set;}
+        public string? Id { get; set; }
 
         public ICollection<Education> Educations { get; set; } = new HashSet<Education>();
 
@@ -16,11 +17,9 @@ namespace PB.Infrastructure{
             ICollection<int> EducationtIDList = new List<int>();
             if (Educations != null)
             {
-                //Console.WriteLine("--------------------------------> KOMMER VI HERIND?? ----- Elements: " + Educations.Count+ "--------------------------------> Name: " + Name);
                 foreach (Education e in Educations)
                 {
                     EducationtIDList.Add(e.Id);
-                    //Console.WriteLine("-------> " + e.Name + "<-------");
                 }
             }
             return EducationtIDList;
@@ -28,5 +27,5 @@ namespace PB.Infrastructure{
 
     }
 
-    
+
 }

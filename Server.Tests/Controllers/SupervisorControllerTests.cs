@@ -21,7 +21,6 @@ namespace PB.Server.Tests.Controllers
             // Assert
             Assert.Equal(created, result?.Value);
             Assert.Equal("GetSupervisor", result?.RouteName);
-            //Assert.Equal(KeyValuePair.Create("Id", (object?)1), result?.RouteValues?.Single());
             Assert.Equal((object?)"1", result?.RouteValues?.GetValueOrDefault("Id"));
         }
 

@@ -17,16 +17,4 @@ public class Student {
     public int EducationId {get; set;}
     public Education? Education {get; set;}
 
-
-    // public ICollection<int> GetProjectIDs() {
-    //     ICollection<int> ProjectIDList = new List<int>();
-    //     if(Projects != null) {
-    //         foreach (Project p in Projects) 
-    //         {
-    //         ProjectIDList.Add(p.Id);
-    //         }
-    //     }
-    //     return ProjectIDList;
-    // }
-
 }

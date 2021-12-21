@@ -423,12 +423,13 @@
                 ctx.SaveChanges();
             }
 
-            
 
-            
+
+
         }
 
-        public static void SeedStudents(this ApplicationDbContext ctx){
+        public static void SeedStudents(this ApplicationDbContext ctx)
+        {
             if (ctx.Students.Count() == 0)
             {
                 ReadRandomNames();
@@ -442,13 +443,13 @@
             }
         }
 
-        private static void ReadRandomNames(){
+        private static void ReadRandomNames()
+        {
             var path = Path.Combine(Environment.CurrentDirectory, @"Model", "fakenames.csv");
             var lines = System.IO.File.ReadAllLines(path);
-            
+
             foreach (var item in lines)
             {
-                
                 var columns = item.Split(',');
                 FakePeople.Add(new FakePerson($"{columns[0]} {columns[3]}", columns[1]));
             }

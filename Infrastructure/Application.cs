@@ -11,6 +11,5 @@ namespace PB.Infrastructure
         public int ProjectID { get; set; }
         public Project Project { get; set; }
 
-
     }
 }
