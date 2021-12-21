@@ -5,14 +5,18 @@
 @inject HttpClient http
 @inject NavigationManager NavigationManager
 @inject IHttpClientFactory ClientFactory
-@using System.Security.Claims
 @using Microsoft.AspNetCore.Components.Authorization
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@using Radzen.Blazor
 
-@if (project != null){
+<div style="word-wrap:break-word;">
+    @if (project != null){
     <h1>@project.Title</h1>
     <p>@project.Description</p>
 }
+</div>
+
+<RadzenButton ButtonStyle="ButtonStyle.Primary" Text="View Applications" Click=@ApplicationButton Style="background: #4169E1;" />
 
 @code {
     [Parameter]
@@ -33,5 +37,9 @@
         }
 
         await base.OnParametersSetAsync();
+    }
+
+    async Task ApplicationButton() {
+        NavigationManager.NavigateTo($"{NavigationManager.BaseUri}Project/{ProjectId}/Applications");
     }
 }
