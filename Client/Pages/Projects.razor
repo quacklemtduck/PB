@@ -12,31 +12,32 @@
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
 <h1>Projects</h1>
+@if (fullProjects != null) {
 <div class="container">
     <div class="row py-5">
         <div class="col">
             <RadzenCard>
 
-                <RadzenDataList WrapItems="true" AllowPaging="true" Data="@projects" TItem="ProjectListDTO" PageSize="5" >
+                <RadzenDataList WrapItems="true" AllowPaging="true" Data="@fullProjects" TItem="fullProject" PageSize="5" >
                     <Template Context="project">
                         <RadzenCard Style="width: 100%; padding: 0; overflow: hidden;">
                             <div class="container">
                                     <div class="project-title">
-                                            <h3 class="h5"><a href="/project/@project.ID">@(project.Title.Substring(0,Math.Min(project.Title.Length, 49)))</a></h3>
+                                            <h3 class="h5"><a href="/project/@project..project.ID">@(project.project.Title.Substring(0,Math.Min(project.project.Title.Length, 49)))</a></h3>
                                         </div>
                                      <div class="row">
                                          <div class="col-lg-8 p-20">
                                         
                                             <div class="col-md-10 col-lg-10">
                                                 <h5 class="mb-0">Supervisor:</h5>
-                                                        <p class="mb-sm-8 mb-lg-8">@(project.Title.Substring(0,Math.Min(project.Title.Length, 30)))</p>
+                                                        <p class="mb-sm-8 mb-lg-8">@(project.supervisor.Name.Substring(0,Math.Min(project.supervisor.Name.Length, 30)))</p>
                                             </div>            
                                             <div class="row">
                                             <h5 class="mb-0">Description:</h5>
-                                            @if (project.Description.Length>80){
-                                                    <p class="mb-sm-5 mb-lg-8">@(project.Description.Substring(0,Math.Min(project.Description.Length, 170)))...</p>
+                                            @if (project.project.Description.Length>80){
+                                                    <p class="mb-sm-5 mb-lg-8">@(project.project.Description.Substring(0,Math.Min(project.project.Description.Length, 170)))...</p>
                                                 } else {
-                                                    <p class="mb-sm- mb-lg-8">@(project.Description.Substring(0,Math.Min(project.Description.Length, 170)))</p>
+                                                    <p class="mb-sm- mb-lg-8">@(project.project.Description.Substring(0,Math.Min(project.project.Description.Length, 170)))</p>
                                                 }     
                                         </div>       
                                     </div>
@@ -50,6 +51,10 @@
         </div>
     </div>
 </div>
+} else {
+    <p>Loading....</p>
+}
+
 <Style>
 
     .project-title {
@@ -72,19 +77,25 @@
 </Style>
 
 @code {
-
-    private IEnumerable<ProjectListDTO>? projects { get; set; }
+    private class fullProject {
+        public ProjectListDTO project {get; set; }
+        public SupervisorDetailsDTO supervisor {get; set; }
+    }
+    private IEnumerable<fullProject>? fullProjects { get; set; }
     protected override async Task OnInitializedAsync()
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
-        if(user.Identity.IsAuthenticated){
-                projects = await ProjectService.GetVisibleProjects(http);
-            }else{
-                var anonClient = ClientFactory.CreateClient("PB.NoAuthenticationClient");
-                projects = await ProjectService.GetVisibleProjects(anonClient);
-            }
-        
+        HttpClient client = (user.Identity.IsAuthenticated)? http : ClientFactory.CreateClient("PB.NoAuthenticationClient");
+        var projects = await ProjectService.GetVisibleProjects(client);
+        var tempList = new List<fullProject>();
+        foreach (var item in projects) {
+            tempList.Add(new fullProject {
+                    project = item,
+                    supervisor = await SupervisorServices.GetSupervisorAsync(client, item.SupervisorId)
+            }); 
+        }
+           fullProjects = tempList;
     }
 
     async void ChangeVisibility(int id, Status status)
