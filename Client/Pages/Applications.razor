@@ -44,17 +44,27 @@
 }
 else
 {
-    <p>loading....</p>
+    <p>Loading....</p>
 }
 
 <h1>Chosen applicants</h1>
-@if(ChosenStudents.Count() > 0){
-    @foreach (var student in ChosenStudents)
-    {
-        <p>@student.Name @student.University @student.Education</p>
+@if(ChosenStudents != null){
+    @if(ChosenStudents.Count() > 0){
+    <RadzenDataList WrapItems="true" AllowPaging="true" Data="@ChosenStudents" TItem="StudentDetailsDTO" PageSize="5">
+            <Template Context="student">
+                <RadzenCard Style="width:100%; padding:0px; overflow:hidden;">
+                    <p><b>Name:</b> @student.Name</p>
+                    <p><b>Email:</b> @student.Email</p>
+                    <p><b>University:</b> @student.University</p>
+                    <p><b>Education:</b> @student.Education</p>
+                </RadzenCard>
+            </Template>
+        </RadzenDataList>
+    }else{
+        <h2>You have not chosen any applicants.</h2>
     }
 }else{
-    <p>loading....</p>
+    <p>Loading....</p>
 }
 
 
@@ -63,7 +73,7 @@ else
     [Parameter]
     public int ProjectId { get; set; }
 
-    private ICollection<StudentDetailsDTO> ChosenStudents = new List<StudentDetailsDTO>();
+    private ICollection<StudentDetailsDTO>? ChosenStudents;
 
 
     private ICollection<fullApplication>? applications;
@@ -80,6 +90,7 @@ else
         {
             var apps = await ProjectService.GetApplications(http, ProjectId);
             var project = await ProjectService.GetProject(http, ProjectId);
+            ChosenStudents = new List<StudentDetailsDTO>();
             foreach (var item in project.ChosenStudents)
             {
                 ChosenStudents.Add(await StudentServices.GetStudentAsync(http, item));
