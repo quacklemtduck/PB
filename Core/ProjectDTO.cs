@@ -3,7 +3,7 @@
     public record ProjectListDTO(int ID, string Title, string Description, Status Status);
     public record ProjectVisibilityUpdateDTO(int ID, Status Status);
     public record ProjectDetailsDTO(
-        int ID, string Title, string? Description, string? Supervisor, bool Notification, ICollection<string> ChosenStudents, ISet<string> Applications, ISet<int> Educations, Status Status);
+        int ID, string Title, string? Description, string? Supervisor, bool Notification, ICollection<int> ChosenStudents, ICollection<string> Applications, ISet<int> Educations, Status Status);
     public record ProjectCreateDTO {
         public int? Id {get; set;}
       
@@ -12,7 +12,7 @@
         
         public string? Description { get; set; }
 
-        public string? Supervisor { get; set; }
+        public string? SupervisorId { get; set; }
 
         //public string? Deadline { get; set; } //can this be a string
 

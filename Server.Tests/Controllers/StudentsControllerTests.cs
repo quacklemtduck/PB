@@ -10,7 +10,7 @@ public class StudentsControllerTests
 
         var logger = new Mock<ILogger<StudentsController>>();
         var toCreate = new StudentCreateDTO();
-        var created = new StudentDetailsDTO(1, "Clark", university.Name, "Clark@gmail.com", new HashSet<string>(), new HashSet<string>());
+        var created = new StudentDetailsDTO(1, "Clark", university.Name, "Clark@gmail.com", new HashSet<string>(), new HashSet<string>(), "KU");
         var repository = new Mock<IStudentRepository>();
         repository.Setup(m => m.CreateAsync(toCreate)).ReturnsAsync(created);
         var controller = new StudentsController(logger.Object, repository.Object);
@@ -20,7 +20,7 @@ public class StudentsControllerTests
 
         // Assert
         Assert.Equal(created, result?.Value);
-        Assert.Equal("Get", result?.RouteName);
+        Assert.Equal("GetStudent", result?.RouteName);
         //Assert.Equal(KeyValuePair.Create("Id", (object?)1), result?.RouteValues?.Single());
         Assert.Equal((object?)1, result?.RouteValues?.GetValueOrDefault("Id"));
     }
@@ -54,7 +54,7 @@ public class StudentsControllerTests
         var controller = new StudentsController(logger.Object, repository.Object);
 
         // Act
-        var response = await controller.Get(42);
+        var response = await controller.GetStudent(42);
 
         // Assert
         Assert.IsType<NotFoundResult>(response.Result);
@@ -68,12 +68,12 @@ public class StudentsControllerTests
 
         var logger = new Mock<ILogger<StudentsController>>();
         var repository = new Mock<IStudentRepository>();
-        var student = new StudentDetailsDTO(1, "Clark", university.Name, "Clark@gmail.com", new HashSet<string>(), new HashSet<string>());
+        var student = new StudentDetailsDTO(1, "Clark", university.Name, "Clark@gmail.com", new HashSet<string>(), new HashSet<string>(), "KU");
         repository.Setup(m => m.ReadAsync(1)).ReturnsAsync(student);
         var controller = new StudentsController(logger.Object, repository.Object);
 
         // Act
-        var response = await controller.Get(1);
+        var response = await controller.GetStudent(1);
 
         // Assert
         Assert.Equal(student, response.Value);

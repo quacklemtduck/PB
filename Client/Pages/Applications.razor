@@ -1,0 +1,129 @@
+@page "/Project/{projectId:int}/Applications"
+@attribute [Authorize]
+@using Microsoft.AspNetCore.Authorization
+@using PB.Client.Services
+@using PB.Core
+@using System.Net.Http
+@inject HttpClient http
+@inject NavigationManager NavigationManager
+@inject IHttpClientFactory ClientFactory
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Components.Authorization
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<h1>Applications</h1>
+@if (applications != null)
+{
+    @if (applications.Count != 0)
+    {
+
+        <RadzenDataList WrapItems="true" AllowPaging="true" Data="@applications" TItem="fullApplication" PageSize="5">
+            <Template Context="application">
+                <RadzenCard Style="width:100%; padding:0px; overflow:hidden;">
+                    <div class="grid-container">
+                        <div class="box-1">
+                            <p>@application.application.Title</p>
+                        </div>
+                        <div class="box-2">
+                            <p><b>Student:</b> @application.student.Name - <b>@application.student.University</b> @application.student.Education</p>
+                            <p style="height: 100%;"><b>Message:</b> @application.application.Description</p>
+                        </div>
+                        <div class="box-3">
+                            <RadzenButton Click=@(args => ApproveApplication(application.application.Id)) Style="width:100%; height:50%" Text="Approve" Icon="done" ButtonStyle="ButtonStyle.Success" />
+                            <RadzenButton Click=@(args => DeclineApplication(application.application.Id)) Style="width:100%; height:50%" Text="Decline" Icon="close" ButtonStyle="ButtonStyle.Danger"/>
+                        </div>
+                    </div>
+                </RadzenCard>
+            </Template>
+        </RadzenDataList>
+    }
+    else
+    {
+        <h2>You do not have any applications.</h2>
+    }
+}
+else
+{
+    <p>Loading....</p>
+}
+
+<h1>Chosen applicants</h1>
+@if(ChosenStudents != null){
+    @if(ChosenStudents.Count() > 0){
+    <RadzenDataList WrapItems="true" AllowPaging="true" Data="@ChosenStudents" TItem="StudentDetailsDTO" PageSize="5">
+            <Template Context="student">
+                <RadzenCard Style="width:100%; padding:0px; overflow:hidden;">
+                    <p><b>Name:</b> @student.Name</p>
+                    <p><b>Email:</b> @student.Email</p>
+                    <p><b>University:</b> @student.University</p>
+                    <p><b>Education:</b> @student.Education</p>
+                </RadzenCard>
+            </Template>
+        </RadzenDataList>
+    }else{
+        <h2>You have not chosen any applicants.</h2>
+    }
+}else{
+    <p>Loading....</p>
+}
+
+
+
+@code {
+    [Parameter]
+    public int ProjectId { get; set; }
+
+    private ICollection<StudentDetailsDTO>? ChosenStudents;
+
+
+    private ICollection<fullApplication>? applications;
+
+    public class fullApplication
+    {
+        public ApplicationDetailsDTO application { get; set; }
+        public StudentDetailsDTO student { get; set; }
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (ProjectId != 0)
+        {
+            var apps = await ProjectService.GetApplications(http, ProjectId);
+            var project = await ProjectService.GetProject(http, ProjectId);
+            ChosenStudents = new List<StudentDetailsDTO>();
+            foreach (var item in project.ChosenStudents)
+            {
+                ChosenStudents.Add(await StudentServices.GetStudentAsync(http, item));
+            }
+            var temp = new List<fullApplication>();
+            foreach (var item in apps)
+            {
+                temp.Add(new fullApplication
+                {
+                    application = item,
+                    student = await StudentServices.GetStudentAsync(http,
+                item.studentId)
+                });
+            }
+            applications = temp;
+        }
+
+        await base.OnParametersSetAsync();
+    }
+
+    public async Task ApproveApplication(int id){
+        var result = await ProjectService.ApproveApplication(http, id);
+        if(result.IsSuccessStatusCode){
+            await OnParametersSetAsync();
+            StateHasChanged();
+        }
+    }
+
+    public async Task DeclineApplication(int id){
+        var result = await ProjectService.DeclineApplication(http, id);
+        if(result.IsSuccessStatusCode){
+            await OnParametersSetAsync();
+            StateHasChanged();
+        }
+    }
+}

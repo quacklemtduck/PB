@@ -16,14 +16,15 @@ namespace PB.Infrastructure.Tests
             var options = new Option<OperationalStoreOptions>(new OperationalStoreOptions());
             var context = new ApplicationDbContext(builder.Options, options);
             context.Database.EnsureCreated();
+            context.SeedEducations();
 
             var supervisor = new Supervisor { Id = "1", Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
             //context.Supervisors.Add(supervisor);
             var universityRepository = new UniversityRepository(context);
-            var university = context.Universities.Find("KU");
+            var education = context.Educations.Find(1);
 
 
-            var student = new Student { Name = "Test", Email = "Test@gmail.com", University = university };
+            var student = new Student { Name = "Test", Email = "Test@gmail.com", Education = education };
             context.Students.Add(student);
 
             DateTime deadline = DateTime.Parse("Dec 22, 2021");
@@ -128,7 +129,7 @@ namespace PB.Infrastructure.Tests
                 Id = 42,
                 Title = "Project5",
                 Description = "This is project 5",
-                Supervisor = supervisor.ToString(),
+                SupervisorId = supervisor.ToString(),
                 Notification = false,
                 ChosenStudents = new HashSet<string>(),
                 Applications = new HashSet<string>(),
@@ -180,7 +181,7 @@ namespace PB.Infrastructure.Tests
                 Id = 5,
                 Title = "newProject5",
                 Description = "This is project 5, version 2",
-                Supervisor = "Supervisor1",
+                SupervisorId = "Supervisor1",
                 Notification = false,
                 //ChosenStudents = new HashSet<string>() { student.Name },
                 ChosenStudents = ChosenStudents,
@@ -215,7 +216,7 @@ namespace PB.Infrastructure.Tests
                 Id = 5,
                 Title = "newProject5",
                 Description = "This is project 5, version 2",
-                Supervisor = "Supervisor1",
+                SupervisorId = "Supervisor1",
                 Notification = false,
                 ChosenStudents = new HashSet<string>(),
                 Applications = applications,

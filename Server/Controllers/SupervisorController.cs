@@ -2,8 +2,7 @@ namespace PB.Server.Controllers;
 
 [Authorize]
 [ApiController]
-[Route("api/[controller]")]
-//[RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes")]
+[Route("api/[controller]/[action]")]
 public class SupervisorController : ControllerBase
 {
     private readonly ILogger<SupervisorController> _logger;
@@ -16,15 +15,10 @@ public class SupervisorController : ControllerBase
     }
 
     [AllowAnonymous]
-    [HttpGet]
-    public async Task<IReadOnlyCollection<SupervisorDetailsDTO>> Get()
-        => await _repository.ReadAllAsync();
-
-    [AllowAnonymous]
     [ProducesResponseType(404)]
     [ProducesResponseType(typeof(SupervisorDetailsDTO), 200)]
-    [HttpGet("{id}")]
-    public async Task<ActionResult<SupervisorDetailsDTO>> Get(string id)
+    [HttpGet("{id}", Name = "GetSupervisor")]
+    public async Task<ActionResult<SupervisorDetailsDTO>> GetSupervisor(string id)
         => (await _repository.ReadAsync(id)).ToActionResult();
 
     [Authorize]
@@ -34,7 +28,7 @@ public class SupervisorController : ControllerBase
     {
         var created = await _repository.CreateAsync(supervisor);
 
-        return CreatedAtRoute(nameof(Get), new { created.Id }, created);
+        return CreatedAtRoute(nameof(GetSupervisor), new { created.Id }, created);
     }
 
     [Authorize]

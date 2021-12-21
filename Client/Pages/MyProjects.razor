@@ -4,36 +4,91 @@
 @using System.Net.Http
 @inject HttpClient http
 @inject NavigationManager NavigationManager
+@using Microsoft.AspNetCore.Components
+@using Radzen.Blazor
 @inject Radzen.DialogService DialogService
 
-<h1>MyProjects</h1>
+<h1>My Projects</h1>
+<div class="container">
+    <div class="row py-5">
+        <div class="col">
+            <RadzenCard>
+                <RadzenDataList WrapItems="true" AllowPaging="true" Data="@projects" TItem="ProjectListDTO" PageSize="5">
+                    <Template Context="project">
+                        <RadzenCard Style="width: 100%; padding: 0; overflow: hidden;">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-2 p-2 project-title">
+                                            <h3 class="h5"><a href="/project/@project.ID">@(project.Title.Substring(0,Math.Min(project.Title.Length, 40)))</a></h3>
+                                    </div>
+                                    <div class="col-lg-7 p-3">
+                                        <div class="row d-flex">
+                                            <div class="col-md-6 col-lg-5">
+                                                <h5 class="mb-0">Description:</h5>
+                                                @if (project.Description.Length>80){
+                                                    <p class="mb-sm-2 mb-lg-0">@(project.Description.Substring(0,Math.Min(project.Description.Length, 80)))...</p>
+                                                } else {
+                                                    <p class="mb-sm-2 mb-lg-0">@(project.Description.Substring(0,Math.Min(project.Description.Length, 80)))</p>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p>Visibility: @project.Status</p>
+                                @if (project.Status == Status.Visible)
+                                {
+                                    <RadzenButton Style="background: #4169E1;" Click=@(args => ChangeVisibility(project.ID, Status.Hidden))
+                                    Text="Make Hidden" Class="VisibilityButton" />
+                                }
+                                else
+                                {
+                                    <RadzenButton Style="background: #4169E1;" Click=@(args => ChangeVisibility(project.ID, Status.Visible))
+                                    Text="Make Visible" Class="VisibilityButton" />
+                                }
+                                <RadzenButton Style="background: #4169E1;" Click=@(args => EditProject(project.ID)) Text="Edit"
+                                    Class="VisibilityButton" />
+                                <RadzenButton Style="background: rgba(255, 0, 0, 0.7);" Click=@(args => DeleteProject(project.ID)) Text="Delete"
+                                    Class="DeleteButton" />
+                            </div>
+                        </RadzenCard>
+                    </Template>
+                </RadzenDataList>
 
-<RadzenDataList WrapItems="true" AllowPaging="true" Data="@projects" TItem="ProjectListDTO" >
-    <Template Context="project">
-        <RadzenCard class="m-3">
-            <h3 class="h5"><a href="/project/@project.ID">@project.Title</a></h3>
-            <b class="h5">Description</b>
-            <div class="row">
-                <div class="col-md-4">
-                    <b>@project.Description.Substring(0,Math.Min(project.Description.Length, 20))</b>
-                </div>
-            </div>
-            <div>
-                <p>Visibility: @project.Status</p>
-                @if (project.Status == Status.Visible)
-                {
-                    <RadzenButton Click=@(args => ChangeVisibility(project.ID, Status.Hidden)) Text="Make Hidden" />
-                }
-                else
-                {
-                    <RadzenButton Click=@(args => ChangeVisibility(project.ID, Status.Visible)) Text="Make Visible" />
-                }
-            </div>
-            <RadzenButton Click=@(args => EditProject(project.ID)) Text="Edit" />
-            <RadzenButton Click=@(args => DeleteProject(project.ID)) Text="Delete" />
-        </RadzenCard>
-    </Template>
-</RadzenDataList>
+            </RadzenCard>
+        </div>
+    </div>
+</div>
+
+<style>
+    .project-title {
+        min-height: 72px;
+        color: #da0074;
+        background-color: rgba(255, 255, 255, .1);
+        font-size: 20px;
+        font-weight: bold;
+        line-height: 20px;
+        letter-spacing: -0.02em;
+    }
+
+    .VisibilityButton {
+        font-size: 12px;
+        font-weight: bold;
+        margin: 1 1rem 1rem 0;
+    }
+
+    .DeleteButton {
+        font-size: 12px;
+        font-weight: bold;
+        margin: 1 1rem 0.5rem 0;
+    }
+
+    .h5 {
+        padding: 1em 0.3em;
+        text-decoration: none;
+
+    }
+
+</style>
 
 @code {
 
@@ -55,10 +110,11 @@
 
     async void DeleteProject(int id)
     {
-        var confirmResult = await DialogService.Confirm("Are you sure you want to delete the project?", 
+        var confirmResult = await DialogService.Confirm("Are you sure you want to delete the project?",
         "Delete Project", new ConfirmOptions() { OkButtonText = "Yes", CancelButtonText = "No" });
 
-        if(confirmResult.HasValue && confirmResult.Value) {
+        if (confirmResult.HasValue && confirmResult.Value)
+        {
             Console.WriteLine($"Id: {id}");
             var result = await ProjectService.DeleteProject(http, id);
             if (result.IsSuccessStatusCode)
@@ -69,7 +125,8 @@
         }
     }
 
-    void EditProject(int id){
+    void EditProject(int id)
+    {
         NavigationManager.NavigateTo($"{NavigationManager.BaseUri}projectform?pid={id}");
-    } 
+    }
 }
