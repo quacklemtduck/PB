@@ -82,9 +82,9 @@ namespace PB.Server.Controllers
         [ProducesResponseType(typeof(ProjectDetailsDTO), 201)]
         public async Task<IActionResult> Post(ProjectCreateDTO project)
         {
-            project.Supervisor = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            project.SupervisorId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             Console.WriteLine("----------------------------- KIG HER ---------------------------");
-            Console.WriteLine(project.Supervisor);
+            Console.WriteLine(project.SupervisorId);
             Console.WriteLine(project.Id);
             if(project.Id != null){
                 var result = await _repository.ReadByIDAsync(project.Id.GetValueOrDefault());
@@ -143,6 +143,14 @@ namespace PB.Server.Controllers
         public async Task<IActionResult> UpdateStatus(ProjectVisibilityUpdateDTO dto)
         {
             var res = await _repository.UpdateStatusAsync(dto);
+            return res.ToActionResult();
+        }
+
+        [HttpPut]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(201)]
+        public async Task<IActionResult> UpdateChosenStudents(ProjectChosenStudentsUpdateDTO dto){
+            var res = await _repository.UpdateChosenStudentsAsync(dto);
             return res.ToActionResult();
         }
     }

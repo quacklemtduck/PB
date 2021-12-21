@@ -13,18 +13,20 @@ public class Student {
     public ICollection<Project> Projects {get; set;} = new HashSet<Project>();
 
     public ICollection<Application> Applications {get; set;} = new HashSet<Application>();
-    public University? University {get; set;}
+
+    public int EducationId {get; set;}
+    public Education? Education {get; set;}
 
 
-    public ICollection<int> GetProjectIDs() {
-        ICollection<int> ProjectIDList = new List<int>();
-        if(Projects != null) {
-            foreach (Project p in Projects) 
-            {
-            ProjectIDList.Add(p.Id);
-            }
-        }
-        return ProjectIDList;
-    }
+    // public ICollection<int> GetProjectIDs() {
+    //     ICollection<int> ProjectIDList = new List<int>();
+    //     if(Projects != null) {
+    //         foreach (Project p in Projects) 
+    //         {
+    //         ProjectIDList.Add(p.Id);
+    //         }
+    //     }
+    //     return ProjectIDList;
+    // }
 
 }

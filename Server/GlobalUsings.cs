@@ -12,3 +12,9 @@ global using PB.Infrastructure;
 global using PB.Server.Model;
 global using static PB.Core.Status;
 global using static PB.Core.Response;
+
+global using Microsoft.AspNetCore.Authentication;
+global using Microsoft.AspNetCore.ResponseCompression;
+global using Microsoft.EntityFrameworkCore;
+global using PB.Infrastructure.Authentication;
+global using Microsoft.AspNetCore.Identity;

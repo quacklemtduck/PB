@@ -14,11 +14,11 @@ namespace PB.Server.Tests.Controllers
             // Arrange
             var university = new University { Name = "Københavns Universitet", Id = "KU" };
             var supervisor = new Supervisor { Id = "1", Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
-
             var logger = new Mock<ILogger<ProjectsController>>();
             var toCreate = new ProjectCreateDTO();
-            var created = new ProjectDetailsDTO(1, "Project1", "This is project 1", supervisor.Name, false, new HashSet<string>(), new HashSet<string>(), new HashSet<int>(), Status.Visible);
+            var created = new ProjectDetailsDTO(1, "Project1", "This is project 1", supervisor.Name, false, new HashSet<int>(), new HashSet<int>(), new HashSet<int>(), Status.Visible);
             var repository = new Mock<IProjectRepository>();
+
             repository.Setup(m => m.CreateAsync(toCreate)).ReturnsAsync(created);
             var controller = new ProjectsController(logger.Object, repository.Object);
 
@@ -79,26 +79,6 @@ namespace PB.Server.Tests.Controllers
             // Assert
             Assert.Equal(expected, actual);
         }
-        
-        public async Task Get_returns_Supervisors_projects_from_repo()
-        {
-            var supervisor = new Supervisor { Id = "1", Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
-
-            // Arrange
-            var logger = new Mock<ILogger<ProjectsController>>();
-            var expected = Array.Empty<ProjectListDTO>();
-            var repository = new Mock<IProjectRepository>();
-
-            repository.Setup(m => m.ListAllAsync()).ReturnsAsync(expected);
-
-            var controller = new ProjectsController(logger.Object, repository.Object);
-
-            // Act
-            var actual = await controller.GetAllFromSupervisor();
-
-            // Assert
-            Assert.Equal(expected, actual);
-        }
 
         [Fact]
         public async Task Get_given_non_existing_returns_NotFound()
@@ -125,7 +105,8 @@ namespace PB.Server.Tests.Controllers
 
             var logger = new Mock<ILogger<ProjectsController>>();
             var repository = new Mock<IProjectRepository>();
-            var project = new ProjectDetailsDTO(1, "Project1", "This is project 1", supervisor.Name, false, new HashSet<string>(), new HashSet<string>(), new HashSet<int>(), Status.Visible);
+            var project = new ProjectDetailsDTO(1, "Project1", "This is project 1", supervisor.Name, false, new HashSet<int>(), new HashSet<int>(), new HashSet<int>(), Status.Visible);
+            
             repository.Setup(m => m.ReadByIDAsync(1)).ReturnsAsync(project);
             var controller = new ProjectsController(logger.Object, repository.Object);
 
@@ -148,6 +129,45 @@ namespace PB.Server.Tests.Controllers
 
             // Act
             var response = await controller.Put(1, project);
+
+            // Assert
+            Assert.IsType<NoContentResult>(response);
+        }
+
+        [Fact]
+        public async Task UpdateStatus_Project()
+        {
+            // Arrange
+            var logger = new Mock<ILogger<ProjectsController>>();
+            var project = new ProjectVisibilityUpdateDTO(1, Status.Closed);
+            var repository = new Mock<IProjectRepository>();
+            repository.Setup(m => m.UpdateStatusAsync(project)).ReturnsAsync(Updated);
+            var controller = new ProjectsController(logger.Object, repository.Object);
+
+            // Act
+            var response = await controller.UpdateStatus(project);
+
+            // Assert
+            Assert.IsType<NoContentResult>(response);
+        }
+
+        [Fact]
+        public async Task ChoseStudents_Project()
+        {
+            
+            // Arrange
+            var student = new Student { Name = "student1", Email = "student1@gmail.com", EducationId = 1 };
+            var students = new HashSet<int>();
+            students.Add(student.Id);
+
+            var logger = new Mock<ILogger<ProjectsController>>();
+            var project = new ProjectChosenStudentsUpdateDTO(1, students);
+            var repository = new Mock<IProjectRepository>();
+            repository.Setup(m => m.UpdateChosenStudentsAsync(project)).ReturnsAsync(Updated);
+            var controller = new ProjectsController(logger.Object, repository.Object);
+
+            // Act
+            var response = await controller.UpdateChosenStudents(project);
 
             // Assert
             Assert.IsType<NoContentResult>(response);

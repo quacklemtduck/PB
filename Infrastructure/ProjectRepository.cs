@@ -17,12 +17,24 @@ namespace PB.Infrastructure
             {
                 Title = project.Title,
                 Description = project.Description,
-                Supervisor = _context.Supervisors.Find(project.Supervisor),
+                Supervisor = _context.Supervisors.Find(project.SupervisorId),
                 Notification = project.Notification,
-                Educations = _context.Educations.Where(e => project.Educations.Any(e2 => e2 == e.Id)).ToList()
+                Status = project.Status,
+                //Educations = _context.Educations.Where(e => project.Educations.Any(e2 => e2 == e.Id)).ToList()
+                Educations = await GetEducationsAsync(project.Educations).ToListAsync()
             };
+            
 
             _context.Projects.Add(entity);
+
+            //Adding dummy applications
+            var students = _context.Students.Where(s => project.Educations.Any(e2 => e2 == s.EducationId)).ToList();
+            foreach (var student in students)
+            {
+                Console.WriteLine("Adding application");
+                _context.Applications.Add(new Application{Title="Dummy Application", Description="Hello, i would like to join your project", Student=student, Project=entity});
+            }
+                          //  .Select(s => _context.Applications.Add(new Application{Title="Dummy Application", Description="Hello, i would like to join your project", Student=s, Project=entity}));
 
             await _context.SaveChangesAsync();
 
@@ -32,8 +44,8 @@ namespace PB.Infrastructure
                                  entity.Description,
                                  entity.Supervisor?.Name,
                                  entity.Notification,
-                                 entity.ChosenStudents.Select(s => s.Name).ToHashSet(),
-                                 entity.Applications.Select(a => a.Title).ToHashSet(),
+                                 entity.ChosenStudents.Select(s => s.Id).ToHashSet(),
+                                 entity.Applications.Select(a => a.Id).ToHashSet(),
                                  entity.Educations.Select(u => u.Id).ToHashSet(),
                                  entity.Status
                              );
@@ -76,6 +88,7 @@ namespace PB.Infrastructure
 
         public async Task<Option<ProjectDetailsDTO>> ReadByIDAsync(int projectId)
         {
+            
             var projects = from p in _context.Projects
                            where p.Id == projectId
                            select new ProjectDetailsDTO(
@@ -83,14 +96,13 @@ namespace PB.Infrastructure
                                p.Title,
                                p.Description,
                                p.Supervisor == null ? null : p.Supervisor.Id,
-                               //convertDateTimeToString(p.Deadline),
                                p.Notification,
-                               p.ChosenStudents.Select(s => s.Name).ToHashSet(),
-                               //p.Tags.Select(t => t.TagName).ToHashSet(),
-                               p.Applications.Select(a => a.Title).ToHashSet(),
+                               p.ChosenStudents.Select(s => s.Id).ToHashSet(),
+                               p.Applications.Select(a => a.Id).ToHashSet(),
                                p.Educations.Select(u => u.Id).ToHashSet(),
                                p.Status
                            );
+
 
             return await projects.FirstOrDefaultAsync();
         }
@@ -99,21 +111,16 @@ namespace PB.Infrastructure
         {
             var entity = await _context.Projects.Include(p => p.ChosenStudents).Include(p => p.Applications).Include(p => p.Educations).FirstOrDefaultAsync(p => p.Id == project.Id);
 
-            //var entity = await _context.Projects.FirstOrDefaultAsync(p => p.Id == project.ID);
-
             if (entity == null)
             {
                 return Response.NotFound;
             }
-
             entity.Title = project.Title;
             entity.Description = project.Description;
             entity.Notification = project.Notification;
             entity.Status = project.Status;
-            //entity.ChosenStudents = await GetStudentsAsync(project.ChosenStudents).ToListAsync();
-            //entity.Applications = await GetApplicationsAsync(project.Applications).ToListAsync();
-            entity.Educations = _context.Educations.Where(e => project.Educations.Any(e2 => e2 == e.Id)).ToList();
-
+            entity.Educations = await GetEducationsAsync(project.Educations).ToListAsync();
+            //entity.Educations = _context.Educations.Where(e => project.Educations.Any(e2 => e2 == e.Id)).ToList();
 
             await _context.SaveChangesAsync();
 
@@ -125,74 +132,54 @@ namespace PB.Infrastructure
             var entity = await _context.Projects.FindAsync(dto.ID);
             if (entity == null) return Response.NotFound;
             entity.Status = dto.Status;
+            
             await _context.SaveChangesAsync();
+
             return Response.Updated;
         }
 
+        public async Task<Response> UpdateChosenStudentsAsync(ProjectChosenStudentsUpdateDTO dto){
+            var entity = await _context.Projects.Include(p => p.ChosenStudents).FirstOrDefaultAsync(p => p.Id == dto.ID);
 
+            if (entity == null) return Response.NotFound;
 
+            entity.ChosenStudents = await GetStudentsAsync(dto.ChosenStudents).ToListAsync();
 
-        //help methods:
+            await _context.SaveChangesAsync();
 
-        private async IAsyncEnumerable<Tag> GetTagsAsync(IEnumerable<string> tags)
-        {
-            var existing = await _context.Tags.Where(t => tags.Contains(t.TagName)).ToDictionaryAsync(t => t.TagName);
-
-            foreach (var tag in tags)
-            {
-                yield return existing.TryGetValue(tag, out var t) ? t : new Tag { TagName = tag };
-            }
+            return Response.Updated;
         }
 
-        private async IAsyncEnumerable<Student> GetStudentsAsync(IEnumerable<string> students)
+        private async IAsyncEnumerable<Student> GetStudentsAsync(IEnumerable<int> students)
         {
-            var existing = await _context.Students.Where(s => students.Contains(s.Name)).ToDictionaryAsync(s => s.Name);
+            var existing = await _context.Students.Where(s => students.Contains(s.Id)).ToDictionaryAsync(s => s.Id);
 
             foreach (var student in students)
             {
-                yield return existing.TryGetValue(student, out var s) ? s : new Student { Name = student };
+                yield return existing.TryGetValue(student, out var s) ? s : new Student { Id = student };
             }
         }
 
-        private async IAsyncEnumerable<Application> GetApplicationsAsync(IEnumerable<string> applications)
+        private async IAsyncEnumerable<Application> GetApplicationsAsync(IEnumerable<int> applications)
         {
-            var existing = await _context.Applications.Where(a => applications.Contains(a.Title)).ToDictionaryAsync(a => a.Title);
+            var existing = await _context.Applications.Where(a => applications.Contains(a.Id)).ToDictionaryAsync(a => a.Id);
 
             foreach (var application in applications)
             {
                 //Console.WriteLine("===========>>Application Title: " + application);
-                yield return existing.TryGetValue(application, out var a) ? a : new Application { Title = application };
+                yield return existing.TryGetValue(application, out var a) ? a : new Application { Id = application };
             }
         }
 
-        private async IAsyncEnumerable<University> GetUniversitiesAsync(IEnumerable<string> universities)
+        private async IAsyncEnumerable<Education> GetEducationsAsync(IEnumerable<int> educations)
         {
-            var existing = await _context.Universities.Where(u => universities.Contains(u.Name)).ToDictionaryAsync(u => u.Name);
+            var existing = await _context.Educations.Where(a => educations.Contains(a.Id)).ToDictionaryAsync(a => a.Id);
 
-            foreach (var university in universities)
+            foreach (var education in educations)
             {
-                yield return existing.TryGetValue(university, out var u) ? u : new University { Name = university };
+                //Console.WriteLine("===========>>Application Title: " + application);
+                yield return existing.TryGetValue(education, out var a) ? a : new Education { Id = education };
             }
         }
-
-        private async Task<Supervisor?> getSupervisorAsync(string? name) =>
-        string.IsNullOrWhiteSpace(name) ? null : await _context.Supervisors.FirstOrDefaultAsync(s => s.Name == name) ?? new Supervisor { Name = name };
-
-        public static string convertDateTimeToString(DateTime? dateTime)
-        {
-            const string FMT = "O";
-            DateTime nonNullableDateTime = dateTime ?? DateTime.Now.AddMonths(1);
-            return nonNullableDateTime.ToString(FMT);
-
-
-        }
-
-        public static DateTime convertStringToDateTime(string deadline)
-        {
-             const string FMT = "O";
-            return DateTime.ParseExact(deadline, FMT, CultureInfo.InvariantCulture);
-        }
-
-
     }
 }

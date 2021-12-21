@@ -8,7 +8,8 @@ namespace PB.Server.Model
             {
                 var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
-                context.Seed();
+                context.SeedEducations();
+                context.SeedStudents();
             }
             return host;
         }
