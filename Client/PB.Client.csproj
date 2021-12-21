@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Shared\PB.Shared.csproj" />
     <ProjectReference Include="..\Core\Core.csproj" />
   </ItemGroup>
 

@@ -25,11 +25,10 @@ namespace PB.Server.Tests.Controllers
             var user = new ClaimsPrincipal(new ClaimsIdentity(new Claim[] {
                                         new Claim(ClaimTypes.NameIdentifier, "1"),
                                         new Claim(ClaimTypes.Name, "Supervisor1")
-                                        // other required and custom claims
-                                   },"TestAuthentication"));
+                                   }, "TestAuthentication"));
 
             controller.ControllerContext = new ControllerContext();
-            controller.ControllerContext.HttpContext = new DefaultHttpContext{User = user};
+            controller.ControllerContext.HttpContext = new DefaultHttpContext { User = user };
 
             // Act
             var result = await controller.Post(toCreate) as CreatedAtRouteResult;
@@ -37,20 +36,20 @@ namespace PB.Server.Tests.Controllers
             // Assert
             Assert.Equal(created, result?.Value);
             Assert.Equal("Get", result?.RouteName);
-            //Assert.Equal(KeyValuePair.Create("Id", (object?)1), result?.RouteValues?.Single());
+            Assert.Equal(KeyValuePair.Create("ID", (object?)1), result?.RouteValues?.Single());
             Assert.Equal((object?)1, result?.RouteValues?.GetValueOrDefault("Id"));
         }
 
-       [Fact]
+        [Fact]
         public async Task Get_returns_Projects_from_repo()
         {
             // Arrange
             var logger = new Mock<ILogger<ProjectsController>>();
             var expected = Array.Empty<ProjectListDTO>();
             var repository = new Mock<IProjectRepository>();
-            
+
             repository.Setup(m => m.ListAllAsync()).ReturnsAsync(expected);
-            
+
 
             var controller = new ProjectsController(logger.Object, repository.Object);
 
@@ -68,7 +67,7 @@ namespace PB.Server.Tests.Controllers
             var logger = new Mock<ILogger<ProjectsController>>();
             var expected = Array.Empty<ProjectListDTO>();
             var repository = new Mock<IProjectRepository>();
-            
+
             repository.Setup(m => m.ListAllVisibleAsync()).ReturnsAsync(expected);
 
             var controller = new ProjectsController(logger.Object, repository.Object);
@@ -106,7 +105,7 @@ namespace PB.Server.Tests.Controllers
             var logger = new Mock<ILogger<ProjectsController>>();
             var repository = new Mock<IProjectRepository>();
             var project = new ProjectDetailsDTO(1, "Project1", "This is project 1", supervisor.Name, false, new HashSet<int>(), new HashSet<int>(), new HashSet<int>(), Status.Visible);
-            
+
             repository.Setup(m => m.ReadByIDAsync(1)).ReturnsAsync(project);
             var controller = new ProjectsController(logger.Object, repository.Object);
 
@@ -154,7 +153,7 @@ namespace PB.Server.Tests.Controllers
         [Fact]
         public async Task ChoseStudents_Project()
         {
-            
+
             // Arrange
             var student = new Student { Name = "student1", Email = "student1@gmail.com", EducationId = 1 };
             var students = new HashSet<int>();
@@ -200,7 +199,7 @@ namespace PB.Server.Tests.Controllers
             var controller = new ProjectsController(logger.Object, repository.Object);
 
             // Act
-            var response = await controller.DeleteProject(new ProjectDeleteDTO{ID = 42});
+            var response = await controller.DeleteProject(new ProjectDeleteDTO { ID = 42 });
 
             // Assert
             Assert.IsType<NotFoundResult>(response);
