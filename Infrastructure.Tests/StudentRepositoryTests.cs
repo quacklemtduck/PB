@@ -21,12 +21,12 @@ namespace Infrastructure.Tests
 
             var universityRepository = new UniversityRepository(context);
             context.Students.AddRange(
-                new Student{Id = 1,Name = "student1", Email = "student1@gmail.com", Education = context.Educations.Find(1)},
-                new Student{Id = 2,Name = "student2", Email = "student2@gmail.com", Education = context.Educations.Find(1)},
-                new Student{Id = 3,Name = "student3", Email = "student3@gmail.com", Education = context.Educations.Find(1)},
-                new Student{Id = 4,Name = "student4", Email = "student4@gmail.com", Education = context.Educations.Find(1)},
-                new Student{Id = 5,Name = "student5", Email = "student5@gmail.com", Education = context.Educations.Find(1)},
-                new Student{Id = 6,Name = "student6", Email = "student6@gmail.com", Education = context.Educations.Find(1)}
+                new Student { Id = 1, Name = "student1", Email = "student1@gmail.com", Education = context.Educations.Find(1) },
+                new Student { Id = 2, Name = "student2", Email = "student2@gmail.com", Education = context.Educations.Find(1) },
+                new Student { Id = 3, Name = "student3", Email = "student3@gmail.com", Education = context.Educations.Find(1) },
+                new Student { Id = 4, Name = "student4", Email = "student4@gmail.com", Education = context.Educations.Find(1) },
+                new Student { Id = 5, Name = "student5", Email = "student5@gmail.com", Education = context.Educations.Find(1) },
+                new Student { Id = 6, Name = "student6", Email = "student6@gmail.com", Education = context.Educations.Find(1) }
             );
 
             context.SaveChanges();
@@ -105,7 +105,7 @@ namespace Infrastructure.Tests
         {
             var universityRepository = new UniversityRepository(_context);
             var university = _context.Universities.Find(universityAbbreviation);
-            var student = new StudentCreateDTO { Name = studentName, Email = studentEmail, EducationId = 1};
+            var student = new StudentCreateDTO { Name = studentName, Email = studentEmail, EducationId = 1 };
             var created = await _repository.CreateAsync(student);
 
             Assert.Equal(7, created.Id);
@@ -155,23 +155,6 @@ namespace Infrastructure.Tests
         }
 
 
-        /*[Fact]
-        public async Task ReadAllAsync_returns_all_students()
-        {
-            var students = await _repository.ReadAllAsync();
-            var university = new University {Name = "Københavns Universitet", Abbreviation = "KU"};
-
-
-            Assert.Collection(students,
-                students => Assert.Equal(new StudentDetailsDTO(1, "student1", university.Name, "student1@gmail.com", new HashSet<string>(), new HashSet<string>()).ToString(), students.ToString()),
-                students => Assert.Equal(new StudentDetailsDTO(2, "student2", university.Name, "student2@gmail.com", new HashSet<string>(), new HashSet<string>()).ToString(), students.ToString()),
-                students => Assert.Equal(new StudentDetailsDTO(3, "student3", university.Name, "student3@gmail.com", new HashSet<string>(), new HashSet<string>()).ToString(), students.ToString()),
-                students => Assert.Equal(new StudentDetailsDTO(4, "student4", university.Name, "student4@gmail.com", new HashSet<string>(), new HashSet<string>()).ToString(), students.ToString()),
-                students => Assert.Equal(new StudentDetailsDTO(5, "student5", university.Name, "student5@gmail.com", new HashSet<string>(), new HashSet<string>()).ToString(), students.ToString()),
-                students => Assert.Equal(new StudentDetailsDTO(6, "student6", university.Name, "student6@gmail.com", new HashSet<string>(), new HashSet<string>()).ToString(), students.ToString())
-            );
-        }*/
-
         private bool disposed;
 
         protected virtual void Dispose(bool disposing)
@@ -193,11 +176,6 @@ namespace Infrastructure.Tests
             Dispose(disposing: true);
             GC.SuppressFinalize(this);
         }
-
-        // private string getDeadlineString(){
-        //     DateTime deadline = DateTime.Parse("Dec 22, 2021");
-        //     return ProjectRepository.convertDateTimeToString(deadline);
-        // }
     }
 
 }
