@@ -20,10 +20,9 @@ namespace PB.Infrastructure
                 Supervisor = _context.Supervisors.Find(project.SupervisorId),
                 Notification = project.Notification,
                 Status = project.Status,
-                //Educations = _context.Educations.Where(e => project.Educations.Any(e2 => e2 == e.Id)).ToList()
                 Educations = await GetEducationsAsync(project.Educations).ToListAsync()
             };
-            
+
 
             _context.Projects.Add(entity);
 
@@ -32,9 +31,8 @@ namespace PB.Infrastructure
             foreach (var student in students)
             {
                 Console.WriteLine("Adding application");
-                _context.Applications.Add(new Application{Title="Dummy Application", Description="Hello, i would like to join your project", Student=student, Project=entity});
+                _context.Applications.Add(new Application { Title = "Dummy Application", Description = "Hello, i would like to join your project", Student = student, Project = entity });
             }
-                          //  .Select(s => _context.Applications.Add(new Application{Title="Dummy Application", Description="Hello, i would like to join your project", Student=s, Project=entity}));
 
             await _context.SaveChangesAsync();
 
@@ -71,14 +69,14 @@ namespace PB.Infrastructure
                        .Select(p => new ProjectListDTO(p.Id, p.Title, p.Description, p.Status))
                        .ToListAsync())
                        .AsReadOnly();
-        
+
         public async Task<IReadOnlyCollection<ProjectListDTO>> ListAllVisibleAsync() =>
                 (await _context.Projects
                        .Where(p => p.Status == Status.Visible)
                        .Select(p => new ProjectListDTO(p.Id, p.Title, p.Description, p.Status))
                        .ToListAsync())
                        .AsReadOnly();
-        
+
         public async Task<IReadOnlyCollection<ProjectListDTO>> ListAllAsync(string SupervisorID) =>
                 (await _context.Projects
                         .Where(p => SupervisorID == p.SupervisorID)
@@ -88,7 +86,7 @@ namespace PB.Infrastructure
 
         public async Task<Option<ProjectDetailsDTO>> ReadByIDAsync(int projectId)
         {
-            
+
             var projects = from p in _context.Projects
                            where p.Id == projectId
                            select new ProjectDetailsDTO(
@@ -120,7 +118,6 @@ namespace PB.Infrastructure
             entity.Notification = project.Notification;
             entity.Status = project.Status;
             entity.Educations = await GetEducationsAsync(project.Educations).ToListAsync();
-            //entity.Educations = _context.Educations.Where(e => project.Educations.Any(e2 => e2 == e.Id)).ToList();
 
             await _context.SaveChangesAsync();
 
@@ -132,13 +129,14 @@ namespace PB.Infrastructure
             var entity = await _context.Projects.FindAsync(dto.ID);
             if (entity == null) return Response.NotFound;
             entity.Status = dto.Status;
-            
+
             await _context.SaveChangesAsync();
 
             return Response.Updated;
         }
 
-        public async Task<Response> UpdateChosenStudentsAsync(ProjectChosenStudentsUpdateDTO dto){
+        public async Task<Response> UpdateChosenStudentsAsync(ProjectChosenStudentsUpdateDTO dto)
+        {
             var entity = await _context.Projects.Include(p => p.ChosenStudents).FirstOrDefaultAsync(p => p.Id == dto.ID);
 
             if (entity == null) return Response.NotFound;
@@ -166,7 +164,6 @@ namespace PB.Infrastructure
 
             foreach (var application in applications)
             {
-                //Console.WriteLine("===========>>Application Title: " + application);
                 yield return existing.TryGetValue(application, out var a) ? a : new Application { Id = application };
             }
         }
@@ -177,7 +174,6 @@ namespace PB.Infrastructure
 
             foreach (var education in educations)
             {
-                //Console.WriteLine("===========>>Application Title: " + application);
                 yield return existing.TryGetValue(education, out var a) ? a : new Education { Id = education };
             }
         }
