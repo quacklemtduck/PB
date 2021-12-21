@@ -1,6 +1,5 @@
 namespace PB.Core
 {
-
     public interface ISupervisorRepository
     {
         Task<SupervisorDetailsDTO> CreateAsync(SuperVisorCreateDTO supervisor);

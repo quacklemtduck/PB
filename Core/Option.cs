@@ -7,7 +7,7 @@ using Microsoft.Extensions.Options;
 
 namespace PB.Core
 {
-    public class Option<T>  : IOptions<T> where T : class
+    public class Option<T> : IOptions<T> where T : class
     {
         private readonly T? _value;
 
@@ -21,8 +21,6 @@ namespace PB.Core
         {
             _value = value;
         }
-
-        //public static implicit operator T(Option<T> option) => option.Value;
 
         public static implicit operator Option<T>(T? value) => new(value);
     }
