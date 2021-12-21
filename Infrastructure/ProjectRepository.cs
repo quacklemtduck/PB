@@ -17,12 +17,21 @@ namespace PB.Infrastructure
             {
                 Title = project.Title,
                 Description = project.Description,
-                Supervisor = _context.Supervisors.Find(project.Supervisor),
+                Supervisor = _context.Supervisors.Find(project.SupervisorId),
                 Notification = project.Notification,
                 Educations = _context.Educations.Where(e => project.Educations.Any(e2 => e2 == e.Id)).ToList()
             };
 
             _context.Projects.Add(entity);
+
+            //Adding dummy applications
+            var students = _context.Students.Where(s => project.Educations.Any(e2 => e2 == s.EducationId)).ToList();
+            foreach (var student in students)
+            {
+                Console.WriteLine("Adding application");
+                _context.Applications.Add(new Application{Title="Dummy Application", Description="Hello, i would like to join your project", Student=student, Project=entity});
+            }
+                          //  .Select(s => _context.Applications.Add(new Application{Title="Dummy Application", Description="Hello, i would like to join your project", Student=s, Project=entity}));
 
             await _context.SaveChangesAsync();
 
@@ -32,8 +41,8 @@ namespace PB.Infrastructure
                                  entity.Description,
                                  entity.Supervisor?.Name,
                                  entity.Notification,
-                                 entity.ChosenStudents.Select(s => s.Name).ToHashSet(),
-                                 entity.Applications.Select(a => a.Title).ToHashSet(),
+                                 entity.ChosenStudents.Select(s => s.Id).ToHashSet(),
+                                 entity.Applications.Select(a => a.Title).ToList(),
                                  entity.Educations.Select(u => u.Id).ToHashSet(),
                                  entity.Status
                              );
@@ -78,9 +87,9 @@ namespace PB.Infrastructure
                                p.Supervisor == null ? null : p.Supervisor.Id,
                                //convertDateTimeToString(p.Deadline),
                                p.Notification,
-                               p.ChosenStudents.Select(s => s.Name).ToHashSet(),
+                               p.ChosenStudents.Select(s => s.Id).ToList(),
                                //p.Tags.Select(t => t.TagName).ToHashSet(),
-                               p.Applications.Select(a => a.Title).ToHashSet(),
+                               p.Applications.Select(a => a.Title).ToList(),
                                p.Educations.Select(u => u.Id).ToHashSet(),
                                p.Status
                            );
@@ -103,8 +112,6 @@ namespace PB.Infrastructure
                 entity.Description = project.Description;
                 entity.Notification = project.Notification;
                 entity.Status = project.Status;
-                //entity.ChosenStudents = await GetStudentsAsync(project.ChosenStudents).ToListAsync();
-                //entity.Applications = await GetApplicationsAsync(project.Applications).ToListAsync();
                 entity.Educations = _context.Educations.Where(e => project.Educations.Any(e2 => e2 == e.Id)).ToList();
 
 

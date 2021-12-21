@@ -13,6 +13,8 @@
     @if (project != null){
     <h1>@project.Title</h1>
     <p>@project.Description</p>
+    <p>@supervisor.Name</p>
+    <p>@project.Applications.FirstOrDefault()</p>
 }
 </div>
 
@@ -22,6 +24,8 @@
     [Parameter]
     public int? ProjectId {get; set;}
     private ProjectDetailsDTO? project;
+    
+    private SupervisorDetailsDTO? supervisor;
 
     protected override async Task OnParametersSetAsync()
     {
@@ -30,9 +34,11 @@
         if(ProjectId != 0){
             if(user.Identity.IsAuthenticated){
                 project = await ProjectService.GetProject(http, ProjectId);
+                supervisor = await SupervisorServices.GetSupervisorAsync(http, project.Supervisor);
             }else{
                 var anonClient = ClientFactory.CreateClient("PB.NoAuthenticationClient");
                 project = await ProjectService.GetProject(anonClient, ProjectId);
+                supervisor = await SupervisorServices.GetSupervisorAsync(anonClient, project.Supervisor);
             }
         }
 

@@ -78,9 +78,9 @@ namespace PB.Server.Controllers
         [ProducesResponseType(typeof(ProjectDetailsDTO), 201)]
         public async Task<IActionResult> Post(ProjectCreateDTO project)
         {
-            project.Supervisor = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            project.SupervisorId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             Console.WriteLine("----------------------------- KIG HER ---------------------------");
-            Console.WriteLine(project.Supervisor);
+            Console.WriteLine(project.SupervisorId);
             Console.WriteLine(project.Id);
             if(project.Id != null){
                 var result = await _repository.ReadByIDAsync(project.Id.GetValueOrDefault());

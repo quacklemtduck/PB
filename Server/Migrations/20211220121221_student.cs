@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PB.Server.Migrations
 {
-    public partial class delete : Migration
+    public partial class student : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -295,26 +295,6 @@ namespace PB.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Students",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
-                    Email = table.Column<string>(type: "TEXT", nullable: true),
-                    UniversityId = table.Column<string>(type: "TEXT", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Students", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Students_Universities_UniversityId",
-                        column: x => x.UniversityId,
-                        principalTable: "Universities",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "EducationProject",
                 columns: table => new
                 {
@@ -334,6 +314,27 @@ namespace PB.Server.Migrations
                         name: "FK_EducationProject_Projects_ProjectsId",
                         column: x => x.ProjectsId,
                         principalTable: "Projects",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Students",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    Email = table.Column<string>(type: "TEXT", nullable: true),
+                    EducationId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Students", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Students_Educations_EducationId",
+                        column: x => x.EducationId,
+                        principalTable: "Educations",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -494,9 +495,9 @@ namespace PB.Server.Migrations
                 column: "ProjectsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Students_UniversityId",
+                name: "IX_Students_EducationId",
                 table: "Students",
-                column: "UniversityId");
+                column: "EducationId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -544,9 +545,6 @@ namespace PB.Server.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Educations");
-
-            migrationBuilder.DropTable(
                 name: "Projects");
 
             migrationBuilder.DropTable(
@@ -554,6 +552,9 @@ namespace PB.Server.Migrations
 
             migrationBuilder.DropTable(
                 name: "Supervisors");
+
+            migrationBuilder.DropTable(
+                name: "Educations");
 
             migrationBuilder.DropTable(
                 name: "Universities");

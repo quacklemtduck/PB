@@ -4,7 +4,7 @@ namespace PB.Server.Controllers
 
     //[Authorize]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     //[RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes")]
     public class StudentsController : ControllerBase
     {
@@ -25,8 +25,8 @@ namespace PB.Server.Controllers
         //[Authorize]
         [ProducesResponseType(404)]
         [ProducesResponseType(typeof(StudentDetailsDTO), 200)]
-        [HttpGet("{id}")]
-        public async Task<ActionResult<StudentDetailsDTO>> Get(int id)
+        [HttpGet("{id}", Name = "GetStudent")]
+        public async Task<ActionResult<StudentDetailsDTO>> GetStudent(int id)
             => (await _repository.ReadAsync(id)).ToActionResult();
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace PB.Server.Controllers
         {
             var created = await _repository.CreateAsync(student);
 
-            return CreatedAtRoute(nameof(Get), new { created.Id }, created);
+            return CreatedAtRoute(nameof(GetStudent), new { created.Id }, created);
         }
 
         //[Authorize]
