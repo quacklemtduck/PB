@@ -1,6 +1,4 @@
 using System.Security.Claims;
-using PB.Infrastructure.Authentication;
-using Microsoft.AspNetCore.Identity;
 
 namespace PB.Server.Controllers
 {
@@ -8,7 +6,6 @@ namespace PB.Server.Controllers
     [Authorize]
     [ApiController]
     [Route("api/[controller]/[action]")]
-    //[RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes")]
     public class ProjectsController : ControllerBase
     {
         private readonly ILogger<ProjectsController> _logger;
@@ -20,24 +17,21 @@ namespace PB.Server.Controllers
             _repository = repository;
         }
 
-        //[AllowAnonymous]
         [HttpGet]
         public async Task<IReadOnlyCollection<ProjectListDTO>> GetAll()
             => await _repository.ListAllAsync();
-        
+
         [AllowAnonymous]
         [HttpGet]
         public async Task<IReadOnlyCollection<ProjectListDTO>> GetAllVisible()
             => await _repository.ListAllVisibleAsync();
 
-        //[Authorize] //Supervisor
 
         [Authorize]
         [HttpGet]
         public async Task<IReadOnlyCollection<ProjectListDTO>> GetAllFromSupervisor()
         {
             var user = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            //Console.WriteLine(ClaimTypes.Name);
             return await _repository.ListAllAsync(user);
         }
 
@@ -48,7 +42,6 @@ namespace PB.Server.Controllers
         [HttpGet("{id}", Name = "Get")]
         public async Task<ActionResult<ProjectDetailsDTO>> Get(int id)
         {
-            Console.WriteLine("---------------- GOT REQUEST ---------------");
             var result = await _repository.ReadByIDAsync(id);
             if (result.IsSome)
             {
@@ -57,7 +50,6 @@ namespace PB.Server.Controllers
                     var user = User.FindFirstValue(ClaimTypes.NameIdentifier);
                     if (user != null)
                     {
-                        Console.WriteLine($"-------KIG HER {user} -- {result.Value.Supervisor}");
                         if (user == result.Value.Supervisor)
                         {
                             return result.ToActionResult();
@@ -84,15 +76,16 @@ namespace PB.Server.Controllers
         public async Task<IActionResult> Post(ProjectCreateDTO project)
         {
             project.SupervisorId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            Console.WriteLine("----------------------------- KIG HER ---------------------------");
-            Console.WriteLine(project.SupervisorId);
-            Console.WriteLine(project.Id);
-            if(project.Id != null){
+            if (project.Id != null)
+            {
                 var result = await _repository.ReadByIDAsync(project.Id.GetValueOrDefault());
-                if(result != null){
-                    if(User.FindFirstValue(ClaimTypes.NameIdentifier) == result.Value.Supervisor){
+                if (result != null)
+                {
+                    if (User.FindFirstValue(ClaimTypes.NameIdentifier) == result.Value.Supervisor)
+                    {
                         var res = await _repository.UpdateAsync(project);
-                        if(res == Core.Response.Updated){
+                        if (res == Core.Response.Updated)
+                        {
                             result = await _repository.ReadByIDAsync(project.Id.GetValueOrDefault());
                             return CreatedAtRoute("Get", new { result.Value.ID }, result.Value);
                         }
@@ -104,14 +97,12 @@ namespace PB.Server.Controllers
             return CreatedAtRoute("Get", new { created.ID }, created);
         }
 
-        //[Authorize] //Supervisor and Student
         [HttpPut("{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
         public async Task<IActionResult> Put(int id, [FromBody] ProjectUpdateDTO project)
                => (await _repository.UpdateAsync(project)).ToActionResult();
 
-        //[Authorize] //Supervisor
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
@@ -150,7 +141,8 @@ namespace PB.Server.Controllers
         [HttpPut]
         [ProducesResponseType(404)]
         [ProducesResponseType(201)]
-        public async Task<IActionResult> UpdateChosenStudents(ProjectChosenStudentsUpdateDTO dto){
+        public async Task<IActionResult> UpdateChosenStudents(ProjectChosenStudentsUpdateDTO dto)
+        {
             var res = await _repository.UpdateChosenStudentsAsync(dto);
             return res.ToActionResult();
         }

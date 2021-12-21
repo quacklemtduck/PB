@@ -2,9 +2,6 @@
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
-
 static IConfiguration LoadConfiguration()
 {
     var builder = new ConfigurationBuilder()
@@ -18,8 +15,7 @@ static IConfiguration LoadConfiguration()
 var configuration = LoadConfiguration();
 var connectionString = configuration.GetConnectionString("PB");
 
-//var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-    builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(connectionString, b => b.MigrationsAssembly("PB.Server")));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -54,7 +50,6 @@ if (app.Environment.IsDevelopment())
 else
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
