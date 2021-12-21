@@ -98,19 +98,15 @@ namespace PB.Infrastructure.Tests
         }
 
         [Theory]
-        [InlineData(-100)]
-        [InlineData(0)]
-        [InlineData(1)]
-        [InlineData(3)]
-        [InlineData(5)]
-        [InlineData(6)]
-        [InlineData(100)]
-        public async Task Delete_boundary(int projectID)
+        [InlineData(-100, Response.NotFound)]
+        [InlineData(0, Response.NotFound)]
+        [InlineData(1, Response.Deleted)]
+        [InlineData(3, Response.Deleted)]
+        [InlineData(5, Response.Deleted)]
+        [InlineData(6, Response.NotFound)]
+        [InlineData(100, Response.NotFound)]
+        public async Task Delete_boundary(int projectID, Response expectedOutput)
         {
-            Project? foundProjects =
-                (from p in _context.Projects
-                 where p.Id == projectID
-                 select p).SingleOrDefault();
 
             var response = await _repository.DeleteAsync(projectID);
             _context.SaveChanges();
@@ -120,8 +116,7 @@ namespace PB.Infrastructure.Tests
                  where p.Id == projectID
                  select p).SingleOrDefault();
 
-            if (foundProjects != null)Assert.Equal((Response.Deleted), response);
-            else Assert.Equal(Response.NotFound,response);
+            Assert.Equal(expectedOutput,response);
             Assert.Null(foundProject);
         }
 
@@ -146,53 +141,52 @@ namespace PB.Infrastructure.Tests
         }
 
         [Theory]
-        [InlineData(-100)]
-        [InlineData(0)]
-        [InlineData(1)]
-        [InlineData(3)]
-        [InlineData(5)]
-        [InlineData(6)]
-        [InlineData(100)]
-        public async Task ReadByIDAsync_Equivalence(int projectID)
+        [InlineData(-100, false)]
+        [InlineData(0, false)]
+        [InlineData(1, true)]
+        [InlineData(3, true)]
+        [InlineData(5, true)]
+        [InlineData(6, false)]
+        [InlineData(100, false)]
+        public async Task ReadByIDAsync_Equivalence(int projectID, bool expectedOutput)
         {
             var option = await _repository.ReadByIDAsync(projectID);
+            Assert.Equal(expectedOutput,option.IsSome);
 
-            if (projectID < 1 || projectID > 5)Assert.True(option.IsNone);
-            else {
-                Assert.True(option.IsSome);
+            if (expectedOutput){
                 var project = option.Value;
                 Assert.Equal(projectID,project.ID);
             }
         }
 
         [Theory]
-        [InlineData(-100, Status.Closed)]
-        [InlineData(0, Status.Hidden)]
-        [InlineData(1, Status.Closed)]
-        [InlineData(3, Status.Hidden)]
-        [InlineData(5, Status.Visible)]
-        [InlineData(6, Status.Hidden)]
-        [InlineData(100,Status.Visible)]
-        public async Task UpdateStatus_Equivalance(int projectID, Status status)
+        [InlineData(-100, Status.Closed, Response.NotFound)]
+        [InlineData(0, Status.Hidden, Response.NotFound)]
+        [InlineData(1, Status.Closed, Response.Updated)]
+        [InlineData(3, Status.Hidden, Response.Updated)]
+        [InlineData(5, Status.Visible, Response.Updated)]
+        [InlineData(6, Status.Hidden, Response.NotFound)]
+        [InlineData(100,Status.Visible, Response.NotFound)]
+        public async Task UpdateStatus_Equivalance(int projectID, Status status, Response expectedResponse)
         {
             var visibilityUpdate = new ProjectVisibilityUpdateDTO(projectID,status);
             var response = await _repository.UpdateStatusAsync(visibilityUpdate);
-            if (projectID < 1 || projectID > 5)Assert.Equal(Response.NotFound,response);
-            else {
-                Assert.Equal(Response.Updated,response);
+            Assert.Equal(expectedResponse,response);
+
+            if(expectedResponse == Response.Updated) {
                 var updatedProject = await _repository.ReadByIDAsync(projectID);
                 Assert.Equal(status,updatedProject.Value.Status);
             }
         }
 
         [Theory]
-        [InlineData("Project 6", "This is project 6", false, Status.Hidden, 0)]
-        [InlineData(null, "This is a closed project", true, Status.Closed, 1)]
-        [InlineData("Visible project", "This is a visible project", true, Status.Visible, 3)]
-        [InlineData("ver Visible project", null, true, Status.Visible, 4)]
-        [InlineData("Visible project2", "This is a visible project2", true, Status.Visible, 5)]
-        [InlineData("Visible project3", "This is a visible project3", true, Status.Visible, 6)]
-        public async Task UpdateAsync_Equivalence(string projectTitle, string projectDescription,bool notification, Status status, int projectID)
+        [InlineData("Project 6", "This is project 6", false, Status.Hidden, 0,Response.NotFound)]
+        [InlineData(null, "This is a closed project", true, Status.Closed, 1,Response.Updated)]
+        [InlineData("Visible project", "This is a visible project", true, Status.Visible, 3,Response.Updated)]
+        [InlineData("ver Visible project", null, true, Status.Visible, 4,Response.Updated)]
+        [InlineData("Visible project2", "This is a visible project2", true, Status.Visible, 5, Response.Updated)]
+        [InlineData("Visible project3", "This is a visible project3", true, Status.Visible, 6, Response.NotFound)]
+        public async Task UpdateAsync_Equivalence(string projectTitle, string projectDescription,bool notification, Status status, int projectID, Response expectedResponse)
         {
             var project = new ProjectUpdateDTO
             {
@@ -205,10 +199,9 @@ namespace PB.Infrastructure.Tests
             try
             {
                 var response = await _repository.UpdateAsync(project);
-                if (projectID < 1 || projectID > 5)Assert.Equal(Response.NotFound,response);
-                else
+                Assert.Equal(expectedResponse,response);
+                if (expectedResponse == Response.Updated)
                 {
-                    Assert.Equal(Updated, response);
                     var projectUpdated = (await _repository.ReadByIDAsync(projectID)).Value;
                     Assert.Equal(projectTitle, projectUpdated.Title);
                     Assert.Equal(projectDescription,projectUpdated.Description);
