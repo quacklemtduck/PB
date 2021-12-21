@@ -159,7 +159,7 @@ namespace PB.Server.Tests.Controllers
         {
             
             // Arrange
-            var student = new Student { Name = "student1", Email = "student1@gmail.com", University = new University{Name = "Københavns Universitet", Id = "KU"} };
+            var student = new Student { Name = "student1", Email = "student1@gmail.com", EducationId = 1 };
             var students = new HashSet<int>();
             students.Add(student.Id);
 

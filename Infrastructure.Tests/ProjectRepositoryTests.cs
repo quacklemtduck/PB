@@ -426,8 +426,8 @@ namespace PB.Infrastructure.Tests
         public async Task UpdateAsync_adds_two_students_with_same_name_existing_Project()
         {
             var university = _context.Universities.Find("KU");
-            var student1 = new Student {Name = "Test", Email = "Test1@gmail.com", University = university };
-            var student2 = new Student {Name = "Test", Email = "Test2@gmail.com", University = university };
+            var student1 = new Student {Name = "Test", Email = "Test1@gmail.com", EducationId = 1 };
+            var student2 = new Student {Name = "Test", Email = "Test2@gmail.com", EducationId = 1 };
             _context.Students.AddRange(
                 student1, student2
             );
@@ -473,8 +473,8 @@ namespace PB.Infrastructure.Tests
         public async Task UpdateAsync_adds_students_existing_Project()
         {
             var university = _context.Universities.Find("KU");
-            var student1 = new Student {Name = "Test1", Email = "Test1@gmail.com", University = university };
-            var student2 = new Student {Name = "Test2", Email = "Test2@gmail.com", University = university };
+            var student1 = new Student {Name = "Test1", Email = "Test1@gmail.com", EducationId = 1 };
+            var student2 = new Student {Name = "Test2", Email = "Test2@gmail.com", EducationId = 1 };
             _context.Students.AddRange(
                 student1, student2
             );
@@ -487,18 +487,18 @@ namespace PB.Infrastructure.Tests
             ChosenStudents.Add(student1.Id);
             ChosenStudents.Add(student2.Id);
 
-            var project = new ProjectUpdateDTO
-            {
-                Id = 5,
-                Title = "newProject5",
-                Description = "This is project 5, version 2",
-                SupervisorId = "Supervisor1",
-                Notification = false,
-                //ChosenStudents = new HashSet<string>() { student.Name },
-                ChosenStudents = ChosenStudents,
-                Applications = new HashSet<string>(),
-                Educations = new HashSet<int>()
-            };
+            // var project = new ProjectUpdateDTO
+            // {
+            //     Id = 5,
+            //     Title = "newProject5",
+            //     Description = "This is project 5, version 2",
+            //     SupervisorId = "Supervisor1",
+            //     Notification = false,
+            //     //ChosenStudents = new HashSet<string>() { student.Name },
+            //     ChosenStudents = ChosenStudents,
+            //     Applications = new HashSet<int>(),
+            //     Educations = new HashSet<int>()
+            // };
 
             var project = new ProjectChosenStudentsUpdateDTO(4, ChosenStudents);
 
@@ -536,7 +536,7 @@ namespace PB.Infrastructure.Tests
         public async Task UpdateAsync_adds_application_existing_Project()
         {
             var university = _context.Universities.Find("KU");
-            var student1 = new Student { Name = "Test1", Email = "Test1@gmail.com", University = university };
+            var student1 = new Student { Name = "Test1", Email = "Test1@gmail.com", EducationId = 1 };
             var supervisor = new Supervisor { Id = "1", Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
             var project5 = new Project { Id = 5, Title = "Project5", Description = "This is project 5", Supervisor = supervisor };
 
@@ -639,7 +639,7 @@ namespace PB.Infrastructure.Tests
             {
                 Title = projectTitle,
                 Description = projectDescription,
-                Supervisor = supervisorID,
+                SupervisorId = supervisorID,
                 Notification = notification,
                 Status = status,
                 Educations = educations

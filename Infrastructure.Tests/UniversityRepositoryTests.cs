@@ -16,7 +16,7 @@ namespace PB.Infrastructure.Tests
             var options = new Option<OperationalStoreOptions>(new OperationalStoreOptions());
             var context = new ApplicationDbContext(builder.Options, options);
             context.Database.EnsureCreated();
-            context.Seed();
+            context.SeedEducations();
 
             var universityRepository = new UniversityRepository(context);
             var university = context.Universities.Find("ITU");

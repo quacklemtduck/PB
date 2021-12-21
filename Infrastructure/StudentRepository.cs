@@ -67,11 +67,8 @@ namespace PB.Infrastructure
             {
                 return NotFound;
             }
-
             entity.Name = student.Name;
-            entity.Education = await _context.Educations.FindAsync(student.EducationId);
             entity.Email = student.Email;
-            entity.Projects = await GetProjectsAsync(student.Projects).ToListAsync();
             
             await _context.SaveChangesAsync();
 

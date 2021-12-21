@@ -36,12 +36,12 @@ namespace Infrastructure.Tests
         }
 
         [Theory]
-        [InlineData(1, "student1", "student1@gmail.com", "Københavns Universitet")]
-        [InlineData(2, "student2", "student2@gmail.com", "Københavns Universitet")]
-        [InlineData(3, "student3", "student3@gmail.com", "Københavns Universitet")]
-        [InlineData(4, "student4", "student4@gmail.com", "Københavns Universitet")]
-        [InlineData(5, "student5", "student5@gmail.com", "Københavns Universitet")]
-        [InlineData(6, "student6", "student6@gmail.com", "Københavns Universitet")]
+        [InlineData(1, "student1", "student1@gmail.com", "Syddansk Universitet")]
+        [InlineData(2, "student2", "student2@gmail.com", "Syddansk Universitet")]
+        [InlineData(3, "student3", "student3@gmail.com", "Syddansk Universitet")]
+        [InlineData(4, "student4", "student4@gmail.com", "Syddansk Universitet")]
+        [InlineData(5, "student5", "student5@gmail.com", "Syddansk Universitet")]
+        [InlineData(6, "student6", "student6@gmail.com", "Syddansk Universitet")]
         public async Task ReadAsync_given_id_exists_returns_Student(int id, string name, string email, string? university)
         {
             var option = await _repository.ReadAsync(id);
@@ -58,9 +58,7 @@ namespace Infrastructure.Tests
             var student = new StudentUpdateDTO
             {
                 Id = 10,
-                Name = "Lars",
-                Projects = new List<int>(),
-                Applications = new HashSet<int>()
+                Name = "Lars"
             };
 
 
@@ -73,89 +71,28 @@ namespace Infrastructure.Tests
         [Fact]
         public async Task UpdateAsync_updates_existing_Student()
         {
-            var supervisor = new Supervisor { Id = "1", Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
-            var student = _context.Students.Find(1);
+
+            var StudentUpdated = (await _repository.ReadAsync(1));
+
+            Assert.True(StudentUpdated.IsSome);
 
             var studentUpdateDTO = new StudentUpdateDTO
             {
-                Id = student.Id,
+                Id = 1,
                 Name = "Lars",
-                Email = "Lars@gmail.com",
-                Projects = new List<int>(),
-                Applications = new HashSet<int>()
+                Email = "Lars@gmail.com"
             };
 
 
             var response = await _repository.UpdateAsync(1, studentUpdateDTO);
 
             Assert.Equal(Updated, response);
-            var StudentUpdated = (await _repository.ReadAsync(1)).Value;
-
-            Assert.Equal("Lars", StudentUpdated.Name);
-            Assert.Equal("Lars@gmail.com", StudentUpdated.Email);
-            Assert.Equal(_context.Universities.Find("KU").Name, StudentUpdated.University);
-            Assert.Empty(StudentUpdated.Applications);
-        }
-
-        [Fact]
-        public async Task UpdateAsync_adds_project_and_applicaton_to_Student()
-        {
-            var supervisor = new Supervisor { Id = "1", Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
-            _context.Supervisors.Add(supervisor);
-
-
-            var project = new Project { Id = 6, Title = "Project6", Description = "This is project 6", Supervisor = supervisor, SupervisorID = supervisor.Id };
-
-            _context.Projects.Add(project);       
-
 
             var student = _context.Students.Find(1);
-
-
-            var application = new Application { Title = "Softwareudvikler søger nye udfordringer", Student = student, Project = project };
-            _context.Applications.Add(application);
-
-            _context.SaveChanges();
-
-
-            var projectsList = new List<int>();
-
-            projectsList.Add(project.Id);
-
-
-            var applicationList = new HashSet<int>();
-
-            applicationList.Add(application.Id);
-
-            var studentUpdateDTO = new StudentUpdateDTO
-            {
-                Id = student.Id,
-                Name = "Lars",
-                Email = "Lars@gmail.com",
-                Projects = projectsList,
-                Applications = applicationList
-            };
-
-    
-            //jeg tror, det er fordi repo ikke blvier opdateret
-
-            var response = await _repository.UpdateAsync(1, studentUpdateDTO);
-
-
-            Assert.Equal(Updated, response);
-
-            var StudentUpdated = (await _repository.ReadAsync(1)).Value;
-
-
-            Assert.Equal("Lars", StudentUpdated.Name);
-            Assert.Equal("Lars@gmail.com", StudentUpdated.Email);
-            Assert.Equal(_context.Universities.Find("KU").Name, StudentUpdated.University);
-            Assert.Equal(1, StudentUpdated.Applications.Count);
-            Assert.Equal(1, StudentUpdated.Projects.Count);
-            Assert.True(StudentUpdated.Applications.Contains(application.Title));
-            Assert.True(StudentUpdated.Projects.Contains(project.Title));
+            Assert.Equal("Lars", student.Name);
+            Assert.Equal("Lars@gmail.com", student.Email);
+            Assert.Empty(student.Applications);
         }
-
 
         [Theory]
         [InlineData(7, "KU", "Markus", "Markus@gmail.com")]
