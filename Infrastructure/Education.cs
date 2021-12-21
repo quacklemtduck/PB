@@ -9,7 +9,7 @@ namespace PB.Infrastructure
     public class Education
     {
         public int Id { get; set; }
-        [StringLength(50)]
+        [StringLength(255)]
         public string? Name { get; set; }
 
         [StringLength(50)]

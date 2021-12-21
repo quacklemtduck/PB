@@ -12,7 +12,7 @@ public class Validation
             };
         if (names.Any(string.IsNullOrWhiteSpace))
         {
-            Console.WriteLine($"This is wokring as intented \n{title} \n{project.Description} \n {project.Supervisor} ");
+            Console.WriteLine($"This is wokring as intented \n{title} \n{project.Description} \n {project.SupervisorId} ");
             return new ValidationResult("A title and description, must be supplied to create a new project", new[] { nameof(ProjectDetailsDTO.Title) });
         }
         return ValidationResult.Success;

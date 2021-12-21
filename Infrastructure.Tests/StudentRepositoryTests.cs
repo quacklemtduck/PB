@@ -16,17 +16,17 @@ namespace Infrastructure.Tests
             var options = new Option<OperationalStoreOptions>(new OperationalStoreOptions());
             var context = new ApplicationDbContext(builder.Options, options);
             context.Database.EnsureCreated();
-            context.Seed();
+            context.SeedEducations();
 
 
             var universityRepository = new UniversityRepository(context);
             context.Students.AddRange(
-                new Student{Id = 1,Name = "student1", Email = "student1@gmail.com", University = context.Universities.Find("KU")},
-                new Student{Id = 2,Name = "student2", Email = "student2@gmail.com", University = context.Universities.Find("KU")},
-                new Student{Id = 3,Name = "student3", Email = "student3@gmail.com", University = context.Universities.Find("KU")},
-                new Student{Id = 4,Name = "student4", Email = "student4@gmail.com", University = context.Universities.Find("KU")},
-                new Student{Id = 5,Name = "student5", Email = "student5@gmail.com", University = context.Universities.Find("KU")},
-                new Student{Id = 6,Name = "student6", Email = "student6@gmail.com", University = context.Universities.Find("KU")}
+                new Student{Id = 1,Name = "student1", Email = "student1@gmail.com", Education = context.Educations.Find(1)},
+                new Student{Id = 2,Name = "student2", Email = "student2@gmail.com", Education = context.Educations.Find(1)},
+                new Student{Id = 3,Name = "student3", Email = "student3@gmail.com", Education = context.Educations.Find(1)},
+                new Student{Id = 4,Name = "student4", Email = "student4@gmail.com", Education = context.Educations.Find(1)},
+                new Student{Id = 5,Name = "student5", Email = "student5@gmail.com", Education = context.Educations.Find(1)},
+                new Student{Id = 6,Name = "student6", Email = "student6@gmail.com", Education = context.Educations.Find(1)}
             );
 
             context.SaveChanges();
@@ -46,7 +46,7 @@ namespace Infrastructure.Tests
             Assert.Equal(2, student.Id);
             Assert.Equal("student2", student.Name);
             Assert.Equal("student2@gmail.com", student.Email);
-            Assert.Equal("Københavns Universitet", student.University);
+            Assert.Equal("Syddansk Universitet", student.University);
         }
 
         [Fact]
@@ -69,7 +69,7 @@ namespace Infrastructure.Tests
         public async Task CreateAsync_creates_new_student_with_generated_id()
         {
             var university = new University {Name = "Københavns Universitet", Id = "KU"};
-            var student = new StudentCreateDTO{ Name = "Markus", Email="Markus@gmail.com", University = university.Name};
+            var student = new StudentCreateDTO{ Name = "Markus", Email="Markus@gmail.com", EducationId = 1};
             var created = await _repository.CreateAsync(student);
 
             Assert.Equal(7, created.Id);

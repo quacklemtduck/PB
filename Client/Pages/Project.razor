@@ -5,19 +5,27 @@
 @inject HttpClient http
 @inject NavigationManager NavigationManager
 @inject IHttpClientFactory ClientFactory
-@using System.Security.Claims
 @using Microsoft.AspNetCore.Components.Authorization
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@using Radzen.Blazor
 
-@if (project != null){
+<div style="word-wrap:break-word;">
+    @if (project != null){
     <h1>@project.Title</h1>
     <p>@project.Description</p>
+    <p>@supervisor.Name</p>
+    <p>@project.Applications.FirstOrDefault()</p>
 }
+</div>
+
+<RadzenButton ButtonStyle="ButtonStyle.Primary" Text="View Applications" Click=@ApplicationButton Style="background: #4169E1;" />
 
 @code {
     [Parameter]
     public int? ProjectId {get; set;}
     private ProjectDetailsDTO? project;
+    
+    private SupervisorDetailsDTO? supervisor;
 
     protected override async Task OnParametersSetAsync()
     {
@@ -26,12 +34,18 @@
         if(ProjectId != 0){
             if(user.Identity.IsAuthenticated){
                 project = await ProjectService.GetProject(http, ProjectId);
+                supervisor = await SupervisorServices.GetSupervisorAsync(http, project.Supervisor);
             }else{
                 var anonClient = ClientFactory.CreateClient("PB.NoAuthenticationClient");
                 project = await ProjectService.GetProject(anonClient, ProjectId);
+                supervisor = await SupervisorServices.GetSupervisorAsync(anonClient, project.Supervisor);
             }
         }
 
         await base.OnParametersSetAsync();
+    }
+
+    async Task ApplicationButton() {
+        NavigationManager.NavigateTo($"{NavigationManager.BaseUri}Project/{ProjectId}/Applications");
     }
 }

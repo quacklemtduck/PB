@@ -2,9 +2,11 @@
 @using PB.Core
 @using PB.Client.Services
 @using System.Net.Http
+@using Microsoft.AspNetCore.Components
+@using Radzen.Blazor
 @inject HttpClient http
 @inject NavigationManager NavigationManager
-@inject IJSRuntime JsRuntime
+@inject Radzen.DialogService DialogService
 
 <style>
     form .row {
@@ -20,9 +22,9 @@
 else
 {
     @if(IsEditing){
-<h2>Edit project</h2>
+<h1>Edit project</h1>
 }else{
-<h2>Create new project</h2>
+<h1>Create new project</h1>
 }
     <RadzenTemplateForm Data="@project" Submit="@((TempProject args) => { Submit(args); })">
 
@@ -33,6 +35,7 @@ else
                 </div>
                 <div class="col-md-8">
                     <RadzenTextBox @bind-Value=@project.Title style="width: 100%;" Name="Title" />
+                    <RadzenRequiredValidator Component="Title" Text="Project title is required" Style="position: absolute"/>
                 </div>
             </div>
             <div class="row">
@@ -49,12 +52,14 @@ else
                 </div>
                 <div class="col-md-8">
                     <RadzenTextArea @bind-Value=@project.Description style="width: 100%" Name="Description" />
+                    <RadzenRequiredValidator Component="Description" Text="Description is required" Style="position: absolute"/>
+                    
                 </div>
             </div>
             <div class="row">
                 <RadzenCard>
                 <h4>Select Educations</h4>
-                <p>Select the educations that you want your project to be visible to!</p>
+                <p>Select the educations that you want your project to be visible to</p>
                 <RadzenListBox AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" @bind-Value=@project.ChosenEducations Multiple="true" Data=@Educations
                                TextProperty="Name" ValueProperty="Id" Change=@(args => OnEducationChange(args)) Style="height:200px" Class="w-100">
                     <Template Context="innercontext">
@@ -69,9 +74,10 @@ else
             <div class="col-md-12 d-flex align-items-end justify-content-center" style="margin-top: 16px;">
                 <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Save" />
                 <RadzenButton ButtonStyle="ButtonStyle.Light" Icon="cancel"
-                style="display: inline-block; margin-left: 10px;" Text="Cancel" Click="@Cancel" />
+                style="display: inline-block; margin-left: 10px;" Text="Cancel" Click=@Cancel />
             </div>
         </div>
+        
     </RadzenTemplateForm>
 }
 
@@ -114,25 +120,22 @@ else
     }
     
 
-    async void Submit(TempProject arg)
+    async void Submit(TempProject arg)  //Called when you press save on project form
     {
-        var req = new ProjectCreateDTO{Title= arg.Title, Description=arg.Description, Notification= arg.Notification, Educations= arg.ChosenEducations.ToHashSet(), Status=arg.Status};
-        if(Pid != null){req.Id = Pid;}
-        Console.WriteLine(arg.Notification);
-        Console.WriteLine(arg.Title);
-        Console.WriteLine(arg.Description);
-        Console.WriteLine(arg.ChosenEducations.First());
-        var res = await ProjectService.PostProject(http, req);
-        Console.WriteLine(res!.ToString());
-        if (res.IsSuccessStatusCode)
-        {
-            var created = await res.Content.ReadFromJsonAsync<ProjectDetailsDTO>();
-            var uri = $"{NavigationManager.BaseUri}project/{created.ID}";
-            NavigationManager.NavigateTo(uri);
-            await JsRuntime.InvokeVoidAsync("alert", "Project created succesfully!"); //Popup when succesfully created project.
-
+        try {
+            var req = new ProjectCreateDTO{Title= arg.Title, Description=arg.Description, Notification= arg.Notification, Educations= arg.ChosenEducations.ToHashSet(), Status=arg.Status};
+            if(Pid != null){req.Id = Pid;}
+            var res = await ProjectService.PostProject(http, req);
+            if (res.IsSuccessStatusCode)
+            {
+                var created = await res.Content.ReadFromJsonAsync<ProjectDetailsDTO>();
+                var uri = $"{NavigationManager.BaseUri}project/{created.ID}";
+                NavigationManager.NavigateTo(uri);
+                await ShowCloseableFromOverlayDialog();
+            }
+        } catch (Exception e) {
+            await ShowErrorMissingEducations(e); 
         }
-    //Called when you press save on project form
     }
 
     void OnEducationChange(object O){
@@ -144,8 +147,58 @@ else
         
     }
 
-    void Cancel()
+    void Cancel() //Called when you press cancel on project form
     {
         NavigationManager.NavigateTo($"{NavigationManager.BaseUri}MyProjects");
     }
+
+    async Task ShowCloseableFromOverlayDialog()
+    {
+        if(!IsEditing) {
+        await DialogService.OpenAsync("Project creation success!", ds =>
+            @<div>
+            You have successfully created a project
+            <RadzenImage Path="checkmark.png" Style="width: 12%; margin: 1rem;" /> 
+        </div>, new DialogOptions() { CloseDialogOnOverlayClick = true });
+        } else
+        {
+            await DialogService.OpenAsync("Project change success!", ds =>
+        @<div>
+            You have successfully edited the project
+            <RadzenImage Path="checkmark.png" Style="width: 12%; margin: 1rem;"/> 
+        </div>, new DialogOptions() { CloseDialogOnOverlayClick = true });
+        }
+    }
+
+    async Task ShowErrorMissingEducations(Exception e) 
+    {
+     await DialogService.OpenAsync("Project Form Error".ToString(), ds =>
+        @<div>
+            You need to fill out at least one education for your project.
+        </div>, new DialogOptions() { CloseDialogOnOverlayClick = true });
+    }
+
+    protected override void OnInitialized()
+    {
+        DialogService.OnOpen += Open;
+        DialogService.OnClose += Close;
+    }
+
+    public void Dispose()
+    {
+        // The DialogService is a singleton so it is advisable to unsubscribe.
+        DialogService.OnOpen -= Open;
+        DialogService.OnClose -= Close;
+    }
+
+    void Open(string title, Type type, Dictionary<string, object> parameters, DialogOptions options)
+    {
+        Console.WriteLine("Dialog opened");
+    }
+
+    void Close(dynamic result)
+    {
+        Console.WriteLine($"Dialog closed");
+    }
+
 }

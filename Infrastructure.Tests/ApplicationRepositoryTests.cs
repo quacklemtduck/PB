@@ -14,11 +14,13 @@ namespace Infrastructure.Tests
             var options = new Option<OperationalStoreOptions>(new OperationalStoreOptions());
             var context = new ApplicationDbContext(builder.Options, options);
             context.Database.EnsureCreated();
-            var student1 = new Student { Id = 1, Name = "Student1" };
-            var student2 = new Student { Id = 2, Name = "Student2" };
+            context.SeedEducations();
+            var student1 = new Student { Id = 1, Name = "Student1", Email="Student1@mail.com", Education = context.Educations.First()};
+            var student2 = new Student { Id = 2, Name = "Student2", Email="Student2@mail.com", Education = context.Educations.First() };
             var supervisor = new Supervisor { Id = "1", Name = "Supervisor1", Email = "supervisor1@email.com", Projects = new List<Project>() };
             var project1 = new Project { Id = 1, Title = "Project1", Description = "project 1", Supervisor = supervisor };
             var project2 = new Project { Id = 2, Title = "Project2", Description = "project 2", Supervisor = supervisor };
+            
 
             context.Applications.AddRange(
                 new Application { Id = 1, Title = "title1", Description = "app 1", Student = student1, Project = project1 },
@@ -47,7 +49,7 @@ namespace Infrastructure.Tests
         }
 
         [Fact]
-        public async Task ReadAsync_given_id_exists_returns_Aplication()
+        public async Task ReadAsync_given_id_exists_returns_Application()
         {
             var option = await _repository.ReadAsync(2);
             Assert.True(option.IsSome);
@@ -74,9 +76,9 @@ namespace Infrastructure.Tests
             var applications = await _repository.ReadAllAsync();
 
             Assert.Collection(applications,
-                applications => Assert.Equal(new ApplicationDetailsDTO(1, 1, 1, "app 1", "title1"), applications),
-                applications => Assert.Equal(new ApplicationDetailsDTO(2, 2, 1, "app 2", "title2"), applications),
-                applications => Assert.Equal(new ApplicationDetailsDTO(3, 1, 2, "app 3", "title3"), applications)
+                applications => Assert.Equal(new ApplicationDetailsDTO(1, 1, 1, "app 1", "title1", "Student1"), applications),
+                applications => Assert.Equal(new ApplicationDetailsDTO(2, 2, 1, "app 2", "title2", "Student2"), applications),
+                applications => Assert.Equal(new ApplicationDetailsDTO(3, 1, 2, "app 3", "title3", "Student1"), applications)
             );
         }
 
