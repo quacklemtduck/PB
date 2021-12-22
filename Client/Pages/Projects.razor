@@ -12,12 +12,12 @@
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
 <h1>Projects</h1>
+<p>A list of all visible projects.</p>
 @if (fullProjects != null) {
 <div class="container">
     <div class="row py-5">
         <div class="col">
             <RadzenCard>
-
                 <RadzenDataList WrapItems="true" AllowPaging="true" Data="@fullProjects" TItem="fullProject" PageSize="5" >
                     <Template Context="project">
                         <RadzenCard Style="width: 100%; padding: 0; overflow: hidden;">

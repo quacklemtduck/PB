@@ -46,8 +46,9 @@
             
             <h1 Style="margin-top: 20px;">@project.Title</h1>
             <p>@project.Description</p>
-
+            @if(!isOwner){
             <RadzenButton ButtonStyle="ButtonStyle.Primary" Style="background:#4169E1; width: fit-content; margin:auto; margin-top:20px;" Text="Apply Now" Click=@Apply />
+            }
         </RadzenCard>
     }
 </div>
