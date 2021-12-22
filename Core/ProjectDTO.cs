@@ -1,6 +1,6 @@
 ﻿namespace PB.Core;
 
-public record ProjectListDTO(int ID, string Title, string Description, Status Status);
+public record ProjectListDTO(int ID, string Title, string Description, Status Status, string SupervisorId);
 public record ProjectVisibilityUpdateDTO(int ID, Status Status);
 public record ProjectChosenStudentsUpdateDTO(int ID, ICollection<int> ChosenStudents);
 public record ProjectDetailsDTO(

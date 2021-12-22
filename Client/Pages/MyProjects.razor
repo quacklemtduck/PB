@@ -18,23 +18,24 @@
                         <RadzenCard Style="width: 100%; padding: 0; overflow: hidden;">
                             <div class="container">
                                 <div class="row">
-                                    <div class="col-lg-2 p-2 project-title">
-                                            <h3 class="h5"><a href="/project/@project.ID">@(project.Title.Substring(0,Math.Min(project.Title.Length, 40)))</a></h3>
+                                    <div class="project-title">
+                                            <h3 class="h5"><a href="/project/@project.ID">@(project.Title.Substring(0,Math.Min(project.Title.Length, 49)))</a></h3>
                                     </div>
-                                    <div class="col-lg-7 p-3">
                                         <div class="row d-flex">
                                             <div class="col-md-6 col-lg-5">
                                                 <h5 class="mb-0">Description:</h5>
                                                 @if (project.Description.Length>80){
-                                                    <p class="mb-sm-2 mb-lg-0">@(project.Description.Substring(0,Math.Min(project.Description.Length, 80)))...</p>
+                                                    <p class="mb-sm-2 mb-lg-0">@(project.Description.Substring(0,Math.Min(project.Description.Length, 170)))...</p>
                                                 } else {
-                                                    <p class="mb-sm-2 mb-lg-0">@(project.Description.Substring(0,Math.Min(project.Description.Length, 80)))</p>
+                                                    <p class="mb-sm-2 mb-lg-0">@(project.Description.Substring(0,Math.Min(project.Description.Length, 170)))</p>
                                                 }
-                                            </div>
                                         </div>
                                     </div>
+                                    
                                 </div>
-                                <p>Visibility: @project.Status</p>
+                                <div>
+                                <b>Visibility: @project.Status</b>
+                                </div>
                                 @if (project.Status == Status.Visible)
                                 {
                                     <RadzenButton Style="background: #4169E1;" Click=@(args => ChangeVisibility(project.ID, Status.Hidden))
@@ -47,7 +48,7 @@
                                 }
                                 <RadzenButton Style="background: #4169E1;" Click=@(args => EditProject(project.ID)) Text="Edit"
                                     Class="VisibilityButton" />
-                                <RadzenButton Style="background: rgba(255, 0, 0, 0.7);" Click=@(args => DeleteProject(project.ID)) Text="Delete"
+                                <RadzenButton Style="background: #eb2424;" Click=@(args => DeleteProject(project.ID)) Text="Delete"
                                     Class="DeleteButton" />
                             </div>
                         </RadzenCard>

@@ -66,21 +66,21 @@ namespace PB.Infrastructure
 
         public async Task<IReadOnlyCollection<ProjectListDTO>> ListAllAsync() =>
                 (await _context.Projects
-                       .Select(p => new ProjectListDTO(p.Id, p.Title, p.Description, p.Status))
+                       .Select(p => new ProjectListDTO(p.Id, p.Title, p.Description, p.Status, p.SupervisorID))
                        .ToListAsync())
                        .AsReadOnly();
 
         public async Task<IReadOnlyCollection<ProjectListDTO>> ListAllVisibleAsync() =>
                 (await _context.Projects
                        .Where(p => p.Status == Status.Visible)
-                       .Select(p => new ProjectListDTO(p.Id, p.Title, p.Description, p.Status))
+                       .Select(p => new ProjectListDTO(p.Id, p.Title, p.Description, p.Status, p.SupervisorID))
                        .ToListAsync())
                        .AsReadOnly();
 
         public async Task<IReadOnlyCollection<ProjectListDTO>> ListAllAsync(string SupervisorID) =>
                 (await _context.Projects
                         .Where(p => SupervisorID == p.SupervisorID)
-                       .Select(p => new ProjectListDTO(p.Id, p.Title, p.Description, p.Status))
+                       .Select(p => new ProjectListDTO(p.Id, p.Title, p.Description, p.Status, p.SupervisorID))
                        .ToListAsync())
                        .AsReadOnly();
 
