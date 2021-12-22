@@ -22,10 +22,10 @@
 else
 {
     @if(IsEditing){
-<h1>Edit project</h1>
-}else{
-<h1>Create new project</h1>
-}
+        <h1>Edit project</h1>
+    }else{
+        <h1>Create new project</h1>
+    }
     <RadzenTemplateForm Data="@project" Submit="@((TempProject args) => { Submit(args); })">
 
         <RadzenFieldset Text="" style="width: 100%;">
@@ -40,7 +40,7 @@ else
             </div>
             <div class="row">
                 <div class="col-xl-6">
-                    <h6>Notifications</h6>
+                    <h6>Receive Notifications</h6>
                     <RadzenSwitch @bind-Value=@project.Notification Style="margin-bottom: 20px" Change=@(args => OnChange(args,
                     "Notification")) />
                     <br />
@@ -72,7 +72,7 @@ else
 
         <div class="row justify-content-center">
             <div class="col-md-12 d-flex align-items-end justify-content-center" style="margin-top: 16px;">
-                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Save" />
+                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Save" Style="background: #4169E1;" />
                 <RadzenButton ButtonStyle="ButtonStyle.Light" Icon="cancel"
                 style="display: inline-block; margin-left: 10px;" Text="Cancel" Click=@Cancel />
             </div>
@@ -81,13 +81,13 @@ else
     </RadzenTemplateForm>
 }
 
+
 @code {
     [Parameter]
     [SupplyParameterFromQuery]
     public int? Pid {get; set;}
     public bool IsEditing {get; set;}
     private TempProject? project {get; set;}
-    //IEnumerable<int> ChosenEducations;
     ICollection<EducationDetailsDTO> Educations;
     public class TempProject
     {
@@ -120,7 +120,7 @@ else
     }
     
 
-    async void Submit(TempProject arg)  //Called when you press save on project form
+    async void Submit(TempProject arg)
     {
         try {
             var req = new ProjectCreateDTO{Title= arg.Title, Description=arg.Description, Notification= arg.Notification, Educations= arg.ChosenEducations.ToHashSet(), Status=arg.Status};
@@ -139,7 +139,7 @@ else
     }
 
     void OnEducationChange(object O){
-        Console.WriteLine(O);
+        
     }
 
     void OnChange(bool? value, string name)
@@ -147,7 +147,7 @@ else
         
     }
 
-    void Cancel() //Called when you press cancel on project form
+    void Cancel()
     {
         NavigationManager.NavigateTo($"{NavigationManager.BaseUri}MyProjects");
     }
@@ -186,7 +186,6 @@ else
 
     public void Dispose()
     {
-        // The DialogService is a singleton so it is advisable to unsubscribe.
         DialogService.OnOpen -= Open;
         DialogService.OnClose -= Close;
     }

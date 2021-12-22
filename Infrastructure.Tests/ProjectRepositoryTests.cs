@@ -207,11 +207,11 @@ namespace PB.Infrastructure.Tests
 
 
             Assert.Collection(projects,
-                projects => Assert.Equal(new ProjectListDTO(1, "Project1", "This is project 1", Status.Visible), projects),
-                projects => Assert.Equal(new ProjectListDTO(2, "Project2", "This is project 2", Status.Visible), projects),
-                projects => Assert.Equal(new ProjectListDTO(3, "Project3", "This is project 3", Status.Visible), projects),
-                projects => Assert.Equal(new ProjectListDTO(4, "Project4", "This is project 4", Status.Visible), projects),
-                projects => Assert.Equal(new ProjectListDTO(5, "Project5", "This is project 5", Status.Visible), projects)
+                projects => Assert.Equal(new ProjectListDTO(1, "Project1", "This is project 1", Status.Visible, "1"), projects),
+                projects => Assert.Equal(new ProjectListDTO(2, "Project2", "This is project 2", Status.Visible, "1"), projects),
+                projects => Assert.Equal(new ProjectListDTO(3, "Project3", "This is project 3", Status.Visible, "1"), projects),
+                projects => Assert.Equal(new ProjectListDTO(4, "Project4", "This is project 4", Status.Visible, "1"), projects),
+                projects => Assert.Equal(new ProjectListDTO(5, "Project5", "This is project 5", Status.Visible, "1"), projects)
             );
         }
         [Fact]
@@ -220,11 +220,11 @@ namespace PB.Infrastructure.Tests
             var projects = await _repository.ListAllVisibleAsync();
 
             Assert.Collection(projects,
-                projects => Assert.Equal(new ProjectListDTO(1, "Project1", "This is project 1", Status.Visible), projects),
-                projects => Assert.Equal(new ProjectListDTO(2, "Project2", "This is project 2", Status.Visible), projects),
-                projects => Assert.Equal(new ProjectListDTO(3, "Project3", "This is project 3", Status.Visible), projects),
-                projects => Assert.Equal(new ProjectListDTO(4, "Project4", "This is project 4", Status.Visible), projects),
-                projects => Assert.Equal(new ProjectListDTO(5, "Project5", "This is project 5", Status.Visible), projects)
+                projects => Assert.Equal(new ProjectListDTO(1, "Project1", "This is project 1", Status.Visible, "1"), projects),
+                projects => Assert.Equal(new ProjectListDTO(2, "Project2", "This is project 2", Status.Visible, "1"), projects),
+                projects => Assert.Equal(new ProjectListDTO(3, "Project3", "This is project 3", Status.Visible, "1"), projects),
+                projects => Assert.Equal(new ProjectListDTO(4, "Project4", "This is project 4", Status.Visible, "1"), projects),
+                projects => Assert.Equal(new ProjectListDTO(5, "Project5", "This is project 5", Status.Visible, "1"), projects)
             );
         }
         [Fact]
@@ -234,11 +234,11 @@ namespace PB.Infrastructure.Tests
 
 
             Assert.Collection(projects,
-                projects => Assert.Equal(new ProjectListDTO(1, "Project1", "This is project 1", Status.Visible), projects),
-                projects => Assert.Equal(new ProjectListDTO(2, "Project2", "This is project 2", Status.Visible), projects),
-                projects => Assert.Equal(new ProjectListDTO(3, "Project3", "This is project 3", Status.Visible), projects),
-                projects => Assert.Equal(new ProjectListDTO(4, "Project4", "This is project 4", Status.Visible), projects),
-                projects => Assert.Equal(new ProjectListDTO(5, "Project5", "This is project 5", Status.Visible), projects)
+                projects => Assert.Equal(new ProjectListDTO(1, "Project1", "This is project 1", Status.Visible, "1"), projects),
+                projects => Assert.Equal(new ProjectListDTO(2, "Project2", "This is project 2", Status.Visible, "1"), projects),
+                projects => Assert.Equal(new ProjectListDTO(3, "Project3", "This is project 3", Status.Visible, "1"), projects),
+                projects => Assert.Equal(new ProjectListDTO(4, "Project4", "This is project 4", Status.Visible, "1"), projects),
+                projects => Assert.Equal(new ProjectListDTO(5, "Project5", "This is project 5", Status.Visible, "1"), projects)
             );
         }
 
