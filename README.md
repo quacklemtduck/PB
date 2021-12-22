@@ -3,13 +3,13 @@
 ## How to run
 Make sure that .NET 6 and Docker is installed.
 
-To run the program on Windows, first open powershell, change directory to Server and define a connectionstring:
+To run the program on Windows, first open powershell, change directory to `Server` using `cd Server` and define a connectionstring:
 ```powershell
 $password = "yourpassword"
 $connectionString = "Host=localhost;Username=pb;Password=$password;Database=pb;Port=5433;"
 ```
 
-If on Mac or Linux, change to first 2 commands to:
+If on Mac or Linux, change the commands to:
 ```bash
 password="yourpassword"
 connectionString="Host=localhost;Username=pb;Password=$password;Database=pb;Port=5433;"
