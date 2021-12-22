@@ -11,6 +11,9 @@
 @inject Radzen.DialogService DialogService
 
 <div style="word-wrap:break-word; max-width:800px; margin:auto;">
+    @if(isUnauthorized){
+        <h2 style="text-align: center;">You are not authorized to view this project.</h2>
+    }
     @if (isOwner)
     {
         <RadzenCard>
@@ -62,6 +65,8 @@
     private bool isOwner;
     private SupervisorDetailsDTO? supervisor;
 
+    private bool isUnauthorized;
+
     protected override async Task OnParametersSetAsync()
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
@@ -79,9 +84,13 @@
             }
             else
             {
+                try{
                 var anonClient = ClientFactory.CreateClient("PB.NoAuthenticationClient");
                 project = await ProjectService.GetProject(anonClient, ProjectId);
                 supervisor = await SupervisorServices.GetSupervisorAsync(anonClient, project.Supervisor);
+                }catch(HttpRequestException e){
+                    isUnauthorized = e.StatusCode.Value == System.Net.HttpStatusCode.Unauthorized;
+                }
             }
         }
 
